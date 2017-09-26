@@ -25,12 +25,18 @@
 
 <body>
     <div class="main-header-content" style="">
-        <nav class="navbar main-navbar navbar-default navbar-fixed-top nomargin" role="navigation">
+        <nav class="navbar main-navbar navbar-default nomargin" role="navigation">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <a class="navbar-brand logo-big  hidden-xs text-hide" href="#">Unaduna</a>
                 <a class="navbar-brand logo-small hidden-lg hidden-md hidden-sm text-hide" href="#">Unaduna</a>
                 <div class="navbar-header navbar-right">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <ul class="nav navbar-nav fixed-navbar-right">
                         <li>
                             <a href="#"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
@@ -44,7 +50,7 @@
                     </ul>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse" id="navbar-ex1-collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
                             <a href="#">About</a>
@@ -62,16 +68,16 @@
             <!-- /.container -->
         </nav>
     </div>
-    <nav class="navbar navbar-default navbar-fixed-top nomargin main-site-navbar">
+    <nav class="navbar navbar-default nomargin main-site-navbar">
         <div class="container">
-            <div class="navbar-header">
+            <!-- <div class="navbar-header hidden-sm">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            </div>
+            </div> -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li>
@@ -96,10 +102,17 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-
+    <div class="jumbotron">
+        <div class="container">
+            <h2 class="title">Crea la tua borsa</h2>
+            <p class="subtitle">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a tellus mollis, accumsan dolor at, pulvinar nibh. Nunc volutpat enim.
+            </p>
+            <a href="#" class="btn btn-default btn-lg follow">Configura adesso</a>
+        </div>
     </div>
     <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="javascripts/bootstrap.js"></script>
     <script src="javascripts/custom.js"></script>
 </body>
 

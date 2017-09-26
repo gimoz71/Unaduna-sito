@@ -199,7 +199,7 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+
 }
 
 img {
@@ -209,7 +209,32 @@ img {
 table {
     width: 100%;
 }
+.title {
+    font-family: $font-family-serif;
+    font-style: italic;
+}
+.jumbotron {
+    padding: 20px 0;
+    background: url(../images/jumbotron.jpg) no-repeat center center;
+    background-size: cover;
+    height: 350px;
+    border-bottom: solid 1px $standard-border-color;
+    .title {
+        font-size: 40px;
 
+    }
+    .subtitle {
+        font-size: 16px;
+    }
+    .follow {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    @media screen and (max-width: $screen-xs-max) {
+        text-align: center;
+        height: auto;
+    }
+}
 /* settaggio elementi grafici di default */
 .active { // stilizzazione con freccia
     &.selected {
@@ -240,6 +265,28 @@ table {
         &:after, &:before {
             top: 0;
         }
+    }
+}
+.follow {
+    position: relative;
+    &:after, &:before {
+        content: "";
+        border-style: solid;
+        border-width: 10px;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        margin-top: -10px;
+
+    }
+    &:before {
+        border-color: transparent transparent transparent $standard-border-color ;
+    }
+    &:after {
+        margin-left: -2px;
+        border-color:  transparent transparent transparent #fff;
     }
 }
 
@@ -356,16 +403,22 @@ a.link {
     }
 }
 .main-header-content {
-    height: 100px;
-    background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(250,250,250,1));
-    top: 53px;
+    height: 150px;
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(250,250,250,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(45%, rgba(255,255,255,1)), color-stop(100%, rgba(250,250,250,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(250,250,250,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(250,250,250,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(250,250,250,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(250,250,250,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafafa', GradientType=0 );
     position: relative;
     @media screen and (max-width: $screen-xs-max) {
         height: auto;
     }
 }
 .main-site-navbar {
-    top: $navbar-height+100px;
+    // top: $navbar-height+100px;
     font-size: 16px;
     text-transform: uppercase;
     border-top: solid 1px $standard-border-color;
@@ -384,7 +437,9 @@ a.link {
         }
     }
     @media screen and (max-width: $screen-xs-max) {
-        top: $navbar-height;
+        // top: $navbar-height;
+        min-height: 0;
+        border-top: none
     }
 }
 
@@ -415,6 +470,7 @@ a.link {
 /*-------------------------------*/
 
 .configuratore {
+    overflow: hidden;
     .main-configurator-navbar {
         // top: $navbar-height+3px;
         margin-top: 1px;

@@ -8648,7 +8648,6 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 img {
@@ -8658,6 +8657,35 @@ img {
 
 table {
   width: 100%;
+}
+
+.title {
+  font-family: "Playfair Display", Georgia, Times, serif;
+  font-style: italic;
+}
+
+.jumbotron {
+  padding: 20px 0;
+  background: url(../images/jumbotron.jpg) no-repeat center center;
+  background-size: cover;
+  height: 350px;
+  border-bottom: solid 1px #dbd4d1;
+}
+.jumbotron .title {
+  font-size: 40px;
+}
+.jumbotron .subtitle {
+  font-size: 16px;
+}
+.jumbotron .follow {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+@media screen and (max-width: 767px) {
+  .jumbotron {
+    text-align: center;
+    height: auto;
+  }
 }
 
 /* settaggio elementi grafici di default */
@@ -8688,6 +8716,28 @@ table {
 }
 .active.bottom:after, .active.bottom:before {
   top: 0;
+}
+
+.follow {
+  position: relative;
+}
+.follow:after, .follow:before {
+  content: "";
+  border-style: solid;
+  border-width: 10px;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -10px;
+}
+.follow:before {
+  border-color: transparent transparent transparent #dbd4d1;
+}
+.follow:after {
+  margin-left: -2px;
+  border-color: transparent transparent transparent #fff;
 }
 
 a.link {
@@ -8813,9 +8863,15 @@ a.link {
 }
 
 .main-header-content {
-  height: 100px;
-  background: linear-gradient(to bottom, white, #fafafa);
-  top: 53px;
+  height: 150px;
+  background: white;
+  background: -moz-linear-gradient(top, white 0%, white 45%, #fafafa 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, white), color-stop(45%, white), color-stop(100%, #fafafa));
+  background: -webkit-linear-gradient(top, white 0%, white 45%, #fafafa 100%);
+  background: -o-linear-gradient(top, white 0%, white 45%, #fafafa 100%);
+  background: -ms-linear-gradient(top, white 0%, white 45%, #fafafa 100%);
+  background: linear-gradient(to bottom, white 0%, white 45%, #fafafa 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafafa', GradientType=0 );
   position: relative;
 }
 @media screen and (max-width: 767px) {
@@ -8825,7 +8881,6 @@ a.link {
 }
 
 .main-site-navbar {
-  top: 150px;
   font-size: 16px;
   text-transform: uppercase;
   border-top: solid 1px #dbd4d1;
@@ -8844,7 +8899,8 @@ a.link {
 }
 @media screen and (max-width: 767px) {
   .main-site-navbar {
-    top: 50px;
+    min-height: 0;
+    border-top: none;
   }
 }
 
@@ -8866,6 +8922,7 @@ a.link {
 /*  @group Configuratore Bag */
 /*-------------------------------*/
 .configuratore {
+  overflow: hidden;
   /* menu accessori */
   /* spinner borse */
 }
