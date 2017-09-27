@@ -154,9 +154,9 @@ $border-radius-small:       0px;
 
 // $btn-font-weight:                normal
 
-// $btn-default-color:              #333
+$btn-default-color:                 $brand-primary; /*#333*/
 // $btn-default-bg:                 #fff
-// $btn-default-border:             #ccc
+$btn-default-border:                rgba(#7E2C09, .35); /* #ccc*/
 
 // $btn-primary-color:              #fff
 // $btn-primary-bg:                 $brand-primary
@@ -198,7 +198,7 @@ $border-radius-small:       0px;
 //** Text color for `<input>`s
 // $input-color:                    $gray
 //** `<input>` border color
-// $input-border:                   #ccc
+$input-border:                      $standard-border-color; /*#ccc*/
 
 // TODO: Rename `$input-border-radius` to `$input-border-radius-base` in v4
 //** Default `.form-control` border radius
