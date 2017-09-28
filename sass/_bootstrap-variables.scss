@@ -155,8 +155,12 @@ $border-radius-small:       0px;
 // $btn-font-weight:                normal
 
 $btn-default-color:                 $brand-primary; /*#333*/
-// $btn-default-bg:                 #fff
+$btn-default-bg:                    #fff;
 $btn-default-border:                rgba(#7E2C09, .35); /* #ccc*/
+
+$btn-action-color:                  #fff;
+$btn-action-bg:                     #7E2C09;
+$btn-action-border:                 rgba(#7E2C09, .35);
 
 // $btn-primary-color:              #fff
 // $btn-primary-bg:                 $brand-primary

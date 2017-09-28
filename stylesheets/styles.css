@@ -11343,6 +11343,47 @@ button.close {
   animation-name: slideOutUp;
 }
 
+/*!
+ * Yamm!3 - Yet another megamenu for Bootstrap 3
+ * http://geedmo.github.com/yamm3
+ *
+ * @geedmo - Licensed under the MIT license
+ */
+.yamm .collapse,
+.yamm .dropdown,
+.yamm .dropup,
+.yamm .nav {
+  position: static;
+}
+.yamm .container {
+  position: relative;
+}
+.yamm .dropdown-menu {
+  box-shadow: 0px 0px 0px transparent;
+  border: solid 1px #dbd4d1;
+  margin: 0;
+  top: 100%;
+}
+.yamm .yamm-content {
+  padding: 20px 0;
+  overflow-x: auto;
+}
+@media screen and (max-width: 767px) {
+  .yamm .dropdown.yamm-fw .dropdown-menu {
+    left: 0;
+    right: 0;
+  }
+}
+@media screen and (max-width: 991px) {
+  .yamm .dropdown.yamm-fw .dropdown-menu {
+    position: absolute;
+    float: left;
+    background-color: #fff;
+    border: solid 1px #dbd4d1;
+  }
+}
+
+/* Enable Bootstrap Hover Drop Downs */
 /* font Awesome http://fontawesome.io*/
 /* Animation.css */
 @font-face {
@@ -11397,6 +11438,18 @@ button.close {
 
 .unaicon-search:before {
   content: '\0048';
+}
+
+.unaicon-facebook:before {
+  content: '\0049';
+}
+
+.unaicon-twitter:before {
+  content: '\004a';
+}
+
+.unaicon-instagram:before {
+  content: '\004b';
 }
 
 /*-------------------------------*/
@@ -11574,7 +11627,6 @@ input.newsletter {
 
 /* settaggio elementi grafici di default */
 .active {
-  opacity: 1;
   position: relative;
 }
 .active.selected {
@@ -11604,6 +11656,7 @@ input.newsletter {
 
 .follow {
   position: relative;
+  width: 98%;
 }
 .follow:after, .follow:before {
   content: "";
@@ -11622,6 +11675,56 @@ input.newsletter {
 .follow:after {
   margin-left: -2px;
   border-color: transparent transparent transparent #fff;
+}
+
+.btn-action {
+  color: #fff;
+  background-color: #7E2C09;
+  border-color: rgba(126, 44, 9, 0.35);
+  font-size: 1.8em;
+}
+.btn-action:focus, .btn-action.focus {
+  color: #fff;
+  background-color: #4e1b06;
+  border-color: rgba(7, 2, 1, 0.35);
+}
+.btn-action:hover {
+  color: #fff;
+  background-color: #4e1b06;
+  border-color: rgba(69, 24, 5, 0.35);
+}
+.btn-action:active, .btn-action.active, .open > .btn-action.dropdown-toggle {
+  color: #fff;
+  background-color: #4e1b06;
+  border-color: rgba(69, 24, 5, 0.35);
+}
+.btn-action:active:hover, .btn-action:active:focus, .btn-action:active.focus, .btn-action.active:hover, .btn-action.active:focus, .btn-action.active.focus, .open > .btn-action.dropdown-toggle:hover, .open > .btn-action.dropdown-toggle:focus, .open > .btn-action.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #2d1003;
+  border-color: rgba(7, 2, 1, 0.35);
+}
+.btn-action:active, .btn-action.active, .open > .btn-action.dropdown-toggle {
+  background-image: none;
+}
+.btn-action.disabled:hover, .btn-action.disabled:focus, .btn-action.disabled.focus, .btn-action[disabled]:hover, .btn-action[disabled]:focus, .btn-action[disabled].focus, fieldset[disabled] .btn-action:hover, fieldset[disabled] .btn-action:focus, fieldset[disabled] .btn-action.focus {
+  background-color: #7E2C09;
+  border-color: rgba(126, 44, 9, 0.35);
+}
+.btn-action .badge {
+  color: #7E2C09;
+  background-color: #fff;
+}
+.btn-action.active:after {
+  background-color: #7E2C09;
+}
+.btn-action.active:before {
+  border-color: #7E2C09 transparent transparent;
+}
+.btn-action.follow:after {
+  border-color: transparent transparent transparent #7E2C09;
+}
+.btn-action.follow:before {
+  border-color: transparent transparent transparent #7E2C09;
 }
 
 .btn-default:hover, .btn-default:active {
@@ -11646,6 +11749,38 @@ a.link {
   border-left: solid 1px #dbd4d1;
   border-right: solid 1px #dbd4d1;
   background-color: #fff !important;
+}
+
+.dropdown-menu {
+  box-shadow: 0px 0px 0px transparent;
+  border: solid 1px #dbd4d1;
+}
+
+.nav-tabs li {
+  float: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.nav-tabs li > a {
+  border: 1px solid #dbd4d1;
+  border-left-color: transparent;
+  margin-right: -4px;
+}
+.nav-tabs li:first-child > a {
+  border-left: 1px solid #dbd4d1;
+}
+.nav-tabs li.active > a {
+  font-weight: bold;
+}
+.nav-tabs li.active > a, .nav-tabs li.active > a:hover, .nav-tabs li.active > a:active, .nav-tabs li.active > a:focus {
+  border-bottom-color: #dbd4d1;
+}
+
+.tab-pane.active:before {
+  border: none;
+}
+.tab-pane.active:after {
+  border: none;
 }
 
 /*-------------------------------*/
@@ -11777,7 +11912,8 @@ a.link {
 }
 .main-header-content .search {
   position: absolute;
-  top: 15px;
+  top: 10px;
+  left: 0;
   padding: 15px;
 }
 .main-header-content .search input {
@@ -11798,6 +11934,12 @@ a.link {
 }
 .main-header-content .search a:hover {
   opacity: 1;
+}
+.main-header-content .language {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  padding: 15px;
 }
 
 .main-site-navbar {
@@ -11833,17 +11975,31 @@ a.link {
 /*  @group Contenitore generale  */
 /*-------------------------------*/
 /* @group Stili ed elementi content */
-.container {
-  min-height: 100%;
-}
-
 .title {
   font-family: "Playfair Display", Georgia, Times, serif;
   color: #60534D;
 }
-.title.section {
+
+.section {
   padding-bottom: 1em;
   background: url("../images/divider.png") no-repeat center bottom;
+}
+.section.left {
+  background-position: left bottom;
+}
+
+.section-small {
+  padding-bottom: 1em;
+  font-size: 15px;
+  background: url("../images/divider-small.png") no-repeat center bottom;
+}
+.section-small.left {
+  background-position: left bottom;
+}
+@media screen and (max-width: 767px) {
+  .section-small.left {
+    background-position: center bottom;
+  }
 }
 
 .jumbotron {
@@ -11872,11 +12028,6 @@ a.link {
   }
 }
 
-.follow {
-  padding-left: 10%;
-  padding-right: 10%;
-}
-
 .bag-box {
   display: block;
   width: 100%;
@@ -11892,6 +12043,123 @@ a.link {
 }
 .bag-box span {
   display: block;
+}
+
+.bag-sample {
+  border: solid 1px #dbd4d1;
+  width: 100%;
+}
+
+.bag-list {
+  text-align: left;
+}
+@media screen and (max-width: 767px) {
+  .bag-list {
+    text-align: center;
+  }
+}
+.bag-list .bag-item {
+  border-bottom: solid 1px #dbd4d1;
+  padding: 30px 0;
+}
+.bag-list .bag-item:last-child {
+  border: none;
+}
+.bag-list .bag {
+  font-size: 20px;
+}
+.bag-list .base, .bag-list .accessori {
+  border-right: solid 1px #dbd4d1;
+}
+@media screen and (max-width: 991px) {
+  .bag-list .base, .bag-list .accessori, .bag-list .action {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: none;
+    border-top: solid 1px #dbd4d1;
+  }
+}
+.bag-list .materiale {
+  display: block;
+  margin: 5px auto 5px auto;
+  width: 30px;
+  height: 30px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.order-state {
+  display: block;
+  width: 300px;
+  text-align: center;
+  padding: 10px;
+  border: solid 1px #dbd4d1;
+  margin-top: -1px;
+  background-color: #fff;
+  color: #E5E1DD;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .order-state {
+    width: 210px;
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .order-state {
+    width: 97%;
+  }
+}
+.order-state.one {
+  z-index: 3;
+}
+.order-state.two {
+  z-index: 2;
+}
+.order-state.three {
+  z-index: 1;
+}
+.order-state.done {
+  color: inherit;
+  z-index: 5;
+  border-bottom-color: #dbd4d1;
+}
+.order-state.done.active:before {
+  border-color: #dbd4d1 transparent transparent;
+}
+.order-state.just-done {
+  color: inherit;
+  z-index: 5;
+  border-bottom-color: #C09683;
+}
+.order-state.just-done.active:before {
+  border-color: #C09683 transparent transparent;
+}
+.order-state.current {
+  border: solid 1px #C09683;
+  z-index: 4;
+  background-color: #f4ece8;
+  color: #7E2C09;
+  font-size: 20px;
+  width: 310px;
+}
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .order-state.current {
+    width: 220px;
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .order-state.current {
+    width: 100%;
+  }
+}
+.order-state.current.active:after {
+  border-color: #f4ece8 transparent transparent;
+}
+.order-state.current.active:before {
+  border-color: #C09683 transparent transparent;
 }
 
 .adv-box {

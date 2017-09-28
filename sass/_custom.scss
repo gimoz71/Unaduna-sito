@@ -36,6 +36,9 @@
 .unaicon-add:before{content:'\0046';}
 .unaicon-remove:before{content:'\0047';}
 .unaicon-search:before{content:'\0048';}
+.unaicon-facebook:before{content:'\0049';}
+.unaicon-twitter:before{content:'\004a';}
+.unaicon-instagram:before{content:'\004b';}
 
 
 /*-------------------------------*/
@@ -231,7 +234,6 @@ input {
     &.selected {
         font-weight: bold;
     }
-    opacity: 1;
     position: relative;
     &:after, &:before {
         content: "";
@@ -258,8 +260,12 @@ input {
         }
     }
 }
+
 .follow {
     position: relative;
+    // padding-left: 10%;
+    // padding-right: 10%;
+    width: 98%;
     &:after, &:before {
         content: "";
         border-style: solid;
@@ -280,7 +286,24 @@ input {
         border-color:  transparent transparent transparent $body-bg;
     }
 }
+.btn-action {
+    @include button-variant($btn-action-color, $btn-action-bg, $btn-action-border);
+    font-size: 1.8em;
+    &.active:after {
+        background-color: $btn-action-bg;
 
+    }
+    &.active:before {
+        border-color: $btn-action-bg transparent transparent;
+
+    }
+    &.follow:after {
+        border-color: transparent transparent transparent $btn-action-bg;
+    }
+    &.follow:before {
+        border-color: transparent transparent transparent $btn-action-bg;
+    }
+}
 .btn-default {
     &:hover, &:active {
         background-color: $body-bg !important;
@@ -305,6 +328,46 @@ a.link {
     border-left: solid 1px $standard-border-color;
     border-right: solid 1px $standard-border-color;
     background-color: $body-bg !important;
+}
+
+.dropdown-menu {
+    // left: auto;
+    box-shadow: 0px 0px 0px transparent;
+    border: solid 1px $standard-border-color;
+}
+
+.nav-tabs {
+    li {
+        float: none;
+        display: inline-block;
+        font-size: 16px;
+        & > a {
+            border: 1px solid $standard-border-color;;
+            border-left-color: transparent;
+            margin-right: -4px;
+        }
+        &:first-child > a {
+            border-left: 1px solid $standard-border-color;;
+
+        }
+        &.active > a {
+            font-weight: bold;
+        }
+        &.active > a, &.active > a:hover, &.active > a:active, , &.active > a:focus {
+            border-bottom-color: $standard-border-color;;
+        }
+    }
+
+}
+.tab-pane {
+    &.active {
+        &:before {
+            border: none;
+        }
+        &:after {
+            border: none;
+        }
+    }
 }
 
 /*-------------------------------*/
@@ -424,7 +487,8 @@ a.link {
     }
     .search {
         position: absolute;
-        top: 15px;
+        top: 10px;
+        left: 0;
         padding: 15px;
         input{
             text-align: inherit;
@@ -445,6 +509,12 @@ a.link {
                 opacity: 1;
             }
         }
+    }
+    .language {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        padding: 15px;
     }
 }
 .main-site-navbar {
@@ -488,15 +558,29 @@ a.link {
 
 
 .container {
-    min-height: 100%;
+    // min-height: 100%;
 }
 
 .title {
     font-family: $font-family-serif;
     color: $brand-primary;
-    &.section {
-        padding-bottom: 1em;
-        background: url('../images/divider.png') no-repeat center bottom;
+}
+.section {
+    padding-bottom: 1em;
+    background: url('../images/divider.png') no-repeat center bottom;
+    &.left {
+        background-position: left bottom;
+    }
+}
+.section-small {
+    padding-bottom: 1em;
+    font-size: 15px;
+    background: url('../images/divider-small.png') no-repeat center bottom;
+    &.left {
+        background-position: left bottom;
+        @media screen and (max-width: $screen-xs-max) {
+            background-position: center bottom;
+        }
     }
 }
 .jumbotron {
@@ -523,10 +607,6 @@ a.link {
     }
 }
 
-.follow {
-    padding-left: 10%;
-    padding-right: 10%;
-}
 .bag-box {
     display: block;
     width: 100%;
@@ -544,6 +624,117 @@ a.link {
         display: block;
     }
 }
+
+.bag-sample {
+    border: solid 1px $standard-border-color;
+    width: 100%;
+}
+.bag-list {
+    text-align: left;
+    @media screen and (max-width: $screen-xs-max) {
+        text-align: center;
+    }
+    .bag-item {
+        border-bottom: solid 1px $standard-border-color;
+        padding: 30px 0;
+        &:last-child {
+            border: none;
+        }
+    }
+    .bag {
+        font-size: 20px;
+    }
+    .base, .accessori {
+        border-right: solid 1px $standard-border-color;
+    }
+    .base, .accessori, .action {
+        @media screen and (max-width: $screen-sm-max) {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border: none;
+            border-top: solid 1px $standard-border-color;
+        }
+
+    }
+    .materiale {
+        display: block;
+        margin: 5px auto 5px auto;
+        width: 30px;
+        height: 30px;
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,.15)
+    }
+}
+
+
+.order-state {
+    display: block;
+    width: 300px;
+    @media screen and (min-width: $screen-xs-max) and (max-width: $screen-sm-max) {
+        width:210px;
+        font-size: 15px;
+    }
+    @media screen and (max-width: $screen-xs-max) {
+        width: 97%;
+    }
+    text-align: center;
+    padding: 10px;
+    border: solid 1px $standard-border-color;
+    margin-top: -1px;
+    background-color: #fff;
+    color: #E5E1DD;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16px;
+    &.one{
+        z-index: 3;
+    }
+    &.two{
+        z-index: 2;
+    }
+    &.three{
+        z-index: 1;
+    }
+    &.done {
+        color: inherit;
+        z-index: 5;
+        border-bottom-color: $standard-border-color;
+        &.active:before {
+            border-color: $standard-border-color transparent transparent;
+        }
+    }
+    &.just-done {
+        color: inherit;
+        z-index: 5;
+        border-bottom-color: #C09683;
+        &.active:before {
+            border-color: #C09683 transparent transparent;
+        }
+    }
+    &.current {
+        border: solid 1px #C09683;
+        z-index: 4;
+        background-color: lighten(#C09683, 30);
+        color: #7E2C09;
+        font-size: 20px;
+        width: 310px;
+        @media screen and (min-width: $screen-xs-max) and (max-width: $screen-sm-max) {
+            width:220px;
+            font-size: 18px;
+        }
+        @media screen and (max-width: $screen-xs-max) {
+            width: 100%;
+        }
+        &.active {
+            &:after {
+                border-color: lighten(#C09683, 30) transparent transparent;
+            }
+            &:before {
+                border-color: #C09683 transparent transparent;
+            }
+        }
+    }
+}
+
 .adv-box {
     display: block;
     width: 100%;

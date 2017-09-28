@@ -37,7 +37,11 @@
                     </button>
                     <ul class="nav navbar-nav fixed-navbar-right">
                         <li>
-                            <a href="#"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
+                            <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
+                            <ul class="dropdown-menu" aria-labelledby="user-menu">
+                                <li><a href="#">Profilo</a></li>
+                                <li><a href="#">Esci</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#"><i class="unaicon-cart"></i> <span class="hidden-xs">(1)</span></a>
@@ -50,13 +54,13 @@
                 <div class="collapse navbar-collapse" id="navbar-ex1-collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="#">About</a>
+                            <a href="#"><i class="unaicon-facebook"></i></a>
                         </li>
                         <li>
-                            <a href="#">Services</a>
+                            <a href="#"><i class="unaicon-twitter"></i></a>
                         </li>
                         <li>
-                            <a href="#">Contact</a>
+                            <a href="#"><i class="unaicon-instagram"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -65,6 +69,13 @@
         <div class="container" style="position: relative">
             <div class="search hidden-xs">
                 <input type="text" placeholder="Ricerca"><a href="#"><i class="unaicon-search"></i></a>
+            </div>
+            <div class="language hidden-xs">
+                <a href="#" id="language" data-toggle="dropdown">English <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="language">
+                    <li><a href="#">Deutsche</a></li>
+                    <li><a href="#">Francois</a></li>
+                </ul>
             </div>
         </div>
     </div>
