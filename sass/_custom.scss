@@ -39,6 +39,7 @@
 .unaicon-facebook:before{content:'\0049';}
 .unaicon-twitter:before{content:'\004a';}
 .unaicon-instagram:before{content:'\004b';}
+.unaicon-register:before{content:'\004c';}
 
 
 /*-------------------------------*/
@@ -213,7 +214,7 @@ img {
 table {
     width: 100%;
 }
-input {
+input, .form-control {
     padding: 5px;
     font-size: 1.5em;
     text-align:center;
@@ -221,6 +222,7 @@ input {
     border-left: none;
     border-right: none;
     border-bottom: solid 1px $standard-border-color;
+    box-shadow:  none;
     &::placeholder {
         color: $standard-border-color;
     }
@@ -385,6 +387,8 @@ a.link {
         float: none;
         display: inline-block;
         font-size: 16px;
+        width: 135px;
+        left: -2px;
         & > a, & > a:hover {
             border: 1px solid $standard-border-color;;
             border-left-color: transparent;

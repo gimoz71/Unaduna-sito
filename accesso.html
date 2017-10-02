@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Configuratore Borse</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta property="og:description" content="Configuratore Borse.">
+    <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+    <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/switchery.css">
+    <!--[if lt IE 9]><script src="javascripts/html5shiv.js"></script><![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <style type="text/css">
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-header-content">
+        <nav class="navbar main-navbar navbar-default nomargin" role="navigation">
+            <div class="container">
+                <a class="navbar-brand logo-big  hidden-xs text-hide" href="#">Unaduna</a>
+                <a class="navbar-brand logo-small hidden-lg hidden-md hidden-sm text-hide" href="#">Unaduna</a>
+                <div class="navbar-header navbar-right">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <ul class="nav navbar-nav fixed-navbar-right">
+                        <li>
+                            <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
+                            <ul class="dropdown-menu" aria-labelledby="user-menu">
+                                <li><a href="#">Profilo</a></li>
+                                <li><a href="#">Esci</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="unaicon-cart"></i> <span class="hidden-xs">(1)</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="unaicon-favourite"></i> <span class="hidden-xs">(2)</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="#"><i class="unaicon-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="unaicon-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="unaicon-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container" style="position: relative">
+            <div class="search hidden-xs">
+                <input type="text" placeholder="Ricerca"><a href="#"><i class="unaicon-search"></i></a>
+            </div>
+            <div class="language hidden-xs">
+                <a href="#" id="language" data-toggle="dropdown">English <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="language">
+                    <li><a href="#">Deutsche</a></li>
+                    <li><a href="#">Francois</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default nomargin main-site-navbar">
+        <div class="container">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="active ontop">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="link active">Configura</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Visione</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Esperienza</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Contatti</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Stores</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-12 clearfix bottom-buffer">
+                <h3 class="title section">Benvenuto,</h3>
+                <p>in questa area puoiaccedere al tuo profilo o registrarti.</p>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#accedi" data-toggle="tab"><i class="unaicon-login" style="margin-right: 2px;"></i> Accedi</a></li>
+            <li role="presentation"><a href="#registrati" data-toggle="tab"><i class="unaicon-register" style="margin-right: 2px;"></i> Registrati</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="row bag-list tab-pane fade in active" id="accedi">
+                <div class="col-sm-6 col-sm-offset-3 bag-item clearfix text-center">
+                    <form>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputEmail" class="sr-only hidden"></label>
+                                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputPassword" class="sr-only hidden"></label>
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="js-switch"> Ricordami</label>
+                            </div>
+                            <button type="submit" class="btn btn-default btn-lg btn-block follow">Accedi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row bag-list tab-pane fade" id="registrati">
+                <div class="col-sm-6 col-sm-offset-3 bag-item clearfix text-center">
+                    <form>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputNome" class="sr-only hidden"></label>
+                                <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputCognome" class="sr-only hidden"></label>
+                                <input type="text" class="form-control" id="inputCognome" placeholder="Cognome">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputPasswordReg" class="sr-only hidden"></label>
+                                <input type="password" class="form-control" id="inputPasswordReg" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputEmailReg" class="sr-only hidden"></label>
+                                <input type="email" class="form-control" id="inputEmailReg" placeholder="Email">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default btn-lg btn-block follow">Registrati</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center">
+        <div class="footer-navbar-container">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Configura</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Visione</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Esperienza</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Contatti</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Stores</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="credits">
+            <div class="container">
+                <a class="logo-footer text-hide" href="#">Unaduna</a>
+                <p>
+                    Via S. Carlo 2707/2709 47522, San Carlo dI Cesena (FC) Italia<br />
+                    Tel. +39 0547 373077 - Fax +39 0547 373363<br />
+                    P.IVA 03487580403
+                </p>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                Copyright 2017 Unaduna
+            </div>
+        </div>
+    </footer>
+    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="javascripts/bootstrap.js"></script>
+    <script src="javascripts/switchery.js"></script>
+    <script src="javascripts/mdb.js"></script>
+    <!-- <script src="javascripts/custom.js"></script> -->
+    <script>new WOW().init();
+    var elem = document.querySelector('.js-switch');
+    var switchery = new Switchery(elem, { color: '#dfd1c2', jackColor: '#fff', size: 'small' });
+    </script>
+</body>
+
+</html>

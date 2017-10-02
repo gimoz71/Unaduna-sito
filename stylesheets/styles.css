@@ -11570,6 +11570,10 @@ button.close {
   content: '\004b';
 }
 
+.unaicon-register:before {
+  content: '\004c';
+}
+
 /*-------------------------------*/
 /* override e aggiunte a stili bootstrap      */
 /*-------------------------------*/
@@ -11727,7 +11731,7 @@ table {
   width: 100%;
 }
 
-input {
+input, .form-control {
   padding: 5px;
   font-size: 1.5em;
   text-align: center;
@@ -11735,11 +11739,12 @@ input {
   border-left: none;
   border-right: none;
   border-bottom: solid 1px #dbd4d1;
+  box-shadow: none;
 }
-input::placeholder {
+input::placeholder, .form-control::placeholder {
   color: #dbd4d1;
 }
-input.newsletter {
+input.newsletter, .form-control.newsletter {
   margin: 20px 0;
 }
 
@@ -11925,6 +11930,8 @@ a.link {
   float: none;
   display: inline-block;
   font-size: 16px;
+  width: 135px;
+  left: -2px;
 }
 .nav-tabs li > a, .nav-tabs li > a:hover {
   border: 1px solid #dbd4d1;
