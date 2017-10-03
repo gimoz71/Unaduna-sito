@@ -39,7 +39,7 @@
                         <li>
                             <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
                             <ul class="dropdown-menu" aria-labelledby="user-menu">
-                                <li><a href="#">Profilo</a></li>
+                                <li><a href="accesso.html">Profilo</a></li>
                                 <li><a href="#">Esci</a></li>
                             </ul>
                         </li>
@@ -84,16 +84,16 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#" class="active ontop">Home</a>
+                        <a href="index.html" class="">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="link active">Configura</a>
+                        <a href="#" class="">Configura</a>
                     </li>
                     <li>
-                        <a href="#" class="">Visione</a>
+                        <a href="corporate.html" class="">Visione</a>
                     </li>
                     <li>
-                        <a href="#" class="">Esperienza</a>
+                        <a href="corporate.html" class="">Esperienza</a>
                     </li>
                     <li>
                         <a href="#" class="">Contatti</a>
@@ -105,7 +105,7 @@
             </div>
         </div>
     </nav>
-    <div class="container text-center">
+    <div class="container text-center gradient">
         <div class="row">
             <div class="col-sm-12 clearfix bottom-buffer">
                 <h3 class="title section">Ciao Gianluca,</h3>
@@ -116,7 +116,7 @@
             <li role="presentation" class="active"><a href="#preferiti" data-toggle="tab"><i class="unaicon-favourite" style="margin-right: 2px;"></i> Preferiti (2)</a></li>
             <li role="presentation"><a href="#ordini" data-toggle="tab"><i class="unaicon-cart" style="margin-right: 2px;"></i> Ordini (2)</a></li>
         </ul>
-        <div class="tab-content">
+        <div class="tab-content clearfix gradient">
             <div class="row bag-list tab-pane fade in active" id="preferiti">
                 <div class="col-sm-12 bag-item clearfix">
                     <div class="col-sm-3">
@@ -469,7 +469,21 @@
     <script src="javascripts/bootstrap.js"></script>
     <script src="javascripts/mdb.js"></script>
     <!-- <script src="javascripts/custom.js"></script> -->
-    <script>new WOW().init();</script>
+    <script>new WOW().init();
+    $(document).ready(function() {
+        // show active tab on reload
+        if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+
+        // remember the hash in the URL without jumping
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+               if(history.pushState) {
+                    history.pushState(null, null, '#'+$(e.target).attr('href').substr(1));
+               } else {
+                    location.hash = '#'+$(e.target).attr('href').substr(1);
+               }
+            });
+        });
+    </script>
 </body>
 
 </html>

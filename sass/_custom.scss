@@ -216,15 +216,16 @@ table {
 }
 input, .form-control {
     padding: 5px;
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-align:center;
     border-top: none;
     border-left: none;
     border-right: none;
     border-bottom: solid 1px $standard-border-color;
     box-shadow:  none;
+    background: transparent;
     &::placeholder {
-        color: $standard-border-color;
+        color: darken($standard-border-color, 5);
     }
     &.newsletter {
         margin: 20px 0;
@@ -421,6 +422,10 @@ a.link {
         }
     }
 }
+.gradient {
+    background: url('../images/gradient.png') no-repeat top center;
+    background-size: contain;
+}
 
 /*-------------------------------*/
 /*  @group Header               */
@@ -441,7 +446,7 @@ a.link {
     text-align: center;
     background: url('/images/logo-small.jpg') no-repeat center center;
     background-size: contain;
-    @media screen and (max-width: $screen-xs-max) {
+    @media screen and (max-width: $screen-xs-min) {
         width:100px;
     }
 }
@@ -458,15 +463,15 @@ a.link {
     background-size: contain;
 }
 
-.navbar>.container .logo-big,
-.navbar>.container-fluid .logo-big {
+.navbar>.container .logo-small,
+.navbar>.container-fluid .logo-small {
     margin-left: -65px;
-    @media screen and (max-width: $screen-xs-max) {
+    @media screen and (max-width: $screen-xs-min) {
         margin-left: -100px;
     }
 }
-.navbar>.container .logo-small,
-.navbar>.container-fluid .logo-small {
+.navbar>.container .logo-big,
+.navbar>.container-fluid .logo-big {
     margin-left: -65px;
     @media screen and (max-width: $screen-xs-max) {
         margin-left: -100px;
@@ -615,7 +620,7 @@ a.link {
                         border-width: 8px;
                         margin-left: -8px;
                     }
-                    &.active {
+                    &.active, &.hl {
                         &:after, &:before {
                             @include transition(all 150ms ease-in-out);
                             content: "";
@@ -641,7 +646,29 @@ a.link {
     @media screen and (max-width: $screen-xs-max) {
         // top: $navbar-height;
         min-height: 0;
-        border-top: none
+        border-top: none;
+        .navbar-collapse {
+            .navbar-nav {
+                li {
+                    a {
+                        &.hl {
+                            &:before, &:after {
+                                border: 0;
+                            }
+                        }
+                        &.active {
+                            &:before, &:after {
+                                border: 0;
+                            }
+                            background: url('../images/divider.png') no-repeat center bottom;
+                        }
+                        &.link {
+                            border:0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -685,8 +712,10 @@ a.link {
 }
 .jumbotron {
     padding: 20px 0;
-    background: url(../images/jumbotron.jpg) no-repeat center center;
-    background-size: cover;
+    background-image: url('../images/gradient.png'), url('../images/jumbotron.jpg');
+    background-repeat: no-repeat, no-repeat;
+    background-position: top center, center center;
+    background-size: contain, cover;
     height: 350px;
     border-bottom: solid 1px $standard-border-color;
     .title {
@@ -698,7 +727,10 @@ a.link {
         width: 50%;
     }
     @media screen and (max-width: $screen-xs-max) {
-        background: url(../images/jumbotron_blur.jpg) no-repeat center center;
+        background-image: url('../images/gradient.png'), url('../images/jumbotron_blur.jpg');
+        background-repeat: no-repeat, no-repeat;
+        background-position: top center, center center;
+        background-size: contain, cover;
         text-align: center;
         height: auto;
         .subtitle {
