@@ -11988,7 +11988,7 @@ a.link {
   display: block;
   width: 130px;
   text-align: center;
-  background: url("/images/logo-small.jpg") no-repeat center center;
+  background: url("../images/logo-small.jpg") no-repeat center center;
   background-size: contain;
 }
 @media screen and (max-width: 480px) {
@@ -12006,7 +12006,7 @@ a.link {
   width: 166px;
   height: 126px;
   text-align: center;
-  background: url("/images/logo-big.png") no-repeat center center;
+  background: url("../images/logo-big.png") no-repeat center center;
   background-size: contain;
 }
 
