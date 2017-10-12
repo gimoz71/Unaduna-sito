@@ -7,6 +7,19 @@ angular.module("applicationModule").controller("componentsController", function(
 	$scope.isContatti = false;
 	$scope.isStores = false;
 	
+	$scope.wowInit = function(config){
+		if(config){
+			new WOW(config).init();
+		} else {
+			new WOW().init();
+		}
+		
+	}
+	
+	$scope.init = function(){
+		$scope.wowInit();
+	}
+	
 	$scope.setHome = function(){
 		$scope.isHome = true;
 		$scope.isConfigurator = false;
@@ -14,6 +27,9 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = false;
 		$scope.isContatti = false;
 		$scope.isStores = false;
+		$scope.wowInit({
+		    boxClass: 'home-content wow'
+		})
 	};
 	
 	$scope.setConfigurator = function(){
@@ -32,6 +48,7 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = false;
 		$scope.isContatti = false;
 		$scope.isStores = false;
+		$scope.wowInit()
 	};
 	
 	$scope.setEsperienza = function(){
@@ -41,6 +58,7 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = true;
 		$scope.isContatti = false;
 		$scope.isStores = false;
+		$scope.wowInit()
 	};
 	
 	$scope.setContatti = function(){
@@ -50,6 +68,7 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = false;
 		$scope.isContatti = true;
 		$scope.isStores = false;
+		$scope.wowInit()
 	};
 	
 	$scope.setStores = function(){
@@ -59,6 +78,7 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = false;
 		$scope.isContatti = false;
 		$scope.isStores = true;
+		$scope.wowInit()
 	};
 	
 })

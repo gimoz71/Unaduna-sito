@@ -1,4 +1,4 @@
-<div class="configuratore" ng-app="configuratorModule">
+<div class="configuratore">
     <div ng-controller="unadunaConfiguratorController as contr">
         <nav class="navbar yamm navbar-default navbar-fixed-top nomargin main-configurator-navbar">
             <div class="container">
@@ -6,7 +6,7 @@
                     <div class="col-sm-12 clearfix">
                         <ul class="nav navbar-nav fixed-navbar-left">
                             <li>
-                                <a href="#" class="link"><i class="fa fa-bars"></i></a>
+                                <a href="#" class="link" ng-click="setHome()"><i class="fa fa-bars"></i></a>
                             </li>
                             <li class="dropdown yamm-fw">
                                 <a href="#" class="active dropdown-toggle link" data-toggle="dropdown">scegli il modello</a>
@@ -102,11 +102,11 @@
                 <div></div>
             </div>
         </div>
-        <div id="a-middle" style="max-width: 960px; opacity: 0;">
+        <div id="media-middle" style="max-width: 960px; opacity: 100;">
             <div ng-show="!contr.visibleManager.spinnerVisible"><img alt="" src="images/base-rounded-3d.png" style="width:100%"></div>
             <div ng-show="contr.visibleManager.spinnerVisible" id="spritespin"></div>
         </div>
-        <div class="accessori" style="opacity: 0;">
+        <div class="accessori" style="opacity: 100;">
             <a href="#" class="accessori-trigger aperto"></a>
             <div class="container">
                 <div class="row">

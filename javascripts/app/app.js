@@ -12,7 +12,7 @@ var app = angular.module('applicationModule', ['loginModule', 'configuratorModul
 }).directive('visioneContent', function(){
 	 return {
 		 restrict: 'E',
-		 templateUrl: 'homeContent.html'
+		 templateUrl: 'visioneContent.html'
 	 };
 }).directive('esperienzaContent', function(){
 	 return {
@@ -22,11 +22,11 @@ var app = angular.module('applicationModule', ['loginModule', 'configuratorModul
 }).directive('contattiContent', function(){
 	 return {
 		 restrict: 'E',
-		 templateUrl: 'homeContent.html'
+		 templateUrl: ''
 	 };
 }).directive('storesContent', function(){
 	 return {
 		 restrict: 'E',
-		 templateUrl: 'homeContent.html'
+		 templateUrl: ''
 	 };
 });
