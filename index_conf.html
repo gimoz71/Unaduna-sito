@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Configuratore Borse</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta property="og:description" content="Configuratore Borse.">
+    <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+    <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/swiper.css">
+    <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
+    <!-- <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/stick.css"> -->
+    <!-- <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/xzoom.css"> -->
+    <!--[if lt IE 9]><script src="javascripts/html5shiv.js"></script><![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <style type="text/css">
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+
+        .la-ball-grid-pulse,
+        .la-ball-grid-pulse>div {
+            position: relative;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .la-ball-grid-pulse {
+            display: block;
+            font-size: 0;
+            color: #fff;
+        }
+
+        .la-ball-grid-pulse.la-dark {
+            color: #333;
+        }
+
+        .la-ball-grid-pulse>div {
+            display: inline-block;
+            float: none;
+            background-color: currentColor;
+            border: 0 solid currentColor;
+        }
+
+        .la-ball-grid-pulse {
+            width: 36px;
+            height: 36px;
+        }
+
+        .la-ball-grid-pulse>div {
+            width: 8px;
+            height: 8px;
+            margin: 2px;
+            border-radius: 100%;
+            -webkit-animation-name: ball-grid-pulse;
+            -moz-animation-name: ball-grid-pulse;
+            -o-animation-name: ball-grid-pulse;
+            animation-name: ball-grid-pulse;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            -o-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+        }
+
+        .la-ball-grid-pulse>div:nth-child(1) {
+            -webkit-animation-duration: .65s;
+            -moz-animation-duration: .65s;
+            -o-animation-duration: .65s;
+            animation-duration: .65s;
+            -webkit-animation-delay: .03s;
+            -moz-animation-delay: .03s;
+            -o-animation-delay: .03s;
+            animation-delay: .03s;
+        }
+
+        .la-ball-grid-pulse>div:nth-child(2) {
+            -webkit-animation-duration: 1.02s;
+            -moz-animation-duration: 1.02s;
+            -o-animation-duration: 1.02s;
+            animation-duration: 1.02s;
+            -webkit-animation-delay: .09s;
+            -moz-animation-delay: .09s;
+            -o-animation-delay: .09s;
+            animation-delay: .09s;
+        }
+
+        .la-ball-grid-pulse>div:nth-child(3) {
+            -webkit-animation-duration: 1.06s;
+            -moz-animation-duration: 1.06s;
+            -o-animation-duration: 1.06s;
+            animation-duration: 1.06s;
+            -webkit-animation-delay: -.69s;
+            -moz-animation-delay: -.69s;
+            -o-animation-delay: -.69s;
+            animation-delay: -.69s;
+        }
+
+        .la-ball-grid-pulse>div:nth-child(4) {
+            -webkit-animation-duration: 1.5s;
+            -moz-animation-duration: 1.5s;
+            -o-animation-duration: 1.5s;
+            animation-duration: 1.5s;
+            -webkit-animation-delay: -.41s;
+            -moz-animation-delay: -.41s;
+            -o-animation-delay: -.41s;
+            animation-delay: -.41s;
+        }
+
+        .la-ball-grid-pulse>div:nth-child(5) {
+            -webkit-animation-duration: 1.6s;
+            -moz-animation-duration: 1.6s;
+            -o-animation-duration: 1.6s;
+            animation-duration: 1.6s;
+            -webkit-animation-delay: .04s;
+            -moz-animation-delay: .04s;
+            -o-animation-delay: .04s;
+            animation-delay: .04s;
+        }
+
+        .la-ball-grid-pulse>div:nth-child(6) {
+            -webkit-animation-duration: .84s;
+            -moz-animation-duration: .84s;
+            -o-animation-duration: .84s;
+            animation-duration: .84s;
+            -webkit-animation-delay: .07s;
+            -moz-animation-delay: .07s;
+            -o-animation-delay: .07s;
+            animation-delay: .07s;
+        }
+
+        .la-ball-grid-pulse>div:nth-child(7) {
+            -webkit-animation-duration: .68s;
+            -moz-animation-duration: .68s;
+            -o-animation-duration: .68s;
+            animation-duration: .68s;
+            -webkit-animation-delay: -.66s;
+            -moz-animation-delay: -.66s;
+            -o-animation-delay: -.66s;
+            animation-delay: -.66s;
+        }
+
+        .la-ball-grid-pulse>div:nth-child(8) {
+            -webkit-animation-duration: .93s;
+            -moz-animation-duration: .93s;
+            -o-animation-duration: .93s;
+            animation-duration: .93s;
+            -webkit-animation-delay: -.76s;
+            -moz-animation-delay: -.76s;
+            -o-animation-delay: -.76s;
+            animation-delay: -.76s;
+        }
+
+        .la-ball-grid-pulse>div:nth-child(9) {
+            -webkit-animation-duration: 1.24s;
+            -moz-animation-duration: 1.24s;
+            -o-animation-duration: 1.24s;
+            animation-duration: 1.24s;
+            -webkit-animation-delay: -.76s;
+            -moz-animation-delay: -.76s;
+            -o-animation-delay: -.76s;
+            animation-delay: -.76s;
+        }
+
+        .la-ball-grid-pulse.la-sm {
+            width: 18px;
+            height: 18px;
+        }
+
+        .la-ball-grid-pulse.la-sm>div {
+            width: 4px;
+            height: 4px;
+            margin: 1px;
+        }
+
+        .la-ball-grid-pulse.la-2x {
+            width: 72px;
+            height: 72px;
+        }
+
+        .la-ball-grid-pulse.la-2x>div {
+            width: 16px;
+            height: 16px;
+            margin: 4px;
+        }
+
+        .la-ball-grid-pulse.la-3x {
+            width: 108px;
+            height: 108px;
+        }
+
+        .la-ball-grid-pulse.la-3x>div {
+            width: 24px;
+            height: 24px;
+            margin: 6px;
+        }
+        /*
+ * Animation
+ */
+
+        @-webkit-keyframes ball-grid-pulse {
+            0% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+            50% {
+                opacity: .35;
+                -webkit-transform: scale(.45);
+                transform: scale(.45);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @-moz-keyframes ball-grid-pulse {
+            0% {
+                opacity: 1;
+                -moz-transform: scale(1);
+                transform: scale(1);
+            }
+            50% {
+                opacity: .35;
+                -moz-transform: scale(.45);
+                transform: scale(.45);
+            }
+            100% {
+                opacity: 1;
+                -moz-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @-o-keyframes ball-grid-pulse {
+            0% {
+                opacity: 1;
+                -o-transform: scale(1);
+                transform: scale(1);
+            }
+            50% {
+                opacity: .35;
+                -o-transform: scale(.45);
+                transform: scale(.45);
+            }
+            100% {
+                opacity: 1;
+                -o-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes ball-grid-pulse {
+            0% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+            }
+            50% {
+                opacity: .35;
+                -webkit-transform: scale(.45);
+                -moz-transform: scale(.45);
+                -o-transform: scale(.45);
+                transform: scale(.45);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body class="configuratore" ng-app="unadunaModule">
+    <div ng-controller="unadunaConfiguratorController as contr">
+        <nav class="navbar yamm navbar-default navbar-fixed-top nomargin main-configurator-navbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 clearfix">
+                        <ul class="nav navbar-nav fixed-navbar-left">
+                            <li>
+                                <a href="#" class="link"><i class="fa fa-bars"></i></a>
+                            </li>
+                            <li class="dropdown yamm-fw">
+                                <a href="#" class="active dropdown-toggle link" data-toggle="dropdown">scegli il modello</a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="yamm-content clearfix" >
+                                            <div class="col-xs-12">
+                                                <h4>Disegna la tua borsa</h4>
+                                            </div>
+                                            <div class="col-xs-12" style="border-top:solid 1px #dbd4d1;">
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <h4>Lasciati ispirare</h4>
+                                            </div>
+                                            <div class="col-xs-12" style="border-top:solid 1px #dbd4d1;">
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                                <div class="col-xs-6 col-sm-2 text-center">
+                                                    <a href="#" id="start3dbutton" type="button" ng-click="contr.SendData(2)"><img src="images/modello.jpg" /><h5>modello #1</h5></a>
+                                                    <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <h1 class="navbar-brand navbar-left nomargin hidden-xs" id="edit-text">Borsa #1</h1>
+                        <ul class="nav navbar-nav fixed-navbar-right">
+                            <li>
+                                <a href="#" class="active materiale link"><span class="hidden-xs">colore </span><span class="tipologia colore" style="background-color:#C9FF26;"></span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="active materiale link"><span class="hidden-xs">pelle </span><span class="tipologia pelle" style="background-image: url('images/pelle.jpg');"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div ng-show="contr.visibleManager.loaderVisible" style="position: absolute;width: 100%; height: 100%;  z-index: 100;background-color: rgba(255,255,255,.75)">
+            <div style="color: #ccc;top: 50%; left: 50%; margin-left: -31px; margin-top: -31px;" class="la-ball-grid-pulse la-2x">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div id="a-middle" style="max-width: 960px; opacity: 0;">
+            <div ng-show="!contr.visibleManager.spinnerVisible"><img alt="" src="images/base-rounded-3d.png" style="width:100%"></div>
+            <div ng-show="contr.visibleManager.spinnerVisible" id="spritespin"></div>
+        </div>
+        <div class="accessori" style="opacity: 0;">
+            <a href="#" class="accessori-trigger aperto"></a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="swiper-container accessori-categoria">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><a href="#" class="active selected">nappe</a></div>
+                                <div class="swiper-slide"><a href="#">zip</a></div>
+                                <div class="swiper-slide"><a href="#">tracolle</a></div>
+                                <div class="swiper-slide"><a href="#">manici</a></div>
+                                <div class="swiper-slide"><a href="#">borchie</a></div>
+                                <div class="swiper-slide"><a href="#">ciondoli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="swiper-container accessori-thumb">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa">
+                                    <a href="#" ng-class="{added:item.attivo === true}">
+	                        				<img ng-src="{{item.datasource}}" class="swiper-lazy" ng-click="contr.SendData(item)">
+                        					<div class="swiper-lazy-preloader"></div>
+                        				</a>
+                                </div>
+                            </div>
+                            <div class="swiper-button-next swiper-button-black"></div>
+                            <div class="swiper-button-prev swiper-button-black"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="riepilogo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3  clearfix">
+                        <div class="col-xs-6 ">
+                            <h3 class="price nomargin">120&euro;</h3>
+                            <h5 class="info nomargin">iva inclusa</h5>
+                        </div>
+                        <div class="col-xs-6 text-center">
+                            <a href="#" class="btn btn-default btn-lg btn-block follow">procedi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/swiper.min.js"></script>
+    <script src="javascripts/swiper.jquery.js"></script>
+    <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="javascripts/custom.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <script src="javascripts/app/app.js"></script>
+    <script src="javascripts/app/controllers/configuratorController.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script type="text/javascript" src="javascripts/spritespin.js"></script>
+    <script>
+        /* edito il nome della borsa nel configuratore */
+        $('#edit-text').click(function() {
+            var name = $(this).text();
+            $(this).html('');
+            $('<input style="margin-top: -10px; margin-left: -3px;"></input>')
+                .attr({
+                    'type': 'text',
+                    'name': 'fname',
+                    'id': 'txt_fullname',
+                    'size': '10',
+                    'value': name
+                })
+                .appendTo('#edit-text');
+            $('#txt_fullname').focus();
+
+        });
+        (function($){
+        $(window).on("load",function(){
+                $(".yamm-content").mCustomScrollbar({
+                    theme:"minimal-dark",
+					scrollButtons:{enable:true},
+					scrollInertia:400
+                });
+                $(".borsaModel").click(function() {
+                   $(".dropdown-toggle").dropdown("toggle");
+                });
+            });
+        })(jQuery)
+        $(document).on('click', '.yamm .dropdown-menu', function(e) {
+          e.stopPropagation()
+        })
+        $(document).on('blur', '#txt_fullname', function() {
+            var name = $(this).val();
+            //alert('Make an AJAX call and pass this parameter >> name=' + name);
+            $('#edit-text').text(name);
+        });
+    </script>
+</body>
+
+</html>

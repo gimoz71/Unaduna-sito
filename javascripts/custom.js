@@ -109,31 +109,31 @@ var swiper = new Swiper('.accessori-thumb', {
 /* settaggio spinner borse */
 /*------------------------------------*/
 
-$(function() {
-    $('.spritespin').spritespin({
-        width: 960,
-        height: 512,
-        source: SpriteSpin.sourceArray('/gallery/3d/test/image{frame}.png', {
-            frame: [1, 8],
-            digits: 4
-        }),
-        sense: 2,
-        responsive: true,
-        animate: false,
-        mods: [
-            // module that changes frame on drag
-            'drag',
-            // module that eases out an animation after mouse is released
-            'ease',
-            // module to display array or sprite of images
-            '360'//,
-            // module that render and fades additional frames to somulate blur
-            // 'blur'
-        ]//,
-        // if true the blur module will make use of css blur
-        // blurCss: true
-    });
-});
+//$(function() {
+//    $('.spritespin').spritespin({
+//        width: 960,
+//        height: 512,
+//        source: SpriteSpin.sourceArray('/gallery/3d/test/image{frame}.png', {
+//            frame: [1, 8],
+//            digits: 4
+//        }),
+//        sense: 2,
+//        responsive: true,
+//        animate: false,
+//        mods: [
+//            // module that changes frame on drag
+//            'drag',
+//            // module that eases out an animation after mouse is released
+//            'ease',
+//            // module to display array or sprite of images
+//            '360'//,
+//            // module that render and fades additional frames to somulate blur
+//            // 'blur'
+//        ]//,
+//        // if true the blur module will make use of css blur
+//        // blurCss: true
+//    });
+//});
 $(window).ready(function(){
     $('<div class="first-divider"></div>' ).appendTo('.accessori');
     $('#a-middle').css('margin-top', function () {

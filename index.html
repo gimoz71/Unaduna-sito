@@ -20,203 +20,228 @@
             visibility: hidden;
         }
     </style>
+    
 </head>
 
-<body>
-    <div class="main-header-content">
-        <nav class="navbar main-navbar navbar-default nomargin" role="navigation">
-            <div class="container">
-                <a class="navbar-brand logo-big  hidden-xs text-hide" href="#">Unaduna</a>
-                <a class="navbar-brand logo-small hidden-lg hidden-md hidden-sm text-hide" href="#">Unaduna</a>
-                <div class="navbar-header navbar-right">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <ul class="nav navbar-nav fixed-navbar-right">
-                        <li>
-                            <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
-                            <ul class="dropdown-menu" aria-labelledby="user-menu">
-                                <li><a href="accesso.html">Profilo</a></li>
-                                <li><a href="#">Esci</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="profilo-borse.html#preferiti"><i class="unaicon-cart"></i> <span class="hidden-xs">(1)</span></a>
-                        </li>
-                        <li>
-                            <a href="profilo-borse.html#ordini"><i class="unaicon-favourite"></i> <span class="hidden-xs">(2)</span></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-ex1-collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#"><i class="unaicon-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="unaicon-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="unaicon-instagram"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="container" style="position: relative">
-            <div class="search hidden-xs">
-                <input type="text" placeholder="Ricerca"><a href="#"><i class="unaicon-search"></i></a>
-            </div>
-            <div class="language hidden-xs">
-                <a href="#" id="language" data-toggle="dropdown">English <span class="caret"></span></a>
-                <ul class="dropdown-menu" aria-labelledby="language">
-                    <li><a href="#">Deutsche</a></li>
-                    <li><a href="#">Francois</a></li>
-                </ul>
-            </div>
-        </div>
+<body ng-app="applicationModule">
+	<div ng-controller="componentsController">
+		<div ng-hide="isConfigurator">
+		    <div class="main-header-content">
+		        <nav class="navbar main-navbar navbar-default nomargin" role="navigation">
+		            <div class="container">
+		                <a class="navbar-brand logo-big  hidden-xs text-hide" href="#">Unaduna</a>
+		                <a class="navbar-brand logo-small hidden-lg hidden-md hidden-sm text-hide" href="#">Unaduna</a>
+		                <div class="navbar-header navbar-right">
+		                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+		                        <span class="sr-only">Toggle navigation</span>
+		                        <span class="icon-bar"></span>
+		                        <span class="icon-bar"></span>
+		                        <span class="icon-bar"></span>
+		                    </button>
+		                    <ul class="nav navbar-nav fixed-navbar-right">
+		                        <li>
+		                            <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
+		                            <ul class="dropdown-menu" aria-labelledby="user-menu">
+		                                <li><a href="accesso.html">Profilo</a></li>
+		                                <li><a href="#">Esci</a></li>
+		                            </ul>
+		                        </li>
+		                        <li>
+		                            <a href="profilo-borse.html#preferiti"><i class="unaicon-cart"></i> <span class="hidden-xs">(1)</span></a>
+		                        </li>
+		                        <li>
+		                            <a href="profilo-borse.html#ordini"><i class="unaicon-favourite"></i> <span class="hidden-xs">(2)</span></a>
+		                        </li>
+		                    </ul>
+		                </div>
+		                <div class="collapse navbar-collapse" id="navbar-ex1-collapse">
+		                    <ul class="nav navbar-nav navbar-left">
+		                        <li>
+		                            <a href="#"><i class="unaicon-facebook"></i></a>
+		                        </li>
+		                        <li>
+		                            <a href="#"><i class="unaicon-twitter"></i></a>
+		                        </li>
+		                        <li>
+		                            <a href="#"><i class="unaicon-instagram"></i></a>
+		                        </li>
+		                    </ul>
+		                </div>
+		            </div>
+		        </nav>
+		        <div class="container" style="position: relative">
+		            <div class="search hidden-xs">
+		                <input type="text" placeholder="Ricerca"><a href="#"><i class="unaicon-search"></i></a>
+		            </div>
+		            <div class="language hidden-xs">
+		                <a href="#" id="language" data-toggle="dropdown">English <span class="caret"></span></a>
+		                <ul class="dropdown-menu" aria-labelledby="language">
+		                    <li><a href="#">Deutsche</a></li>
+		                    <li><a href="#">Francois</a></li>
+		                </ul>
+		            </div>
+		        </div>
+		    </div>
+		    <nav class="navbar navbar-default nomargin main-site-navbar">
+		        <div class="container">
+		            <div class="collapse navbar-collapse navbar-ex1-collapse">
+		                <ul class="nav navbar-nav">
+		                    <li>
+		                        <a href="#" class="active link" ng-click="setHome()">Home</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setConfigurator()">Configura</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setVisione()">Visione</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setEsperienza()">Esperienza</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setContatti()">Contatti</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setStores()">Stores</a>
+		                    </li>
+		                </ul>
+		            </div>
+		        </div>
+		    </nav>
+	    </div>
+	    <div><!-- contenitore principale -->
+		    <home-content ng-show="isHome"></home-content>
+		    <configura-content ng-show="isConfigurator"></configura-content>
+		    <visione-content ng-show="isVisione"></visione-content>
+		    <esperienza-content ng-show="isEsperienza"></esperienza-content>
+		    <contatti-content ng-show="isContatti"></contatti-content>
+		    <stores-content ng-show="isStores"></stores-content>
+	    </div>
+	    
+	    <footer class="text-center">
+	        <div class="footer-navbar-container">
+	            <div class="container">
+	                <ul class="nav navbar-nav">
+	                    <li>
+	                        <a href="index.html" class="">Home</a>
+	                    </li>
+	                    <li>
+	                        <a href="http://unadunaconfiguratore.eu-central-1.elasticbeanstalk.com" class="">Configura</a>
+	                    </li>
+	                    <li>
+	                        <a href="visione.html" class="">Visione</a>
+	                    </li>
+	                    <li>
+	                        <a href="esperienza.html" class="">Esperienza</a>
+	                    </li>
+	                    <li>
+	                        <a href="#" class="">Contatti</a>
+	                    </li>
+	                    <li>
+	                        <a href="#" class="">Stores</a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="credits">
+	            <div class="container">
+	                <a class="logo-footer text-hide" href="#">Unaduna</a>
+	                <p>
+	                    Via S. Carlo 2707/2709 47522, San Carlo dI Cesena (FC) Italia<br />
+	                    Tel. +39 0547 373077 - Fax +39 0547 373363<br />
+	                    P.IVA 03487580403
+	                </p>
+	            </div>
+	        </div>
+	        <div class="copyright">
+	            <div class="container">
+	                Copyright 2017 Unaduna
+	            </div>
+	        </div>
+	    </footer>
     </div>
-    <nav class="navbar navbar-default nomargin main-site-navbar">
-        <div class="container">
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="index.html" class="active link">Home</a>
-                    </li>
-                    <li>
-                        <a href="http://unadunaconfiguratore.eu-central-1.elasticbeanstalk.com" target="_blank" class="">Configura</a>
-                    </li>
-                    <li>
-                        <a href="visione.html" class="">Visione</a>
-                    </li>
-                    <li>
-                        <a href="esperienza.html" class="">Esperienza</a>
-                    </li>
-                    <li>
-                        <a href="#" class="">Contatti</a>
-                    </li>
-                    <li>
-                        <a href="#" class="">Stores</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="jumbotron wow fadeIn" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 clearfix">
-                    <h2 class="title">Crea la tua borsa</h2>
-                    <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a tellus mollis, accumsan dolor at, pulvinar nibh. Nunc volutpat enim.</p>
-                    <a href="#" class="btn btn-default btn-lg follow anim">Configura adesso</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-sm-12 clearfix bottom-buffer wow fadeInUpSmall" data-wow-delay=".2s">
-                <h3 class="title section">ATELIER</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a tellus mollis, accumsan dolor at, pulvinar nibh. Nunc volutpat enim.</p>
-            </div>
-        </div>
-        <div class="row top-buffer bottom-buffer">
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <a href="#" class="bag-box wow fadeIn" data-wow-delay="0.4s"><img src="images/borsa-dummy-1.jpg" /><span>Configurazione #1</span></a>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <a href="#" class="bag-box wow fadeIn" data-wow-delay="0.5s"><img src="images/borsa-dummy-2.jpg" /><span>Configurazione #1</span></a>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <a href="#" class="bag-box wow fadeIn" data-wow-delay="0.6s"><img src="images/borsa-dummy-3.jpg" /><span>Configurazione #1</span></a>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                <a href="#" class="bag-box wow fadeIn" data-wow-delay="0.7s"><img src="images/borsa-dummy-4.jpg" /><span>Configurazione #1</span></a>
-            </div>
-        </div>
-        <div class="row top-buffer bottom-buffer">
-            <div class="col-sm-12 clearfix bottom-buffer">
-                <a href="#" class="btn btn-default btn-lg follow">Vedi tutti</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 clearfix bottom-buffer wow fadeInUpSmall" data-wow-delay=".2s">
-                <h3 class="title section">TITOLO DELLA SEZIONE</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a tellus mollis, accumsan dolor at, pulvinar nibh. Nunc volutpat enim.</p>
-            </div>
-        </div>
-        <div class="row top-buffer bottom-buffer">
-            <div class="col-xs-12 col-sm-6 ">
-                <div class="corp-box wow fadeInLeftSmall" data-wow-delay="0.5s"><img src="images/corp-dummy-1.jpg" /><h3 class="title">Visione</h3>
-                    <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a tellus mollis, accumsan dolor at, pulvinar nibh. Nunc volutpat enim.</p>
-                    <a href="#" class="btn btn-default btn-lg follow bottom-buffer">Scopri di pi&ugrave;</a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6">
-                <div class="corp-box wow fadeInRightSmall" data-wow-delay="0.5s"><img src="images/corp-dummy-2.jpg" /><h3 class="title">Esperienza</h3>
-                    <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a tellus mollis, accumsan dolor at, pulvinar nibh. Nunc volutpat enim.</p>
-                    <a href="#" class="btn btn-default btn-lg follow bottom-buffer">Scopri di pi&ugrave;</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 clearfix bottom-buffer wow fadeInUpSmall" data-wow-delay=".2s">
-                <h3 class="title section">NEWSLETTER</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a tellus mollis, accumsan dolor at, pulvinar nibh. Nunc volutpat enim.</p>
-                <p><input type="email" class="newsletter" placeholder="il tuo indirizzo email"></p>
-                <a href="#" class="btn btn-default btn-lg follow bottom-buffer">Iscriviti</a>
-            </div>
-        </div>
-    </div>
-    <footer class="text-center">
-        <div class="footer-navbar-container">
-            <div class="container">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="index.html" class="">Home</a>
-                    </li>
-                    <li>
-                        <a href="http://unadunaconfiguratore.eu-central-1.elasticbeanstalk.com" class="">Configura</a>
-                    </li>
-                    <li>
-                        <a href="visione.html" class="">Visione</a>
-                    </li>
-                    <li>
-                        <a href="esperienza.html" class="">Esperienza</a>
-                    </li>
-                    <li>
-                        <a href="#" class="">Contatti</a>
-                    </li>
-                    <li>
-                        <a href="#" class="">Stores</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="credits">
-            <div class="container">
-                <a class="logo-footer text-hide" href="#">Unaduna</a>
-                <p>
-                    Via S. Carlo 2707/2709 47522, San Carlo dI Cesena (FC) Italia<br />
-                    Tel. +39 0547 373077 - Fax +39 0547 373363<br />
-                    P.IVA 03487580403
-                </p>
-            </div>
-        </div>
-        <div class="copyright">
-            <div class="container">
-                Copyright 2017 Unaduna
-            </div>
-        </div>
-    </footer>
+    
+    <script src="javascripts/angular/angular.min.js"></script>
+    <script src="javascripts/angular/angular-route.min.js"></script>
+	<script src="javascripts/angular/angular-animate.min.js"></script>
+	<script src="javascripts/angular/angular-aria.min.js"></script>
+	<script src="javascripts/angular/angular-messages.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+	
+    
     <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="javascripts/bootstrap.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/swiper.min.js"></script>
+    <script src="javascripts/swiper.jquery.js"></script>
+    <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="javascripts/custom.js"></script>
     <script src="javascripts/mdb.js"></script>
-    <!-- <script src="javascripts/custom.js"></script> -->
     <script>new WOW().init();</script>
+
+    <!-- Angular Material Library -->
+    
+    <script>
+        /* edito il nome della borsa nel configuratore */
+        $('#edit-text').click(function() {
+            var name = $(this).text();
+            $(this).html('');
+            $('<input style="margin-top: -10px; margin-left: -3px;"></input>')
+                .attr({
+                    'type': 'text',
+                    'name': 'fname',
+                    'id': 'txt_fullname',
+                    'size': '10',
+                    'value': name
+                })
+                .appendTo('#edit-text');
+            $('#txt_fullname').focus();
+
+        });
+        (function($){
+        $(window).on("load",function(){
+                $(".yamm-content").mCustomScrollbar({
+                    theme:"minimal-dark",
+					scrollButtons:{enable:true},
+					scrollInertia:400
+                });
+                $(".borsaModel").click(function() {
+                   $(".dropdown-toggle").dropdown("toggle");
+                });
+            });
+        })(jQuery)
+        $(document).on('click', '.yamm .dropdown-menu', function(e) {
+          e.stopPropagation()
+        })
+        $(document).on('blur', '#txt_fullname', function() {
+            var name = $(this).val();
+            //alert('Make an AJAX call and pass this parameter >> name=' + name);
+            $('#edit-text').text(name);
+        });
+    </script>
+    
+	
+    <!-- <script src="javascripts/custom.js"></script> -->
+    
+    
+    <script src="javascripts/app/app.js"></script>
+    <script src="javascripts/app/controllers/componentsController.js"></script>
+    
+    <script src="javascripts/app/loginApp/app.js"></script>
+	<script src="javascripts/app/loginApp/constants/rolesConstants.js"></script>
+	<script src="javascripts/app/loginApp/constants/statesConstants.js"></script>
+	<script src="javascripts/app/loginApp/constants/responseCodesConstants.js"></script>
+	<script src="javascripts/app/loginApp/constants/loginUrlConstants.js"></script>
+	<script src="javascripts/app/loginApp/services/loginService.js"></script>
+	<script src="javascripts/app/loginApp/services/sessionService.js"></script>
+	<script src="javascripts/app/loginApp/services/loginMessagesCreator.js"></script>
+	<script src="javascripts/app/loginApp/controller/loginController.js"></script>
+	
+	<script src="javascripts/app/configuratorApp/app.js"></script>
+	<script src="javascripts/app/configuratorApp/controllers/configuratorController.js"></script>
+	<script src="javascripts/app/configuratorApp/controllers/rootController.js"></script>
+	
+    <script src="javascripts/spritespin.js"></script>
+    
 </body>
 
 </html>
