@@ -14,6 +14,7 @@
     <!--[if lt IE 9]><script src="javascripts/html5shiv.js"></script><![endif]-->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Source+Sans+Pro:300,400,600" rel="stylesheet">
     <style type="text/css">
+    
         .clearfix:after {
             content: ".";
             display: block;
@@ -21,7 +22,6 @@
             clear: both;
             visibility: hidden;
         }
-
 
         .la-ball-grid-pulse,
         .la-ball-grid-pulse>div {
@@ -280,13 +280,16 @@
                 transform: scale(1);
             }
         }
+        
     </style>
+    
+    
     
 </head>
 
 <body ng-app="applicationModule">
 	<div ng-controller="componentsController">
-		<div ng-hide="isConfigurator">
+		<div ng-if="!isConfigurator">
 		    <div class="main-header-content">
 		        <nav class="navbar main-navbar navbar-default nomargin" role="navigation">
 		            <div class="container">
@@ -371,15 +374,15 @@
 		    </nav>
 	    </div>
 	    <div><!-- contenitore principale -->
-		    <home-content ng-show="isHome"></home-content>
-		    <configura-content ng-show="isConfigurator"></configura-content>
-		    <visione-content ng-show="isVisione"></visione-content>
-		    <esperienza-content ng-show="isEsperienza"></esperienza-content>
-		    <contatti-content ng-show="isContatti"></contatti-content>
-		    <stores-content ng-show="isStores"></stores-content>
+		    <home-content ng-if="isHome"></home-content>
+		    <configura-content ng-if="isConfigurator"></configura-content>
+		    <visione-content ng-if="isVisione"></visione-content>
+		    <esperienza-content ng-if="isEsperienza"></esperienza-content>
+		    <contatti-content ng-if="isContatti"></contatti-content>
+		    <stores-content ng-if="isStores"></stores-content>
 	    </div>
 	    
-	    <footer class="text-center" ng-hide="isConfigurator">
+	    <footer class="text-center" ng-if="!isConfigurator">
 	        <div class="footer-navbar-container">
 	            <div class="container">
 	                <ul class="nav navbar-nav">
@@ -422,14 +425,6 @@
 	    </footer>
     </div>
     
-    
-    
-    <script src="javascripts/angular/angular.min.js"></script>
-    <script src="javascripts/angular/angular-route.min.js"></script>
-	<script src="javascripts/angular/angular-animate.min.js"></script>
-	<script src="javascripts/angular/angular-aria.min.js"></script>
-	<script src="javascripts/angular/angular-messages.min.js"></script>
-    
     <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
     <script src="javascripts/swiper.min.js"></script>
@@ -437,6 +432,12 @@
     <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="javascripts/custom.js"></script>
     <script src="javascripts/mdb.js"></script>
+    
+    <script src="javascripts/angular/angular.min.js"></script>
+    <script src="javascripts/angular/angular-route.min.js"></script>
+	<script src="javascripts/angular/angular-animate.min.js"></script>
+	<script src="javascripts/angular/angular-aria.min.js"></script>
+	<script src="javascripts/angular/angular-messages.min.js"></script>
     
     <script src="javascripts/app/app.js"></script>
     <script src="javascripts/app/controllers/componentsController.js"></script>
@@ -455,6 +456,7 @@
 	<script src="javascripts/app/configuratorApp/controllers/configuratorController.js"></script>
 	<script src="javascripts/app/configuratorApp/controllers/rootController.js"></script>
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <script src="javascripts/spritespin.js"></script>
     
     <script>
@@ -495,7 +497,6 @@
             $('#edit-text').text(name);
         });
     </script>
-    
 </body>
 
 </html>

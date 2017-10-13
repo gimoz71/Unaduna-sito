@@ -13,11 +13,6 @@ angular.module("applicationModule").controller("componentsController", function(
 		} else {
 			new WOW().init();
 		}
-		
-	}
-	
-	$scope.init = function(){
-		$scope.wowInit();
 	}
 	
 	$scope.setHome = function(){
@@ -27,9 +22,6 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = false;
 		$scope.isContatti = false;
 		$scope.isStores = false;
-		$scope.wowInit({
-		    boxClass: 'home-content wow'
-		})
 	};
 	
 	$scope.setConfigurator = function(){
@@ -48,7 +40,6 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = false;
 		$scope.isContatti = false;
 		$scope.isStores = false;
-		$scope.wowInit()
 	};
 	
 	$scope.setEsperienza = function(){
@@ -58,7 +49,6 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = true;
 		$scope.isContatti = false;
 		$scope.isStores = false;
-		$scope.wowInit()
 	};
 	
 	$scope.setContatti = function(){
@@ -68,7 +58,6 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = false;
 		$scope.isContatti = true;
 		$scope.isStores = false;
-		$scope.wowInit()
 	};
 	
 	$scope.setStores = function(){
@@ -78,7 +67,21 @@ angular.module("applicationModule").controller("componentsController", function(
 		$scope.isEsperienza = false;
 		$scope.isContatti = false;
 		$scope.isStores = true;
-		$scope.wowInit()
+	};
+	
+	$scope.initConfiguratore = function(){
+		$('#a-middle').centerElement();
+	    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
+	    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
+	    $('.accessori').animate({opacity:'1'}, 1000, function() {
+	        $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger');
+	        $('#a-middle').animate({opacity:'1'}, 1000)
+	        // $('.swiper-slide a').click(function() {
+	        //     $.fn.animateAccessoriBar('accessori','riepilogo','swiper-slide','trigger');
+	        //     // alert('click');
+	        //
+	        // })
+	    });
 	};
 	
 })

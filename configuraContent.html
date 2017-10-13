@@ -1,4 +1,4 @@
-<div class="configuratore">
+<div class="configuratore" ng-init="initConfiguratore()">
     <div ng-controller="unadunaConfiguratorController as contr">
         <nav class="navbar yamm navbar-default navbar-fixed-top nomargin main-configurator-navbar">
             <div class="container">
@@ -102,11 +102,11 @@
                 <div></div>
             </div>
         </div>
-        <div id="media-middle" style="max-width: 960px; opacity: 100;">
+        <div id="a-middle" style="max-width: 960px; opacity: 0;">
             <div ng-show="!contr.visibleManager.spinnerVisible"><img alt="" src="images/base-rounded-3d.png" style="width:100%"></div>
             <div ng-show="contr.visibleManager.spinnerVisible" id="spritespin"></div>
         </div>
-        <div class="accessori" style="opacity: 100;">
+        <div class="accessori" style="opacity: 0;">
             <a href="#" class="accessori-trigger aperto"></a>
             <div class="container">
                 <div class="row">
