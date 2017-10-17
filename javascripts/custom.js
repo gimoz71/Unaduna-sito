@@ -39,7 +39,7 @@ var swiper = new Swiper('.accessori-categoria', {
        }
    }
 });
-var swiper = new Swiper('.accessori-thumb', {
+var swiper2 = new Swiper('.accessori-thumb', {
     pagination: '.swiper-pagination',
     slidesPerView: 8,
     paginationClickable: true,
@@ -98,7 +98,7 @@ $.fn.animateAccessoriBar = function(accContainer, offsetElement, triggerElement,
     var docHeight = $(window).height();
     // console.log('accContainerHeight: '+accContainerHeight);
     // console.log('offsetElementHeight: '+offsetElementHeight);
-    console.log('valore di aperto: '+aperto);
+    // console.log('valore di aperto: '+aperto);
     if (docHeight > 600) {
         aperto = 0;
         $('.'+accContainer).stop().animate({
