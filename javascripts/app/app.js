@@ -1,4 +1,4 @@
-var app = angular.module('applicationModule', ['loginModule', 'configuratorModule'])
+var app = angular.module('applicationModule', ['loginModule', 'configuratorModule', 'ngAnimate'])
 .directive('homeContent', function(){
 	 return {
 		 restrict: 'E',
