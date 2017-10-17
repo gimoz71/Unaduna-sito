@@ -252,7 +252,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		//riempio il resto dinamicamente (per ora fisso di test sulle nappe)
 		//accessoriesService.addAllAccessories($scope.nappeFisse);
 		
-		configController.visibleManager.loaderVisible = false;
+		configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
 		
         /*------------------------------------*/
@@ -316,11 +316,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                }
            }
         });
-        $('#a-middle').centerElement();
 	    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
 	    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
 	    $('.accessori').animate({opacity:'1'}, 1000, function() {
 	        $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger');
+	        $('#a-middle').centerElement();
 	        $('#a-middle').animate({opacity:'1'}, 1000)
 	        // $('.swiper-slide a').click(function() {
 	        //     $.fn.animateAccessoriBar('accessori','riepilogo','swiper-slide','trigger');
@@ -329,5 +329,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	        // })
 	    });
 	    
+	    configController.visibleManager.loaderVisible = false;
 	};
 });
