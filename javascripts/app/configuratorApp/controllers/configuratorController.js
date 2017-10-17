@@ -55,9 +55,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	    		attivo: false
 	    	},
 	];
-	
+
 	//configController.tipiAccessori = accessoriesService.tipiAccessoriList;
-	
+
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
 		if(index == 0){
@@ -69,21 +69,21 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		} else {
 			toReturn = "swiper-slide";
 		}
-		
+
 		return toReturn;
 	}
-	
+
 	configController.visibleManager = {
 			loaderVisible: false,
 			spinnerVisible: true
 	};
-	
+
 	configController.cleanAccessori = function(){
 		for(var i = 0; i < configController.accessoriBorsa.length; i++){
 			configController.accessoriBorsa[i].attivo = false;
 		}
 	}
-	
+
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.SendData = function(accessorio){
 
@@ -160,19 +160,19 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 
 		});
 	};
-	
+
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.SendData2 = function(accessorio){
-		
+
 		//attivo il loader e tolgo lo spinner
 		configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
-		
+
 		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole/";
 		var accessorioPath = "accessorio/";
 		var accessorio2Path = "accessorio2/";
 		var basePath = "base/";
-		
+
 		//a regime questi dati devono essere caricati dinamicamente
 		var baseAccessorio = [baseImagePath + basePath + "source_0001.jpg",
 			baseImagePath + basePath + "source_0002.jpg",
@@ -182,7 +182,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			baseImagePath + basePath + "source_0006.jpg",
 			baseImagePath + basePath + "source_0007.jpg",
 			baseImagePath + basePath + "source_0008.jpg",];
-		
+
 		var sourceAccessorio = [baseImagePath + accessorioPath + "source_0001.jpg",
 			baseImagePath + accessorioPath + "source_0002.jpg",
 			baseImagePath + accessorioPath + "source_0003.jpg",
@@ -191,7 +191,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			baseImagePath + accessorioPath + "source_0006.jpg",
 			baseImagePath + accessorioPath + "source_0007.jpg",
 			baseImagePath + accessorioPath + "source_0008.jpg",];
-		
+
 		var sourceAccessorio2 = [baseImagePath + accessorio2Path + "source_0001.jpg",
 			baseImagePath + accessorio2Path + "source_0002.jpg",
 			baseImagePath + accessorio2Path + "source_0003.jpg",
@@ -243,18 +243,18 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		configController.visibleManager.spinnerVisible = true;
 
 	};
-	
+
 	configController.initConfiguratore = function(){
-		
+
 		//testo la chiamata per il model1, poi deve essere reso dinamico
 		//accessoriesService.getTipiAccessoriRemote("modello1")
-		
+
 		//riempio il resto dinamicamente (per ora fisso di test sulle nappe)
 		//accessoriesService.addAllAccessories($scope.nappeFisse);
-		
+
 		configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
-		
+
         /*------------------------------------*/
         /* settaggio vari swiper */
         /*------------------------------------*/
@@ -316,6 +316,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                }
            }
         });
+		$('.borsaModel').click(function() {
+			$('.dropdown-toggle').trigger('click');
+		});
 	    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
 	    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
 	    $('.accessori').animate({opacity:'1'}, 1000, function() {
@@ -328,7 +331,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	        //
 	        // })
 	    });
-	    
+
 	    configController.visibleManager.loaderVisible = false;
 	};
 });
