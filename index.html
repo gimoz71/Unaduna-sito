@@ -13,10 +13,10 @@
     <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
     <!--[if lt IE 9]><script src="javascripts/html5shiv.js"></script><![endif]-->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Source+Sans+Pro:300,400,600" rel="stylesheet">
-    
+
 </head>
 
-<body ng-app="applicationModule" class="ng-scope configuratore">
+<body ng-app="applicationModule" class="ng-scope">
 	<div ng-controller="componentsController">
 		<div ng-if="!isConfigurator">
 		    <div class="main-header-content">
@@ -109,7 +109,7 @@
 		    <esperienza-content ng-if="isEsperienza"></esperienza-content>
 		    <contatti-content ng-if="isContatti"></contatti-content>
 		    <stores-content ng-if="isStores"></stores-content>
-		    
+
 	    </div>
 
 	    <footer class="text-center" ng-if="!isConfigurator">
@@ -251,7 +251,7 @@
         });
     </script>
     <style type="text/css">
-    
+
         .clearfix:after {
             content: ".";
             display: block;
