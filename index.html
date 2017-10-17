@@ -13,6 +13,243 @@
     <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
     <!--[if lt IE 9]><script src="javascripts/html5shiv.js"></script><![endif]-->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Source+Sans+Pro:300,400,600" rel="stylesheet">
+    
+</head>
+
+<body ng-app="applicationModule" class="ng-scope configuratore">
+	<div ng-controller="componentsController">
+		<div ng-if="!isConfigurator">
+		    <div class="main-header-content">
+		        <nav class="navbar main-navbar navbar-default nomargin" role="navigation">
+		            <div class="container">
+		                <a class="navbar-brand logo-big  hidden-xs text-hide" href="#">Unaduna</a>
+		                <a class="navbar-brand logo-small hidden-lg hidden-md hidden-sm text-hide" href="#">Unaduna</a>
+		                <div class="navbar-header navbar-right">
+		                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+		                        <span class="sr-only">Toggle navigation</span>
+		                        <span class="icon-bar"></span>
+		                        <span class="icon-bar"></span>
+		                        <span class="icon-bar"></span>
+		                    </button>
+		                    <ul class="nav navbar-nav fixed-navbar-right">
+		                        <li>
+		                            <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
+		                            <ul class="dropdown-menu" aria-labelledby="user-menu">
+		                                <li><a href="accesso.html">Profilo</a></li>
+		                                <li><a href="#">Esci</a></li>
+		                            </ul>
+		                        </li>
+		                        <li>
+		                            <a href="profilo-borse.html#preferiti"><i class="unaicon-cart"></i> <span class="hidden-xs">(1)</span></a>
+		                        </li>
+		                        <li>
+		                            <a href="profilo-borse.html#ordini"><i class="unaicon-favourite"></i> <span class="hidden-xs">(2)</span></a>
+		                        </li>
+		                    </ul>
+		                </div>
+		                <div class="collapse navbar-collapse" id="navbar-ex1-collapse">
+		                    <ul class="nav navbar-nav navbar-left">
+		                        <li>
+		                            <a href="#"><i class="unaicon-facebook"></i></a>
+		                        </li>
+		                        <li>
+		                            <a href="#"><i class="unaicon-twitter"></i></a>
+		                        </li>
+		                        <li>
+		                            <a href="#"><i class="unaicon-instagram"></i></a>
+		                        </li>
+		                    </ul>
+		                </div>
+		            </div>
+		        </nav>
+		        <div class="container" style="position: relative">
+		            <div class="search hidden-xs">
+		                <input type="text" placeholder="Ricerca"><a href="#"><i class="unaicon-search"></i></a>
+		            </div>
+		            <div class="language hidden-xs">
+		                <a href="#" id="language" data-toggle="dropdown">English <span class="caret"></span></a>
+		                <ul class="dropdown-menu" aria-labelledby="language">
+		                    <li><a href="#">Deutsche</a></li>
+		                    <li><a href="#">Francois</a></li>
+		                </ul>
+		            </div>
+		        </div>
+		    </div>
+		    <nav class="navbar navbar-default nomargin main-site-navbar">
+		        <div class="container">
+		            <div class="collapse navbar-collapse navbar-ex1-collapse">
+		                <ul class="nav navbar-nav">
+		                    <li>
+		                        <a href="#" class="active link" ng-click="setHome()">Home</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setConfigurator()">Configura</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setVisione()">Visione</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setEsperienza()">Esperienza</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setContatti()">Contatti</a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="" ng-click="setStores()">Stores</a>
+		                    </li>
+		                </ul>
+		            </div>
+		        </div>
+		    </nav>
+	    </div>
+	    <div><!-- contenitore principale -->
+		    <home-content ng-if="isHome"></home-content>
+		    <configura-content ng-if="isConfigurator"></configura-content>
+		    <visione-content ng-if="isVisione"></visione-content>
+		    <esperienza-content ng-if="isEsperienza"></esperienza-content>
+		    <contatti-content ng-if="isContatti"></contatti-content>
+		    <stores-content ng-if="isStores"></stores-content>
+		    
+	    </div>
+
+	    <footer class="text-center" ng-if="!isConfigurator">
+	        <div class="footer-navbar-container">
+	            <div class="container">
+	                <ul class="nav navbar-nav">
+<!-- 	                		<li> -->
+<!-- 	                        <a href="#" class="active link" ng-click="setHome()">Home</a> -->
+<!-- 	                    </li> -->
+<!-- 	                    <li> -->
+<!-- 	                        <a href="#" class="" ng-click="setConfigurator()">Configura</a> -->
+<!-- 	                    </li> -->
+<!-- 	                    <li> -->
+<!-- 	                        <a href="#" class="" ng-click="setVisione()">Visione</a> -->
+<!-- 	                    </li> -->
+<!-- 	                    <li> -->
+<!-- 	                        <a href="#" class="" ng-click="setEsperienza()">Esperienza</a> -->
+<!-- 	                    </li> -->
+<!-- 	                    <li> -->
+<!-- 	                        <a href="#" class="" ng-click="setContatti()">Contatti</a> -->
+<!-- 	                    </li> -->
+<!-- 	                    <li> -->
+<!-- 	                        <a href="#" class="" ng-click="setStores()">Stores</a> -->
+<!-- 	                    </li> -->
+	                    <li>
+	                        <a href="index.html" class="">Home</a>
+	                    </li>
+	                    <li>
+	                        <a href="http://unadunaconfiguratore.eu-central-1.elasticbeanstalk.com" class="">Configura</a>
+	                    </li>
+	                    <li>
+	                        <a href="visione.html" class="">Visione</a>
+	                    </li>
+	                    <li>
+	                        <a href="esperienza.html" class="">Esperienza</a>
+	                    </li>
+	                    <li>
+	                        <a href="#" class="">Contatti</a>
+	                    </li>
+	                    <li>
+	                        <a href="#" class="">Stores</a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="credits">
+	            <div class="container">
+	                <a class="logo-footer text-hide" href="#">Unaduna</a>
+	                <p>
+	                    Via S. Carlo 2707/2709 47522, San Carlo dI Cesena (FC) Italia<br />
+	                    Tel. +39 0547 373077 - Fax +39 0547 373363<br />
+	                    P.IVA 03487580403
+	                </p>
+	            </div>
+	        </div>
+	        <div class="copyright">
+	            <div class="container">
+	                Copyright 2017 Unaduna
+	            </div>
+	        </div>
+	    </footer>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+
+	<!--BLOCCO IMPORT FILE APPLICAZIONE ANGULAR  -->
+    <script src="javascripts/angular/angular.min.js"></script>
+    <script src="javascripts/angular/angular-route.min.js"></script>
+	<script src="javascripts/angular/angular-animate.min.js"></script>
+	<script src="javascripts/angular/angular-aria.min.js"></script>
+	<script src="javascripts/angular/angular-messages.min.js"></script>
+
+    <script src="javascripts/app/app.js"></script>
+    <script src="javascripts/app/controllers/componentsController.js"></script>
+    <script src="javascripts/app/services/accessoriesService.js"></script>
+    <script src="javascripts/app/services/utilFunctionMessageCreator.js"></script>
+
+    <script src="javascripts/app/loginApp/app.js"></script>
+	<script src="javascripts/app/loginApp/constants/rolesConstants.js"></script>
+	<script src="javascripts/app/loginApp/constants/statesConstants.js"></script>
+	<script src="javascripts/app/loginApp/constants/responseCodesConstants.js"></script>
+	<script src="javascripts/app/loginApp/constants/loginUrlConstants.js"></script>
+	<script src="javascripts/app/loginApp/services/loginService.js"></script>
+	<script src="javascripts/app/loginApp/services/sessionService.js"></script>
+	<script src="javascripts/app/loginApp/services/loginMessagesCreator.js"></script>
+	<script src="javascripts/app/loginApp/controller/applicationController.js"></script>
+	<script src="javascripts/app/loginApp/controller/loginController.js"></script>
+
+	<script src="javascripts/app/configuratorApp/app.js"></script>
+	<script src="javascripts/app/configuratorApp/controllers/configuratorController.js"></script>
+	<script src="javascripts/app/configuratorApp/controllers/rootController.js"></script>
+	<!--FINE BLOCCO IMPORT FILE APPLICAZIONE ANGULAR  -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="javascripts/spritespin.js"></script>
+    <script src="javascripts/swiper.min.js"></script>
+    <script src="javascripts/swiper.jquery.min.js"></script>
+    <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="javascripts/custom.js"></script>
+    <script src="javascripts/mdb.js"></script>
+
+    <script>
+        /* edito il nome della borsa nel configuratore */
+        $('#edit-text').click(function() {
+            var name = $(this).text();
+            $(this).html('');
+            $('<input style="margin-top: -10px; margin-left: -3px;"></input>')
+                .attr({
+                    'type': 'text',
+                    'name': 'fname',
+                    'id': 'txt_fullname',
+                    'size': '10',
+                    'value': name
+                })
+                .appendTo('#edit-text');
+            $('#txt_fullname').focus();
+
+        });
+        (function($){
+        $(window).on("load",function(){
+                $(".yamm-content").mCustomScrollbar({
+                    theme:"minimal-dark",
+					scrollButtons:{enable:true},
+					scrollInertia:400
+                });
+                $(".borsaModel").click(function() {
+                   $(".dropdown-toggle").dropdown("toggle");
+                });
+            });
+        })(jQuery)
+        $(document).on('click', '.yamm .dropdown-menu', function(e) {
+          e.stopPropagation()
+        })
+        $(document).on('blur', '#txt_fullname', function() {
+            var name = $(this).val();
+            //alert('Make an AJAX call and pass this parameter >> name=' + name);
+            $('#edit-text').text(name);
+        });
+    </script>
     <style type="text/css">
     
         .clearfix:after {
@@ -281,242 +518,6 @@
             }
         }
     </style>
-</head>
-
-<body ng-app="applicationModule" class="ng-scope configuratore">
-	<div ng-controller="componentsController">
-		<div ng-if="!isConfigurator">
-		    <div class="main-header-content">
-		        <nav class="navbar main-navbar navbar-default nomargin" role="navigation">
-		            <div class="container">
-		                <a class="navbar-brand logo-big  hidden-xs text-hide" href="#">Unaduna</a>
-		                <a class="navbar-brand logo-small hidden-lg hidden-md hidden-sm text-hide" href="#">Unaduna</a>
-		                <div class="navbar-header navbar-right">
-		                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-		                        <span class="sr-only">Toggle navigation</span>
-		                        <span class="icon-bar"></span>
-		                        <span class="icon-bar"></span>
-		                        <span class="icon-bar"></span>
-		                    </button>
-		                    <ul class="nav navbar-nav fixed-navbar-right">
-		                        <li>
-		                            <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
-		                            <ul class="dropdown-menu" aria-labelledby="user-menu">
-		                                <li><a href="accesso.html">Profilo</a></li>
-		                                <li><a href="#">Esci</a></li>
-		                            </ul>
-		                        </li>
-		                        <li>
-		                            <a href="profilo-borse.html#preferiti"><i class="unaicon-cart"></i> <span class="hidden-xs">(1)</span></a>
-		                        </li>
-		                        <li>
-		                            <a href="profilo-borse.html#ordini"><i class="unaicon-favourite"></i> <span class="hidden-xs">(2)</span></a>
-		                        </li>
-		                    </ul>
-		                </div>
-		                <div class="collapse navbar-collapse" id="navbar-ex1-collapse">
-		                    <ul class="nav navbar-nav navbar-left">
-		                        <li>
-		                            <a href="#"><i class="unaicon-facebook"></i></a>
-		                        </li>
-		                        <li>
-		                            <a href="#"><i class="unaicon-twitter"></i></a>
-		                        </li>
-		                        <li>
-		                            <a href="#"><i class="unaicon-instagram"></i></a>
-		                        </li>
-		                    </ul>
-		                </div>
-		            </div>
-		        </nav>
-		        <div class="container" style="position: relative">
-		            <div class="search hidden-xs">
-		                <input type="text" placeholder="Ricerca"><a href="#"><i class="unaicon-search"></i></a>
-		            </div>
-		            <div class="language hidden-xs">
-		                <a href="#" id="language" data-toggle="dropdown">English <span class="caret"></span></a>
-		                <ul class="dropdown-menu" aria-labelledby="language">
-		                    <li><a href="#">Deutsche</a></li>
-		                    <li><a href="#">Francois</a></li>
-		                </ul>
-		            </div>
-		        </div>
-		    </div>
-		    <nav class="navbar navbar-default nomargin main-site-navbar">
-		        <div class="container">
-		            <div class="collapse navbar-collapse navbar-ex1-collapse">
-		                <ul class="nav navbar-nav">
-		                    <li>
-		                        <a href="#" class="active link" ng-click="setHome()">Home</a>
-		                    </li>
-		                    <li>
-		                        <a href="#" class="" ng-click="setConfigurator()">Configura</a>
-		                    </li>
-		                    <li>
-		                        <a href="#" class="" ng-click="setVisione()">Visione</a>
-		                    </li>
-		                    <li>
-		                        <a href="#" class="" ng-click="setEsperienza()">Esperienza</a>
-		                    </li>
-		                    <li>
-		                        <a href="#" class="" ng-click="setContatti()">Contatti</a>
-		                    </li>
-		                    <li>
-		                        <a href="#" class="" ng-click="setStores()">Stores</a>
-		                    </li>
-		                </ul>
-		            </div>
-		        </div>
-		    </nav>
-	    </div>
-	    <div><!-- contenitore principale -->
-		    <home-content ng-if="isHome"></home-content>
-		    <configura-content ng-if="isConfigurator"></configura-content>
-		    <visione-content ng-if="isVisione"></visione-content>
-		    <esperienza-content ng-if="isEsperienza"></esperienza-content>
-		    <contatti-content ng-if="isContatti"></contatti-content>
-		    <stores-content ng-if="isStores"></stores-content>
-		    
-	    </div>
-
-	    <footer class="text-center" ng-if="!isConfigurator">
-	        <div class="footer-navbar-container">
-	            <div class="container">
-	                <ul class="nav navbar-nav">
-	                		<li>
-	                        <a href="#" class="active link" ng-click="setHome()">Home</a>
-	                    </li>
-	                    <li>
-	                        <a href="#" class="" ng-click="setConfigurator()">Configura</a>
-	                    </li>
-	                    <li>
-	                        <a href="#" class="" ng-click="setVisione()">Visione</a>
-	                    </li>
-	                    <li>
-	                        <a href="#" class="" ng-click="setEsperienza()">Esperienza</a>
-	                    </li>
-	                    <li>
-	                        <a href="#" class="" ng-click="setContatti()">Contatti</a>
-	                    </li>
-	                    <li>
-	                        <a href="#" class="" ng-click="setStores()">Stores</a>
-	                    </li>
-<!-- 	                    <li> -->
-<!-- 	                        <a href="index.html" class="">Home</a> -->
-<!-- 	                    </li> -->
-<!-- 	                    <li> -->
-<!-- 	                        <a href="http://unadunaconfiguratore.eu-central-1.elasticbeanstalk.com" class="">Configura</a> -->
-<!-- 	                    </li> -->
-<!-- 	                    <li> -->
-<!-- 	                        <a href="visione.html" class="">Visione</a> -->
-<!-- 	                    </li> -->
-<!-- 	                    <li> -->
-<!-- 	                        <a href="esperienza.html" class="">Esperienza</a> -->
-<!-- 	                    </li> -->
-<!-- 	                    <li> -->
-<!-- 	                        <a href="#" class="">Contatti</a> -->
-<!-- 	                    </li> -->
-<!-- 	                    <li> -->
-<!-- 	                        <a href="#" class="">Stores</a> -->
-<!-- 	                    </li> -->
-	                </ul>
-	            </div>
-	        </div>
-	        <div class="credits">
-	            <div class="container">
-	                <a class="logo-footer text-hide" href="#">Unaduna</a>
-	                <p>
-	                    Via S. Carlo 2707/2709 47522, San Carlo dI Cesena (FC) Italia<br />
-	                    Tel. +39 0547 373077 - Fax +39 0547 373363<br />
-	                    P.IVA 03487580403
-	                </p>
-	            </div>
-	        </div>
-	        <div class="copyright">
-	            <div class="container">
-	                Copyright 2017 Unaduna
-	            </div>
-	        </div>
-	    </footer>
-    </div>
-
-    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="javascripts/bootstrap.min.js"></script>
-
-	<!--BLOCCO IMPORT FILE APPLICAZIONE ANGULAR  -->
-    <script src="javascripts/angular/angular.min.js"></script>
-    <script src="javascripts/angular/angular-route.min.js"></script>
-	<script src="javascripts/angular/angular-animate.min.js"></script>
-	<script src="javascripts/angular/angular-aria.min.js"></script>
-	<script src="javascripts/angular/angular-messages.min.js"></script>
-
-    <script src="javascripts/app/app.js"></script>
-    <script src="javascripts/app/controllers/componentsController.js"></script>
-    <script src="javascripts/app/services/accessoriesService.js"></script>
-    <script src="javascripts/app/services/utilFunctionMessageCreator.js"></script>
-
-    <script src="javascripts/app/loginApp/app.js"></script>
-	<script src="javascripts/app/loginApp/constants/rolesConstants.js"></script>
-	<script src="javascripts/app/loginApp/constants/statesConstants.js"></script>
-	<script src="javascripts/app/loginApp/constants/responseCodesConstants.js"></script>
-	<script src="javascripts/app/loginApp/constants/loginUrlConstants.js"></script>
-	<script src="javascripts/app/loginApp/services/loginService.js"></script>
-	<script src="javascripts/app/loginApp/services/sessionService.js"></script>
-	<script src="javascripts/app/loginApp/services/loginMessagesCreator.js"></script>
-	<script src="javascripts/app/loginApp/controller/applicationController.js"></script>
-	<script src="javascripts/app/loginApp/controller/loginController.js"></script>
-
-	<script src="javascripts/app/configuratorApp/app.js"></script>
-	<script src="javascripts/app/configuratorApp/controllers/configuratorController.js"></script>
-	<script src="javascripts/app/configuratorApp/controllers/rootController.js"></script>
-	<!--FINE BLOCCO IMPORT FILE APPLICAZIONE ANGULAR  -->
-
-	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <script src="javascripts/spritespin.js"></script>
-    <script src="javascripts/swiper.min.js"></script>
-    <script src="javascripts/swiper.jquery.min.js"></script>
-    <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="javascripts/custom.js"></script>
-    <script src="javascripts/mdb.js"></script>
-
-    <script>
-        /* edito il nome della borsa nel configuratore */
-        $('#edit-text').click(function() {
-            var name = $(this).text();
-            $(this).html('');
-            $('<input style="margin-top: -10px; margin-left: -3px;"></input>')
-                .attr({
-                    'type': 'text',
-                    'name': 'fname',
-                    'id': 'txt_fullname',
-                    'size': '10',
-                    'value': name
-                })
-                .appendTo('#edit-text');
-            $('#txt_fullname').focus();
-
-        });
-        (function($){
-        $(window).on("load",function(){
-                $(".yamm-content").mCustomScrollbar({
-                    theme:"minimal-dark",
-					scrollButtons:{enable:true},
-					scrollInertia:400
-                });
-                $(".borsaModel").click(function() {
-                   $(".dropdown-toggle").dropdown("toggle");
-                });
-            });
-        })(jQuery)
-        $(document).on('click', '.yamm .dropdown-menu', function(e) {
-          e.stopPropagation()
-        })
-        $(document).on('blur', '#txt_fullname', function() {
-            var name = $(this).val();
-            //alert('Make an AJAX call and pass this parameter >> name=' + name);
-            $('#edit-text').text(name);
-        });
-    </script>
 </body>
 
 </html>

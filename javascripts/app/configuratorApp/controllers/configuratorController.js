@@ -253,7 +253,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		//accessoriesService.addAllAccessories($scope.nappeFisse);
 		
 		configController.visibleManager.loaderVisible = false;
-		configController.visibleManager.spinnerVisible = true;
+		configController.visibleManager.spinnerVisible = false;
 		
         /*------------------------------------*/
         /* settaggio vari swiper */
@@ -330,7 +330,4 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	    });
 	    
 	};
-	
-	configController.initConfiguratore();
-	
 });
