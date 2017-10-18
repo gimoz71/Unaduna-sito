@@ -170,6 +170,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		configController.visibleManager.spinnerVisible = false;
 
 		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole/";
+		// var baseImagePath = "../images/testsingole/";
 		var accessorioPath = "accessorio/";
 		var accessorio2Path = "accessorio2/";
 		var basePath = "base/";
@@ -334,9 +335,52 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	        //
 	        // })
 	    });
-		$('#cicci').click(function() {
-		    $("#spritespin").spritespin('api').toggleZoom();
+		$('#openZoom').click(function() {
+			$('.zoom').fadeIn();
+			$(".zoom img").imagePanning();
+		});
+		$('#closeZoom').click(function() {
+			$('.zoom').fadeOut();
+		});
+
+
+		/* edito il nome della borsa nel configuratore */
+		$('#edit-text').click(function() {
+			var name = $(this).text();
+			$(this).html('');
+			$('<input style="margin-top: -10px; margin-left: -3px;"></input>')
+				.attr({
+					'type': 'text',
+					'name': 'fname',
+					'id': 'txt_fullname',
+					'size': '10',
+					'value': name
+				})
+				.appendTo('#edit-text');
+			$('#txt_fullname').focus();
+
+		});
+		(function($){
+		$(window).on("load",function(){
+				$(".yamm-content").mCustomScrollbar({
+					theme:"minimal-dark",
+					scrollButtons:{enable:true},
+					scrollInertia:400
+				});
+				$(".borsaModel").click(function() {
+				   $(".dropdown-toggle").dropdown("toggle");
+				});
+			});
+		})(jQuery)
+		$(document).on('click', '.yamm .dropdown-menu', function(e) {
+		  e.stopPropagation()
 		})
+		$(document).on('blur', '#txt_fullname', function() {
+			var name = $(this).val();
+			//alert('Make an AJAX call and pass this parameter >> name=' + name);
+			$('#edit-text').text(name);
+		});
+
 	    configController.visibleManager.loaderVisible = false;
 	};
 });

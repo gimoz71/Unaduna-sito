@@ -1,4 +1,6 @@
 <div class="configuratore" ng-controller="unadunaConfiguratorController as contr" ng-init="contr.initConfiguratore()">
+
+
     <nav class="navbar yamm navbar-default navbar-fixed-top nomargin main-configurator-navbar">
         <div class="container">
             <div class="row">
@@ -101,9 +103,11 @@
             <div></div>
         </div>
     </div>
-    <button style="position: absolute; top: 100px; left: 0;" id="cicci">zoom
-
-    </button>
+    <a href="#" id="openZoom"><i class="unaicon-zoom"></i></a>
+    <div class="zoom" style="display: none;">
+        <button id="closeZoom"><i class="unaicon-remove"></button>
+        <img src="images/zoom-test.jpg"  />
+    </div>
     <div id="a-middle" style="max-width: 960px; opacity: 0;">
         <div ng-show="!contr.visibleManager.spinnerVisible"><img alt="" src="images/base-rounded-3d.png" style="width:100%"></div>
         <div class="animate-show-hide" ng-show="contr.visibleManager.spinnerVisible" id="spritespin"></div>
@@ -175,12 +179,6 @@
                     <!-- zip -->
                     <div class="swiper-container accessori-thumb zip" ng-show="false">
                         <div class="swiper-wrapper">
-                            <!--                                 <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa"> -->
-                            <!--                                     <a href="#"> -->
-                            <!-- 	                        				<img src="{{ item.imageSrc }}" class="swiper-lazy" ng-click="contr.SendData2(item)"> -->
-                            <!--                         					<div class="swiper-lazy-preloader"></div> -->
-                            <!--                         				</a> -->
-                            <!--                                 </div> -->
                             <div class="swiper-slide">
                                 <a href="#" class="active selected">
                     				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
@@ -213,12 +211,6 @@
                     <!-- tracolle -->
                     <div class="swiper-container accessori-thumb tracolle" ng-show="false">
                         <div class="swiper-wrapper">
-                            <!--                                 <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa"> -->
-                            <!--                                     <a href="#"> -->
-                            <!-- 	                        				<img src="{{ item.imageSrc }}" class="swiper-lazy" ng-click="contr.SendData2(item)"> -->
-                            <!--                         					<div class="swiper-lazy-preloader"></div> -->
-                            <!--                         				</a> -->
-                            <!--                                 </div> -->
                             <div class="swiper-slide">
                                 <a href="#" class="active selected">
                     				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
@@ -251,12 +243,6 @@
                     <!-- manici -->
                     <div class="swiper-container accessori-thumb manici" ng-show="false">
                         <div class="swiper-wrapper">
-                            <!--                                 <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa"> -->
-                            <!--                                     <a href="#"> -->
-                            <!-- 	                        				<img src="{{ item.imageSrc }}" class="swiper-lazy" ng-click="contr.SendData2(item)"> -->
-                            <!--                         					<div class="swiper-lazy-preloader"></div> -->
-                            <!--                         				</a> -->
-                            <!--                                 </div> -->
                             <div class="swiper-slide">
                                 <a href="#" class="active selected">
                     				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">

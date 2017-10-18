@@ -228,53 +228,14 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <script src="javascripts/spritespin.js"></script>
-    <!-- <script src="javascripts/spritespin.mod-zoom.js"></script> -->
+    <script src="javascripts/zoomPan.js"></script>
     <script src="javascripts/swiper.min.js"></script>
     <script src="javascripts/swiper.jquery.min.js"></script>
     <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="javascripts/custom.js"></script>
     <script src="javascripts/mdb.js"></script>
-
-    <script>
-        /* edito il nome della borsa nel configuratore */
-        $('#edit-text').click(function() {
-            var name = $(this).text();
-            $(this).html('');
-            $('<input style="margin-top: -10px; margin-left: -3px;"></input>')
-                .attr({
-                    'type': 'text',
-                    'name': 'fname',
-                    'id': 'txt_fullname',
-                    'size': '10',
-                    'value': name
-                })
-                .appendTo('#edit-text');
-            $('#txt_fullname').focus();
-
-        });
-        (function($){
-        $(window).on("load",function(){
-                $(".yamm-content").mCustomScrollbar({
-                    theme:"minimal-dark",
-					scrollButtons:{enable:true},
-					scrollInertia:400
-                });
-                $(".borsaModel").click(function() {
-                   $(".dropdown-toggle").dropdown("toggle");
-                });
-            });
-        })(jQuery)
-        $(document).on('click', '.yamm .dropdown-menu', function(e) {
-          e.stopPropagation()
-        })
-        $(document).on('blur', '#txt_fullname', function() {
-            var name = $(this).val();
-            //alert('Make an AJAX call and pass this parameter >> name=' + name);
-            $('#edit-text').text(name);
-        });
-    </script>
     <style type="text/css">
-
+        /* N.B. .clearfix per funzionare deve rimanere dichiarato nell'html */
         .clearfix:after {
             content: ".";
             display: block;
