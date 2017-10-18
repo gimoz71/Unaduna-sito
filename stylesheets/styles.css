@@ -12492,6 +12492,12 @@ a.link {
   z-index: 10;
 }
 
+#openZoom {
+  font-size: 18px;
+  padding: 7px 13px;
+  color: #999;
+}
+
 .zoom {
   position: relative;
   margin: 0;
@@ -12565,13 +12571,13 @@ a.link {
 .configuratore .main-configurator-navbar a.materiale .tipologia {
   display: block;
   position: absolute;
-  height: 30px;
-  width: 30px;
-  top: 10px;
-  right: 10px;
+  height: 40px;
+  width: 40px;
+  top: 5px;
+  right: 5px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
   background-position: center center;
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 .configuratore .accessori {

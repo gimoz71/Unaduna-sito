@@ -149,8 +149,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	                mods: [
 	                    'drag',
 	                    '360',
-						'ease',
-						'zoom'
+						'ease'
 	                ]
 			};
 
@@ -237,8 +236,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 mods: [
                     'drag',
                     '360',
-					'ease',
-					'zoom'
+					'ease'
                 ]
 		};
 
