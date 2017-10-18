@@ -39,7 +39,7 @@ var swiper = new Swiper('.accessori-categoria', {
        }
    }
 });
-var swiper2 = new Swiper('.accessori-thumb', {
+var swiper = new Swiper('.accessori-thumb', {
     pagination: '.swiper-pagination',
     slidesPerView: 8,
     paginationClickable: true,

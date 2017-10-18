@@ -130,28 +130,29 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		.then(function(success){
 
 			//ricompongo la stringa base64 dell'immagine spritesheet che ho creato su Lambda
-			// var image = 'data:image/jpg;base64,';
-			// for(var i = 0; i < success.data.imageArray.length; i++){
-			// 	image = image + success.data.imageArray[i];
-			// }
-			// //ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
-			// var dataSpin = {
-			// 		width: 960,
-	        //         height: 540,
-	        //         source: image,
-	        //         frames: 8,
-	        //         framesX: 8,
-	        //         sense: -1,
-	        //         responsive: true,
-	        //         animate: false,
-	        //         detectSubsampling : true,
-	        //         scrollThreshold   : 200,
-	        //         mods: [
-	        //             'drag',
-	        //             '360',
-			// 			'ease'
-	        //         ]
-			// };
+			var image = 'data:image/jpg;base64,';
+			for(var i = 0; i < success.data.imageArray.length; i++){
+				image = image + success.data.imageArray[i];
+			}
+			//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
+			var dataSpin = {
+					width: 960,
+	                height: 540,
+	                source: image,
+	                frames: 8,
+	                framesX: 8,
+	                sense: -1,
+	                responsive: true,
+	                animate: false,
+	                detectSubsampling : true,
+	                scrollThreshold   : 200,
+	                mods: [
+	                    'drag',
+	                    '360',
+						'ease',
+						'zoom'
+	                ]
+			};
 
 			$('#spritespin').spritespin(dataSpin);
 			$('#spritespin').fadeIn();
@@ -234,7 +235,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 scrollThreshold   : 200,
                 mods: [
                     'drag',
-                    '360'
+                    '360',
+					'ease',
+					'zoom'
                 ]
 		};
 
@@ -331,7 +334,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	        //
 	        // })
 	    });
-
+		$('#cicci').click(function() {
+		    $("#spritespin").spritespin('api').toggleZoom();
+		})
 	    configController.visibleManager.loaderVisible = false;
 	};
 });
