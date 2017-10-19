@@ -1,79 +1,12 @@
-// $('.carousel').carousel()
-// $(document).on('click', '.yamm .dropdown-menu', function(e) {
-//     e.stopPropagation();
-// })
-
-/*Tooltip*/
-// $(function() {
-//     $('[data-toggle="tooltip"]').tooltip();
-// });
+/*--------------------*/
+/* FUNZIONI  GENERALI */
+/*--------------------*/
 
 
 
-/*------------------------------------*/
-/* settaggio  vari swiper */
-/*------------------------------------*/
-
-var swiper = new Swiper('.accessori-categoria', {
-    pagination: '.swiper-pagination',
-    slidesPerView: 6,
-    paginationClickable: true,
-    spaceBetween: 0,
-    keyboardControl: true,
-    grabCursor: true,
-    breakpoints: {
-       320: {
-           slidesPerView: 3
-       },
-       480: {
-           slidesPerView: 3
-       },
-       768: {
-           slidesPerView: 4
-       },
-       992: {
-           slidesPerView: 6
-       },
-       1200: {
-           slidesPerView: 6
-       }
-   }
-});
-var swiper = new Swiper('.accessori-thumb', {
-    pagination: '.swiper-pagination',
-    slidesPerView: 8,
-    paginationClickable: true,
-    spaceBetween: 0,
-    keyboardControl: true,
-    nextButton: '.swiper-button-next',
-    prevButton: '.swiper-button-prev',
-    // centeredSlides: 'true',
-    keyboardControl: 'true',
-    grabCursor: true,
-    lazyLoading: 'true',
-    // slidesOffsetBefore: 60,
-    // slidesOffsetAfter: 60,
-    breakpoints: {
-       320: {
-           slidesPerView: 1
-       },
-       480: {
-           slidesPerView: 3
-       },
-       768: {
-           slidesPerView: 5
-       },
-       992: {
-           slidesPerView: 5
-       },
-       1200: {
-           slidesPerView: 8
-       }
-   }
-});
-/* variabile booleana per stato apeertura del menu accessori */
-
-var aperto = 0;
+/*-------------------------*/
+/* FUNZIONI  CONFIGURATORE */
+/*-------------------------*/
 
 /* trucchetto per creare e posizionare la linea separatrice tra menu accessori e accessori */
 $.fn.sepLine = function(divider, container, parent){
@@ -91,15 +24,15 @@ $.fn.yammHeight = function(mainNavbar, yammContent, offsetElementHeight){
     $('.'+yammContent).outerHeight(heightref);
 }
 
+var aperto = 0;
+
 /* funzione per apertura menu accessori in base all'altezza della viewport e con lo switch*/
 $.fn.animateAccessoriBar = function(accContainer, offsetElement, triggerElement, trigger){
     var accContainerHeight = $('.'+accContainer).outerHeight();
     var offsetElementHeight = $('.'+offsetElement).outerHeight();
     var docHeight = $(window).height();
-    // console.log('accContainerHeight: '+accContainerHeight);
-    // console.log('offsetElementHeight: '+offsetElementHeight);
-    // console.log('valore di aperto: '+aperto);
-    if (docHeight > 600) {
+
+    /*if (docHeight > 600) {
         aperto = 0;
         $('.'+accContainer).stop().animate({
             bottom: offsetElementHeight
@@ -111,7 +44,7 @@ $.fn.animateAccessoriBar = function(accContainer, offsetElement, triggerElement,
             bottom: -(accContainerHeight - offsetElementHeight)
         }, 500, "swing");
         $('.'+triggerElement).removeClass('chiuso').addClass('aperto');
-    }
+    }*/
 
     if (trigger == 'trigger') {
         $('.'+triggerElement).click(function() {
@@ -137,38 +70,21 @@ $.fn.animateAccessoriBar = function(accContainer, offsetElement, triggerElement,
         // console.log('notrigger!!!');
     }
 }
+
+// ricalcola posizione e dimensione delle immagini delle borse al resize della finestra
 $.fn.centerElement = function () {
     this.css("position","absolute");
-    if ($(window).width() > 480) {
+    if ($(window).width() > 480 && $(window).height() > 600) {
         this.css("width", '100%');
         this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) - (($(this).outerHeight())/4)+100 + "px");
         this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
         return this;
-    } else {
-        this.css("width", '500px');
-        this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) - (($(this).outerHeight())/4)+100 + "px");
+    } else if ( $(window).height() < 600) {
+        this.css("width", $(window).height()+150);
+        this.css("top", $(".navbar").outerHeight());
+        // this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) - (($(this).outerHeight())/4)+100 + "px");
         this.css("left", (($(this).parent().width() - $(this).width()) / 2) + "px");
         return this;
-    }
-}
-$(document).ready(function(){
-    $('#a-middle').centerElement();
-    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
-    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
-    $('.accessori').animate({opacity:'1'}, 1000, function() {
-        $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger');
-        $('#a-middle').animate({opacity:'1'}, 1000)
-        // $('.swiper-slide a').click(function() {
-        //     $.fn.animateAccessoriBar('accessori','riepilogo','swiper-slide','trigger');
-        //     // alert('click');
-        //
-        // })
-    });
-});
+    };
 
-$(window).resize(function(){
-    $('#a-middle').centerElement();
-    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
-    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
-    $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
-});
+}

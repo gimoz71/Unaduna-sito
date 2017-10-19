@@ -288,7 +288,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
         });
         var swiper_accessori = new Swiper('.accessori-thumb', {
             pagination: '.swiper-pagination',
-            slidesPerView: 8,
+            slidesPerView: 12,
             paginationClickable: true,
             spaceBetween: 0,
             keyboardControl: true,
@@ -302,37 +302,36 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
             // slidesOffsetAfter: 60,
             breakpoints: {
                320: {
-                   slidesPerView: 1
-               },
-               480: {
                    slidesPerView: 3
                },
-               768: {
+               480: {
                    slidesPerView: 5
+               },
+               768: {
+                   slidesPerView: 6
                },
                992: {
-                   slidesPerView: 5
+                   slidesPerView: 8
                },
                1200: {
-                   slidesPerView: 8
+                   slidesPerView: 12
                }
            }
         });
 		$('.borsaModel').click(function() {
 			$('.dropdown-toggle').trigger('click');
 		});
-	    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
-	    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
-	    $('.accessori').animate({opacity:'1'}, 1000, function() {
-	        $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger');
-	        $('#a-middle').centerElement();
-	        $('#a-middle').animate({opacity:'1'}, 1000)
-	        // $('.swiper-slide a').click(function() {
-	        //     $.fn.animateAccessoriBar('accessori','riepilogo','swiper-slide','trigger');
-	        //     // alert('click');
-	        //
-	        // })
+
+		var aperto = 0;
+	    $.fn.sepLine('first-divider', 'swiper-container', 'accessori'); // rif. descrizione funzione sepline: custom.js linea 77
+	    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
+	    $('.accessori').animate({opacity:'1'}, 1000, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
+	        $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
+			$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
+	        $('#a-middle').animate({opacity:'1'}, 1000);
 	    });
+
+		// pulsanti apertura/chiusura zoom borsa
 		$('#openZoom').click(function() {
 			$('.zoom').fadeIn();
 			$(".zoom img").imagePanning();
@@ -342,7 +341,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		});
 
 
-		/* edito il nome della borsa nel configuratore */
+		/* edito il nome della borsa nel configuratore *DA COMPLETARE* */
 		$('#edit-text').click(function() {
 			var name = $(this).text();
 			$(this).html('');
@@ -358,8 +357,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			$('#txt_fullname').focus();
 
 		});
+
+		// customizza la barra di scorrimento del mega menu
 		(function($){
-		$(window).on("load",function(){
+			$(window).on("load",function(){
 				$(".yamm-content").mCustomScrollbar({
 					theme:"minimal-dark",
 					scrollButtons:{enable:true},
@@ -370,6 +371,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 				});
 			});
 		})(jQuery)
+
 		$(document).on('click', '.yamm .dropdown-menu', function(e) {
 		  e.stopPropagation()
 		})
@@ -377,6 +379,13 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			var name = $(this).val();
 			//alert('Make an AJAX call and pass this parameter >> name=' + name);
 			$('#edit-text').text(name);
+		});
+
+		$(window).resize(function(){
+		    $('#a-middle').centerElement();
+		    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
+		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
+		    $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
 
 	    configController.visibleManager.loaderVisible = false;
