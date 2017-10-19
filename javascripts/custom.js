@@ -32,6 +32,7 @@ $.fn.animateAccessoriBar = function(accContainer, offsetElement, triggerElement,
     var offsetElementHeight = $('.'+offsetElement).outerHeight();
     var docHeight = $(window).height();
 
+    // automatismo in base all'altezza del browser
     /*if (docHeight > 600) {
         aperto = 0;
         $('.'+accContainer).stop().animate({
@@ -74,13 +75,14 @@ $.fn.animateAccessoriBar = function(accContainer, offsetElement, triggerElement,
 // ricalcola posizione e dimensione delle immagini delle borse al resize della finestra
 $.fn.centerElement = function () {
     this.css("position","absolute");
-    if ($(window).width() > 480 && $(window).height() > 600) {
+    if ($(window).width() > 480 && $(window).height() > 850) {
         this.css("width", '100%');
-        this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) - (($(this).outerHeight())/4)+100 + "px");
+        this.css("top", $(".navbar").outerHeight());
+        // this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) - (($(this).outerHeight())/4)+100 + "px");
         this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
         return this;
-    } else if ( $(window).height() < 600) {
-        this.css("width", $(window).height()+150);
+    } else if ( $(window).height() < 850) {
+        this.css("width", $(window).height()-150);
         this.css("top", $(".navbar").outerHeight());
         // this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) - (($(this).outerHeight())/4)+100 + "px");
         this.css("left", (($(this).parent().width() - $(this).width()) / 2) + "px");
