@@ -97,12 +97,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		configController.visibleManager.spinnerVisible = false;
 		
 		var prezzo = 0;
-		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/";
+		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/new/";
 
 		//a regime questi dati devono essere caricati dinamicamente
-		var baseAccessorio = baseImagePath + "BASE_{frame}.jpg";
-		var sourceAccessorio = baseImagePath + "BASE_AC1_{frame}.jpg";
-		var sourceAccessorio2 = baseImagePath + "BASE_AC1_AC2_{frame}.jpg";
+		var baseAccessorio = baseImagePath + "base_X_X_X_X_X_{frame}.jpg";
+		var sourceAccessorio = baseImagePath + "base_X_manici_X_X_tracolle_{frame}.jpg";
+		var sourceAccessorio2 = baseImagePath + "base_borchie_manici_ciondoli_nappe_tracolle_{frame}.jpg";
 
 		if(accessorio.attivo){
 			accessorio.attivo = false;
@@ -130,7 +130,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 
 		//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
 		var dataSpin = {
-				width: 960,
+				width: 540,
                 height: 540,
                 source: SpriteSpin.sourceArray(dataSource, {
                 	  frame: [1,8],
