@@ -88,7 +88,7 @@
             </div>
         </div>
     </nav>
-    <div ng-show="contr.visibleManager.loaderVisible" style="position: absolute;width: 100%; height: 100%;  z-index: 100;background-color: rgba(255,255,255,.75)">
+    <div id="loader" ng-show="contr.visibleManager.loaderVisible" style="position: absolute;width: 100%; height: 100%;  z-index: 100;background-color: rgba(255,255,255,.75)">
         <div style="color: #ccc;top: 50%; left: 50%; margin-left: -31px; margin-top: -31px;" class="la-ball-grid-pulse la-2x">
             <div></div>
             <div></div>
@@ -107,7 +107,7 @@
         <img src="images/zoom-test.jpg"  />
     </div>
     <div id="a-middle" style="max-width: 960px; opacity: 0;">
-        <div ng-show="!contr.visibleManager.spinnerVisible"><img alt="" src="images/base-rounded-square-3d.jpg" style="width:100%"></div>
+        <div ng-show="!contr.visibleManager.spinnerVisible"><img alt="" src="images/base-rounded-3d.png" style="width:100%"></div>
         <div class="animate-show-hide" ng-show="contr.visibleManager.spinnerVisible" id="spritespin"></div>
     </div>
     <div class="accessori" style="opacity: 0;">
@@ -146,7 +146,7 @@
                             <!--                         				</a> -->
                             <!--                                 </div> -->
                             <div class="swiper-slide">
-                                <a href="#" class=" selected">
+                                <a href="#" class="active selected">
                     				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
                 					<div class="swiper-lazy-preloader"></div>
                 				</a>

@@ -146,10 +146,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                     '360'
                 ],
                 onInit: function(){
-                		configController.visibleManager.loaderVisible = true;
+                		//configController.visibleManager.loaderVisible = true;
+                		$('#loader').removeClass('ng-hide');
                 },
                 onDraw: function(){
-                		configController.visibleManager.loaderVisible = false;
+                		//configController.visibleManager.loaderVisible = false;
+                		$('#loader').addClass('ng-hide');
                 }
 		};
 
