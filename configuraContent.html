@@ -1,6 +1,4 @@
 <div class="configuratore" ng-controller="unadunaConfiguratorController as contr" ng-init="contr.initConfiguratore()">
-
-
     <nav class="navbar yamm navbar-default navbar-fixed-top nomargin main-configurator-navbar">
         <div class="container">
             <div class="row">
@@ -356,7 +354,7 @@
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3  clearfix">
                     <div class="col-xs-6 ">
-                        <h3 class="price nomargin">120&euro;</h3>
+                        <h3 class="price nomargin">{{contr.priceManager.price}}&euro;</h3>
                         <h5 class="info nomargin">iva inclusa</h5>
                     </div>
                     <div class="col-xs-6 text-center">

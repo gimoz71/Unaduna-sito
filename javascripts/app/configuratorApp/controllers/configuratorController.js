@@ -77,6 +77,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			loaderVisible: false,
 			spinnerVisible: true
 	};
+	
+	configController.priceManager = {
+			price: 0
+	}
 
 	configController.cleanAccessori = function(){
 		for(var i = 0; i < configController.accessoriBorsa.length; i++){
@@ -84,123 +88,21 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		}
 	}
 
-	//qui avviene la richiesta del modello in base agli accessori selezionati
-	configController.SendData = function(accessorio){
-
-		//attivo il loader e tolgo lo spinner
-		configController.visibleManager.loaderVisible = true;
-		//configController.visibleManager.spinnerVisible = false;
-
-		if(accessorio.attivo){
-			accessorio.attivo = false;
-		} else {
-			configController.cleanAccessori();
-			accessorio.attivo = true;
-		}
-
-		var hasAccessorio = false;
-		switch(accessorio.idaccessorio){
-			case 1:
-				hasAccessorio = true && accessorio.attivo;
-				break;
-			case 2:
-				hasAccessorio = false;
-				break;
-			default:
-				hasAccessorio = false;
-				break;
-		}
-
-		//parametri di chiamata
-		var data = {
-				accessorio: hasAccessorio
-		};
-
-		//configurazioni di chiamata
-		var config = {
-            headers : {
-                'Content-Type': 'application/json'
-            }
-        };
-
-		//effettuo la chiamata
-		//$http.post('https://dzaentokb4.execute-api.eu-central-1.amazonaws.com/unadunaurl',data, config)//chiamata alla funziona Lambda che accede a S3 via URL; l'esperimento è fallito in quanoto risulta piu' lento
-		$http.post('https://cnohm5u3jh.execute-api.eu-central-1.amazonaws.com/configuratorstage',data, config)
-
-		.then(function(success){
-
-			//ricompongo la stringa base64 dell'immagine spritesheet che ho creato su Lambda
-			var image = 'data:image/jpg;base64,';
-			for(var i = 0; i < success.data.imageArray.length; i++){
-				image = image + success.data.imageArray[i];
-			}
-			//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
-			var dataSpin = {
-					width: 960,
-	                height: 540,
-	                source: image,
-	                frames: 8,
-	                framesX: 8,
-	                sense: -1,
-	                responsive: true,
-	                animate: false,
-	                detectSubsampling : true,
-	                scrollThreshold   : 200,
-	                mods: [
-	                    'drag',
-	                    '360',
-						'ease'
-	                ]
-			};
-
-			$('#spritespin').spritespin(dataSpin);
-			$('#spritespin').fadeIn();
-			configController.visibleManager.loaderVisible = false;
-			configController.visibleManager.spinnerVisible = true;
-
-		});
-	};
-
+	
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.SendData2 = function(accessorio){
 
 		//attivo il loader e tolgo lo spinner
 		configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
-
-		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole/";
-		// var baseImagePath = "../images/testsingole/";
-		var accessorioPath = "accessorio/";
-		var accessorio2Path = "accessorio2/";
-		var basePath = "base/";
+		
+		var prezzo = 0;
+		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/";
 
 		//a regime questi dati devono essere caricati dinamicamente
-		var baseAccessorio = [baseImagePath + basePath + "source_0001.jpg",
-			baseImagePath + basePath + "source_0002.jpg",
-			baseImagePath + basePath + "source_0003.jpg",
-			baseImagePath + basePath + "source_0004.jpg",
-			baseImagePath + basePath + "source_0005.jpg",
-			baseImagePath + basePath + "source_0006.jpg",
-			baseImagePath + basePath + "source_0007.jpg",
-			baseImagePath + basePath + "source_0008.jpg",];
-
-		var sourceAccessorio = [baseImagePath + accessorioPath + "source_0001.jpg",
-			baseImagePath + accessorioPath + "source_0002.jpg",
-			baseImagePath + accessorioPath + "source_0003.jpg",
-			baseImagePath + accessorioPath + "source_0004.jpg",
-			baseImagePath + accessorioPath + "source_0005.jpg",
-			baseImagePath + accessorioPath + "source_0006.jpg",
-			baseImagePath + accessorioPath + "source_0007.jpg",
-			baseImagePath + accessorioPath + "source_0008.jpg",];
-
-		var sourceAccessorio2 = [baseImagePath + accessorio2Path + "source_0001.jpg",
-			baseImagePath + accessorio2Path + "source_0002.jpg",
-			baseImagePath + accessorio2Path + "source_0003.jpg",
-			baseImagePath + accessorio2Path + "source_0004.jpg",
-			baseImagePath + accessorio2Path + "source_0005.jpg",
-			baseImagePath + accessorio2Path + "source_0006.jpg",
-			baseImagePath + accessorio2Path + "source_0007.jpg",
-			baseImagePath + accessorio2Path + "source_0008.jpg",];
+		var baseAccessorio = baseImagePath + "BASE_{frame}.jpg";
+		var sourceAccessorio = baseImagePath + "BASE_AC1_{frame}.jpg";
+		var sourceAccessorio2 = baseImagePath + "BASE_AC1_AC2_{frame}.jpg";
 
 		if(accessorio.attivo){
 			accessorio.attivo = false;
@@ -214,12 +116,15 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		switch(accessorio.idaccessorio){
 			case 1:
 				dataSource = sourceAccessorio;
+				prezzo = 100;
 				break;
 			case 2:
 				dataSource = sourceAccessorio2;
+				prezzo = 150;
 				break;
 			default:
 				dataSource = baseAccessorio;
+				prezzo = 50;
 				break;
 		}
 
@@ -227,7 +132,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		var dataSpin = {
 				width: 960,
                 height: 540,
-                source: dataSource,
+                source: SpriteSpin.sourceArray(dataSource, {
+                	  frame: [1,8],
+                	  digits: 4
+                	  }),
                 sense: 1,
                 responsive: true,
                 animate: false,
@@ -235,14 +143,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 scrollThreshold   : 200,
                 mods: [
                     'drag',
-                    '360',
-					'ease'
+                    '360'
                 ]
 		};
 
 		$('#spritespin').spritespin(dataSpin);
 		configController.visibleManager.loaderVisible = false;
 		configController.visibleManager.spinnerVisible = true;
+		configController.priceManager.price = prezzo;
 
 	};
 
