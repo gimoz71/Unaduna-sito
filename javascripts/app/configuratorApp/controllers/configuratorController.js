@@ -93,7 +93,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	configController.SendData2 = function(accessorio){
 
 		//attivo il loader e tolgo lo spinner
-		configController.visibleManager.loaderVisible = true;
+		//configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
 		
 		var prezzo = 0;
@@ -144,11 +144,17 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 mods: [
                     'drag',
                     '360'
-                ]
+                ],
+                onInit: function(){
+                		configController.visibleManager.loaderVisible = true;
+                },
+                onDraw: function(){
+                		configController.visibleManager.loaderVisible = false;
+                }
 		};
 
 		$('#spritespin').spritespin(dataSpin);
-		configController.visibleManager.loaderVisible = false;
+		//configController.visibleManager.loaderVisible = false;
 		configController.visibleManager.spinnerVisible = true;
 		configController.priceManager.price = prezzo;
 
