@@ -1013,7 +1013,7 @@ a.link {
         opacity: 0;
         position: absolute;
         width: 100%;
-        bottom: 55px;
+        bottom: 0;
         left: 0;
         overflow: visible;
         border-top: solid 1px $standard-border-color;
@@ -1075,6 +1075,7 @@ a.link {
     .riepilogo {
         position: absolute;
         width: 100%;
+        height: 45px;
         background-color: #fff;
         z-index: 50;
         bottom: 0;

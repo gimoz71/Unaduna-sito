@@ -77,7 +77,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			loaderVisible: false,
 			spinnerVisible: true
 	};
-	
+
 	configController.priceManager = {
 			price: 0
 	}
@@ -88,14 +88,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		}
 	}
 
-	
+
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.SendData2 = function(accessorio){
 
 		//attivo il loader e tolgo lo spinner
 		//configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
-		
+
 		var prezzo = 0;
 		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/new/";
 
@@ -130,8 +130,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 
 		//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
 		var dataSpin = {
-				width: 540,
-                height: 540,
+				width: 960,
+                height: 960,
                 source: SpriteSpin.sourceArray(dataSource, {
                 	  frame: [1,8],
                 	  digits: 4
@@ -234,15 +234,26 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                }
            }
         });
+
+		/* apertura menu */
+
 		$('.borsaModel').click(function() {
 			$('.dropdown-toggle').trigger('click');
 		});
+
+		$(document).on('click', '.yamm .dropdown-menu', function(e) {
+		  e.stopPropagation()
+		})
+
+
+
+		/* gestioe elementi dell'interfaccia */
 
 		var aperto = 0;
 	    $.fn.sepLine('first-divider', 'swiper-container', 'accessori'); // rif. descrizione funzione sepline: custom.js linea 77
 	    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
 	    $('.accessori').animate({opacity:'1'}, 1000, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
-	        $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
+	        // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
 			$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
 	        $('#a-middle').animate({opacity:'1'}, 1000);
 	    });
@@ -273,7 +284,16 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			$('#txt_fullname').focus();
 
 		});
+		$(document).on('blur', '#txt_fullname', function() {
+			var name = $(this).val();
+			//alert('Make an AJAX call and pass this parameter >> name=' + name);
+			$('#edit-text').text(name);
+		});
 
+		setTimeout(function() {
+		   $(".dropdown-toggle").trigger('click');
+	   },10);
+		$('.accessori').css('bottom', $('.riepilogo').outerHeight());
 		// customizza la barra di scorrimento del mega menu
 		(function($){
 			$(window).on("load",function(){
@@ -288,20 +308,13 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			});
 		})(jQuery)
 
-		$(document).on('click', '.yamm .dropdown-menu', function(e) {
-		  e.stopPropagation()
-		})
-		$(document).on('blur', '#txt_fullname', function() {
-			var name = $(this).val();
-			//alert('Make an AJAX call and pass this parameter >> name=' + name);
-			$('#edit-text').text(name);
-		});
 
 		$(window).resize(function(){
+			$('.accessori').css('bottom', $('.riepilogo').outerHeight());
 		    $('#a-middle').centerElement();
 		    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
 		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
-		    $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
+		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
 
 	    configController.visibleManager.loaderVisible = false;
