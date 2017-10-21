@@ -238,8 +238,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		/* apertura menu */
 
 		$('.borsaModel').click(function() {
-			$('.dropdown-toggle').trigger('click');
+			$('.modello').trigger('click');
+			$('.variante').trigger('click');
+
 		});
+
+		setTimeout(function() {
+			$(".modello").trigger('click');
+   		},10);
 
 		$(document).on('click', '.yamm .dropdown-menu', function(e) {
 		  e.stopPropagation()
@@ -290,9 +296,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			$('#edit-text').text(name);
 		});
 
-		setTimeout(function() {
-		   $(".dropdown-toggle").trigger('click');
-	   },10);
 		$('.accessori').css('bottom', $('.riepilogo').outerHeight());
 		// customizza la barra di scorrimento del mega menu
 		(function($){
