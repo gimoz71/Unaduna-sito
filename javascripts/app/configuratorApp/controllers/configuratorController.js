@@ -237,15 +237,22 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 
 		/* apertura menu */
 
+		setTimeout(function() {
+			$(".modello").trigger('click');
+		},10);
+		
 		$('.borsaModel').click(function() {
 			$('.modello').trigger('click');
 			$('.variante').trigger('click');
 
 		});
 
-		setTimeout(function() {
-			$(".modello").trigger('click');
-   		},10);
+		$('.borsaVariante').click(function() {
+			// $('.modello').trigger('click');
+			$('.variante').trigger('click');
+
+		});
+
 
 		$(document).on('click', '.yamm .dropdown-menu', function(e) {
 		  e.stopPropagation()
