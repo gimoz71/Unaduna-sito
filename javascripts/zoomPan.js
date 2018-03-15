@@ -1,4 +1,5 @@
 /* image panning zoom */
+
 (function($){
     $.fn.imagePanning=function(){
         var init="center";
@@ -26,8 +27,14 @@
                             !p ? evt.pageY-cont.offset().top : init==="center" ? contH/2 : 0,
                             !p ? evt.pageX-cont.offset().left : init==="center" ? contW/2 : 0
                         ],
+                        destMob=[Math.round(($this.outerHeight(true)-contH)*(Math.abs(coords[0]-contH)/contH)),Math.round(($this.outerWidth(true)-contW)*(Math.abs(coords[1]-contW)/contW))],
                         dest=[Math.round(($this.outerHeight(true)-contH)*(coords[0]/contH)),Math.round(($this.outerWidth(true)-contW)*(coords[1]/contW))];
-                    $this.css({"top":-dest[0],"left":-dest[1]});
+                    if (isTouchDevice()) {
+                        $this.css({"top":-destMob[0],"left":-destMob[1]});
+                    }
+                    else {
+                        $this.css({"top":-dest[0],"left":-dest[1]});
+                    }
                 })
                 //resize fn
                 .find(".resize iframe").each(function(){
@@ -38,3 +45,7 @@
         });
     }
 })(jQuery);
+
+function isTouchDevice() {
+    return 'ontouchstart' in document.documentElement;
+}

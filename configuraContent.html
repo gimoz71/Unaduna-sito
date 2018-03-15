@@ -14,7 +14,7 @@
                                     <div class="yamm-content clearfix">
                                         <div class="col-xs-12">
                                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
-                                                <a href="#" class="borsaModel" id="start3dbutton" type="button" ><img src="images/mod1_base.jpg" /><h5>modello #1</h5></a>
+                                                <a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.SendData2({idaccessorio:3, attivo:false})"><img src="https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole/thumb/thumb_test2.png" /><h5>modello #1</h5></a>
                                                 <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
                                             </div>
                                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
@@ -44,46 +44,6 @@
                         </li>
                     </ul>
                     <h1 class="navbar-brand navbar-left nomargin hidden-xs" id="edit-text">Borsa #1</h1>
-                    <ul class="nav navbar-nav fixed-navbar-right">
-                        <li class="dropdown yamm-fw">
-                            <a href="#" class="active dropdown-toggle materiale link variante" data-toggle="dropdown"><span class="hidden-xs">materiale </span><span class="tipologia colore" style="background-image: url('images/thumb-colore.png')"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="yamm-content clearfix">
-                                        <div class="col-xs-12">
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
-                                                <a href="#" class="borsaVariante" id="start3dbutton" type="button" ng-click="contr.SendData2({idaccessorio:3, attivo:false})"><img src="https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole/thumb/thumb_test2.png" /><h5>materiale #1</h5></a>
-                                                <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
-                                                <a href="#" class="borsaVariante" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>materiale #2</h5></a>
-                                                <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
-                                                <a href="#" class="borsaVariante" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>materiale #3</h5></a>
-                                                <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
-                                                <a href="#" class="borsaVariante" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>materiale #4</h5></a>
-                                                <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
-                                                <a href="#" class="borsaVariante" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>materiale #5</h5></a>
-                                                <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
-                                                <a href="#" class="borsaVariante" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>materiale #6</h5></a>
-                                                <!-- <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- <li>
-                            <a href="#" class="active materiale link"><span class="hidden-xs">pelle </span><span class="tipologia pelle" style="background-image: url('images/pelle.jpg');"></span></a>
-                        </li> -->
-                    </ul>
                 </div>
             </div>
         </div>
@@ -123,7 +83,8 @@
                             <!--                         					<div class="swiper-lazy-preloader"></div> -->
                             <!--                         				</a> -->
                             <!--                                 </div> -->
-                            <div class="swiper-slide"><a href="#" class="active selected">nappe</a></div>
+                            <div class="swiper-slide"><a href="#" class="active selected">colori</a></div>
+                            <div class="swiper-slide"><a href="#">nappe</a></div>
                             <div class="swiper-slide"><a href="#">zip</a></div>
                             <div class="swiper-slide"><a href="#">tracolle</a></div>
                             <div class="swiper-slide"><a href="#">manici</a></div>
@@ -136,8 +97,46 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <!-- nappe -->
+                    <!-- colori -->
                     <div class="swiper-container accessori-thumb nappe" ng-show="true">
+                        <div class="swiper-wrapper">
+                            <!--                                 <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa"> -->
+                            <!--                                     <a href="#"> -->
+                            <!-- 	                        				<img src="{{ item.imageSrc }}" class="swiper-lazy" ng-click="contr.SendData2(item)"> -->
+                            <!--                         					<div class="swiper-lazy-preloader"></div> -->
+                            <!--                         				</a> -->
+                            <!--                                 </div> -->
+                            <div class="swiper-slide">
+                                <a href="#" class=" selected">
+                    				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item2.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:2, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item3.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item4.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next swiper-button-black"></div>
+                        <div class="swiper-button-prev swiper-button-black"></div>
+                    </div>
+
+                    <!-- nappe -->
+                    <div class="swiper-container accessori-thumb nappe" ng-show="false">
                         <div class="swiper-wrapper">
                             <!--                                 <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa"> -->
                             <!--                                     <a href="#"> -->

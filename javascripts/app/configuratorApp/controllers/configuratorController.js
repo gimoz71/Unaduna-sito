@@ -129,6 +129,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		}
 
 		//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
+		var renderType;
+		if (isTouchDevice()) {
+			renderType = "canvas"
+		} else {
+			renderType = "canvas"
+		}
 		var dataSpin = {
 				width: 960,
                 height: 960,
@@ -140,6 +146,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 responsive: true,
                 animate: false,
                 detectSubsampling : true,
+				//renderer: renderType,
                 scrollThreshold   : 200,
                 mods: [
                     'drag',
@@ -155,6 +162,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 }
 		};
 
+		function isTouchDevice() {
+		    return 'ontouchstart' in document.documentElement;
+		}
 		$('#spritespin').spritespin(dataSpin);
 		//configController.visibleManager.loaderVisible = false;
 		configController.visibleManager.spinnerVisible = true;
@@ -239,7 +249,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 
 		$('.borsaModel').click(function() {
 			$('.modello').trigger('click');
-			$('.variante').trigger('click');
+			//$('.variante').trigger('click');
 
 		});
 
@@ -250,7 +260,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		$(document).on('click', '.yamm .dropdown-menu', function(e) {
 		  e.stopPropagation()
 		});
-		
+
 		/* gestioe elementi dell'interfaccia */
 
 		var aperto = 0;
