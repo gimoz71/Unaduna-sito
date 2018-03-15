@@ -97,12 +97,16 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		configController.visibleManager.spinnerVisible = false;
 
 		var prezzo = 0;
-		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/new/";
+		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/nera/";
+//		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/new/";
 
 		//a regime questi dati devono essere caricati dinamicamente
-		var baseAccessorio = baseImagePath + "base_X_X_X_X_X_{frame}.jpg";
-		var sourceAccessorio = baseImagePath + "base_X_manici_X_X_tracolle_{frame}.jpg";
-		var sourceAccessorio2 = baseImagePath + "base_borchie_manici_ciondoli_nappe_tracolle_{frame}.jpg";
+		var baseAccessorio = baseImagePath + "base_X_{frame}.jpg";
+		var sourceAccessorio = baseImagePath + "base_borchie_{frame}.jpg";
+
+//		var baseAccessorio = baseImagePath + "base_X_X_X_X_X_{frame}.jpg";
+//		var sourceAccessorio = baseImagePath + "base_X_manici_X_X_tracolle_{frame}.jpg";
+//		var sourceAccessorio2 = baseImagePath + "base_borchie_manici_ciondoli_nappe_tracolle_{frame}.jpg";
 
 		if(accessorio.attivo){
 			accessorio.attivo = false;
@@ -117,10 +121,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			case 1:
 				dataSource = sourceAccessorio;
 				prezzo = 100;
-				break;
-			case 2:
-				dataSource = sourceAccessorio2;
-				prezzo = 150;
 				break;
 			default:
 				dataSource = baseAccessorio;
@@ -237,29 +237,20 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 
 		/* apertura menu */
 
-		setTimeout(function() {
-			$(".modello").trigger('click');
-		},10);
-		
 		$('.borsaModel').click(function() {
 			$('.modello').trigger('click');
 			$('.variante').trigger('click');
 
 		});
 
-		$('.borsaVariante').click(function() {
-			// $('.modello').trigger('click');
-			$('.variante').trigger('click');
-
-		});
-
+		setTimeout(function() {
+			$(".modello").trigger('click');
+   		},10);
 
 		$(document).on('click', '.yamm .dropdown-menu', function(e) {
 		  e.stopPropagation()
-		})
-
-
-
+		});
+		
 		/* gestioe elementi dell'interfaccia */
 
 		var aperto = 0;
