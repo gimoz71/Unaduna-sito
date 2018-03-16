@@ -2,6 +2,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 
 	var configController = this;
 
+	$scope.spinAnim = true;
+	$scope.spinIcon = true;
+
 	//configController.accessoriBorsa = accessoriesService.accessoriesList;ù
 	configController.accessoriBorsa = [
 	    	{
@@ -144,15 +147,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 	  }),
                 sense: 1,
                 responsive: true,
-                animate: false,
                 detectSubsampling : true,
-				//animate: true,
-				//frameTime: 200,
-				//loop: false,
-				//stopFrame: 7,
+                animate: $scope.spinAnim,
+				frameTime: 300,
+				loop: false,
+				stopFrame: 7,
 				//renderer: renderType,
                 scrollThreshold   : 200,
-                mods: [
+                plugins: [
                     'drag',
                     '360'
                 ],
@@ -163,6 +165,13 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 onDraw: function(){
                 		//configController.visibleManager.loaderVisible = false;
                 		$('#loader').addClass('ng-hide');
+						if ($scope.spinIcon == true) {
+							var pos1 = $('#spinIcon').position();
+							$("#spinIcon").fadeIn().delay(100).fadeOut();
+							$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
+						}
+
+								$scope.spinIcon = false;
                 }
 		};
 
@@ -174,6 +183,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		configController.visibleManager.spinnerVisible = true;
 		configController.priceManager.price = prezzo;
 
+		$scope.spinAnim = false;
 	};
 
 	configController.initConfiguratore = function(){
