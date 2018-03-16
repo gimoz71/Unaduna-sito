@@ -133,23 +133,28 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 
 		//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
 		var renderType;
+
 		if (isTouchDevice()) {
 			renderType = "canvas"
 		} else {
 			renderType = "canvas"
 		}
-		var dataSpin = {
+
+		var dataSourceString = '';
+		mergeImages(['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'
+		,'https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/borchie/ImageCollage.png']).then(b64 => {
+			dataSourceString = b64;
+			var dataSpin = {
 				width: 960,
                 height: 960,
-                source: SpriteSpin.sourceArray(dataSource, {
-                	  frame: [1,8],
-                	  digits: 4
-                	  }),
+				source: dataSourceString,
+				frames: 8,
+				framesX: 8,
                 sense: 1,
                 responsive: true,
                 detectSubsampling : true,
                 animate: $scope.spinAnim,
-				frameTime: 300,
+				frameTime: 200,
 				loop: false,
 				stopFrame: 7,
 				//renderer: renderType,
@@ -163,27 +168,30 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 		$('#loader').removeClass('ng-hide');
                 },
                 onDraw: function(){
-                		//configController.visibleManager.loaderVisible = false;
-                		$('#loader').addClass('ng-hide');
-						if ($scope.spinIcon == true) {
-							var pos1 = $('#spinIcon').position();
-							$("#spinIcon").fadeIn().delay(100).fadeOut();
-							$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
-						}
+            		//configController.visibleManager.loaderVisible = false;
+            		$('#loader').addClass('ng-hide');
+					if ($scope.spinIcon == true) {
+						var pos1 = $('#spinIcon').position();
+						$("#spinIcon").fadeIn().delay(100).fadeOut();
+						$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
+					}
+					$scope.spinIcon = false;
+					$scope.spinAnim = false;
+				}
+            }
+			$('#spritespin').spritespin(dataSpin);
+		});
 
-								$scope.spinIcon = false;
-                }
-		};
+		configController.priceManager.price = prezzo;
 
 		function isTouchDevice() {
 		    return 'ontouchstart' in document.documentElement;
 		}
-		$('#spritespin').spritespin(dataSpin);
+
 		//configController.visibleManager.loaderVisible = false;
 		configController.visibleManager.spinnerVisible = true;
-		configController.priceManager.price = prezzo;
 
-		$scope.spinAnim = false;
+
 	};
 
 	configController.initConfiguratore = function(){
