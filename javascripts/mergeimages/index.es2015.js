@@ -31,10 +31,10 @@ var mergeImages = function (sources, options) {
 
 		// Resolve source and img when loaded
 		var img = new Image();
+		img.crossOrigin = "Anonymous";
 		img.onerror = function () { return reject(new Error('Couldn\'t load image')); };
 		img.onload = function () { return resolve(Object.assign({}, source, { img: img })); };
 		img.src = source.src;
-		img.crossOrigin = "Anonymous";
 	}); });
 
 	// Get canvas context
@@ -51,6 +51,7 @@ var mergeImages = function (sources, options) {
 			// Draw images to canvas
 			images.forEach(function (image) {
 				ctx.globalAlpha = image.opacity ? image.opacity : 1;
+				
 				return ctx.drawImage(image.img, image.x || 0, image.y || 0);
 			});
 

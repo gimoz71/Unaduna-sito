@@ -5,6 +5,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	$scope.spinAnim = true;
 	$scope.spinIcon = true;
 
+	configController.spinnerVisibleTest = false;
+
+	$scope.elencoAccessori = ['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'];
+
 	//configController.accessoriBorsa = accessoriesService.accessoriesList;ù
 	configController.accessoriBorsa = [
 	    	{
@@ -95,9 +99,16 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.SendData2 = function(accessorio){
 
+		html2canvas(document.querySelector("#spritespin")).then(canvas => {
+		    //document.body.appendChild(canvas);
+			$("#spinnerBackgroundImage").attr('src', canvas.toDataURL());
+		});
+
 		//attivo il loader e tolgo lo spinner
 		//configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
+
+		configController.setVisible(false);
 
 		var prezzo = 0;
 		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/nera/";
@@ -123,10 +134,17 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		switch(accessorio.idaccessorio){
 			case 1:
 				dataSource = sourceAccessorio;
+				if(elencoAccessori.length > 1){
+					elencoAccessori = ['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'];
+				} else {
+					elencoAccessori.push('https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/borchie/ImageCollage.png');
+				}
+
 				prezzo = 100;
 				break;
 			default:
 				dataSource = baseAccessorio;
+				elencoAccessori = ['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'];
 				prezzo = 50;
 				break;
 		}
@@ -141,8 +159,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		}
 
 		var dataSourceString = '';
-		mergeImages(['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'
-		,'https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/borchie/ImageCollage.png']).then(b64 => {
+		mergeImages(elencoAccessori).then(b64 => {
 			dataSourceString = b64;
 			var dataSpin = {
 				width: 960,
@@ -151,6 +168,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 				frames: 8,
 				framesX: 8,
                 sense: 1,
+				renderType: 'image',
                 responsive: true,
                 detectSubsampling : true,
                 animate: $scope.spinAnim,
@@ -165,11 +183,13 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                 ],
                 onInit: function(){
                 		//configController.visibleManager.loaderVisible = true;
-                		$('#loader').removeClass('ng-hide');
+                		//$('#loader').removeClass('ng-hide');
+
                 },
                 onDraw: function(){
             		//configController.visibleManager.loaderVisible = false;
-            		$('#loader').addClass('ng-hide');
+            		//$('#loader').addClass('ng-hide');
+
 					if ($scope.spinIcon == true) {
 						var pos1 = $('#spinIcon').position();
 						$("#spinIcon").fadeIn().delay(100).fadeOut();
@@ -177,6 +197,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 					}
 					$scope.spinIcon = false;
 					$scope.spinAnim = false;
+				},
+				onComplete: function() {
+					//configController.visibleManager.spinnerVisible = true;
 				}
             }
 			$('#spritespin').spritespin(dataSpin);
@@ -187,12 +210,15 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		function isTouchDevice() {
 		    return 'ontouchstart' in document.documentElement;
 		}
-
+		configController.setVisible(true);
 		//configController.visibleManager.loaderVisible = false;
-		configController.visibleManager.spinnerVisible = true;
 
 
 	};
+
+	configController.setVisible = function(visible){
+		configController.spinnerVisibleTest = visible;
+	}
 
 	configController.initConfiguratore = function(){
 
