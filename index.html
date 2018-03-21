@@ -11,6 +11,7 @@
     <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/styles.css">
     <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/swiper.css">
     <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/jquery.mCustomScrollbar.css">
+    <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/pinchzoomer.css">
     <!--[if lt IE 9]><script src="javascripts/html5shiv.js"></script><![endif]-->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Source+Sans+Pro:300,400,600" rel="stylesheet">
 
@@ -120,6 +121,7 @@
 		    </nav>
 	    </div>
 	    <div><!-- contenitore principale -->
+
 		    <home-content ng-if="isHome"></home-content>
 		    <configura-content ng-if="isConfigurator"></configura-content>
 		    <visione-content ng-if="isVisione"></visione-content>
@@ -227,8 +229,8 @@
 	<!--FINE BLOCCO IMPORT FILE APPLICAZIONE ANGULAR  -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <script src='https://unpkg.com/spritespin@4.0.1/release/spritespin.js' type='text/javascript'></script>
-    <script src="javascripts/zoomPan.js"></script>
+    <!-- <script src='https://unpkg.com/spritespin@4.0.1/release/spritespin.js' type='text/javascript'></script> -->
+    <script src="javascripts/spritespin.js"></script>
     <script src="javascripts/swiper.min.js"></script>
     <script src="javascripts/swiper.jquery.min.js"></script>
     <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -237,6 +239,10 @@
     <script src="javascripts/mergeimages/index.umd.js"></script>
     <script src="javascripts/mergeimages/index.es2015.js"></script>
     <script src="javascripts/html2canvas/html2canvas.js"></script>
+    <script src="javascripts/jquery.mousewheel.js"></script>
+    <script src="javascripts/hammer.js" ></script>
+    <script src="javascripts/TweenMax.js"></script>
+    <script src="javascripts/jquery.pinchzoomer.js"></script>
     <style type="text/css">
         /* N.B. .clearfix per funzionare deve rimanere dichiarato nell'html */
         .clearfix:after {

@@ -65,9 +65,11 @@
         </div>
     </div>
     <a href="#" id="openZoom"><i class="unaicon-zoom"></i></a>
-    <div class="zoom" style="display: none;">
+    <div class="zoom">
         <button id="closeZoom"><i class="unaicon-remove"></i></button>
-        <img src="images/zoom-test-2.jpg"  />
+        <div class="zoomHolder">
+            <img data-src="images/zoom-test-2.jpg" data-elem="pinchzoomer" data-options="scaleMode:proportionalInside;maxZoom:3;doubleTapZoom:3;force3D:true;appendControls:false;appendControlHolder:false">
+        </div>
     </div>
     <div id="a-middle" style="max-width: 960px; max-height: 960px; opacity: 0;">
         <div ng-show="!contr.spinnerVisibleTest" ><img id="spinnerBackgroundImage" alt="" src="images/base-rounded-square-3d.jpg" style="width:100%"></div>

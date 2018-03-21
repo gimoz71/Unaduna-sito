@@ -104,6 +104,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 			$("#spinnerBackgroundImage").attr('src', canvas.toDataURL());
 		});
 
+
 		//attivo il loader e tolgo lo spinner
 		//configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
@@ -168,7 +169,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 				frames: 8,
 				framesX: 8,
                 sense: 1,
-				renderType: 'image',
                 responsive: true,
                 detectSubsampling : true,
                 animate: $scope.spinAnim,
@@ -190,6 +190,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
             		//configController.visibleManager.loaderVisible = false;
             		//$('#loader').addClass('ng-hide');
 
+
+				},
+				onComplete: function() {
+					//configController.visibleManager.spinnerVisible = true;
 					if ($scope.spinIcon == true) {
 						var pos1 = $('#spinIcon').position();
 						$("#spinIcon").fadeIn().delay(100).fadeOut();
@@ -197,9 +201,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 					}
 					$scope.spinIcon = false;
 					$scope.spinAnim = false;
-				},
-				onComplete: function() {
-					//configController.visibleManager.spinnerVisible = true;
 				}
             }
 			$('#spritespin').spritespin(dataSpin);
@@ -303,30 +304,31 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 
 		setTimeout(function() {
 			$(".modello").trigger('click');
-   		},10);
+   		},1000);
 
 		$(document).on('click', '.yamm .dropdown-menu', function(e) {
 		  e.stopPropagation()
 		});
 
-		/* gestioe elementi dell'interfaccia */
+		/* gestione elementi dell'interfaccia */
 
 		var aperto = 0;
 	    $.fn.sepLine('first-divider', 'swiper-container', 'accessori'); // rif. descrizione funzione sepline: custom.js linea 77
 	    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
-	    $('.accessori').animate({opacity:'1'}, 1000, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
+	    $('.accessori').animate({opacity:'1'}, 500, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
 	        // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
 			$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
-	        $('#a-middle').animate({opacity:'1'}, 1000);
+	        $('#a-middle').animate({opacity:'1'}, 500);
 	    });
+
+		$(".zoom img").pinchzoomer();
 
 		// pulsanti apertura/chiusura zoom borsa
 		$('#openZoom').click(function() {
-			$('.zoom').fadeIn();
-			$(".zoom img").imagePanning();
+			$('.zoom').css({'z-index':'10'}).animate({opacity: '1'});
 		});
 		$('#closeZoom').click(function() {
-			$('.zoom').fadeOut();
+			$('.zoom').animate({opacity: 0}, {complete: function(){ $(this).css({'z-index': '0'}) }})
 		});
 
 
