@@ -12478,6 +12478,35 @@ a.link {
 /*-------------------------------*/
 /*  @group Configuratore Bag */
 /*-------------------------------*/
+.transition-image {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: none;
+}
+
+.spinIcon {
+  display: none;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  z-index: 100;
+}
+
+.loader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
 /* panning immagini */
 #openZoom, #closeZoom {
   position: absolute;
@@ -12594,6 +12623,7 @@ a.link {
   width: 100%;
   bottom: 0;
   left: 0;
+  z-index: 2;
   overflow: visible;
   border-top: solid 1px #dbd4d1;
   background-color: #fff;

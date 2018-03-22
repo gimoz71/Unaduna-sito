@@ -99,14 +99,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.SendData2 = function(accessorio){
 
-		html2canvas(document.querySelector("#spritespin")).then(canvas => {
-		    //document.body.appendChild(canvas);
-			$("#spinnerBackgroundImage").attr('src', canvas.toDataURL());
-		});
+
 
 
 		//attivo il loader e tolgo lo spinner
-		//configController.visibleManager.loaderVisible = true;
+		configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
 
 		configController.setVisible(false);
@@ -154,9 +151,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 		var renderType;
 
 		if (isTouchDevice()) {
-			renderType = "canvas"
+			renderType = "image"
 		} else {
-			renderType = "canvas"
+			renderType = "image"
 		}
 
 		var dataSourceString = '';
@@ -169,10 +166,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
 				frames: 8,
 				framesX: 8,
                 sense: 1,
+				rendering: renderType,
                 responsive: true,
                 detectSubsampling : true,
                 animate: $scope.spinAnim,
-				frameTime: 200,
+				frameTime: 100,
 				loop: false,
 				stopFrame: 7,
 				//renderer: renderType,
@@ -182,23 +180,40 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController',
                     '360'
                 ],
                 onInit: function(){
-                		//configController.visibleManager.loaderVisible = true;
-                		//$('#loader').removeClass('ng-hide');
+					if ($scope.spinIcon == false) {
 
+
+						$(".transition-image").show();
+					}
                 },
+				onLoad: function() {
+					if ($scope.spinIcon == false) {
+						html2canvas(document.querySelector("#spritespin")).then(canvas => {
+							//document.body.appendChild(canvas);
+							//$("#spinnerBackgroundImage").attr('src', canvas.toDataURL());
+							$(".transition-image").attr('src', canvas.toDataURL());
+						});
+					}
+				},
                 onDraw: function(){
-            		//configController.visibleManager.loaderVisible = false;
-            		//$('#loader').addClass('ng-hide');
-
+					configController.visibleManager.loaderVisible = true;
+					//$('#loader').removeClass('ng-hide');
 
 				},
 				onComplete: function() {
-					//configController.visibleManager.spinnerVisible = true;
+
+					$('#loader').addClass('ng-hide');
 					if ($scope.spinIcon == true) {
 						var pos1 = $('#spinIcon').position();
 						$("#spinIcon").fadeIn().delay(100).fadeOut();
 						$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
 					}
+					if ($scope.spinIcon == false) {
+						$(".transition-image").fadeOut("slow");
+					}
+					configController.visibleManager.spinnerVisible = true;
+					configController.visibleManager.loaderVisible = false;
+
 					$scope.spinIcon = false;
 					$scope.spinAnim = false;
 				}

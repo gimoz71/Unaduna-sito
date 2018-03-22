@@ -387,7 +387,7 @@ a.link {
         display: inline-block;
         font-size: 16px;
         & > a, & > a:hover {
-            border: 1px solid $standard-border-color;;
+            border: 1px solid $standard-border-color;
             border-left-color: transparent;
             margin-right: -4px;
         }
@@ -395,18 +395,17 @@ a.link {
             color: #000;
         }
         &:first-child > a {
-            border-left: 1px solid $standard-border-color;;
+            border-left: 1px solid $standard-border-color;
 
         }
         &.active > a, &.active > a:hover {
             font-weight: bold;
             color: #000;
         }
-        &.active > a, &.active > a:hover, &.active > a:active, , &.active > a:focus {
+        &.active > a, &.active > a:hover, &.active > a:active, &.active > a:focus {
             border-bottom-color: $standard-border-color;
         }
     }
-
 }
 .tab-pane {
     &.active {
@@ -654,9 +653,9 @@ a.link {
 /* @group Stili ed elementi content */
 
 
-.container {
-    // min-height: 100%;
-}
+// .container {
+//     // min-height: 100%;
+// }
 
 .title {
     font-family: $font-family-serif;
@@ -915,6 +914,34 @@ a.link {
 /*-------------------------------*/
 /*  @group Configuratore Bag */
 /*-------------------------------*/
+.transition-image {
+    width:100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 1;
+    display: none;
+    //border: solid 5px #f00;
+}
+
+.spinIcon {
+    display: none;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    z-index: 100;
+}
+.loader {
+	position        : absolute;
+	width           : 100%;
+	height          : 100%;
+	z-index         : 100;
+	background-color: rgba(255,255,255,.75);
+}
 
 /* panning immagini */
 
@@ -1022,6 +1049,7 @@ a.link {
         width: 100%;
         bottom: 0;
         left: 0;
+        z-index: 2;
         overflow: visible;
         border-top: solid 1px $standard-border-color;
         background-color: $body-bg;
