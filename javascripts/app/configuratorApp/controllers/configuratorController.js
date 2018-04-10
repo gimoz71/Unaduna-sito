@@ -6,11 +6,11 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 	$scope.spinIcon = true;
 
 	configController.spinnerVisibleTest = false;
-	
+
 	//array che popolo in fasse di inizializzazione e che saranno i dati su gui lavorare, lato client, per richiedere le immagini del configuratore
 
-	
-	
+
+
 
 	$scope.elencoAccessori = ['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'];
 
@@ -67,14 +67,14 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 	    		attivo: false
 	    	},
 	];
-	
+
 	configController.init = function(){
 		//fase di inizializzazione del controller
-		
+
 		//1. devo fare il caricamento massivo iniziale delle configurazioni (solo la struttura json dal DB, non le immagini)
 		//	A. carico i modelli di borse
 		//	B. carico le entita
-		
+
 		//2. devo popolare il primo step relativo ai modelli di borsa
 	}
 
@@ -121,7 +121,7 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 			$(".transition-image").show();
 			continueFlag = true;
 		});
-		
+
 		//attivo il loader e tolgo lo spinner
 		configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
@@ -210,11 +210,11 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
                 onInit: function(){
 					if ($scope.spinIcon == false) {
 
-						
+
 					}
                 },
 				onLoad: function() {
-					
+
 				},
                 onDraw: function(){
 					configController.visibleManager.loaderVisible = true;
