@@ -120,12 +120,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	configController.caricaSpinner = function(){
 		
 		var continueFlag = false;
-		html2canvas(document.querySelector("#spritespin")).then(canvas => {
-
-			$(".transition-image").attr('src', canvas.toDataURL());
-			$(".transition-image").show();
-			continueFlag = true;
-		});
+//		html2canvas(document.querySelector("#spritespin")).then(canvas => {
+//
+//			$(".transition-image").attr('src', canvas.toDataURL());
+//			$(".transition-image").show();
+//			continueFlag = true;
+//		});
 		
 		//attivo il loader e tolgo lo spinner
 		configController.visibleManager.loaderVisible = true;
@@ -188,9 +188,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						$("#spinIcon").fadeIn().delay(100).fadeOut();
 						$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
 					}
-					if ($scope.spinIcon == false) {
-						$(".transition-image").fadeOut("slow");
-					}
+//					if ($scope.spinIcon == false) {
+//						$(".transition-image").fadeOut("slow");
+//					}
 					configController.visibleManager.spinnerVisible = true;
 					configController.visibleManager.loaderVisible = false;
 
