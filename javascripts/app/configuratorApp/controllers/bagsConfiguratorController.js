@@ -77,36 +77,43 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.selezionaEntita = function(entita){
-		configController.aggiungiStrato(entita.urlThumbnailHD, entita.ordine);
+		configController.aggiungiStrato(entita.urlStripeHD, entita.ordine);
 	}
 	
 	configController.aggiungiStrato = function(strato, ordine){
 		var indice = $scope.stack.indexOf(strato);
 		
 		
-		if(indice == -1){
+		if(indice == -1){ //lo strato non è nello stack
 			
 			var lastIndex = $scope.stack.length -1;
 			if(ordine == lastIndex+1){//metto lo strato in coda
 				$scope.stack.push(strato);
-			} else if(ordine == lastIndex+1){
-				
+			} else if(ordine > lastIndex+1){//metto stringhe vuote fino all'indice dello strato da inserire
+				for(var i = lastIndex+1; i <= ordine-1; i++){
+					$scope.stack[i] = "";
+				}
+				$scope.stack.push(strato);
+			} else {//sostituisco lo strato esistente nello stack all'indice dello strato da inserire 
+				$scope.stack[ordine] = strato;
 			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			$scope.stack.splice(ordine, 0, strato);//aggiunge l'elemento 'strato' nel posto 'ordine'
-		} else {
-			$scope.stack.splice(indice, 1);//rimuove 1 elemento da 'indice'
+			//$scope.stack.splice(ordine, 0, strato);//aggiunge l'elemento 'strato' nel posto 'ordine'
+		} else { //lo strato è già nello stack
+			$scope.stack[ordine] = "";
+			//$scope.stack.splice(indice, 1);//sostituisco lo strato con stringa vuota
 		}
-		configController().caricaSpinner();
+		configController.caricaSpinner();
+	}
+	
+	configController.pulisciStack = function(){
+		var tempStack = []
+		for(var i = 0; i< $scope.stack.length; i++){
+			if($scope.stack[i] != ""){
+				tempStack.push($scope.stack[i]);
+			}
+		}
+		return tempStack;
 	}
 	
 	//qui avviene la richiesta del modello in base agli accessori selezionati
@@ -135,7 +142,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			renderType = "image"
 		}
 		
-		mergeImages($scope.stack).then(b64 => {
+		var cleanStack = configController.pulisciStack();
+		
+		mergeImages(cleanStack).then(b64 => {
 			dataSourceString = b64;
 			var dataSpin = {
 				width: 960,
