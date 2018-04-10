@@ -1,4 +1,4 @@
-angular.module('configuratorModule').controller('unadunaBorseConfiguratorController', function($http, $scope, $filter, listeService){
+angular.module('configuratorModule').controller('unadunaConfiguratorController2', function($http, $scope, $filter, listeService){
 
 	var configController = this;
 
@@ -7,79 +7,19 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 
 	configController.spinnerVisibleTest = false;
 	
-	//array che popolo in fasse di inizializzazione e che saranno i dati su gui lavorare, lato client, per richiedere le immagini del configuratore
-
+	$scope.modelli = [];
+	$scope.entita = [];
 	
+	$scope.stack = [];
 	
-
-	$scope.elencoAccessori = ['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'];
-
-	//configController.accessoriBorsa = accessoriesService.accessoriesList;ù
-	configController.accessoriBorsa = [
-	    	{
-	    		imageSrc: "images/item.jpg",
-	    		idaccessorio: 1,
-	    		attivo: false
-	    	},
-	    	{
-	    		imageSrc: "images/item2.jpg",
-	    		idaccessorio: 2,
-	    		attivo: false
-	    	},
-	    	{
-	    		imageSrc: "images/item3.jpg",
-	    		idaccessorio: 3,
-	    		attivo: false
-	    	},
-	    	{
-	    		imageSrc: "images/item4.jpg",
-	    		idaccessorio: 3,
-	    		attivo: false
-	    	},
-	    	{
-	    		imageSrc: "images/item.jpg",
-	    		idaccessorio: 3,
-	    		attivo: false
-	    	},
-	    	{
-	    		imageSrc: "images/item2.jpg",
-	    		idaccessorio: 3,
-	    		attivo: false
-	    	},
-	    	{
-	    		imageSrc: "images/item3.jpg",
-	    		idaccessorio: 3,
-	    		attivo: false
-	    	},
-	    	{
-	    		imageSrc: "images/item4.jpg",
-	    		idaccessorio: 3,
-	    		attivo: false
-	    	},
-	    	{
-	    		imageSrc: "images/item.jpg",
-	    		idaccessorio: 3,
-	    		attivo: false
-	    	},
-	    	{
-	    		imageSrc: "images/item2.jpg",
-	    		idaccessorio: 3,
-	    		attivo: false
-	    	},
-	];
+	$scope.tipiAccessori = new Map();
+	$scope.entitaTipoAccessorioSelezionato = [];
+	$scope.tipiAccossoriModelloSelezionato = [];
+	$scope.modelloSelezionato = '';
 	
-	configController.init = function(){
-		//fase di inizializzazione del controller
-		
-		//1. devo fare il caricamento massivo iniziale delle configurazioni (solo la struttura json dal DB, non le immagini)
-		//	A. carico i modelli di borse
-		//	B. carico le entita
-		
-		//2. devo popolare il primo step relativo ai modelli di borsa
-	}
-
-	//configController.tipiAccessori = accessoriesService.tipiAccessoriList;
-
+	$scope.swiperAccessori = null;
+	$scope.swiperCategorie = null;
+	
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
 		if(index == 0){
@@ -110,13 +50,71 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 		}
 	}
 
+	configController.selezioneTipoAccessorio = function(tipoAccessorio){
+		//preparo la mappa che ha chiave = entita.nome - valore = entita
+		//fadeout del componente
+		$("#rigaaccessori").fadeOut("slow");
+		$scope.entitaTipoAccessorioSelezionato = [];
+		for(var i = 0; i < $scope.modelli.length; i++){
+			var modello = $scope.modelli[i];
+			for(var j = 0; j < $scope.entita.length; j++){
+				var entitaSingola = $scope.entita[j];
+				if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
+					$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+				}
+			}
+		}
+		//fadein del componente
+		$("#rigaaccessori").fadeIn("slow");
+	}
+	
+	configController.scegliModello = function(modello){
+		$scope.stack = [];
+		$scope.stack.push(modello.urlStripeHD);
+		$scope.modelloSelezionato = modello.nome;
+		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
+		configController.caricaSpinner();
+	}
 
+	configController.selezionaEntita = function(entita){
+		configController.aggiungiStrato(entita.urlThumbnailHD, entita.ordine);
+	}
+	
+	configController.aggiungiStrato = function(strato, ordine){
+		var indice = $scope.stack.indexOf(strato);
+		
+		
+		if(indice == -1){
+			
+			var lastIndex = $scope.stack.length -1;
+			if(ordine == lastIndex+1){//metto lo strato in coda
+				$scope.stack.push(strato);
+			} else if(ordine == lastIndex+1){
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			$scope.stack.splice(ordine, 0, strato);//aggiunge l'elemento 'strato' nel posto 'ordine'
+		} else {
+			$scope.stack.splice(indice, 1);//rimuove 1 elemento da 'indice'
+		}
+		configController().caricaSpinner();
+	}
+	
 	//qui avviene la richiesta del modello in base agli accessori selezionati
-	configController.SendData2 = function(accessorio){
+	configController.caricaSpinner = function(){
+		
 		var continueFlag = false;
 		html2canvas(document.querySelector("#spritespin")).then(canvas => {
-			//document.body.appendChild(canvas);
-			//$("#spinnerBackgroundImage").attr('src', canvas.toDataURL());
+
 			$(".transition-image").attr('src', canvas.toDataURL());
 			$(".transition-image").show();
 			continueFlag = true;
@@ -128,45 +126,6 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 
 		configController.setVisible(false);
 
-		var prezzo = 0;
-		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/nera/";
-//		var baseImagePath = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/modello-test/testsingole_hd/new/";
-
-		//a regime questi dati devono essere caricati dinamicamente
-		var baseAccessorio = baseImagePath + "base_X_{frame}.jpg";
-		var sourceAccessorio = baseImagePath + "base_borchie_{frame}.jpg";
-
-//		var baseAccessorio = baseImagePath + "base_X_X_X_X_X_{frame}.jpg";
-//		var sourceAccessorio = baseImagePath + "base_X_manici_X_X_tracolle_{frame}.jpg";
-//		var sourceAccessorio2 = baseImagePath + "base_borchie_manici_ciondoli_nappe_tracolle_{frame}.jpg";
-
-		if(accessorio.attivo){
-			accessorio.attivo = false;
-		} else {
-			configController.cleanAccessori();
-			accessorio.attivo = true;
-		}
-
-		var dataSource = [];
-		var hasAccessorio = false;
-		switch(accessorio.idaccessorio){
-			case 1:
-				dataSource = sourceAccessorio;
-				if(elencoAccessori.length > 1){
-					elencoAccessori = ['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'];
-				} else {
-					elencoAccessori.push('https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/borchie/ImageCollage.png');
-				}
-
-				prezzo = 100;
-				break;
-			default:
-				dataSource = baseAccessorio;
-				elencoAccessori = ['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'];
-				prezzo = 50;
-				break;
-		}
-
 		//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
 		var renderType;
 
@@ -175,17 +134,8 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 		} else {
 			renderType = "image"
 		}
-
-		var dataSourceString = '';
-//		if ($scope.spinIcon == false) {
-//			html2canvas(document.querySelector("#spritespin")).then(canvas => {
-//				//document.body.appendChild(canvas);
-//				//$("#spinnerBackgroundImage").attr('src', canvas.toDataURL());
-//				$(".transition-image").attr('src', canvas.toDataURL());
-//				$(".transition-image").show();
-//			});
-//		}
-		mergeImages(elencoAccessori).then(b64 => {
+		
+		mergeImages($scope.stack).then(b64 => {
 			dataSourceString = b64;
 			var dataSpin = {
 				width: 960,
@@ -223,9 +173,6 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 				},
 				onComplete: function() {
 
-					while(!continueFlag){
-						//waiting
-					}
 					$('#loader').addClass('ng-hide');
 					if ($scope.spinIcon == true) {
 						var pos1 = $('#spinIcon').position();
@@ -245,7 +192,7 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 			$('#spritespin').spritespin(dataSpin);
 		});
 
-		configController.priceManager.price = prezzo;
+		configController.priceManager.price = 0;
 
 		function isTouchDevice() {
 		    return 'ontouchstart' in document.documentElement;
@@ -262,77 +209,34 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 
 	configController.initConfiguratore = function(){
 
-		//testo la chiamata per il model1, poi deve essere reso dinamico
-		//accessoriesService.getTipiAccessoriRemote("modello1")
-
-		//riempio il resto dinamicamente (per ora fisso di test sulle nappe)
-		//accessoriesService.addAllAccessories($scope.nappeFisse);
+		//1. devo fare il caricamento massivo iniziale delle configurazioni (solo la struttura json dal DB, non le immagini)
+		listeService.getModelli().then(function (res) {
+			if(res.data.esito.codice == 100){
+				$scope.modelli = res.data.modelli;
+				
+				listeService.getAccessori().then(function(res2) {
+					$scope.entita = res2.data.accessori;
+					//inizializzo la mappa con gli elenchi dei tipi di accessori
+					for(var i = 0; i < $scope.modelli.length; i++){
+						var elencoAccessori = [];
+						var modello = $scope.modelli[i];
+						for(var j = 0; j < $scope.entita.length; j++){
+							var entitaSingola = $scope.entita[j];
+							if(entitaSingola.modello == modello.nome){
+								if(elencoAccessori.indexOf(entitaSingola.categoria) == -1){
+									elencoAccessori.push(entitaSingola.categoria);
+								}
+							}
+						}
+						$scope.tipiAccessori.set(modello.nome, elencoAccessori);
+					}
+				});
+			}
+	    });
 
 		configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
-
-        /*------------------------------------*/
-        /* settaggio vari swiper */
-        /*------------------------------------*/
-
-        var swiper_categorie = new Swiper('.accessori-categoria', {
-            pagination: '.swiper-pagination',
-            slidesPerView: 6,
-            paginationClickable: true,
-            spaceBetween: 0,
-            keyboardControl: true,
-            grabCursor: true,
-            breakpoints: {
-               320: {
-                   slidesPerView: 3
-               },
-               480: {
-                   slidesPerView: 3
-               },
-               768: {
-                   slidesPerView: 4
-               },
-               992: {
-                   slidesPerView: 6
-               },
-               1200: {
-                   slidesPerView: 6
-               }
-           }
-        });
-        var swiper_accessori = new Swiper('.accessori-thumb', {
-            pagination: '.swiper-pagination',
-            slidesPerView: 12,
-            paginationClickable: true,
-            spaceBetween: 0,
-            keyboardControl: true,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            // centeredSlides: 'true',
-            keyboardControl: 'true',
-            grabCursor: true,
-            lazyLoading: 'true',
-            // slidesOffsetBefore: 60,
-            // slidesOffsetAfter: 60,
-            breakpoints: {
-               320: {
-                   slidesPerView: 3
-               },
-               480: {
-                   slidesPerView: 5
-               },
-               768: {
-                   slidesPerView: 6
-               },
-               992: {
-                   slidesPerView: 8
-               },
-               1200: {
-                   slidesPerView: 12
-               }
-           }
-        });
-
+		
 		/* apertura menu */
 
 		$('.borsaModel').click(function() {
@@ -369,7 +273,6 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 		$('#closeZoom').click(function() {
 			$('.zoom').animate({opacity: 0}, {complete: function(){ $(this).css({'z-index': '0'}) }})
 		});
-
 
 		/* edito il nome della borsa nel configuratore *DA COMPLETARE* */
 		$('#edit-text').click(function() {
@@ -419,4 +322,5 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 
 	    configController.visibleManager.loaderVisible = false;
 	};
+	
 });

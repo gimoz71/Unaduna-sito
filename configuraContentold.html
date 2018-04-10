@@ -1,0 +1,370 @@
+<div class="configuratore" ng-controller="unadunaConfiguratorController2 as contr" ng-init="contr.initConfiguratore()">
+    <nav class="navbar yamm navbar-default navbar-fixed-top nomargin main-configurator-navbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 clearfix">
+                    <ul class="nav navbar-nav fixed-navbar-left">
+                        <li>
+                            <a href="#" class="link" ng-click="setHome()"><i class="fa fa-bars"></i></a>
+                        </li>
+                        <li class="dropdown yamm-fw">
+                            <a href="#" class="active dropdown-toggle link modello" data-toggle="dropdown">scegli il modello</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="yamm-content clearfix">
+                                        <div class="col-xs-12">
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center" ng-repeat="modello in modelli">
+                                                <a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="scegliModello(modello)"><img ng-src="{{modello.urlThumbnailHD}}" /><h5>{{modello.nome}}</h5></a>
+                                            </div>
+<!--                                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center"> -->
+<!--                                                 <a href="#" class="borsaModel" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>modello #2</h5></a> -->
+<!--                                                 <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center"> -->
+<!--                                                 <a href="#" class="borsaModel" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>modello #3</h5></a> -->
+<!--                                                 <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center"> -->
+<!--                                                 <a href="#" class="borsaModel" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>modello #4</h5></a> -->
+<!--                                                 <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center"> -->
+<!--                                                 <a href="#" class="borsaModel" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>modello #5</h5></a> -->
+<!--                                                 <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center"> -->
+<!--                                                 <a href="#" class="borsaModel" id="start3dbutton" type="button"><img src="images/mod1_base.jpg" /><h5>modello #6</h5></a> -->
+<!--                                                 <button id="start3dbutton" type="button" ng-click="SendData(2)"/>carica borsa</button></div> -->
+<!--                                             </div> -->
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h1 class="navbar-brand navbar-left nomargin hidden-xs" id="edit-text">Borsa #1</h1>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="spinIcon" class="spinIcon">
+        <img src="images/finger-touch.png" />
+    </div>
+    <div id="loader" class="loader" ng-show="contr.visibleManager.loaderVisible">
+        <div style="color: #ccc;top: 50%; left: 50%; margin-left: -31px; margin-top: -31px;" class="la-ball-grid-pulse la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <a href="#" id="openZoom"><i class="unaicon-zoom"></i></a>
+    <div class="zoom">
+        <button id="closeZoom"><i class="unaicon-remove"></i></button>
+        <div class="zoomHolder">
+            <img data-src="images/zoom-test-2.jpg" data-elem="pinchzoomer" data-options="scaleMode:proportionalInside;maxZoom:3;doubleTapZoom:3;force3D:true;appendControls:false;appendControlHolder:false">
+        </div>
+    </div>
+    <div id="a-middle" style="max-width: 960px; max-height: 960px; opacity: 0; position: relative;">
+        <img class="transition-image" src="images/zoom-test-2.jpg">
+        <div ng-show="!contr.spinnerVisibleTest" ><img id="spinnerBackgroundImage" alt="" src="images/base-rounded-square-3d.jpg" style="width:100%"></div>
+        <div class="animate-show-hide" ng-show="contr.spinnerVisibleTest" id="spritespin"></div>
+    </div>
+    <div class="accessori" style="opacity: 0;">
+        <!-- <a href="#" class="accessori-trigger aperto"></a> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="swiper-container accessori-categoria">
+                        <div class="swiper-wrapper">
+                            <!--                             		<div class="swiper-slide" ng-repeat="item in contr.tipiAccessori"> -->
+                            <!--                                     <a href="#" ng-class="{added:item.attivo === true}"> -->
+                            <!-- 	                        				<img src="{{ item.nome }}" class="swiper-lazy"> -->
+                            <!--                         					<div class="swiper-lazy-preloader"></div> -->
+                            <!--                         				</a> -->
+                            <!--                                 </div> -->
+                            <div class="swiper-slide"><a href="#" class="active selected">nappe</a></div>
+                            <div class="swiper-slide"><a href="#">zip</a></div>
+                            <div class="swiper-slide"><a href="#">tracolle</a></div>
+                            <div class="swiper-slide"><a href="#">manici</a></div>
+                            <div class="swiper-slide"><a href="#">borchie</a></div>
+                            <div class="swiper-slide"><a href="#">ciondoli</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- colori -->
+                    <div class="swiper-container accessori-thumb nappe" ng-show="true">
+                        <div class="swiper-wrapper">
+                            <!--                                 <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa"> -->
+                            <!--                                     <a href="#"> -->
+                            <!-- 	                        				<img src="{{ item.imageSrc }}" class="swiper-lazy" ng-click="contr.SendData2(item)"> -->
+                            <!--                         					<div class="swiper-lazy-preloader"></div> -->
+                            <!--                         				</a> -->
+                            <!--                                 </div> -->
+                            <div class="swiper-slide">
+                                <a href="#" class=" selected">
+                    				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item2.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:2, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item3.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item4.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next swiper-button-black"></div>
+                        <div class="swiper-button-prev swiper-button-black"></div>
+                    </div>
+
+                    <!-- nappe -->
+                    <div class="swiper-container accessori-thumb nappe" ng-show="false">
+                        <div class="swiper-wrapper">
+                            <!--                                 <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa"> -->
+                            <!--                                     <a href="#"> -->
+                            <!-- 	                        				<img src="{{ item.imageSrc }}" class="swiper-lazy" ng-click="contr.SendData2(item)"> -->
+                            <!--                         					<div class="swiper-lazy-preloader"></div> -->
+                            <!--                         				</a> -->
+                            <!--                                 </div> -->
+                            <div class="swiper-slide">
+                                <a href="#" class=" selected">
+                    				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item2.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:2, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item3.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item4.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next swiper-button-black"></div>
+                        <div class="swiper-button-prev swiper-button-black"></div>
+                    </div>
+
+                    <!-- zip -->
+                    <div class="swiper-container accessori-thumb zip" ng-show="false">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="#" class="active selected">
+                    				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item2.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:2, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item3.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item4.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next swiper-button-black"></div>
+                        <div class="swiper-button-prev swiper-button-black"></div>
+                    </div>
+
+                    <!-- tracolle -->
+                    <div class="swiper-container accessori-thumb tracolle" ng-show="false">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="#" class="active selected">
+                    				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item2.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:2, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item3.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item4.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next swiper-button-black"></div>
+                        <div class="swiper-button-prev swiper-button-black"></div>
+                    </div>
+
+                    <!-- manici -->
+                    <div class="swiper-container accessori-thumb manici" ng-show="false">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="#" class="active selected">
+                    				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item2.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:2, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item3.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item4.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next swiper-button-black"></div>
+                        <div class="swiper-button-prev swiper-button-black"></div>
+                    </div>
+
+                    <!-- borchie -->
+                    <div class="swiper-container accessori-thumb borchie" ng-show="false">
+                        <div class="swiper-wrapper">
+                            <!--                                 <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa"> -->
+                            <!--                                     <a href="#"> -->
+                            <!-- 	                        				<img src="{{ item.imageSrc }}" class="swiper-lazy" ng-click="contr.SendData2(item)"> -->
+                            <!--                         					<div class="swiper-lazy-preloader"></div> -->
+                            <!--                         				</a> -->
+                            <!--                                 </div> -->
+                            <div class="swiper-slide">
+                                <a href="#" class="active selected">
+                    				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item2.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:2, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item3.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item4.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next swiper-button-black"></div>
+                        <div class="swiper-button-prev swiper-button-black"></div>
+                    </div>
+
+                    <!-- ciondoli -->
+                    <div class="swiper-container accessori-thumb ciondoli" ng-show="false">
+                        <div class="swiper-wrapper">
+                            <!--                                 <div class="swiper-slide" ng-repeat="item in contr.accessoriBorsa"> -->
+                            <!--                                     <a href="#"> -->
+                            <!-- 	                        				<img src="{{ item.imageSrc }}" class="swiper-lazy" ng-click="contr.SendData2(item)"> -->
+                            <!--                         					<div class="swiper-lazy-preloader"></div> -->
+                            <!--                         				</a> -->
+                            <!--                                 </div> -->
+                            <div class="swiper-slide">
+                                <a href="#" class="active selected">
+                    				<img src="images/item.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:1, attivo:true})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item2.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:2, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item3.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="#">
+                    				<img src="images/item4.jpg" class="swiper-lazy" ng-click="contr.SendData2({idaccessorio:3, attivo:false})">
+                					<div class="swiper-lazy-preloader"></div>
+                				</a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next swiper-button-black"></div>
+                        <div class="swiper-button-prev swiper-button-black"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="riepilogo">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3  clearfix">
+                    <div class="col-xs-6 ">
+                        <h3 class="price nomargin">{{contr.priceManager.price}}&euro;</h3>
+                        <!-- <h5 class="info nomargin">iva inclusa</h5> -->
+                    </div>
+                    <div class="col-xs-6 text-center">
+                        <a href="#" class="btn btn-default btn-block follow">procedi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
