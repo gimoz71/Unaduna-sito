@@ -6,4 +6,17 @@ angular.module("applicationModule").service("UtilFunctionMessagesCreator", funct
 		
 		return message;
 	};
+	
+	
+	this.getModelliMessage = function(){
+		var message = {};
+		message.functionName = "UnaDunaGetModelli";
+		return message;
+	}
+	
+	this.getAccessoriMessage = function(){
+		var message = {};
+		message.functionName = "UnaDunaGetAccessori";
+		return message;
+	}
 });
