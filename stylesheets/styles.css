@@ -11969,8 +11969,15 @@ a.link {
   display: block;
   width: 130px;
   text-align: center;
+  background-image: url(../images/logo-small.jpg?1521104669);
   background: url("/images/logo-small.jpg") no-repeat center center;
   background-size: contain;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .logo-small {
+    background-image: url(../images/logo-small@2.jpg?1522157471);
+    background-size: 140 30;
+  }
 }
 @media screen and (max-width: 767px) {
   .logo-small {
@@ -11987,8 +11994,16 @@ a.link {
   width: 166px;
   height: 36px;
   text-align: center;
-  background: url("/images/logo-big.png") no-repeat center center;
+  background-image: url(../images/logo-big.png?1521104669);
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: contain;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .logo-big {
+    background-image: url(../images/logo-big@2.png?1522157423);
+    background-size: 166 36;
+  }
 }
 
 .navbar > .container .logo-big,
@@ -12872,8 +12887,17 @@ footer .credits .logo-footer {
   height: 26px;
   margin: 20px;
   text-align: center;
+  background-image: url(../images/logo-big.png?1521104669);
   background: url("/images/logo-big.png") no-repeat center center;
+  background-repeat: center center;
+  background-repeat: no-repeat;
   background-size: contain;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  footer .credits .logo-footer {
+    background-image: url(../images/logo-big@2.png?1522157423);
+    background-size: 166 36;
+  }
 }
 footer .credits p {
   font-size: 13px;

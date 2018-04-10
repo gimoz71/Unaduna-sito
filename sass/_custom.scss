@@ -435,6 +435,7 @@ a.link {
     display: block;
     width: 130px;
     text-align: center;
+    @include img-retina('/images/logo-small.jpg', '/images/logo-small@2.jpg', 140, 30);
     background: url('/images/logo-small.jpg') no-repeat center center;
     background-size: contain;
     @media screen and (max-width: $screen-xs-max) {
@@ -450,7 +451,10 @@ a.link {
     width: 166px;
     height: 36px;
     text-align: center;
-    background: url('/images/logo-big.png') no-repeat center center;
+    @include img-retina('/images/logo-big.png', '/images/logo-big@2.png', 166, 36);
+    //background: url('/images/logo-big.png') no-repeat center center;
+    background-repeat: no-repeat;
+    background-position: center center;
     background-size: contain;
 }
 
@@ -1336,7 +1340,10 @@ footer {
             height: 26px;
             margin: 20px;
             text-align: center;
+            @include img-retina('/images/logo-big.png', '/images/logo-big@2.png', 166, 36);
             background: url('/images/logo-big.png') no-repeat center center;
+            background-repeat: center center;
+            background-repeat: no-repeat;
             background-size: contain;
         }
         p {
