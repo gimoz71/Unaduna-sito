@@ -52,16 +52,20 @@
         </div>
     </div>
     <div id="a-middle" style="max-width: 960px; max-height: 960px; opacity: 0; position: relative;">
-        <img class="transition-image" src="images/zoom-test-2.jpg">
-        <div ng-show="!contr.spinnerVisibleTest" ><img id="spinnerBackgroundImage" alt="" src="images/base-rounded-square-3d.jpg" style="width:100%"></div>
-        <div class="animate-show-hide" ng-show="contr.spinnerVisibleTest" id="spritespin"></div>
+        <div ng-show="transitionVisible" class="fade">
+        		<img class="transition-image" id="transition-image" ng-src="{{dataUrl}}" >
+        	</div>
+        <div ng-show="!spinnerVisibleTest" >
+        		<img id="spinnerBackgroundImage" alt="" src="images/base-rounded-square-3d.jpg" style="width:100%">
+        	</div>
+        <div class="animate-show-hide" ng-show="spinnerVisibleTest" id="spritespin"></div>
     </div>
     <div class="accessori" style="opacity: 0;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                 		<section class="swipe">
-						<swiper grabCursor="true" spaceBetween="0" keyboardControl="true" slidesPerView="parseInt('6')">
+						<swiper grab-cursor="true" space-between="0" keyboard-control="true" slides-per-view="6">
 						  <slides>
 						    <slide ng-repeat="tipoAccessorio in tipiAccessoriModelloSelezionato" ng-click="contr.selezioneTipoAccessorio(tipoAccessorio)">{{tipoAccessorio}}</slide>
 						  </slides>
@@ -72,7 +76,7 @@
             <div class="row" id="rigaaccessori">
                 <div class="col-lg-12">
 					<section class="swipe">
-						<swiper grabCursor="true" spaceBetween="0" keyboardControl="true" slidesPerView="parseInt('6')"> 
+						<swiper grab-cursor="true" space-between="0" keyboard-control="true" slides-per-view="6"> 
 						  <slides>
 						    <slide ng-repeat="entita in entitaTipoAccessorioSelezionato" ng-click="contr.selezionaEntita(entita)"><img ng-src="{{entita.urlThumbnailHD}}" class="swiper-lazy"/></slide>
 						  </slides>

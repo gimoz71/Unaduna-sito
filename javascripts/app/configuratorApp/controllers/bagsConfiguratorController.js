@@ -5,7 +5,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.spinAnim = true;
 	$scope.spinIcon = true;
 
-	configController.spinnerVisibleTest = false;
+	$scope.spinnerVisibleTest = false;
 	
 	$scope.modelli = [];
 	$scope.entita = [];
@@ -19,6 +19,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	
 	$scope.swiperAccessori = null;
 	$scope.swiperCategorie = null;
+	
+	$scope.dataUrl = "";
+	$scope.transitionVisible = false;
 	
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -69,6 +72,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 	
 	configController.scegliModello = function(modello){
+		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+			$scope.dataUrl = canvas.toDataURL();
+			if ($scope.spinIcon == false) {
+				//$("#transition-image").show();
+				$scope.transitionVisible = true;
+			}
+		});
+		
 		$scope.stack = [];
 		$scope.stack.push(modello.urlStripeHD);
 		$scope.modelloSelezionato = modello.nome;
@@ -77,12 +88,18 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.selezionaEntita = function(entita){
+		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+			$scope.dataUrl = canvas.toDataURL();
+			if ($scope.spinIcon == false) {
+				//$("#transition-image").show();
+				$scope.transitionVisible = true;
+			}
+		});
 		configController.aggiungiStrato(entita.urlStripeHD, entita.ordine);
 	}
 	
 	configController.aggiungiStrato = function(strato, ordine){
 		var indice = $scope.stack.indexOf(strato);
-		
 		
 		if(indice == -1){ //lo strato non è nello stack
 			
@@ -119,18 +136,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.caricaSpinner = function(){
 		
-		var continueFlag = false;
-//		html2canvas(document.querySelector("#spritespin")).then(canvas => {
-//
-//			$(".transition-image").attr('src', canvas.toDataURL());
-//			$(".transition-image").show();
-//			continueFlag = true;
-//		});
-		
 		//attivo il loader e tolgo lo spinner
-		configController.visibleManager.loaderVisible = true;
-		configController.visibleManager.spinnerVisible = false;
-
+//		configController.visibleManager.loaderVisible = true;
+//		configController.visibleManager.spinnerVisible = false;
+//		
 		configController.setVisible(false);
 
 		//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
@@ -167,19 +176,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
                     '360'
                 ],
                 onInit: function(){
-					if ($scope.spinIcon == false) {
-
-						
-					}
-                },
-				onLoad: function() {
 					
-				},
-                onDraw: function(){
-					configController.visibleManager.loaderVisible = true;
-					//$('#loader').removeClass('ng-hide');
-
-				},
+                },
 				onComplete: function() {
 
 					$('#loader').addClass('ng-hide');
@@ -189,16 +187,26 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
 					}
 //					if ($scope.spinIcon == false) {
-//						$(".transition-image").fadeOut("slow");
+//						$("#transition-image").fadeOut("slow");
+//						$('#transition-image').addClass('ng-hide');
 //					}
-					configController.visibleManager.spinnerVisible = true;
-					configController.visibleManager.loaderVisible = false;
+					
+//					configController.visibleManager.spinnerVisible = true;
+//					configController.visibleManager.loaderVisible = false;
 
+					
+					if ($scope.spinIcon == false) {
+//						$("#transition-image").fadeOut("slow");
+						//$('#transition-image').addClass('ng-hide');
+						$scope.transitionVisible = false;
+					}
+					
 					$scope.spinIcon = false;
 					$scope.spinAnim = false;
 				}
             }
 			$('#spritespin').spritespin(dataSpin);
+			
 		});
 
 		configController.priceManager.price = 0;
@@ -206,14 +214,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		function isTouchDevice() {
 		    return 'ontouchstart' in document.documentElement;
 		}
+		
+		
 		configController.setVisible(true);
-		//configController.visibleManager.loaderVisible = false;
-
 
 	};
-
+	
 	configController.setVisible = function(visible){
-		configController.spinnerVisibleTest = visible;
+		$scope.spinnerVisibleTest = visible;
 	}
 
 	configController.initConfiguratore = function(){
