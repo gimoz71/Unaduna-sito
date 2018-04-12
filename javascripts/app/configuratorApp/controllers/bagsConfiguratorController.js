@@ -27,11 +27,19 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	$scope.tipoEntitaSelezionata = "colore";//di default apro il pannello colori
 	$scope.nomeEntitaSelezionata = "black";//di default apro il pannello colori
+	
 	$scope.embossSelezionato = false;
 	$scope.mapEmboss = new Map();
 
 	$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
 	$scope.scegliColore = true;
+	
+	$scope.metalloVincolante = "argento";
+	$scope.mapMetalloTracolle = new Map();
+	$scope.mapMetalloBorchie = new Map();
+	
+	$scope.borchieSelezionate = false;
+	$scope.tracollaSelezionata = false;
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -73,6 +81,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		} else {
 			$scope.scegliColore = false;
 		}
+		if(tipoAccessorio == "metalleria"){
+			//qui devo gestire le limitazioni relative al colore
+			$scope.scegliMetallo = true;
+		} else {
+			$scope.scegliMetallo = false;
+		}
 		$scope.entitaTipoAccessorioSelezionato = [];
 		for(var i = 0; i < $scope.modelli.length; i++){
 			var modello = $scope.modelli[i];
@@ -87,6 +101,16 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 							if(entitaSingola.colore == $scope.coloreVincolante){
 								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
 							}
+						} else if(entitaSingola.vincoloMetallo == true) {
+							if(entitaSingola.categoria == "tracolle"){
+								$scope.mapMetalloTracolle.set(entitaSingola.metallo, entitaSingola);
+								$scope.mapMetalloBorchie.set(entitaSingola.metallo, entitaSingola);
+							}else if (entitaSingola.categoria == "borchie"){
+								$scope.mapMetalloBorchie.set(entitaSingola.metallo, entitaSingola);
+							}
+							if(entitaSingola.metallo == $scope.metalloVincolante){
+								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+							}
 						} else {
 							$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
 						}
@@ -97,6 +121,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.scegliModello = function(modello){
+		$scope.mapEmboss.clear();
+		$scope.mapMetalloTracolle.clear();
+		$scope.mapMetalloBorchie.clear();
+		
 		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
 			$scope.dataUrl = canvas.toDataURL();
 			if ($scope.spinIcon == false) {
@@ -133,9 +161,30 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				}
 			}
 		}
+		if($scope.tipoEntitaSelezionata == "metalleria"){
+			if($scope.tracollaSelezionata){
+				//devo sostituire l'emboss se è selezionato
+				//1. estraggo la url dell'emboss
+				var tracollaUrl = $scope.mapMetalloTracolle.get(entita.metallo);
+				if(tracollaUrl){
+					configController.aggiungiElementoAStack(tracollaUrl.urlStripeHD, tracollaUrl.ordine, false);
+				}
+			}
+			if($scope.borchieSelezionate){
+				//devo sostituire l'emboss se è selezionato
+				//1. estraggo la url dell'emboss
+				var borchieUrl = $scope.mapMetalloBorchie.get(entita.metallo);
+				if(borchieUrl){
+					configController.aggiungiElementoAStack(borchieUrl.urlStripeHD, borchieUrl.ordine, false);
+				}
+			}
+		}
 
 		if($scope.scegliColore){
 			$scope.coloreVincolante = entita.colore;
+		}
+		if($scope.scegliMetallo){
+			$scope.metalloVincolante = entita.metallo;
 		}
 //		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
 //			$scope.dataUrl = canvas.toDataURL();
@@ -144,7 +193,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 //				$scope.transitionVisible = true;
 //			}
 //		});
-		configController.aggiungiStrato(entita.urlStripeHD, entita.ordine);
+		configController.aggiungiStrato(entita.urlStripeHD, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
 
 		if($scope.tipoEntitaSelezionata == "emboss"){
 			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
@@ -153,14 +202,29 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				$scope.embossSelezionato = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
 			}
 		}
+		
+		if($scope.tipoEntitaSelezionata == "borchie"){
+			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
+				$scope.borchieSelezionate = false;
+			} else {
+				$scope.borchieSelezionate = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
+			}
+		}
+		if($scope.tipoEntitaSelezionata == "tracolle"){
+			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
+				$scope.tracollaSelezionata = false;
+			} else {
+				$scope.tracollaSelezionata = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
+			}
+		}
 	}
 
-	configController.aggiungiStrato = function(strato, ordine){
-		configController.aggiungiElementoAStack(strato, ordine);
+	configController.aggiungiStrato = function(strato, ordine, eliminabile){
+		configController.aggiungiElementoAStack(strato, ordine, eliminabile);
 		configController.caricaSpinner();
 	}
 
-	configController.aggiungiElementoAStack = function(strato, ordine){
+	configController.aggiungiElementoAStack = function(strato, ordine, eliminabile){
 		var indice = $scope.stack.indexOf(strato);
 
 		if(indice == -1){ //lo strato non è nello stack
@@ -176,11 +240,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			} else {//sostituisco lo strato esistente nello stack all'indice dello strato da inserire
 				$scope.stack[ordine] = strato;
 			}
-
-			//$scope.stack.splice(ordine, 0, strato);//aggiunge l'elemento 'strato' nel posto 'ordine'
+			
 		} else { //lo strato è già nello stack
-			$scope.stack[ordine] = "";
-			//$scope.stack.splice(indice, 1);//sostituisco lo strato con stringa vuota
+			if(eliminabile){
+				$scope.stack[ordine] = "";
+			}
 		}
 	}
 
@@ -292,7 +356,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		function isTouchDevice() {
 		    return 'ontouchstart' in document.documentElement;
 		}
-
 
 		configController.setVisible(true);
 
