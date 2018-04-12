@@ -12738,6 +12738,12 @@ a.link {
 .configuratore .swiper-slide .swiper-lazy-preloader {
   margin-top: 21px;
 }
+.configuratore .swipe {
+  border: solid 1px transparent;
+  position: relative;
+  top: -1px;
+  left: -1px;
+}
 .configuratore .accessori-categoria {
   overflow: visible;
 }
@@ -12765,6 +12771,9 @@ a.link {
   .configuratore .accessori-categoria a {
     font-size: inherit;
   }
+}
+.configuratore .accessori-thumb {
+  padding: 10px 0;
 }
 .configuratore .accessori-thumb img {
   height: 57px;
