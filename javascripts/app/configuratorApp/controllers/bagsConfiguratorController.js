@@ -27,6 +27,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	
 	$scope.tipoEntitaSelezionata = "colore";//di default apro il pannello colori
 	$scope.embossSelezionato = false;
+	$scope.mapEmboss = new Map();
 	
 	$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
 	$scope.scegliColore = true;
@@ -62,6 +63,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.selezioneTipoAccessorio = function(tipoAccessorio){
+		$scope.tipoEntitaSelezionata = tipoAccessorio;
 		//preparo la mappa che ha chiave = entita.nome - valore = entita
 		//fadeout del componente
 		if(tipoAccessorio == "colore"){
@@ -78,6 +80,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 					var entitaSingola = $scope.entita[j];
 					if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
 						if(entitaSingola.vincoloColore == true){
+							if(entitaSingola.categoria == "emboss"){
+								$scope.mapEmboss.set(entitaSingola.colore, entitaSingola);
+							}
 							if(entitaSingola.colore == $scope.coloreVincolante){
 								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
 							}
@@ -117,22 +122,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		if($scope.tipoEntitaSelezionata == "colore"){
 			if($scope.embossSelezionato){
 				//devo sostituire l'emboss se è selezionato
-				for(var i = 0; i < $scope.modelli.length; i++){
-					var modello = $scope.modelli[i];
-					if(modello.nome == $scope.modelloSelezionato){
-						for(var j = 0; j < $scope.entita.length; j++){
-							var entitaSingola = $scope.entita[j];
-							if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
-								if(entitaSingola.vincoloColore == true){
-									if(entitaSingola.colore == $scope.coloreVincolante){
-										$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
-									}
-								} else {
-									$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
-								}
-							}
-						}
-					}
+				//1. estraggo la url dell'emboss
+				var embossUrl = $scope.mapEmboss.get(entita.colore);
+				if(embossUrl){
+					configController.aggiungiElementoAStack(embossUrl.urlStripeHD, embossUrl.ordine);
 				}
 			}
 		}
@@ -148,9 +141,22 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 //			}
 //		});
 		configController.aggiungiStrato(entita.urlStripeHD, entita.ordine);
+		
+		if($scope.tipoEntitaSelezionata == "emboss"){
+			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
+				$scope.embossSelezionato = false;
+			} else {
+				$scope.embossSelezionato = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
+			}
+		}
 	}
 	
 	configController.aggiungiStrato = function(strato, ordine){
+		configController.aggiungiElementoAStack(strato, ordine);
+		configController.caricaSpinner();
+	}
+	
+	configController.aggiungiElementoAStack = function(strato, ordine){
 		var indice = $scope.stack.indexOf(strato);
 		
 		if(indice == -1){ //lo strato non è nello stack
@@ -172,7 +178,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.stack[ordine] = "";
 			//$scope.stack.splice(indice, 1);//sostituisco lo strato con stringa vuota
 		}
-		configController.caricaSpinner();
 	}
 	
 	configController.pulisciStack = function(){
