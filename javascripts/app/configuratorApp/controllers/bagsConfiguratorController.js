@@ -40,6 +40,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	
 	$scope.borchieSelezionate = false;
 	$scope.tracollaSelezionata = false;
+	
+	$scope.metalleriaObbligatoria = [];
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -136,9 +138,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		$(".dropdown-toggle").dropdown("toggle");
 
 		$scope.stack = [];
-		$scope.stack.push(modello.urlStripeHD);
+		//$scope.stack.push(modello.urlStripeHD);
+		configController.aggiungiElementoAStack(modello.urlStripeHD, 0, false);
 		$scope.modelloSelezionato = modello.nome;
 		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
+		
+
+		$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
+		configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
 
 		//apro il pannello dei colori
 		configController.selezioneTipoAccessorio("colore");
@@ -365,6 +372,16 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		$scope.spinnerVisibleTest = visible;
 	}
 
+	configController.getUrlMetalleria = function(modello, metallo){
+		for(var i = 0; i < $scope.entita.length; i++){
+			var singolaEntita = $scope.entita[i];
+			if(singolaEntita.modello == modello && singolaEntita.metallo == metallo && singolaEntita.categoria == "metalleria"){
+				return singolaEntita.urlStripeHD;
+			}
+		}
+		return "";
+	}
+	
 	configController.initConfiguratore = function(){
 
 		//1. devo fare il caricamento massivo iniziale delle configurazioni (solo la struttura json dal DB, non le immagini)
@@ -379,6 +396,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						var elencoAccessori = [];
 						var modello = $scope.modelli[i];
 						$scope.tipiAccessori.set(modello.nome, modello.accessori);
+						
 //						for(var j = 0; j < $scope.entita.length; j++){
 //							var entitaSingola = $scope.entita[j];
 //							if(entitaSingola.modello == modello.nome){
@@ -389,6 +407,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 //						}
 //						$scope.tipiAccessori.set(modello.nome, elencoAccessori);
 					}
+					
 				});
 			}
 	    });
@@ -462,6 +481,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		});
 
 	    configController.visibleManager.loaderVisible = false;
+	    $(".dropdown-toggle").dropdown("toggle");
 	};
 
 });
