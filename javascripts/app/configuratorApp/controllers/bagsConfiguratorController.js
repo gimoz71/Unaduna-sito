@@ -26,6 +26,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.transitionVisible = false;
 	
 	$scope.tipoEntitaSelezionata = "colore";//di default apro il pannello colori
+	$scope.nomeEntitaSelezionata = "black";//di default apro il pannello colori
 	$scope.embossSelezionato = false;
 	$scope.mapEmboss = new Map();
 	
@@ -118,6 +119,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.selezionaEntita = function(entita){
+		
+		$scope.nomeEntitaSelezionata = entita.nome;
 		
 		if($scope.tipoEntitaSelezionata == "colore"){
 			if($scope.embossSelezionato){
