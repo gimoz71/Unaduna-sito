@@ -115,9 +115,25 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	configController.selezionaEntita = function(entita){
 		
 		if($scope.tipoEntitaSelezionata == "colore"){
-			//devo sostituire l'emboss se è selezionato
 			if($scope.embossSelezionato){
-				
+				//devo sostituire l'emboss se è selezionato
+				for(var i = 0; i < $scope.modelli.length; i++){
+					var modello = $scope.modelli[i];
+					if(modello.nome == $scope.modelloSelezionato){
+						for(var j = 0; j < $scope.entita.length; j++){
+							var entitaSingola = $scope.entita[j];
+							if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
+								if(entitaSingola.vincoloColore == true){
+									if(entitaSingola.colore == $scope.coloreVincolante){
+										$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+									}
+								} else {
+									$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 		
