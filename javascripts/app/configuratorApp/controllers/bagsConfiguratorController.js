@@ -1,5 +1,7 @@
-angular.module('configuratorModule').controller('unadunaConfiguratorController2', function($http, $scope, $filter, listeService){
+angular.module('configuratorModule').controller('unadunaConfiguratorController2', function($http, $scope, $filter, listeService, $log){
 
+	$scope.$log = $log;
+	
 	var configController = this;
 
 	$scope.spinAnim = true;
@@ -22,6 +24,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	
 	$scope.dataUrl = "";
 	$scope.transitionVisible = false;
+	
+	$scope.tipoEntitaSelezionata = "colore";//di default apro il pannello colori
+	$scope.embossSelezionato = false;
+	
+	$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
+	$scope.scegliColore = true;
 	
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -56,19 +64,30 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	configController.selezioneTipoAccessorio = function(tipoAccessorio){
 		//preparo la mappa che ha chiave = entita.nome - valore = entita
 		//fadeout del componente
-		$("#rigaaccessori").fadeOut("slow");
+		if(tipoAccessorio == "colore"){
+			//qui devo gestire le limitazioni relative al colore
+			$scope.scegliColore = true;
+		} else {
+			$scope.scegliColore = false;
+		}
 		$scope.entitaTipoAccessorioSelezionato = [];
 		for(var i = 0; i < $scope.modelli.length; i++){
 			var modello = $scope.modelli[i];
-			for(var j = 0; j < $scope.entita.length; j++){
-				var entitaSingola = $scope.entita[j];
-				if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
-					$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+			if(modello.nome == $scope.modelloSelezionato){
+				for(var j = 0; j < $scope.entita.length; j++){
+					var entitaSingola = $scope.entita[j];
+					if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
+						if(entitaSingola.vincoloColore == true){
+							if(entitaSingola.colore == $scope.coloreVincolante){
+								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+							}
+						} else {
+							$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+						}
+					}
 				}
 			}
 		}
-		//fadein del componente
-		$("#rigaaccessori").fadeIn("slow");
 	}
 	
 	configController.scegliModello = function(modello){
@@ -80,21 +99,38 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			}
 		});
 		
+		$(".dropdown-toggle").dropdown("toggle");
+		
 		$scope.stack = [];
 		$scope.stack.push(modello.urlStripeHD);
 		$scope.modelloSelezionato = modello.nome;
 		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
+		
+		//apro il pannello dei colori
+		configController.selezioneTipoAccessorio("colore");
+		
 		configController.caricaSpinner();
 	}
 
 	configController.selezionaEntita = function(entita){
-		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
-			$scope.dataUrl = canvas.toDataURL();
-			if ($scope.spinIcon == false) {
-				//$("#transition-image").show();
-				$scope.transitionVisible = true;
+		
+		if($scope.tipoEntitaSelezionata == "colore"){
+			//devo sostituire l'emboss se è selezionato
+			if($scope.embossSelezionato){
+				
 			}
-		});
+		}
+		
+		if($scope.scegliColore){
+			$scope.coloreVincolante = entita.colore;
+		}
+//		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+//			$scope.dataUrl = canvas.toDataURL();
+//			if ($scope.spinIcon == false) {
+//				//$("#transition-image").show();
+//				$scope.transitionVisible = true;
+//			}
+//		});
 		configController.aggiungiStrato(entita.urlStripeHD, entita.ordine);
 	}
 	
@@ -135,6 +171,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.caricaSpinner = function(){
+		var date1 = new Date();
 		
 		//attivo il loader e tolgo lo spinner
 //		configController.visibleManager.loaderVisible = true;
@@ -155,6 +192,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		
 		mergeImages(cleanStack).then(b64 => {
 			dataSourceString = b64;
+			var date2 = new Date();
+			var diff = date2 - date1;
+			$scope.$log.log('durata fusione immagini: ' + diff);
 			var dataSpin = {
 				width: 960,
                 height: 960,
@@ -203,6 +243,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 					
 					$scope.spinIcon = false;
 					$scope.spinAnim = false;
+					
+					var date3 = new Date();
+					var diff = date3 - date2;
+					$scope.$log.log('durata caricamento spinner: ' + diff)
 				}
             }
 			$('#spritespin').spritespin(dataSpin);
@@ -237,15 +281,16 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 					for(var i = 0; i < $scope.modelli.length; i++){
 						var elencoAccessori = [];
 						var modello = $scope.modelli[i];
-						for(var j = 0; j < $scope.entita.length; j++){
-							var entitaSingola = $scope.entita[j];
-							if(entitaSingola.modello == modello.nome){
-								if(elencoAccessori.indexOf(entitaSingola.categoria) == -1){
-									elencoAccessori.push(entitaSingola.categoria);
-								}
-							}
-						}
-						$scope.tipiAccessori.set(modello.nome, elencoAccessori);
+						$scope.tipiAccessori.set(modello.nome, modello.accessori);
+//						for(var j = 0; j < $scope.entita.length; j++){
+//							var entitaSingola = $scope.entita[j];
+//							if(entitaSingola.modello == modello.nome){
+//								if(elencoAccessori.indexOf(entitaSingola.categoria) == -1){
+//									elencoAccessori.push(entitaSingola.categoria);
+//								}
+//							}
+//						}
+//						$scope.tipiAccessori.set(modello.nome, elencoAccessori);
 					}
 				});
 			}
