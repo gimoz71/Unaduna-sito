@@ -12632,6 +12632,16 @@ a.link {
   background-size: cover;
   background-repeat: no-repeat;
 }
+.configuratore .borsaModel {
+  display: block;
+  opacity: .75;
+}
+.configuratore .borsaModel img {
+  border: solid 1px #ccc;
+}
+.configuratore .borsaModel:hover {
+  opacity: 1;
+}
 .configuratore .accessori {
   opacity: 0;
   position: absolute;

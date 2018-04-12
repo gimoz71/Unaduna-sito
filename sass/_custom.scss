@@ -1046,6 +1046,16 @@ a.link {
         }
     }
 
+    .borsaModel {
+        display: block;
+        opacity: .75;
+        img {
+            border: solid 1px #ccc;
+        }
+        &:hover {
+            opacity: 1;
+        }
+    }
     /* menu accessori */
     .accessori {
         opacity: 0;
