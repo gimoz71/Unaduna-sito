@@ -1,104 +1,118 @@
 <div class="configuratore" ng-controller="unadunaConfiguratorController2 as contr" ng-init="contr.initConfiguratore()">
-    <nav class="navbar yamm navbar-default navbar-fixed-top nomargin main-configurator-navbar">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 clearfix">
-                    <ul class="nav navbar-nav fixed-navbar-left">
-                        <li>
-                            <a href="#" class="link" ng-click="setHome()"><i class="fa fa-bars"></i></a>
-                        </li>
-                        <li class="dropdown yamm-fw">
-                            <a href="#" class="active dropdown-toggle link modello" data-toggle="dropdown">scegli il modello</a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="yamm-content clearfix">
-                                        <div class="col-xs-12">
-                                        <!-- CON IL REPEATER VADO A ELENCARE TUTTI I MODELLI DI BORSA DISPONIBILI  -->
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center" ng-repeat="modello in modelli">
-                                                <a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.scegliModello(modello)"><img ng-src="{{modello.urlThumbnailHD}}" /><h5>{{modello.nome}}</h5></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <h1 class="navbar-brand navbar-left nomargin hidden-xs" id="edit-text">Borsa #1</h1>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <div id="spinIcon" class="spinIcon">
-        <img src="images/finger-touch.png" />
-    </div>
-    <div id="loader" class="loader" ng-show="contr.visibleManager.loaderVisible">
-        <div style="color: #ccc;top: 50%; left: 50%; margin-left: -31px; margin-top: -31px;" class="la-ball-grid-pulse la-2x">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <a href="#" id="openZoom"><i class="unaicon-zoom"></i></a>
-    <div class="zoom">
-        <button id="closeZoom"><i class="unaicon-remove"></i></button>
-        <div class="zoomHolder">
-            <img data-src="images/zoom-test-2.jpg" data-elem="pinchzoomer" data-options="scaleMode:proportionalInside;maxZoom:3;doubleTapZoom:3;force3D:true;appendControls:false;appendControlHolder:false">
-        </div>
-    </div>
-    <div id="a-middle" style="max-width: 960px; max-height: 960px; opacity: 0; position: relative;">
-        <div ng-show="transitionVisible" class="fade">
-        		<img class="transition-image" id="transition-image" ng-src="{{dataUrl}}" >
-        	</div>
-        <div ng-show="!spinnerVisibleTest" >
-        		<img id="spinnerBackgroundImage" alt="" src="images/base-rounded-square-3d.jpg" style="width:100%">
-        	</div>
-        <div class="animate-show-hide" ng-show="spinnerVisibleTest" id="spritespin"></div>
-    </div>
-    <div class="accessori" style="opacity: 0;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-            		<section class="swipe">
-						<swiper class="accessori-categoria" grab-cursor="true" keyboard-control="true" slides-per-view="6" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;3&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;3&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; }}" >
-						  <slides>
-						    <slide ng-repeat="tipoAccessorio in tipiAccessoriModelloSelezionato" ng-click="contr.selezioneTipoAccessorio(tipoAccessorio)" class="swiper-lazy"  ng-class="{active: tipoAccessorio === tipoEntitaSelezionata, selected: tipoAccessorio === tipoEntitaSelezionata}"><a href="#" >{{tipoAccessorio}}</a></slide>
-						  </slides>
-						</swiper>
-					</section>
-                </div>
-            </div>
-            <div class="row" id="rigaaccessori">
-                <div class="col-lg-12">
+	<nav class="navbar yamm navbar-default navbar-fixed-top nomargin main-configurator-navbar">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 clearfix">
+					<ul class="nav navbar-nav fixed-navbar-left">
+						<li>
+							<a href="#" class="link" ng-click="setHome()"><i class="fa fa-bars"></i></a>
+						</li>
+						<li class="dropdown yamm-fw">
+							<a href="#" class="active dropdown-toggle link modello" data-toggle="dropdown">scegli il modello</a>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="yamm-content clearfix">
+										<div class="col-xs-12">
+											<!-- CON IL REPEATER VADO A ELENCARE TUTTI I MODELLI DI BORSA DISPONIBILI  -->
+											<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center" ng-repeat="modello in modelli">
+												<a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.scegliModello(modello)"><img ng-src="{{modello.urlThumbnailHD}}" /><h5>{{modello.nome}}</h5></a>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<h1 class="navbar-brand navbar-left nomargin hidden-xs" id="edit-text">Borsa #1</h1>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div id="spinIcon" class="spinIcon">
+		<img src="images/finger-touch.png" />
+	</div>
+	<div id="loader" class="loader" ng-show="contr.visibleManager.loaderVisible">
+		<div style="color: #ccc;top: 50%; left: 50%; margin-left: -31px; margin-top: -31px;" class="la-ball-grid-pulse la-2x">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	<a href="#" id="openZoom"><i class="unaicon-zoom"></i></a>
+	<div class="zoom">
+		<button id="closeZoom"><i class="unaicon-remove"></i></button>
+		<div class="zoomHolder">
+			<img data-src="images/zoom-test-2.jpg" id="pz" data-elem="pinchzoomer" data-options="scaleMode:proportionalInside;maxZoom:3;doubleTapZoom:3;force3D:true;appendControls:true;appendControlHolder:true">
+			<div class="controlHolder" data-elem="controlHolder">
+				<div class="zoomIn" data-elem="zoomIn"><i class="unaicon-add"></i></div>
+				<div class="zoomOut" data-elem="zoomOut"><i class="unaicon-minus"></i></div>
+				<div class="fullscreenToggle" data-elem="fullscreenToggle"><i class="unaicon-minus"></i></div>
+			</div>
+		</div>
+	</div>
+	<div id="a-middle" style="max-width: 960px; max-height: 960px; opacity: 1; position: relative;">
+		<div class="">
+			<img class="transition-image" id="transition-image" ng-src="{{dataUrl}}">
+		</div>
+		<div class="animate-show-hide" ng-show="spinnerVisibleTest" id="spritespin"></div>
+		<div>
+			<img alt="" src="images/base-rounded-square-3d.jpg" style="width:100%">
+		</div>
+	</div>
+	<div class="accessori" style="opacity: 0;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 					<section class="swipe">
-						<swiper class="accessori-thumb" grab-cursor="true" keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;3&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}" >
-						  <slides>
-						    <slide ng-repeat="entita in entitaTipoAccessorioSelezionato" ng-click="contr.selezionaEntita(entita)"><img ng-src="{{entita.urlThumbnailHD}}" class="swiper-lazy" ng_class="{active: entita.nome === nomeEntitaSelezionata, selected: entita.nome === nomeEntitaSelezionata}"/></slide>
-						  </slides>
+						<swiper class="accessori-categoria" grab-cursor="true" keyboard-control="true" slides-per-view="6" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;3&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;3&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; }}">
+							<slides>
+								<slide ng-repeat="tipoAccessorio in tipiAccessoriModelloSelezionato" ng-click="contr.selezioneTipoAccessorio(tipoAccessorio)" class="swiper-lazy" ng-class="{active: tipoAccessorio === tipoEntitaSelezionata, selected: tipoAccessorio === tipoEntitaSelezionata}"><a href="#">{{tipoAccessorio}}</a></slide>
+							</slides>
+							<prev></prev>
+							<next></next>
 						</swiper>
 					</section>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="riepilogo">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3  clearfix">
-                    <div class="col-xs-6 ">
-                        <h3 class="price nomargin">{{contr.priceManager.price}}&euro;</h3>
-                        <!-- <h5 class="info nomargin">iva inclusa</h5> -->
-                    </div>
-                    <div class="col-xs-6 text-center">
-                        <a href="#" class="btn btn-default btn-block follow">procedi</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+			<div class="row" id="rigaaccessori">
+				<div class="col-lg-12">
+					<section class="swipe">
+						<swiper class="accessori-thumb" grab-cursor="true" keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;3&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}">
+							<slides>
+								<slide ng-repeat="entita in entitaTipoAccessorioSelezionato" ng-click="contr.selezionaEntita(entita)">
+									<a href="#" ng_class="{activeAccessorio: entita.nome === nomeEntitaSelezionata}">
+                                    <img ng-src="{{entita.urlThumbnailHD}}" class="swiper-lazy"/>
+                                    <div class="closeItem"><i class="unaicon-remove"></i></div>
+                                </a>
+								</slide>
+							</slides>
+							<prev></prev>
+							<next></next>
+						</swiper>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="riepilogo">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3  clearfix">
+					<div class="col-xs-6 ">
+						<h3 class="price nomargin">{{contr.priceManager.price}}&euro;</h3>
+						<!-- <h5 class="info nomargin">iva inclusa</h5> -->
+					</div>
+					<div class="col-xs-6 text-center">
+						<a href="#" class="btn btn-default btn-block follow">procedi</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -23,24 +23,23 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.swiperCategorie = null;
 
 	$scope.dataUrl = "";
-	$scope.transitionVisible = false;
 
 	$scope.tipoEntitaSelezionata = "colore";//di default apro il pannello colori
 	$scope.nomeEntitaSelezionata = "black";//di default apro il pannello colori
-	
+
 	$scope.embossSelezionato = false;
 	$scope.mapEmboss = new Map();
 
-	$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
+	$scope.coloreVincolante = "black";//scelgo il nero come colore vincolante di default
 	$scope.scegliColore = true;
-	
+
 	$scope.metalloVincolante = "argento";
 	$scope.mapMetalloTracolle = new Map();
 	$scope.mapMetalloBorchie = new Map();
-	
+
 	$scope.borchieSelezionate = false;
 	$scope.tracollaSelezionata = false;
-	
+
 	$scope.metalleriaObbligatoria = [];
 
 	configController.getRepeaterClass = function(accessorio, index){
@@ -123,29 +122,23 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.scegliModello = function(modello){
-		
+
 		$scope.embossSelezionato = false;
 		$scope.mapEmboss = new Map();
 
 		$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
 		$scope.scegliColore = true;
-		
+
 		$scope.metalloVincolante = "argento";
 		$scope.mapMetalloTracolle = new Map();
 		$scope.mapMetalloBorchie = new Map();
-		
+
 		$scope.borchieSelezionate = false;
 		$scope.tracollaSelezionata = false;
-		
+
 		$scope.metalleriaObbligatoria = [];
-		
-		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
-			$scope.dataUrl = canvas.toDataURL();
-			if ($scope.spinIcon == false) {
-				//$("#transition-image").show();
-				$scope.transitionVisible = true;
-			}
-		});
+
+
 
 		$(".dropdown-toggle").dropdown("toggle");
 
@@ -154,7 +147,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		configController.aggiungiElementoAStack(modello.urlStripeHD, 0, false);
 		$scope.modelloSelezionato = modello.nome;
 		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
-		
+
 
 		$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
 		configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
@@ -168,9 +161,19 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	configController.selezionaEntita = function(entita){
 
-		$scope.nomeEntitaSelezionata = entita.nome;
+		if(entita.nome == $scope.nomeEntitaSelezionata && $scope.tipoEntitaSelezionata != "colore" && $scope.tipoEntitaSelezionata != "metalleria"){
+				$scope.nomeEntitaSelezionata = "";
+		} else {
+				$scope.nomeEntitaSelezionata = entita.nome;
+		}
+
+		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+			$scope.dataUrl = canvas.toDataURL();
+
+		});
 
 		if($scope.tipoEntitaSelezionata == "colore"){
+
 			if($scope.embossSelezionato){
 				//devo sostituire l'emboss se è selezionato
 				//1. estraggo la url dell'emboss
@@ -205,13 +208,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		if($scope.scegliMetallo){
 			$scope.metalloVincolante = entita.metallo;
 		}
-//		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
-//			$scope.dataUrl = canvas.toDataURL();
-//			if ($scope.spinIcon == false) {
-//				//$("#transition-image").show();
-//				$scope.transitionVisible = true;
-//			}
-//		});
 		configController.aggiungiStrato(entita.urlStripeHD, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
 
 		if($scope.tipoEntitaSelezionata == "emboss"){
@@ -221,7 +217,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				$scope.embossSelezionato = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
 			}
 		}
-		
+
 		if($scope.tipoEntitaSelezionata == "borchie"){
 			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
 				$scope.borchieSelezionate = false;
@@ -259,7 +255,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			} else {//sostituisco lo strato esistente nello stack all'indice dello strato da inserire
 				$scope.stack[ordine] = strato;
 			}
-			
+
 		} else { //lo strato è già nello stack
 			if(eliminabile){
 				$scope.stack[ordine] = "";
@@ -298,6 +294,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		var cleanStack = configController.pulisciStack();
 
+		var firstExecInit = true;
+		var firstExecComplete = true;
+
+		if($('#spritespin') != undefined &&  $('#spritespin').data("spritespin") != undefined){
+
+			$scope.dataUrl = $('#spritespin').data("spritespin").canvas[0].toDataURL();
+		}
+
 		mergeImages(cleanStack).then(b64 => {
 			dataSourceString = b64;
 			var date2 = new Date();
@@ -324,46 +328,56 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
                     '360'
                 ],
                 onInit: function(){
-					$.fn.sepLine('first-divider', 'swiper-container', 'accessori'); // rif. descrizione funzione sepline: custom.js linea 77
-					$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
+					if(firstExecInit){
+                		firstExecInit = false;
+						$.fn.sepLine('first-divider', 'swiper-container', 'accessori'); // rif. descrizione funzione sepline: custom.js linea 77
+						$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
+						$(".riepilogo").fadeIn();
+
+
+						$("#transition-image").show();
+                	}
                 },
+				onLoad: function() {
+					// html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+					// 	$scope.dataUrl = canvas.toDataURL();
+					//
+					// });
+
+
+				},
 				onComplete: function() {
+					if(firstExecComplete){
+						firstExecComplete = false;
 
-					$('#loader').addClass('ng-hide');
-					if ($scope.spinIcon == true) {
-						var pos1 = $('#spinIcon').position();
-						$("#spinIcon").fadeIn().delay(100).fadeOut();
-						$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
+						//$('#loader').addClass('ng-hide');
+						if ($scope.spinIcon == true) {
+							var pos1 = $('#spinIcon').position();
+							$("#spinIcon").fadeIn().delay(100).fadeOut();
+							$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
+							$('#a-middle').animate({opacity:'1'}, 500);
+						}
+						$("#transition-image").fadeOut();
+
+	//					configController.visibleManager.spinnerVisible = true;
+	//					configController.visibleManager.loaderVisible = false;
+
+
+
+						$scope.spinIcon = false;
+						$scope.spinAnim = false;
+
+						var date3 = new Date();
+						var diff = date3 - date2;
+						$scope.$log.log('durata caricamento spinner: ' + diff);
+
+
+
+						$('.accessori').animate({opacity:'1'}, 500, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
+					        // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
+							$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
+					    });
 					}
-//					if ($scope.spinIcon == false) {
-//						$("#transition-image").fadeOut("slow");
-//						$('#transition-image').addClass('ng-hide');
-//					}
-
-//					configController.visibleManager.spinnerVisible = true;
-//					configController.visibleManager.loaderVisible = false;
-
-
-					if ($scope.spinIcon == false) {
-//						$("#transition-image").fadeOut("slow");
-						//$('#transition-image').addClass('ng-hide');
-						$scope.transitionVisible = false;
-					}
-
-					$scope.spinIcon = false;
-					$scope.spinAnim = false;
-
-					var date3 = new Date();
-					var diff = date3 - date2;
-					$scope.$log.log('durata caricamento spinner: ' + diff);
-
-					$('#a-middle').animate({opacity:'1'}, 500);
-
-					$('.accessori').animate({opacity:'1'}, 500, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
-				        // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
-						$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
-				    });
-
 				}
             }
 			$('#spritespin').spritespin(dataSpin);
@@ -393,14 +407,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 		return "";
 	}
-	
+
 	configController.initConfiguratore = function(){
 
 		//1. devo fare il caricamento massivo iniziale delle configurazioni (solo la struttura json dal DB, non le immagini)
 		listeService.getModelli().then(function (res) {
 			if(res.data.esito.codice == 100){
 				$scope.modelli = res.data.modelli;
-
+				$(".dropdown-toggle").dropdown("toggle");
 				listeService.getAccessori().then(function(res2) {
 					$scope.entita = res2.data.accessori;
 					//inizializzo la mappa con gli elenchi dei tipi di accessori
@@ -408,7 +422,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						var elencoAccessori = [];
 						var modello = $scope.modelli[i];
 						$scope.tipiAccessori.set(modello.nome, modello.accessori);
-						
+
 //						for(var j = 0; j < $scope.entita.length; j++){
 //							var entitaSingola = $scope.entita[j];
 //							if(entitaSingola.modello == modello.nome){
@@ -419,7 +433,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 //						}
 //						$scope.tipiAccessori.set(modello.nome, elencoAccessori);
 					}
-					
 				});
 			}
 	    });
@@ -431,11 +444,16 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		  e.stopPropagation()
 		});
 
+
+
 		/* gestione elementi dell'interfaccia */
 
 		var aperto = 0;
 
-		$(".zoom img").pinchzoomer();
+
+
+		$("#pz").pinchzoomer();
+
 
 		// pulsanti apertura/chiusura zoom borsa
 		$('#openZoom').click(function() {
@@ -492,8 +510,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
 
+		$('#a-middle').centerElement();
 	    configController.visibleManager.loaderVisible = false;
-	    $(".dropdown-toggle").dropdown("toggle");
 	};
 
 });
