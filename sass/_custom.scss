@@ -1244,6 +1244,7 @@ a.link {
         padding: 10px 0;
         img {
             height: 57px;
+            cursor: pointer;
         }
         &:after, &:before {
             content: "";

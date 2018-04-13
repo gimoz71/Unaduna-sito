@@ -12787,6 +12787,7 @@ a.link {
 }
 .configuratore .accessori-thumb img {
   height: 57px;
+  cursor: pointer;
 }
 .configuratore .accessori-thumb:after, .configuratore .accessori-thumb:before {
   content: "";
