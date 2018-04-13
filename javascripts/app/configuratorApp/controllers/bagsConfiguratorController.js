@@ -123,9 +123,21 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.scegliModello = function(modello){
-		$scope.mapEmboss.clear();
-		$scope.mapMetalloTracolle.clear();
-		$scope.mapMetalloBorchie.clear();
+		
+		$scope.embossSelezionato = false;
+		$scope.mapEmboss = new Map();
+
+		$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
+		$scope.scegliColore = true;
+		
+		$scope.metalloVincolante = "argento";
+		$scope.mapMetalloTracolle = new Map();
+		$scope.mapMetalloBorchie = new Map();
+		
+		$scope.borchieSelezionate = false;
+		$scope.tracollaSelezionata = false;
+		
+		$scope.metalleriaObbligatoria = [];
 		
 		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
 			$scope.dataUrl = canvas.toDataURL();
