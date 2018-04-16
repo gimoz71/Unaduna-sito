@@ -278,8 +278,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		var date1 = new Date();
 
 		//attivo il loader e tolgo lo spinner
-//		configController.visibleManager.loaderVisible = true;
-//		configController.visibleManager.spinnerVisible = false;
+		// configController.visibleManager.loaderVisible = true; // non funziona
+		// configController.visibleManager.spinnerVisible = false;
 //
 		configController.setVisible(false);
 
@@ -329,12 +329,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
                 ],
                 onInit: function(){
 					if(firstExecInit){
+
                 		firstExecInit = false;
 						$.fn.sepLine('first-divider', 'swiper-container', 'accessori'); // rif. descrizione funzione sepline: custom.js linea 77
 						$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
 						$(".riepilogo").fadeIn();
-
-
 						$("#transition-image").show();
                 	}
                 },
@@ -350,19 +349,21 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 					if(firstExecComplete){
 						firstExecComplete = false;
 
-						//$('#loader').addClass('ng-hide');
 						if ($scope.spinIcon == true) {
 							var pos1 = $('#spinIcon').position();
 							$("#spinIcon").fadeIn().delay(100).fadeOut();
 							$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
 							$('#a-middle').animate({opacity:'1'}, 500);
+							$('.accessori').animate({opacity:'1'}, 500, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
+						        // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
+								$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
+						    });
+							$("#loader").fadeOut();
 						}
-						$("#transition-image").fadeOut();
-
-	//					configController.visibleManager.spinnerVisible = true;
-	//					configController.visibleManager.loaderVisible = false;
+						$("#transition-image").delay(100).fadeOut();
 
 
+						// configController.visibleManager.loaderVisible = false; // non funziona
 
 						$scope.spinIcon = false;
 						$scope.spinAnim = false;
@@ -372,11 +373,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						$scope.$log.log('durata caricamento spinner: ' + diff);
 
 
-
-						$('.accessori').animate({opacity:'1'}, 500, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
-					        // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
-							$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
-					    });
 					}
 				}
             }
@@ -450,10 +446,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		var aperto = 0;
 
-
-
 		$("#pz").pinchzoomer();
 
+		$('#a-middle').centerElement();
 
 		// pulsanti apertura/chiusura zoom borsa
 		$('#openZoom').click(function() {
@@ -510,8 +505,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
 
-		$('#a-middle').centerElement();
-	    configController.visibleManager.loaderVisible = false;
 	};
 
 });
