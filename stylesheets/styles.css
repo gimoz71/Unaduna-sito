@@ -12501,6 +12501,13 @@ a.link {
 /*-------------------------------*/
 /*  @group Configuratore Bag */
 /*-------------------------------*/
+.spinnerContainer {
+  max-width: 960px !important;
+  max-height: 960px !important;
+  opacity: 1 !important;
+  position: relative !important;
+}
+
 .transition-image {
   width: 100%;
   position: absolute;
@@ -12734,7 +12741,7 @@ a.link {
   background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxpdmVsbG9fMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHdpZHRoPSIyMDUuNDgxcHgiIGhlaWdodD0iNDA3Ljc4NXB4IiB2aWV3Qm94PSIwIDAgMjA1LjQ4MSA0MDcuNzg1IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyMDUuNDgxIDQwNy43ODUiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBvbHlnb24gcG9pbnRzPSIyMDUuNDgxLDQwNy43ODUgMCwyMDMuNDggMjA1LjQ4MSwwIDIxLjIxMywyMDMuNDggCSIvPg0KPC9nPg0KPC9zdmc+DQo="), linear-gradient(to right, white 50%, rgba(255, 255, 255, 0) 100%);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 10px, cover;
+  background-size: 12px, cover;
   right: auto;
 }
 .configuratore .swiper-button-next,
@@ -12742,7 +12749,7 @@ a.link {
   background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxpdmVsbG9fMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHdpZHRoPSIyMDUuNDgxcHgiIGhlaWdodD0iNDA3Ljc4NXB4IiB2aWV3Qm94PSIwIDAgMjA1LjQ4MSA0MDcuNzg1IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyMDUuNDgxIDQwNy43ODUiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBvbHlnb24gcG9pbnRzPSIwLDAgMjA1LjQ4MSwyMDQuMzA0IDAsNDA3Ljc4NSAxODQuMjY4LDIwNC4zMDQgCSIvPg0KPC9nPg0KPC9zdmc+DQo="), linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 50%);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 10px, cover;
+  background-size: 12px, cover;
   left: auto;
 }
 .configuratore .swiper-button-next.swiper-button-disabled, .configuratore .swiper-button-prev.swiper-button-disabled {

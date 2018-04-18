@@ -920,6 +920,14 @@ a.link {
 /*-------------------------------*/
 /*  @group Configuratore Bag */
 /*-------------------------------*/
+
+.spinnerContainer {
+    max-width: 960px !important;
+    max-height: 960px !important;
+    opacity: 1 !important;
+    position: relative !important;
+}
+
 .transition-image {
     width:100%;
     position: absolute;
@@ -1211,7 +1219,7 @@ a.link {
         // background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0)); /*Standard*/
         background-repeat: no-repeat;
         background-position: center center;
-        background-size: 10px, cover;
+        background-size: 12px, cover;
         right: auto;
     }
     .swiper-button-prev.swiper-button-black,
@@ -1232,7 +1240,7 @@ a.link {
         // background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); /*Standard*/
         background-repeat: no-repeat;
         background-position: center center;
-        background-size: 10px, cover;
+        background-size: 12px, cover;
         left: auto;
     }
     .swiper-button-next.swiper-button-black,
