@@ -1304,11 +1304,10 @@ a.link {
             &:hover {
                 // border: solid 1px $standard-border-color;
                 opacity: 1;
-                font-weight: normal;
                 text-decoration: none;
             }
             &.active {
-                font-weight: normal;
+                font-weight: bold;
                 opacity: 1;
             }
             font-size: 15px;
@@ -1322,10 +1321,16 @@ a.link {
         .swiper-button-prev {
             left: -20px;
             height: 35px;
+            @media screen and (max-height: 600px) {
+                height: 31px;
+            }
         }
         .swiper-button-next {
             right: -20px;
             height: 35px;
+            @media screen and (max-height: 600px) {
+                height: 31px;
+            }
         }
     }
     .accessori-thumb {

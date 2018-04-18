@@ -12797,11 +12797,10 @@ a.link {
 }
 .configuratore .accessori-categoria a:hover {
   opacity: 1;
-  font-weight: normal;
   text-decoration: none;
 }
 .configuratore .accessori-categoria a.active {
-  font-weight: normal;
+  font-weight: bold;
   opacity: 1;
 }
 @media screen and (min-height: 600px) {
@@ -12813,9 +12812,19 @@ a.link {
   left: -20px;
   height: 35px;
 }
+@media screen and (max-height: 600px) {
+  .configuratore .accessori-categoria .swiper-button-prev {
+    height: 31px;
+  }
+}
 .configuratore .accessori-categoria .swiper-button-next {
   right: -20px;
   height: 35px;
+}
+@media screen and (max-height: 600px) {
+  .configuratore .accessori-categoria .swiper-button-next {
+    height: 31px;
+  }
 }
 .configuratore .accessori-thumb {
   padding: 10px 0;
