@@ -12791,7 +12791,7 @@ a.link {
 }
 .configuratore .accessori-categoria a:hover {
   opacity: 1;
-  font-weight: bold;
+  font-weight: normal;
   text-decoration: none;
 }
 .configuratore .accessori-categoria a.active {
