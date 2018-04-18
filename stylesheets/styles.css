@@ -12711,7 +12711,6 @@ a.link {
   position: absolute;
   display: none;
   width: 100%;
-  height: 45px;
   background-color: #fff;
   z-index: 50;
   bottom: 0;
@@ -12793,7 +12792,7 @@ a.link {
 }
 .configuratore .accessori-categoria a {
   width: 100%;
-  font-size: 14px;
+  font-size: 15px;
   padding: 5px;
 }
 .configuratore .accessori-categoria a:hover {
@@ -12802,10 +12801,10 @@ a.link {
   text-decoration: none;
 }
 .configuratore .accessori-categoria a.active {
-  font-weight: bold;
+  font-weight: normal;
   opacity: 1;
 }
-@media screen and (min-height: 400px) {
+@media screen and (min-height: 600px) {
   .configuratore .accessori-categoria a {
     font-size: inherit;
   }
@@ -12825,6 +12824,14 @@ a.link {
 .configuratore .accessori-thumb img {
   height: 57px;
   cursor: pointer;
+}
+@media screen and (max-height: 600px) {
+  .configuratore .accessori-thumb {
+    padding: 5px 0;
+  }
+  .configuratore .accessori-thumb img {
+    height: 47px;
+  }
 }
 .configuratore .accessori-thumb a {
   position: relative;
@@ -12872,9 +12879,19 @@ a.link {
   left: -20px;
   height: 82px;
 }
+@media screen and (max-height: 600px) {
+  .configuratore .accessori-thumb .swiper-button-prev {
+    height: 62px;
+  }
+}
 .configuratore .accessori-thumb .swiper-button-next {
   right: -20px;
   height: 82px;
+}
+@media screen and (max-height: 600px) {
+  .configuratore .accessori-thumb .swiper-button-next {
+    height: 62px;
+  }
 }
 .configuratore .spritespin {
   width: 100%;

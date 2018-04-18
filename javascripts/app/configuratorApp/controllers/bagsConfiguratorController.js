@@ -289,7 +289,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		if (isTouchDevice()) {
 			renderType = "image"
 		} else {
-			renderType = "image"
+			renderType = "ca"
 		}
 
 		var cleanStack = configController.pulisciStack();
@@ -332,7 +332,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
                 		firstExecInit = false;
 						$.fn.sepLine('first-divider', 'swiper-container', 'accessori'); // rif. descrizione funzione sepline: custom.js linea 77
-						$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
+						$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX'); // rif. descrizione funzione yammHeight: custom.js linea 86
 						$(".riepilogo").fadeIn();
 						$("#transition-image").show();
                 	}
@@ -481,7 +481,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		});
 
 		$('.accessori').css('bottom', $('.riepilogo').outerHeight());
-		$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
+		$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX'); // rif. descrizione funzione yammHeight: custom.js linea 86
 		// customizza la barra di scorrimento del mega menu
 		(function($){
 			$(window).on("load",function(){
@@ -501,7 +501,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$('.accessori').css('bottom', $('.riepilogo').outerHeight());
 		    $('#a-middle').centerElement();
 		    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
-		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
+		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX')
 		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
 

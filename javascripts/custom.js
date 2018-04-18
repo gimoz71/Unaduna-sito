@@ -92,8 +92,7 @@ $.fn.centerElement = function () {
         this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
         return this;
     } else if ( $(window).height() < elementMaxHeight) {
-        this.css("width", elemSize);
-        this.css("left", (($(this).parent().width() - $(this).width()) / 2) + "px");
+        this.css("width", elemSize + (elemSize/12)).css("left", (($(this).parent().width() - $(this).width()) / 2) + "px");
         return this;
     };
 
