@@ -96,7 +96,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 					var entitaSingola = $scope.entita[j];
 					if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
 						if(entitaSingola.vincoloColore == true){
-							if(entitaSingola.categoria == "emboss"){
+							if(entitaSingola.categoria == "stile"){
 								$scope.mapEmboss.set(entitaSingola.colore, entitaSingola);
 							}
 							if(entitaSingola.colore == $scope.coloreVincolante){
@@ -210,7 +210,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 		configController.aggiungiStrato(entita.urlStripeHD, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
 
-		if($scope.tipoEntitaSelezionata == "emboss"){
+		if($scope.tipoEntitaSelezionata == "stile"){
 			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
 				$scope.embossSelezionato = false;
 			} else {
