@@ -42,6 +42,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	$scope.metalleriaObbligatoria = [];
 
+	$scope.removable = false;
+
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
 		if(index == 0){
@@ -202,6 +204,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			}
 		}
 
+		$scope.removable = false;
 		if($scope.scegliColore){
 			$scope.coloreVincolante = entita.colore;
 		}
@@ -216,6 +219,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			} else {
 				$scope.embossSelezionato = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
 			}
+			$scope.removable = true;
 		}
 
 		if($scope.tipoEntitaSelezionata == "borchie"){
@@ -224,6 +228,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			} else {
 				$scope.borchieSelezionate = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
 			}
+			$scope.removable = true;
 		}
 		if($scope.tipoEntitaSelezionata == "tracolle"){
 			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
@@ -231,6 +236,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			} else {
 				$scope.tracollaSelezionata = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
 			}
+			$scope.removable = true;
 		}
 	}
 
@@ -287,9 +293,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		var renderType;
 
 		if (isTouchDevice()) {
-			renderType = "image"
+			renderType = "images"
 		} else {
-			renderType = "ca"
+			renderType = "canvas"
 		}
 
 		var cleanStack = configController.pulisciStack();

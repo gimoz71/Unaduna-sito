@@ -56,7 +56,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="a-middle" class="spinnerContainer" style="/*max-width: 960px; max-height: 960px; opacity: 1; position: relative;*/">
+	<div id="a-middle" class="spinnerContainer" >
 		<div>
 			<img class="transition-image" id="transition-image" ng-src="{{dataUrl}}">
 		</div>
@@ -88,7 +88,7 @@
 								<slide ng-repeat="entita in entitaTipoAccessorioSelezionato" ng-click="contr.selezionaEntita(entita)">
 									<a href="#" ng_class="{activeAccessorio: entita.nome === nomeEntitaSelezionata}">
 	                                    <img ng-src="{{entita.urlThumbnailHD}}" class="swiper-lazy"/>
-	                                    <div class="closeItem"><i class="unaicon-remove"></i></div>
+	                                    <div ng-if="removable" class="closeItem"><i class="unaicon-remove"></i></div>
 	                                </a>
 								</slide>
 							</slides>
