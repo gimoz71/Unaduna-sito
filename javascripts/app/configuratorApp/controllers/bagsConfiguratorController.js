@@ -276,7 +276,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.caricaSpinner = function(){
 		var date1 = new Date();
-
+		$("#loader").show();
 		//attivo il loader e tolgo lo spinner
 		// configController.visibleManager.loaderVisible = true; // non funziona
 		// configController.visibleManager.spinnerVisible = false;
@@ -335,6 +335,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX'); // rif. descrizione funzione yammHeight: custom.js linea 86
 						$(".riepilogo").fadeIn();
 						$("#transition-image").show();
+
                 	}
                 },
 				onLoad: function() {
@@ -358,9 +359,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						        // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
 								$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
 						    });
-							$("#loader").fadeOut();
 						}
 						$("#transition-image").delay(100).fadeOut();
+						$("#loader").delay(200).fadeOut("slow");
 
 
 						// configController.visibleManager.loaderVisible = false; // non funziona
