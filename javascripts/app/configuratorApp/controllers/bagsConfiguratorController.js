@@ -45,6 +45,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	$scope.metalleriaObbligatoria = [];
 
+	$scope.removable = false;
+
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
 		if(index == 0){
@@ -216,6 +218,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			}
 		}
 
+		$scope.removable = false;
 		if($scope.scegliColore){
 			$scope.coloreVincolante = entita.colore;
 		}
@@ -230,6 +233,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			} else {
 				$scope.embossSelezionato = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
 			}
+			$scope.removable = true;
 		}
 
 		if($scope.tipoEntitaSelezionata == "borchie"){
@@ -238,6 +242,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			} else {
 				$scope.borchieSelezionate = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
 			}
+			$scope.removable = true;
 		}
 		if($scope.tipoEntitaSelezionata == "tracolle"){
 			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
@@ -245,6 +250,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			} else {
 				$scope.tracollaSelezionata = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
 			}
+			$scope.removable = true;
 		}
 	}
 
@@ -290,7 +296,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.caricaSpinner = function(){
 		var date1 = new Date();
-
+		$("#loader").show();
 		//attivo il loader e tolgo lo spinner
 		// configController.visibleManager.loaderVisible = true; // non funziona
 		// configController.visibleManager.spinnerVisible = false;
@@ -301,9 +307,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		var renderType;
 
 		if (isTouchDevice()) {
-			renderType = "image"
+			renderType = "images"
 		} else {
-			renderType = "image"
+			renderType = "canvas"
 		}
 
 		var cleanStack = configController.pulisciStack();
@@ -346,9 +352,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
                 		firstExecInit = false;
 						$.fn.sepLine('first-divider', 'swiper-container', 'accessori'); // rif. descrizione funzione sepline: custom.js linea 77
-						$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
+						$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX'); // rif. descrizione funzione yammHeight: custom.js linea 86
 						$(".riepilogo").fadeIn();
 						$("#transition-image").show();
+
                 	}
                 },
 				onLoad: function() {
@@ -372,9 +379,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						        // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
 								$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
 						    });
-							$("#loader").fadeOut();
 						}
 						$("#transition-image").delay(100).fadeOut();
+						$("#loader").delay(200).fadeOut("slow");
 
 
 						// configController.visibleManager.loaderVisible = false; // non funziona
@@ -495,7 +502,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		});
 
 		$('.accessori').css('bottom', $('.riepilogo').outerHeight());
-		$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo'); // rif. descrizione funzione yammHeight: custom.js linea 86
+		$.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX'); // rif. descrizione funzione yammHeight: custom.js linea 86
 		// customizza la barra di scorrimento del mega menu
 		(function($){
 			$(window).on("load",function(){
@@ -515,7 +522,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$('.accessori').css('bottom', $('.riepilogo').outerHeight());
 		    $('#a-middle').centerElement();
 		    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
-		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogo')
+		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX')
 		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
 

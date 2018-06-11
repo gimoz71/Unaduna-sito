@@ -920,6 +920,14 @@ a.link {
 /*-------------------------------*/
 /*  @group Configuratore Bag */
 /*-------------------------------*/
+
+.spinnerContainer {
+    max-width: 960px !important;
+    max-height: 960px !important;
+    opacity: 1 !important;
+    position: relative !important;
+}
+
 .transition-image {
     width:100%;
     position: absolute;
@@ -945,7 +953,17 @@ a.link {
 	width           : 100%;
 	height          : 100%;
 	z-index         : 100;
-	background-color: rgba(255,255,255,.75);
+	background-color: rgba(255,255,255,.2);
+    .custom {
+        color: #fff;
+        top: 50%;
+        left: 50%;
+        margin-left: -31px;
+        margin-top: -31px;
+        div {
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,.5);
+        }
+    }
 }
 
 /* panning immagini */
@@ -1168,7 +1186,7 @@ a.link {
         position: absolute;
         display: none;
         width: 100%;
-        height: 45px;
+        // height: 45px;
         background-color: #fff;
         z-index: 50;
         bottom: 0;
@@ -1211,7 +1229,7 @@ a.link {
         // background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0)); /*Standard*/
         background-repeat: no-repeat;
         background-position: center center;
-        background-size: 10px, cover;
+        background-size: 12px, cover;
         right: auto;
     }
     .swiper-button-prev.swiper-button-black,
@@ -1232,7 +1250,7 @@ a.link {
         // background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)); /*Standard*/
         background-repeat: no-repeat;
         background-position: center center;
-        background-size: 10px, cover;
+        background-size: 12px, cover;
         left: auto;
     }
     .swiper-button-next.swiper-button-black,
@@ -1296,16 +1314,15 @@ a.link {
             &:hover {
                 // border: solid 1px $standard-border-color;
                 opacity: 1;
-                font-weight: normal;
                 text-decoration: none;
             }
             &.active {
                 font-weight: bold;
                 opacity: 1;
             }
-            font-size: 14px;
+            font-size: 15px;
             padding: 5px;
-            @media screen and (min-height: 400px) {
+            @media screen and (min-height: 600px) {
                 font-size: inherit;
                 // padding: 10px 0;
             }
@@ -1314,10 +1331,16 @@ a.link {
         .swiper-button-prev {
             left: -20px;
             height: 35px;
+            @media screen and (max-height: 600px) {
+                height: 31px;
+            }
         }
         .swiper-button-next {
             right: -20px;
             height: 35px;
+            @media screen and (max-height: 600px) {
+                height: 31px;
+            }
         }
     }
     .accessori-thumb {
@@ -1326,6 +1349,13 @@ a.link {
         img {
             height: 57px;
             cursor: pointer;
+
+        }
+        @media screen and (max-height: 600px) {
+            padding: 5px 0;
+            img {
+                height: 47px;
+            }
         }
         @media screen and (max-width: $screen-xs-max) {
 
@@ -1403,10 +1433,16 @@ a.link {
         .swiper-button-prev {
             left: -20px;
             height: 82px;
+            @media screen and (max-height: 600px) {
+                height: 62px;
+            }
         }
         .swiper-button-next {
             right: -20px;
             height: 82px;
+            @media screen and (max-height: 600px) {
+                height: 62px;
+            }
         }
     }
 
