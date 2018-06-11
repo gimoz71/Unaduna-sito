@@ -28,16 +28,19 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.nomeEntitaSelezionata = "black";//di default apro il pannello colori
 
 	$scope.embossSelezionato = false;
+	$scope.nomeStileSelezionato = "";
 	$scope.mapEmboss = new Map();
 
 	$scope.coloreVincolante = "black";//scelgo il nero come colore vincolante di default
 	$scope.scegliColore = true;
+	$scope.scegliEmboss = false;
 
 	$scope.metalloVincolante = "argento";
 	$scope.mapMetalloTracolle = new Map();
 	$scope.mapMetalloBorchie = new Map();
 
 	$scope.borchieSelezionate = false;
+	$scope.nomeBorchiaSelezionata = "";
 	$scope.tracollaSelezionata = false;
 
 	$scope.metalleriaObbligatoria = [];
@@ -88,6 +91,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		} else {
 			$scope.scegliMetallo = false;
 		}
+		if(tipoAccessorio == "stile"){
+			$scope.scegliEmboss = true;
+		} else {
+			$scope.scegliEmboss = false;
+		}
 		$scope.entitaTipoAccessorioSelezionato = [];
 		for(var i = 0; i < $scope.modelli.length; i++){
 			var modello = $scope.modelli[i];
@@ -97,7 +105,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 					if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
 						if(entitaSingola.vincoloColore == true){
 							if(entitaSingola.categoria == "stile"){
-								$scope.mapEmboss.set(entitaSingola.colore, entitaSingola);
+								$scope.mapEmboss.set(entitaSingola.nomeStile + "_" + entitaSingola.colore, entitaSingola);
 							}
 							if(entitaSingola.colore == $scope.coloreVincolante){
 								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
@@ -107,7 +115,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 								$scope.mapMetalloTracolle.set(entitaSingola.metallo, entitaSingola);
 								$scope.mapMetalloBorchie.set(entitaSingola.metallo, entitaSingola);
 							}else if (entitaSingola.categoria == "borchie"){
-								$scope.mapMetalloBorchie.set(entitaSingola.metallo, entitaSingola);
+								$scope.mapMetalloBorchie.set(entitaSingola.nomeBorchia + "_" + entitaSingola.metallo, entitaSingola);
 							}
 							if(entitaSingola.metallo == $scope.metalloVincolante){
 								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
@@ -117,6 +125,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						}
 					}
 				}
+				
+				
 			}
 		}
 	}
@@ -137,8 +147,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		$scope.tracollaSelezionata = false;
 
 		$scope.metalleriaObbligatoria = [];
-
-
 
 		$(".dropdown-toggle").dropdown("toggle");
 
@@ -172,12 +180,18 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		});
 
+		if($scope.tipoEntitaSelezionata == "stile"){
+			$scope.nomeStileSelezionato = entita.nomeStile;
+		}
+		if($scope.tipoEntitaSelezionata == "borchie"){
+			$scope.nomeBorchiaSelezionata = entita.nomeBorchia;
+		}
 		if($scope.tipoEntitaSelezionata == "colore"){
 
 			if($scope.embossSelezionato){
 				//devo sostituire l'emboss se è selezionato
 				//1. estraggo la url dell'emboss
-				var embossUrl = $scope.mapEmboss.get(entita.colore);
+				var embossUrl = $scope.mapEmboss.get($scope.nomeStileSelezionato + "_" + entita.colore);
 				if(embossUrl){
 					configController.aggiungiElementoAStack(embossUrl.urlStripeHD, embossUrl.ordine);
 				}
@@ -195,7 +209,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			if($scope.borchieSelezionate){
 				//devo sostituire l'emboss se è selezionato
 				//1. estraggo la url dell'emboss
-				var borchieUrl = $scope.mapMetalloBorchie.get(entita.metallo);
+				var borchieUrl = $scope.mapMetalloBorchie.get($scope.nomeBorchiaSelezionata + "_" + entita.metallo);
 				if(borchieUrl){
 					configController.aggiungiElementoAStack(borchieUrl.urlStripeHD, borchieUrl.ordine, false);
 				}
