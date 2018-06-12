@@ -1,4 +1,4 @@
-angular.module('configuratorModule').controller('unadunaConfiguratorController2', function($http, $scope, $filter, listeService, $log){
+angular.module('configuratorModule').controller('unadunaConfiguratorController2', function($http, $scope, $filter, listeService, $log, $window){
 
 	$scope.$log = $log;
 
@@ -123,6 +123,23 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 	}
 
+	configController.getResolutionPlaceHolder = function(){
+		var screenWidth = $window.innerWidth;
+		var screenHeight = $window.innerHeight;
+
+		var placeHolder = "";
+		var minSize = (screenWidth > screenHeight ? screenHeight : screenWidth);
+		if (minSize < 560) {
+			placeHolder = "560";
+		} else if (minSize >= 560) {
+			placeHolder = "720"
+		} else if (minSize >= 720) {
+			placeHolder = "960"
+		}
+
+		return placeHolder;
+	}
+
 	configController.scegliModello = function(modello){
 
 		$scope.embossSelezionato = false;
@@ -146,7 +163,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		$scope.stack = [];
 		//$scope.stack.push(modello.urlStripeHD);
-		configController.aggiungiElementoAStack(modello.urlStripeHD, 0, false);
+
+		var url = modello.urlStripe;
+		url = url.replace("RES", configController.getResolutionPlaceHolder());
+
+		configController.aggiungiElementoAStack(url, 0, false);
 		$scope.modelloSelezionato = modello.nome;
 		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
 
@@ -241,6 +262,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.aggiungiStrato = function(strato, ordine, eliminabile){
+		
 		configController.aggiungiElementoAStack(strato, ordine, eliminabile);
 		configController.caricaSpinner();
 	}
@@ -405,7 +427,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		for(var i = 0; i < $scope.entita.length; i++){
 			var singolaEntita = $scope.entita[i];
 			if(singolaEntita.modello == modello && singolaEntita.metallo == metallo && singolaEntita.categoria == "metalleria"){
-				return singolaEntita.urlStripeHD;
+				var url = singolaEntita.urlStripe;
+				url = url.replace("RES", configController.getResolutionPlaceHolder());
+				
+				return url;
+				//return singolaEntita.urlStripeHD;
 			}
 		}
 		return "";
