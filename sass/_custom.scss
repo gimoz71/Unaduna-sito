@@ -926,6 +926,10 @@ a.link {
     max-height: 960px !important;
     opacity: 1 !important;
     position: relative !important;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
 }
 
 .transition-image {

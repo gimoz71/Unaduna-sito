@@ -56,14 +56,16 @@
 			</div>
 		</div>
 	</div>
-	<div id="a-middle" class="spinnerContainer" >
-		<div>
-			<img class="transition-image" id="transition-image" ng-src="{{dataUrl}}">
+	<div id="canvasWrapper">
+		<div id="a-middle" class="spinnerContainer" >
+			<div>
+				<img class="transition-image" id="transition-image" ng-src="{{dataUrl}}">
+			</div>
+			<div class="animate-show-hide" ng-show="spinnerVisibleTest" id="spritespin"></div>
+			<!-- <div>
+				<img alt="" src="images/base-rounded-square-3d.jpg" style="width:100%">
+			</div> -->
 		</div>
-		<div class="animate-show-hide" ng-show="spinnerVisibleTest" id="spritespin"></div>
-		<!-- <div>
-			<img alt="" src="images/base-rounded-square-3d.jpg" style="width:100%">
-		</div> -->
 	</div>
 	<div class="accessori" style="opacity: 0;">
 		<div class="container">
@@ -86,7 +88,7 @@
 						<swiper class="accessori-thumb" grab-cursor="true" observer="false"  keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}">
 							<slides>
 								<slide ng-repeat="entita in entitaTipoAccessorioSelezionato" ng-click="contr.selezionaEntita(entita)">
-									<a href="#" ng_class="{activeAccessorio: entita.nome === nomeEntitaSelezionata}">
+									<a href="#" ng_class="{activeAccessorio: entita.nome === nomeEntitaSelezionata}" title="">
 	                                    <img ng-src="{{entita.urlThumbnailHD}}" class="swiper-lazy"/>
 	                                    <div ng-if="removable" class="closeItem"><i class="unaicon-remove"></i></div>
 	                                </a>

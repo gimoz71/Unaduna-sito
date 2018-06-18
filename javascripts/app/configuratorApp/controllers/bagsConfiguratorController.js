@@ -134,14 +134,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.getResolutionPlaceHolder = function(){
-		var screenWidth = $window.innerWidth;
-		var screenHeight = $window.innerHeight;
+		var screenWidth = $("#canvasWrapper").innerWidth();
+		var screenHeight = $("#canvasWrapper").innerHeight();
 
 		var placeHolder = "";
 		var minSize = (screenWidth > screenHeight ? screenHeight : screenWidth);
-		if (minSize < 560) {
+		if (minSize <= 560) {
 			placeHolder = "560";
-		} else if (minSize >= 560) {
+		} else if (minSize > 560 && minSize < 720) {
 			placeHolder = "720"
 		} else if (minSize >= 720) {
 			placeHolder = "960"
@@ -171,9 +171,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		$scope.stack = [];
 		//$scope.stack.push(modello.urlStripeHD);
-
-		var url = modello.urlStripe;
+var url = modello.urlStripe;
 		url = url.replace("RES", configController.getResolutionPlaceHolder());
+		
 
 		configController.aggiungiElementoAStack(url, 0, false);
 		$scope.modelloSelezionato = modello.nome;
@@ -203,38 +203,53 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		});
 
+		var url = entita.urlStripe;
+		url = url.replace("RES", configController.getResolutionPlaceHolder());
+
 		if($scope.tipoEntitaSelezionata == "stile"){
 			$scope.nomeStileSelezionato = entita.nomeStile;
 		}
 		if($scope.tipoEntitaSelezionata == "borchie"){
 			$scope.nomeBorchiaSelezionata = entita.nomeBorchia;
 		}
-		if($scope.tipoEntitaSelezionata == "colore"){
+		if ($scope.tipoEntitaSelezionata.startsWith("colore")){
 
 			if($scope.embossSelezionato){
 				//devo sostituire l'emboss se è selezionato
 				//1. estraggo la url dell'emboss
+
 				var embossUrl = $scope.mapEmboss.get($scope.nomeStileSelezionato + "_" + entita.colore);
+				var urlE = embossUrl.urlStripe;
+				urlE = urlE.replace("RES", configController.getResolutionPlaceHolder());
+
 				if(embossUrl){
-					configController.aggiungiElementoAStack(embossUrl.urlStripeHD, embossUrl.ordine);
+					configController.aggiungiElementoAStack(urlE, embossUrl.ordine);
 				}
 			}
 		}
-		if($scope.tipoEntitaSelezionata == "metalleria"){
+		if ($scope.tipoEntitaSelezionata.startsWith("metalleria")){
 			if($scope.tracollaSelezionata){
 				//devo sostituire l'emboss se è selezionato
 				//1. estraggo la url dell'emboss
+
 				var tracollaUrl = $scope.mapMetalloTracolle.get(entita.metallo);
+				var urlT = tracollaUrl.urlStripe;
+				urlT = urlT.replace("RES", configController.getResolutionPlaceHolder());
+
 				if(tracollaUrl){
-					configController.aggiungiElementoAStack(tracollaUrl.urlStripeHD, tracollaUrl.ordine, false);
+					configController.aggiungiElementoAStack(urlT, tracollaUrl.ordine, false);
 				}
 			}
 			if($scope.borchieSelezionate){
 				//devo sostituire l'emboss se è selezionato
 				//1. estraggo la url dell'emboss
+
 				var borchieUrl = $scope.mapMetalloBorchie.get($scope.nomeBorchiaSelezionata + "_" + entita.metallo);
+				var urlB = borchieUrl.urlStripe;
+				urlB = urlB.replace("RES", configController.getResolutionPlaceHolder());
+
 				if(borchieUrl){
-					configController.aggiungiElementoAStack(borchieUrl.urlStripeHD, borchieUrl.ordine, false);
+					configController.aggiungiElementoAStack(urlB, borchieUrl.ordine, false);
 				}
 			}
 		}
@@ -246,10 +261,15 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		if($scope.scegliMetallo){
 			$scope.metalloVincolante = entita.metallo;
 		}
-		configController.aggiungiStrato(entita.urlStripeHD, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
+
+		
+
+		//configController.aggiungiStrato(entita.urlStripeHD, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
+		configController.aggiungiStrato(url, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
 
 		if($scope.tipoEntitaSelezionata == "stile"){
-			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
+			//if($scope.stack.indexOf(entita.urlStripeHD) == -1){
+			if($scope.stack.indexOf(url) == -1){
 				$scope.embossSelezionato = false;
 			} else {
 				$scope.embossSelezionato = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
@@ -258,7 +278,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 
 		if($scope.tipoEntitaSelezionata == "borchie"){
-			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
+			//if($scope.stack.indexOf(entita.urlStripeHD) == -1){
+			if ($scope.stack.indexOf(url) == -1) {
 				$scope.borchieSelezionate = false;
 			} else {
 				$scope.borchieSelezionate = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
@@ -266,7 +287,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.removable = true;
 		}
 		if($scope.tipoEntitaSelezionata == "tracolle"){
-			if($scope.stack.indexOf(entita.urlStripeHD) == -1){
+			//if($scope.stack.indexOf(entita.urlStripeHD) == -1){
+			if ($scope.stack.indexOf(url) == -1) {
 				$scope.tracollaSelezionata = false;
 			} else {
 				$scope.tracollaSelezionata = ($scope.stack[entita.ordine] != undefined && $scope.stack[entita.ordine] != null)
@@ -396,10 +418,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 							var pos1 = $('#spinIcon').position();
 							$("#spinIcon").fadeIn().delay(100).fadeOut();
 							$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
-							$('#a-middle').animate({opacity:'1'}, 500);
+							//$('#a-middle').animate({opacity:'1'}, 500);
 							$('.accessori').animate({opacity:'1'}, 500, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
-						        // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
-								$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
+								// $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
+								//$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
 						    });
 						}
 						$("#transition-image").delay(100).fadeOut();
@@ -495,7 +517,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		$("#pz").pinchzoomer();
 
-		$('#a-middle').centerElement();
+		$('#canvasWrapper').parentResize();
+		//$('#a-middle').centerElement();
 
 		// pulsanti apertura/chiusura zoom borsa
 		$('#openZoom').click(function() {
@@ -546,7 +569,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		$(window).resize(function(){
 			$('.accessori').css('bottom', $('.riepilogo').outerHeight());
-		    $('#a-middle').centerElement();
+			$('#canvasWrapper').parentResize();
+		    //$('#a-middle').centerElement();
 		    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
 		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX')
 		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
