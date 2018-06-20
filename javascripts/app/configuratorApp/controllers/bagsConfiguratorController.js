@@ -47,6 +47,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	$scope.removable = false;
 
+	$scope.resolution = "560";
+
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
 		if(index == 0){
@@ -152,6 +154,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	configController.scegliModello = function(modello){
 
+		$scope.resolution = configController.getResolutionPlaceHolder();
+
 		$scope.embossSelezionato = false;
 		$scope.mapEmboss = new Map();
 
@@ -171,8 +175,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		$scope.stack = [];
 		//$scope.stack.push(modello.urlStripeHD);
-var url = modello.urlStripe;
-		url = url.replace("RES", configController.getResolutionPlaceHolder());
+		var url = modello.urlStripe;
+		//url = url.replace("RES", configController.getResolutionPlaceHolder());
+		url = url.replace("RES", $scope.resolution);
 		
 
 		configController.aggiungiElementoAStack(url, 0, false);
@@ -204,7 +209,8 @@ var url = modello.urlStripe;
 		});
 
 		var url = entita.urlStripe;
-		url = url.replace("RES", configController.getResolutionPlaceHolder());
+		//url = url.replace("RES", configController.getResolutionPlaceHolder());
+		url = url.replace("RES", $scope.resolution);
 
 		if($scope.tipoEntitaSelezionata == "stile"){
 			$scope.nomeStileSelezionato = entita.nomeStile;
@@ -220,7 +226,8 @@ var url = modello.urlStripe;
 
 				var embossUrl = $scope.mapEmboss.get($scope.nomeStileSelezionato + "_" + entita.colore);
 				var urlE = embossUrl.urlStripe;
-				urlE = urlE.replace("RES", configController.getResolutionPlaceHolder());
+				//urlE = urlE.replace("RES", configController.getResolutionPlaceHolder());
+				urlE = urlE.replace("RES", $scope.resolution);
 
 				if(embossUrl){
 					configController.aggiungiElementoAStack(urlE, embossUrl.ordine);
@@ -234,7 +241,8 @@ var url = modello.urlStripe;
 
 				var tracollaUrl = $scope.mapMetalloTracolle.get(entita.metallo);
 				var urlT = tracollaUrl.urlStripe;
-				urlT = urlT.replace("RES", configController.getResolutionPlaceHolder());
+				//urlT = urlT.replace("RES", configController.getResolutionPlaceHolder());
+				urlT = urlT.replace("RES", $scope.resolution);
 
 				if(tracollaUrl){
 					configController.aggiungiElementoAStack(urlT, tracollaUrl.ordine, false);
@@ -246,7 +254,8 @@ var url = modello.urlStripe;
 
 				var borchieUrl = $scope.mapMetalloBorchie.get($scope.nomeBorchiaSelezionata + "_" + entita.metallo);
 				var urlB = borchieUrl.urlStripe;
-				urlB = urlB.replace("RES", configController.getResolutionPlaceHolder());
+				//urlB = urlB.replace("RES", configController.getResolutionPlaceHolder());
+				urlB = urlB.replace("RES", $scope.resolution);
 
 				if(borchieUrl){
 					configController.aggiungiElementoAStack(urlB, borchieUrl.ordine, false);
@@ -464,7 +473,8 @@ var url = modello.urlStripe;
 			var singolaEntita = $scope.entita[i];
 			if(singolaEntita.modello == modello && singolaEntita.metallo == metallo && singolaEntita.categoria == "metalleria"){
 				var url = singolaEntita.urlStripe;
-				url = url.replace("RES", configController.getResolutionPlaceHolder());
+				//url = url.replace("RES", configController.getResolutionPlaceHolder());
+				url = url.replace("RES", $scope.resolution);
 				
 				return url;
 				//return singolaEntita.urlStripeHD;
@@ -509,7 +519,7 @@ var url = modello.urlStripe;
 		  e.stopPropagation()
 		});
 
-
+		
 
 		/* gestione elementi dell'interfaccia */
 
