@@ -43,6 +43,57 @@
 .unaicon-minus:before{content:'\004d';}
 
 
+// font per lista lettere emboss
+
+@font-face {
+    font-family: 'unaduna-char';
+    src: url('../fonts/unaduna-char.eot');
+    src: url('../fonts/unaduna-char.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/unaduna-char.woff') format('woff'),
+         url('../fonts/unaduna-char.ttf') format('truetype'),
+         url('../fonts/unaduna-char.svg#unaduna-char') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+[class*='unaduna-char-icon-']:before{
+	display: inline-block;
+   font-family: 'unaduna-char';
+   font-style: normal;
+   font-weight: normal;
+   line-height: 1;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale
+}
+.unaduna-char-icon-a:before{content:'\0041';}
+.unaduna-char-icon-b:before{content:'\0042';}
+.unaduna-char-icon-d:before{content:'\0044';}
+.unaduna-char-icon-e:before{content:'\0045';}
+.unaduna-char-icon-f:before{content:'\0046';}
+.unaduna-char-icon-g:before{content:'\0047';}
+.unaduna-char-icon-h:before{content:'\0048';}
+.unaduna-char-icon-i:before{content:'\0049';}
+.unaduna-char-icon-j:before{content:'\004a';}
+.unaduna-char-icon-k:before{content:'\004b';}
+.unaduna-char-icon-l:before{content:'\004c';}
+.unaduna-char-icon-m:before{content:'\004d';}
+.unaduna-char-icon-n:before{content:'\004e';}
+.unaduna-char-icon-o:before{content:'\004f';}
+.unaduna-char-icon-p:before{content:'\0050';}
+.unaduna-char-icon-q:before{content:'\0051';}
+.unaduna-char-icon-r:before{content:'\0052';}
+.unaduna-char-icon-s:before{content:'\0053';}
+.unaduna-char-icon-t:before{content:'\0054';}
+.unaduna-char-icon-u:before{content:'\0055';}
+.unaduna-char-icon-v:before{content:'\0056';}
+.unaduna-char-icon-w:before{content:'\0057';}
+.unaduna-char-icon-x:before{content:'\0058';}
+.unaduna-char-icon-y:before{content:'\0059';}
+.unaduna-char-icon-z:before{content:'\005a';}
+.unaduna-char-icon-paperella:before{content:'\0031';}
+.unaduna-char-icon-nota:before{content:'\0032';}
+.unaduna-char-icon-stella:before{content:'\0033';}
+
+
 /*-------------------------------*/
 /* override e aggiunte a stili bootstrap      */
 /*-------------------------------*/
@@ -1447,6 +1498,50 @@ a.link {
             @media screen and (max-height: 600px) {
                 height: 62px;
             }
+        }
+
+        .unaduna-char {
+            height: 49px;
+            width: 100%;
+            line-height: 1.75em;
+            font-size: 1.75em;
+            display: block;
+        }
+        select {
+            display: none;
+            font-family: 'unaduna-char';
+            width                : 100%;
+            height                  : 59px;
+            padding-left: 35%;
+            font-size: 1.75em;
+            border               : none;
+            text-align           : right;
+            -webkit-border-radius: 0;
+            -moz-border-radius   : 0;
+            border-radius        : 0;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            -webkit-appearance : none;
+            box-shadow         : none;
+            background-repeat  : no-repeat;
+            background-color   : #fff;
+            margin: 0 2px;
+            &:focus {
+                outline-width: 0;
+                outline: none;
+            }
+            option {
+                font-size: .5em;
+            }
+        }
+
+        .iniziali-list {
+            display: block;
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            right: 20px;
         }
     }
 
