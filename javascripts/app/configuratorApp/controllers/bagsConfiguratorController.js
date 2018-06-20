@@ -11,6 +11,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	$scope.modelli = [];
 	$scope.entita = [];
+	
+	$scope.lettere = [];
 
 	$scope.stack = [];
 
@@ -46,6 +48,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.metalleriaObbligatoria = [];
 
 	$scope.removable = false;
+	
+	$scope.configurazione = [];
+	$scope.configurazione.elencoEntita = [];
+	
+	$scope.prezzo = 0;
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -77,6 +84,113 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 	}
 
+	/*
+	 * funzione che prende le informazioni relative alla risoluzione usata dal client e restituisce 
+	 * il valore da inserire nella stringa per scaricare la versione delle immagini con la risoluzione corretta
+	 * */
+	configController.getResolutionPlaceHolder = function(){
+		var screenWidth = $("#canvasWrapper").innerWidth();
+		var screenHeight = $("#canvasWrapper").innerHeight();
+
+		var placeHolder = "";
+		var minSize = (screenWidth > screenHeight ? screenHeight : screenWidth);
+		if (minSize <= 560) {
+			placeHolder = "560";
+		} else if (minSize > 560 && minSize < 720) {
+			placeHolder = "720"
+		} else if (minSize >= 720) {
+			placeHolder = "960"
+		}
+
+		return placeHolder;
+	}
+	
+	configController.ricalcolaPrezzo(){
+		$scope.prezzo = 0;
+		for (entita in configurazione.elencoEntita) {
+			  $scope.prezzo += entita.prezzo;
+			}
+	}
+
+	/*
+	 * funzione invocata quando sul configuratore si sceglie il modello della borsa
+	 * */
+	configController.scegliModello = function(modello){
+
+		$scope.embossSelezionato = false;
+		$scope.mapEmboss = new Map();
+
+		//scelgo il nero come colore vincolante di default
+		$scope.coloreVincolante = "black";
+		$scope.scegliColore = true;
+
+		//scelgo l'argento come metallo vincolante di default
+		$scope.metalloVincolante = "argento";
+		$scope.mapMetalloTracolle = new Map();
+		$scope.mapMetalloBorchie = new Map();
+
+		$scope.borchieSelezionate = false;
+		$scope.tracollaSelezionata = false;
+
+		$scope.metalleriaObbligatoria = [];
+
+		$(".dropdown-toggle").dropdown("toggle");
+
+		$scope.stack = [];
+		
+		//$scope.stack.push(modello.urlStripeHD);
+		var url = modello.urlStripe;
+		url = url.replace("RES", configController.getResolutionPlaceHolder());
+
+		configController.aggiungiElementoAStack(url, 0, false);
+		$scope.modelloSelezionato = modello.nome;
+		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
+
+		var entitaMetalleria = configController.getEntitaMetalleria(modello.nome, "argento");
+		
+		$scope.metalleriaObbligatoria = entitaMetalleria.urlStripe.replace("RES", configController.getResolutionPlaceHolder());
+		//$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
+		configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
+
+		//apro il pannello dei colori
+		configController.selezioneTipoAccessorio("colore");
+
+		configController.caricaSpinner();
+		
+		//gestione configurazione da salvare
+		//entita per il modello
+		var entitaModello = new Object();
+		
+		entitaModello.codiceEntita = modello.codice;
+		entitaModello.nomeEntita = modello.nome;
+		entitaModello.tipoEntita = "modello";
+		entitaModello.descrizioneEntita = "descrizione per il momento non prevista";
+		entitaModello.categoria = "modello";
+		entitaModello.prezzo = modello.prezzo;
+		entitaModello.url = modello.urlStripe;
+		
+		$scope.configuration.elencoEntita.push(entitaModello);
+
+		//entita per la metalleria
+		var entitaAccessorio = new Object();
+		
+		entitaAccessorio.codiceEntita = entitaMetalleria.codice;
+		entitaAccessorio.nomeEntita = entitaMetalleria.nome;
+		entitaAccessorio.tipoEntita = "accessorio";
+		entitaAccessorio.descrizioneEntita = "descrizione per il momento non prevista";
+		entitaAccessorio.categoria = "metalleria";
+		entitaAccessorio.prezzo = entitaMetalleria.prezzo;
+		entitaAccessorio.url = entitaMetalleria.urlStripe;
+		
+		$scope.configuration.elencoEntita.push(entitaAccessorio);
+		
+		//calcolo il prezzo
+		$scope.ricalcolaPrezzo();
+	}
+	
+	/*
+	 * funzione invocata quando si sceglie un tipo di accessorio
+	 * */
 	configController.selezioneTipoAccessorio = function(tipoAccessorio){
 		$scope.tipoEntitaSelezionata = tipoAccessorio;
 		//preparo la mappa che ha chiave = entita.nome - valore = entita
@@ -133,74 +247,19 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 	}
 
-	configController.getResolutionPlaceHolder = function(){
-		var screenWidth = $("#canvasWrapper").innerWidth();
-		var screenHeight = $("#canvasWrapper").innerHeight();
-
-		var placeHolder = "";
-		var minSize = (screenWidth > screenHeight ? screenHeight : screenWidth);
-		if (minSize <= 560) {
-			placeHolder = "560";
-		} else if (minSize > 560 && minSize < 720) {
-			placeHolder = "720"
-		} else if (minSize >= 720) {
-			placeHolder = "960"
-		}
-
-		return placeHolder;
-	}
-
-	configController.scegliModello = function(modello){
-
-		$scope.embossSelezionato = false;
-		$scope.mapEmboss = new Map();
-
-		$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
-		$scope.scegliColore = true;
-
-		$scope.metalloVincolante = "argento";
-		$scope.mapMetalloTracolle = new Map();
-		$scope.mapMetalloBorchie = new Map();
-
-		$scope.borchieSelezionate = false;
-		$scope.tracollaSelezionata = false;
-
-		$scope.metalleriaObbligatoria = [];
-
-		$(".dropdown-toggle").dropdown("toggle");
-
-		$scope.stack = [];
-		//$scope.stack.push(modello.urlStripeHD);
-var url = modello.urlStripe;
-		url = url.replace("RES", configController.getResolutionPlaceHolder());
-		
-
-		configController.aggiungiElementoAStack(url, 0, false);
-		$scope.modelloSelezionato = modello.nome;
-		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
-
-
-		$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
-		configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
-
-		//apro il pannello dei colori
-		configController.selezioneTipoAccessorio("colore");
-
-		configController.caricaSpinner();
-
-	}
-
+	/*
+	 * funzione invocata quando si seleziona una qualsiasi entità nella scelta degli accessori
+	 * */
 	configController.selezionaEntita = function(entita){
 
 		if(entita.nome == $scope.nomeEntitaSelezionata && $scope.tipoEntitaSelezionata != "colore" && $scope.tipoEntitaSelezionata != "metalleria"){
-				$scope.nomeEntitaSelezionata = "";
+				$scope.nomeEntitaSelezionata = ""; //elimino se l'accessorio è eliminabile (ovvero non è colore o metalleria)
 		} else {
 				$scope.nomeEntitaSelezionata = entita.nome;
 		}
 
 		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
 			$scope.dataUrl = canvas.toDataURL();
-
 		});
 
 		var url = entita.urlStripe;
@@ -261,8 +320,6 @@ var url = modello.urlStripe;
 		if($scope.scegliMetallo){
 			$scope.metalloVincolante = entita.metallo;
 		}
-
-		
 
 		//configController.aggiungiStrato(entita.urlStripeHD, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
 		configController.aggiungiStrato(url, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
@@ -326,7 +383,7 @@ var url = modello.urlStripe;
 			}
 		}
 	}
-
+	
 	configController.pulisciStack = function(){
 		var tempStack = []
 		for(var i = 0; i< $scope.stack.length; i++){
@@ -458,19 +515,15 @@ var url = modello.urlStripe;
 	configController.setVisible = function(visible){
 		$scope.spinnerVisibleTest = visible;
 	}
-
-	configController.getUrlMetalleria = function(modello, metallo){
+	
+	configController.getEntitaMetalleria = function(modello, metallo){
 		for(var i = 0; i < $scope.entita.length; i++){
 			var singolaEntita = $scope.entita[i];
 			if(singolaEntita.modello == modello && singolaEntita.metallo == metallo && singolaEntita.categoria == "metalleria"){
-				var url = singolaEntita.urlStripe;
-				url = url.replace("RES", configController.getResolutionPlaceHolder());
-				
-				return url;
-				//return singolaEntita.urlStripeHD;
+				return singolaEntita;
 			}
 		}
-		return "";
+		return null;
 	}
 
 	configController.initConfiguratore = function(){
@@ -509,10 +562,7 @@ var url = modello.urlStripe;
 		  e.stopPropagation()
 		});
 
-
-
 		/* gestione elementi dell'interfaccia */
-
 		var aperto = 0;
 
 		$("#pz").pinchzoomer();
