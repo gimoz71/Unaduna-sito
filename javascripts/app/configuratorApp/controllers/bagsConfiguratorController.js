@@ -16,7 +16,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	$scope.tipiAccessori = new Map();
 	$scope.entitaTipoAccessorioSelezionato = [];
-	$scope.tipiAccossoriModelloSelezionato = [];
+	$scope.tipiAccessoriModelloSelezionato = [];
 	$scope.modelloSelezionato = '';
 
 	$scope.swiperAccessori = null;
@@ -183,6 +183,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		configController.aggiungiElementoAStack(url, 0, false);
 		$scope.modelloSelezionato = modello.nome;
 		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
+		$scope.tipiAccessoriModelloSelezionato.push("iniziali");
 
 
 		$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");

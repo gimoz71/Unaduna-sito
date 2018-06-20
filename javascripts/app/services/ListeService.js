@@ -1,6 +1,6 @@
-angular.module("applicationModule").service("listeService", ["$http",  "UtilFunctionMessagesCreator", function($http, $scope, UtilFunctionMessagesCreator) {
+angular.module("applicationModule").service("listeService", ["$http", "UtilFunctionMessagesCreator", function($http, UtilFunctionMessagesCreator) {
 	
-	$scope.urlGetService = "https://5mjp7r5urj.execute-api.eu-central-1.amazonaws.com/UnadunaGet"
+	this.urlGetService = "https://5mjp7r5urj.execute-api.eu-central-1.amazonaws.com/UnadunaGet"
 	
 	this.tipiAccessoriList = [];
 	this.accessoriesList = [];
@@ -37,7 +37,7 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
 	this.getAccessori = function(){
@@ -47,7 +47,7 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
 	this.getConfigurazione = function(codiceConfigurazione){
@@ -57,7 +57,7 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
 	this.getConfigurazioni = function(){
@@ -67,7 +67,7 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
 	this.getConfigurazioniUtente = function(codiceUtente){
@@ -77,7 +77,7 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
 	this.getOrdini = function(codiceOrdine){
@@ -87,7 +87,7 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
 	this.getOrdini = function(){
@@ -97,7 +97,7 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
 	this.getOrdiniUtente = function(codiceUtente){
@@ -107,7 +107,7 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
 	this.putConfigurazione = function(configurazione){
@@ -117,7 +117,7 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
 	this.putOrdine = function(ordine){
@@ -127,6 +127,6 @@ angular.module("applicationModule").service("listeService", ["$http",  "UtilFunc
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post($scope.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService, requestMessage, config);
 	}
 }]);
