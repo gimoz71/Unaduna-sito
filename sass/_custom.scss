@@ -1500,7 +1500,15 @@ a.link {
             }
         }
 
+        .unaduna-char {
+            height: 49px;
+            width: 100%;
+            line-height: 1.75em;
+            font-size: 1.75em;
+            display: block;
+        }
         select {
+            display: none;
             font-family: 'unaduna-char';
             width                : 100%;
             height                  : 59px;
@@ -1527,6 +1535,8 @@ a.link {
                 font-size: .5em;
             }
         }
+
+        
     }
 
     /* spinner borse */

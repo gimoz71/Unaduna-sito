@@ -13045,7 +13045,15 @@ a.link {
     height: 62px;
   }
 }
+.configuratore .accessori-thumb .unaduna-char {
+  height: 49px;
+  width: 100%;
+  line-height: 1.75em;
+  font-size: 1.75em;
+  display: block;
+}
 .configuratore .accessori-thumb select {
+  display: none;
   font-family: 'unaduna-char';
   width: 100%;
   height: 59px;
