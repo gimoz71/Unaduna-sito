@@ -13080,6 +13080,13 @@ a.link {
 .configuratore .accessori-thumb select option {
   font-size: .5em;
 }
+.configuratore .accessori-thumb .iniziali-list {
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  right: 20px;
+}
 .configuratore .spritespin {
   width: 100%;
 }
