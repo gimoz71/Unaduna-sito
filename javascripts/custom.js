@@ -79,8 +79,8 @@ $.fn.animateAccessoriBar = function(accContainer, offsetElement, triggerElement,
 }
 
 // ricalcola posizione e dimensione delle immagini delle borse al resize della finestra
-$.fn.centerElement2 = function () {
-    /*this.css("position","absolute");
+/*$.fn.centerElement2 = function () {
+    this.css("position","absolute");
     this.css("top", $(".navbar").outerHeight());
 
     var elemSize = $(window).height()-$(".navbar").outerHeight()-$(".accessori").outerHeight()-$(".riepilogo").outerHeight();
@@ -94,12 +94,14 @@ $.fn.centerElement2 = function () {
     } else if ( $(window).height() < elementMaxHeight) {
         this.css("width", elemSize + (elemSize/12)).css("left", (($(this).parent().width() - $(this).width()) / 2) + "px");
         return this;
-    };*/
+    };
 
+}*/
+
+
+$.fn.showIniziali = function(panel) {
+    $(panel).show();
 }
-
-
-
 
 $.fn.parentResize = function() {
     var elemSize = $(window).height() - $(".navbar").outerHeight() - $(".accessori").outerHeight() - $(".riepilogo").outerHeight();
