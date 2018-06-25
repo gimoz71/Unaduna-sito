@@ -48,6 +48,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.removable = false;
 
 	$scope.resolution = "560";
+	
+	$scope.symbolsUrlStack = [];
+	$scope.symbolArray = []; 
+	$scope.symbolEnabled = true;
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -482,6 +486,27 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			}
 		}
 		return "";
+	}
+	
+	configController.addSymbol(symbol){
+		$scope.symbolArray.push(symbol);
+		configController.checkSelectedSymbols();
+	}
+	
+	configController.checkSelectesSymbols(){
+		if($scope.symbolArray.length > 2){
+			configController.disableSymbol();
+		} else {
+			configController.enableSymbols();
+		}
+	}
+	
+	configController.disableSymbols(){
+		$scope.symbolEnabled = false;
+	}
+	
+	configController.enableSymbols(){
+		$scope.symbolEnabled = true;
 	}
 
 	configController.initConfiguratore = function(){
