@@ -66,6 +66,7 @@
 }
 .unaduna-char-icon-a:before{content:'\0041';}
 .unaduna-char-icon-b:before{content:'\0042';}
+.unaduna-char-icon-c:before{content:'\0043';}
 .unaduna-char-icon-d:before{content:'\0044';}
 .unaduna-char-icon-e:before{content:'\0045';}
 .unaduna-char-icon-f:before{content:'\0046';}
@@ -92,8 +93,12 @@
 .unaduna-char-icon-paperella:before{content:'\0031';}
 .unaduna-char-icon-nota:before{content:'\0032';}
 .unaduna-char-icon-stella:before{content:'\0033';}
+.unaduna-char-icon-blank:before{content:'\005f';}
 
-
+.unaduna-char-icon-w:before {
+    font-size: 135%;
+    line-height: .75em;
+}
 /*-------------------------------*/
 /* override e aggiunte a stili bootstrap      */
 /*-------------------------------*/
@@ -1536,15 +1541,28 @@ a.link {
             }
         }
 
-        .iniziali-list {
+    }
+    .iniziali-list {
+        display: block;
+        position: absolute;
+        top: 60px;
+        background: rgba(255,255,255,1);
+        border: solid 1px $standard-border-color;
+        left: 10px;
+        right: 10px;
+        bottom: 75px;
+        z-index: 100;
+        font-size: 3em;
+        overflow: auto;
+        .unaduna-char {
+            height: 1em;
+            margin: 20px 0;
+            width: 100%;
+            line-height: 1em;
+            font-size: 1em;
             display: block;
-            position: absolute;
-            top: 50px;
-            left: 20px;
-            right: 20px;
         }
     }
-
     /* spinner borse */
 
     .spritespin {
