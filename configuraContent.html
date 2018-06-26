@@ -95,7 +95,14 @@
 	                                </a>
 								</slide>
 							</slides>
-							<slides ng-show="tipoEntitaSelezionata == 'iniziali'" >
+						</swiper>
+						<swiper  ng-show="tipoEntitaSelezionata == 'iniziali'"  class="accessori-thumb" grab-cursor="true" observer="false" keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}">
+							<slides>
+								<slide>
+									<a href="javascript:void(0)" onclick="addSymbol('a')" class="unaduna-char" ng-disabled="symbolEnabled">
+										<i class="unaduna-char-icon-backspace"></i>
+									</a>
+								</slide>
 								<slide>
 									<a href="javascript:void(0)" onclick="addSymbol('a')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-a"></i>
