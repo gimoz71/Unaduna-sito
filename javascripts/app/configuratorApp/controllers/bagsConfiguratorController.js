@@ -473,7 +473,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	/*
 	 * SEZIONE RELATIVA ALLA GESTIONE DELLE LETTERE E DEI SIMBOLI 
 	 * */
-	configController.generateSymbolStack(){
+	configController.generateSymbolStack = function(){
 		//aggiungo la parte delle iniziali - se ce ne sono
 		/*
 		 * il symbolArray è quello su cui agganciare il modello del 'campo di testo'. Una volta definito quello e dato l'OK
@@ -498,7 +498,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			}
 		}
 	}
-	configController.modelNameTranslate(modelName){
+	configController.modelNameTranslate = function(modelName){
 		switch(modelName){
 			case "shoulderbag":
 				return "RIBALTINA";
@@ -510,12 +510,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				return "POCHETTE";
 		}
 	}
-	configController.addSymbol(symbol){
+	configController.addSymbol = function(symbol){
 		$scope.symbolArray.push(symbol);
 		configController.checkSelectedSymbols();
 	}
 	
-	configController.checkSelectesSymbols(){
+	configController.checkSelectesSymbols = function(){
 		if($scope.symbolArray.length > 2){
 			configController.disableSymbol();
 		} else {
@@ -523,19 +523,19 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 	}
 	
-	configController.disableSymbols(){
+	configController.disableSymbols = function(){
 		$scope.symbolEnabled = false;
 	}
 	
-	configController.enableSymbols(){
+	configController.enableSymbols = function(){
 		$scope.symbolEnabled = true;
 	}
 	
-	configController.areSymbolsSelected(){
+	configController.areSymbolsSelected = function(){
 		return $scope.symbolArray.length > 0;
 	}
 	
-	configController.getSelectedSymbolNumber(){
+	configController.getSelectedSymbolNumber = function(){
 		return $scope.symbolArray.length;
 	}
 	/*
