@@ -11721,7 +11721,7 @@ button.close {
 
 .unaduna-char-icon-w:before {
   font-size: 135%;
-  line-height: .75em;
+  line-height: 1.15em;
 }
 
 /*-------------------------------*/
@@ -11898,6 +11898,10 @@ input.newsletter {
 }
 
 /* settaggio elementi grafici dei link e pulsanti */
+button:focus {
+  outline: 0;
+}
+
 .btn {
   -webkit-transition: all 500ms ease-in-out;
   -o-transition: all 500ms ease-in-out;
@@ -13077,26 +13081,36 @@ a.link {
     font-size: 1.75em;
   }
 }
-.configuratore .iniziali-list {
-  display: block;
+.configuratore .iniziali-preview {
   position: absolute;
-  top: 60px;
-  background: white;
-  border: solid 1px #dbd4d1;
-  left: 10px;
-  right: 10px;
-  bottom: 75px;
-  z-index: 100;
-  font-size: 3em;
-  overflow: auto;
-}
-.configuratore .iniziali-list .unaduna-char {
-  height: 1em;
-  margin: 20px 0;
-  width: 100%;
-  line-height: 1em;
+  top: -80px;
+  left: 50%;
+  margin-left: -64px;
+  width: auto;
+  font-family: "unaduna char";
   font-size: 1em;
-  display: block;
+  background: rgba(255, 255, 255, 0.9);
+  border: solid 1px #dbd4d1;
+  padding: 1px;
+}
+.configuratore .iniziali-preview input {
+  width: 4em;
+  border: none;
+  background: transparent;
+}
+.configuratore .iniziali-preview button {
+  font-family: "Source Sans Pro";
+  position: absolute;
+  top: -1px;
+  height: 43px;
+  width: 40px;
+  border: solid 1px #dbd4d1;
+  background: #fff;
+}
+@media screen and (max-height: 600px) {
+  .configuratore .iniziali-preview {
+    top: -76px;
+  }
 }
 .configuratore .spritespin {
   width: 100%;

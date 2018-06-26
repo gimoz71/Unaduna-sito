@@ -85,6 +85,9 @@
 			</div>
 			<div class="row" id="rigaaccessori">
 				<div class="col-lg-12">
+
+					<div class="iniziali-preview" ng-show="tipoEntitaSelezionata == 'iniziali'"><input type="text"  id="inizialiPreview" readonly placeholder="ABC" value="{{inizialiPreview}}"><button class="follow anim">OK</button></div>
+
 					<section class="swipe">
 						<swiper class="accessori-thumb" grab-cursor="true" observer="false"  keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}">
 							<slides ng-hide="tipoEntitaSelezionata == 'iniziali'" >
@@ -96,160 +99,161 @@
 								</slide>
 							</slides>
 						</swiper>
-						<swiper  ng-show="tipoEntitaSelezionata == 'iniziali'"  class="accessori-thumb" grab-cursor="true" observer="false" keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}">
+						<swiper class="accessori-thumb" ng-show="tipoEntitaSelezionata == 'iniziali'" grab-cursor="true" observer="false" keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}">
 							<slides>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('a')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<a href="#" ng-click="contr.addSymbol('backspace')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-backspace"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('a')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<a href="#" ng-click="contr.addSymbol('A')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-a"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('b')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<a href="#" ng-click="contr.addSymbol('B')"  class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-b"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('c')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<a href="#" ng-click="contr.addSymbol('C')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-c"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('d')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<a href="#" ng-click="contr.addSymbol('D')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-d"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('e')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('e')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-e"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('f')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('f')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-f"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('g')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('g')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-g"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('h')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('h')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-h"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('i')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('i')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-i"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('j')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('j')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-j"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('k')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('k')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-k"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('l')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('l')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-l"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('m')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('m')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-m"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('n')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('n')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-n"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('o')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('o')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-o"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('p')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('p')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-p"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('q')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('q')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-q"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('r')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('r')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-r"></i>
 									</a>
 								</slide><slide>
-									<a href="javascript:void(0)" onclick="addSymbol('s')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('s')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-s"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('t')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('t')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-t"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('u')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('u')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-u"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('v')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('v')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-v"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('w')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('W')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-w"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('x')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('x')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-x"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('y')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('y')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-y"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('z')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('z')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-z"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('paperella')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('paperella')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-paperella"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('stella')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('stella')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-stella"></i>
 									</a>
 								</slide>
 								<slide>
-									<a href="javascript:void(0)" onclick="addSymbol('nota')" class="unaduna-char" ng-disabled="symbolEnabled">
+									<ahref="#" ng-click="contr.addSymbol('nota')" class="unaduna-char" ng-disabled="symbolEnabled">
 										<i class="unaduna-char-icon-nota"></i>
 									</a>
 								</slide>
 							</slides>
 							<prev></prev>
 							<next></next>
+							
 						</swiper>
 					</section>
 				</div>
@@ -276,158 +280,5 @@
 			</div>
 		</div>
 	</div>
-	<div class="iniziali-list" id="sx" style="display: none;">
-		<div class="col-xs-12">
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-blank"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-a"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-b"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-c"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-d"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-e"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-f"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-g"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-h"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-i"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-j"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-k"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-l"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-m"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-n"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-o"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-p"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-q"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-r"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-s"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-t"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-u"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-v"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-w"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-x"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-y"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-z"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-paperella"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-nota"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-stella"></i>
-				</a>
-			</div>
-		</div>
-	</div>
 </div>
+

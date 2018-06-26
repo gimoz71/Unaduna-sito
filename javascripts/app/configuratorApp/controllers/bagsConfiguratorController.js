@@ -55,6 +55,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.symbolEnabled = true;
 	$scope.baseUrlSymbols = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/MODELLI/MODELLO/INIZIALI/";
 	$scope.symbolConfigurations = [["M"],["MSX","MDX"],["SX","M","DX"]];
+	$scope.inizialiPreview = "";
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -511,8 +512,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 	}
 	configController.addSymbol = function(symbol){
-		$scope.symbolArray.push(symbol);
-		configController.checkSelectedSymbols();
+		//$scope.symbolArray.push(symbol);
+		//configController.checkSelectedSymbols();
+		$scope.inizialiPreview += symbol;
 	}
 	
 	configController.checkSelectesSymbols = function(){
@@ -614,6 +616,15 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$('#txt_fullname').focus();
 
 		});
+
+		$('#a').click(function(){
+			var $target = $('#inizialiPreview'),
+				text = $('#inizialiPreview').val(),
+				buttonVal = $(this).data('value');
+
+			$target.val(text+" "+buttonVal);
+		})
+
 		$(document).on('blur', '#txt_fullname', function() {
 			var name = $(this).val();
 			//alert('Make an AJAX call and pass this parameter >> name=' + name);
@@ -645,6 +656,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX')
 		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
+
+
 
 	};
 
