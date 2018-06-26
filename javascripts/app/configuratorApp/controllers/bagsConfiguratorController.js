@@ -42,6 +42,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.borchieSelezionate = false;
 	$scope.nomeBorchiaSelezionata = "";
 	$scope.tracollaSelezionata = false;
+	$scope.coloreSelezionato = "black";
 
 	$scope.metalleriaObbligatoria = [];
 
@@ -52,6 +53,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.symbolsUrlStack = [];
 	$scope.symbolArray = []; 
 	$scope.symbolEnabled = true;
+	$scope.baseUrlSymbols = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/MODELLI/MODELLO/INIZIALI/";
+	$scope.symbolConfigurations = [["M"],["MSX","MDX"],["SX","M","DX"]];
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -195,9 +198,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		//apro il pannello dei colori
 		configController.selezioneTipoAccessorio("colore");
-
 		configController.caricaSpinner();
-
 	}
 
 	configController.selezionaEntita = function(entita){
@@ -210,11 +211,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
 			$scope.dataUrl = canvas.toDataURL();
-
 		});
 
 		var url = entita.urlStripe;
-		//url = url.replace("RES", configController.getResolutionPlaceHolder());
 		url = url.replace("RES", $scope.resolution);
 
 		if($scope.tipoEntitaSelezionata == "stile"){
@@ -224,14 +223,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.nomeBorchiaSelezionata = entita.nomeBorchia;
 		}
 		if ($scope.tipoEntitaSelezionata.startsWith("colore")){
-
+			
+			$scope.coloreSelezionato = entita.colore;
 			if($scope.embossSelezionato){
 				//devo sostituire l'emboss se è selezionato
 				//1. estraggo la url dell'emboss
 
 				var embossUrl = $scope.mapEmboss.get($scope.nomeStileSelezionato + "_" + entita.colore);
 				var urlE = embossUrl.urlStripe;
-				//urlE = urlE.replace("RES", configController.getResolutionPlaceHolder());
 				urlE = urlE.replace("RES", $scope.resolution);
 
 				if(embossUrl){
@@ -348,6 +347,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				tempStack.push($scope.stack[i]);
 			}
 		}
+		
+		
 		return tempStack;
 	}
 
@@ -355,10 +356,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	configController.caricaSpinner = function(){
 		var date1 = new Date();
 		$("#loader").show();
-		//attivo il loader e tolgo lo spinner
-		// configController.visibleManager.loaderVisible = true; // non funziona
-		// configController.visibleManager.spinnerVisible = false;
-//
+		
 		configController.setVisible(false);
 
 		//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
@@ -399,7 +397,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				frameTime: 100,
 				loop: false,
 				stopFrame: 7,
-				//renderer: renderType,
                 scrollThreshold   : 200,
                 plugins: [
                     'drag',
@@ -416,14 +413,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
                 	}
                 },
-				onLoad: function() {
-					// html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
-					// 	$scope.dataUrl = canvas.toDataURL();
-					//
-					// });
-
-
-				},
 				onComplete: function() {
 					if(firstExecComplete){
 						firstExecComplete = false;
@@ -440,9 +429,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						}
 						$("#transition-image").delay(100).fadeOut();
 						$("#loader").delay(200).fadeOut("slow");
-
-
-						// configController.visibleManager.loaderVisible = false; // non funziona
 
 						$scope.spinIcon = false;
 						$scope.spinAnim = false;
@@ -478,16 +464,52 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			var singolaEntita = $scope.entita[i];
 			if(singolaEntita.modello == modello && singolaEntita.metallo == metallo && singolaEntita.categoria == "metalleria"){
 				var url = singolaEntita.urlStripe;
-				//url = url.replace("RES", configController.getResolutionPlaceHolder());
-				url = url.replace("RES", $scope.resolution);
-				
-				return url;
-				//return singolaEntita.urlStripeHD;
+				return url.replace("RES", $scope.resolution);
 			}
 		}
 		return "";
 	}
 	
+	/*
+	 * SEZIONE RELATIVA ALLA GESTIONE DELLE LETTERE E DEI SIMBOLI 
+	 * */
+	configController.generateSymbolStack(){
+		//aggiungo la parte delle iniziali - se ce ne sono
+		/*
+		 * il symbolArray è quello su cui agganciare il modello del 'campo di testo'. Una volta definito quello e dato l'OK
+		 * questa funzione si occupa di definire l'array delle url da concatenare a quelle della borsa, andando anche a ragionare
+		 * sulle disposizioni dei simboli (sx, msx, m, mdx, dx) dipendentemente dal numero di simboli selezionati
+		 * */
+		if(configController.areSymbolsSelected()){
+			var symbolNumber = configController.getSelectedSymbolNumber();
+			if(symbolNumber > 0){
+				for(var i=0; i<symbolConfigurations[symbolNmber+1].length; i++){
+					var posizione = symbolConfigurations[symbolNmber+1][i];
+					//adesso posso comporre lo stack dei simboli
+					var url = $scope.baseUrlSymbols 
+						+ "INIZIALI" + "_" 
+						+ $scope.symbolArray + "_" 
+						+ posizione + "_" 
+						+ $scope.resolution + "_" 
+						+ $scope.coloreSelezionato + ".png";
+						//INIZIALI_W_MDX_960_PARROT
+					$scope.symbolsUrlStack.push(url);
+				}
+			}
+		}
+	}
+	configController.modelNameTranslate(modelName){
+		switch(modelName){
+			case "shoulderbag":
+				return "RIBALTINA";
+			case "shopping":
+				return "SHOPPING";
+			case "tote":
+				return "TOTE";
+			case "crossbody":
+				return "POCHETTE";
+		}
+	}
 	configController.addSymbol(symbol){
 		$scope.symbolArray.push(symbol);
 		configController.checkSelectedSymbols();
@@ -508,7 +530,19 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	configController.enableSymbols(){
 		$scope.symbolEnabled = true;
 	}
-
+	
+	configController.areSymbolsSelected(){
+		return $scope.symbolArray.length > 0;
+	}
+	
+	configController.getSelectedSymbolNumber(){
+		return $scope.symbolArray.length;
+	}
+	/*
+	 * FINE ---- SEZIONE RELATIVA ALLA GESTIONE DELLE LETTERE E DEI SIMBOLI 
+	 * */
+	
+	
 	configController.initConfiguratore = function(){
 
 		//1. devo fare il caricamento massivo iniziale delle configurazioni (solo la struttura json dal DB, non le immagini)
