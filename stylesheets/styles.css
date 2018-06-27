@@ -13060,6 +13060,12 @@ a.link {
     height: 62px;
   }
 }
+.configuratore .accessori-thumb .unaduna-char.disabled {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: #ccc;
+}
 .configuratore .accessori-thumb .unaduna-char i {
   height: 57px;
   width: 57px;

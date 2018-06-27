@@ -503,6 +503,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		if(symbol == 'backspace'){
 			if($scope.inizialiPreview.length > 0){
 				$scope.inizialiPreview = $scope.inizialiPreview.slice(0, -1);
+				configController.checkSelectedSymbols();
 			}
 		} else {
 			$scope.inizialiPreview += symbol;
