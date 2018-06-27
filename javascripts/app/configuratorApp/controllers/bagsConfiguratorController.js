@@ -137,8 +137,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						}
 					}
 				}
-				
-				
 			}
 		}
 	}
@@ -182,17 +180,13 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		$(".dropdown-toggle").dropdown("toggle");
 
 		$scope.stack = [];
-		//$scope.stack.push(modello.urlStripeHD);
 		var url = modello.urlStripe;
-		//url = url.replace("RES", configController.getResolutionPlaceHolder());
 		url = url.replace("RES", $scope.resolution);
 		
-
 		configController.aggiungiElementoAStack(url, 0, false);
 		$scope.modelloSelezionato = modello.nome;
 		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
 		$scope.tipiAccessoriModelloSelezionato.push("iniziali");
-
 
 		$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
 		configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
@@ -276,13 +270,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.metalloVincolante = entita.metallo;
 		}
 
-		
-
-		//configController.aggiungiStrato(entita.urlStripeHD, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
 		configController.aggiungiStrato(url, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
 
 		if($scope.tipoEntitaSelezionata == "stile"){
-			//if($scope.stack.indexOf(entita.urlStripeHD) == -1){
 			if($scope.stack.indexOf(url) == -1){
 				$scope.embossSelezionato = false;
 			} else {
@@ -292,7 +282,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 
 		if($scope.tipoEntitaSelezionata == "borchie"){
-			//if($scope.stack.indexOf(entita.urlStripeHD) == -1){
 			if ($scope.stack.indexOf(url) == -1) {
 				$scope.borchieSelezionate = false;
 			} else {
@@ -301,7 +290,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.removable = true;
 		}
 		if($scope.tipoEntitaSelezionata == "tracolle"){
-			//if($scope.stack.indexOf(entita.urlStripeHD) == -1){
 			if ($scope.stack.indexOf(url) == -1) {
 				$scope.tracollaSelezionata = false;
 			} else {
@@ -348,8 +336,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				tempStack.push($scope.stack[i]);
 			}
 		}
-		
-		
 		return tempStack;
 	}
 
@@ -514,12 +500,19 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	configController.addSymbol = function(symbol){
 		//$scope.symbolArray.push(symbol);
 		//configController.checkSelectedSymbols();
-		$scope.inizialiPreview += symbol;
+		if(symbol == 'backspace'){
+			if($scope.inizialiPreview.length > 0){
+				$scope.inizialiPreview = $scope.inizialiPreview.slice(0, -1);
+			}
+		} else {
+			$scope.inizialiPreview += symbol;
+			configController.checkSelectedSymbols();
+		}
 	}
 	
-	configController.checkSelectesSymbols = function(){
-		if($scope.symbolArray.length > 2){
-			configController.disableSymbol();
+	configController.checkSelectedSymbols = function(){
+		if($scope.inizialiPreview.length > 2){
+			configController.disableSymbols();
 		} else {
 			configController.enableSymbols();
 		}
@@ -539,6 +532,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	
 	configController.getSelectedSymbolNumber = function(){
 		return $scope.symbolArray.length;
+	}
+	
+	configController.getSymbolEnabled = function(){
+		return $scope.symbolEnabled;
 	}
 	/*
 	 * FINE ---- SEZIONE RELATIVA ALLA GESTIONE DELLE LETTERE E DEI SIMBOLI 
