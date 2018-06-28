@@ -1509,7 +1509,13 @@ a.link {
         }
 
         .unaduna-char{
-             i {
+            &.disabled {
+                pointer-events: none;
+                cursor: default;
+                text-decoration: none;
+                color: #ccc;
+            }
+            i {
                 height: 57px;
                 width: 57px;
                 line-height: 2em;
@@ -1526,11 +1532,13 @@ a.link {
             img {
                 height: 47px;
             }
-            .unaduna-char i {
-                height: 47px;
-                width: 47px;
-                line-height: 1.9em;
-                font-size: 1.75em;
+            .unaduna-char{
+                i {
+                    height: 47px;
+                    width: 47px;
+                    line-height: 1.9em;
+                    font-size: 1.75em;
+                }
             }
         }
     }
