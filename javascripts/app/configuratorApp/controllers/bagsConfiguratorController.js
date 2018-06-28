@@ -220,6 +220,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		if ($scope.tipoEntitaSelezionata.startsWith("colore")){
 			
 			$scope.coloreSelezionato = entita.colore;
+			
+			//ricarico le iniziali quando cambio il colore
+			if($scope.inizialiPreview.length > 0){
+				configController.generateArray();
+				configController.caricaSpinner();
+			}
 			if($scope.embossSelezionato){
 				//devo sostituire l'emboss se è selezionato
 				//1. estraggo la url dell'emboss
@@ -339,6 +345,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		return tempStack;
 	}
 
+	configController.caricaZoom = function(){
+		
+	}
+	
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.caricaSpinner = function(){
 		var date1 = new Date();
@@ -356,6 +366,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 
 		var cleanStack = configController.pulisciStack();
+		
+		if($scope.symbolsUrlStack.length > 0) {
+			cleanStack = cleanStack.concat($scope.symbolsUrlStack);
+		}
 
 		var firstExecInit = true;
 		var firstExecComplete = true;
@@ -470,8 +484,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		if(configController.areSymbolsSelected()){
 			var symbolNumber = configController.getSelectedSymbolNumber();
 			if(symbolNumber > 0){
-				for(var i=0; i<symbolConfigurations[symbolNmber+1].length; i++){
-					var posizione = symbolConfigurations[symbolNmber+1][i];
+				for(var i=0; i<symbolConfigurations[symbolNumber+1].length; i++){
+					var posizione = symbolConfigurations[symbolNumber+1][i];
 					//adesso posso comporre lo stack dei simboli
 					var url = $scope.baseUrlSymbols 
 						+ "INIZIALI" + "_" 
@@ -497,16 +511,74 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				return "POCHETTE";
 		}
 	}
+	
+	configController.symbolTranslate = function(symbol){
+		switch(symbol){
+			case "1":
+				return "PAPERELLA";
+			case "2":
+				return "NOTA";
+			case "3": 
+				return "STELLA";
+			default:
+				return symbol;
+		}
+	}
+	configController.colorTranslate = function(color){
+		switch(color){
+		case "black":
+			return "NERO";
+		case "nude":
+			return "NUDE";
+		case "parrot": 
+			return "PARROT";
+		case "oceania": 
+			return "OCEANIA";
+		case "champagne": 
+			return "CHAMPAGNE";
+		case "lion": 
+			return "LION";
+		default:
+			return "NERO";
+		}
+	}
 	configController.addSymbol = function(symbol){
 		//$scope.symbolArray.push(symbol);
 		//configController.checkSelectedSymbols();
 		if(symbol == 'backspace'){
 			if($scope.inizialiPreview.length > 0){
 				$scope.inizialiPreview = $scope.inizialiPreview.slice(0, -1);
+				configController.checkSelectedSymbols();
+				configController.generateArray();
+				configController.caricaSpinner();
 			}
 		} else {
 			$scope.inizialiPreview += symbol;
 			configController.checkSelectedSymbols();
+			configController.generateArray();
+			configController.caricaSpinner();
+		}
+	}
+	
+	configController.generateArray = function(){
+		$scope.symbolsUrlStack = [];
+		var charArray = $scope.inizialiPreview.split('');
+		var charArraySize = charArray.length;
+		if(charArraySize > 0){
+			for(var i=0; i< $scope.symbolConfigurations[charArraySize-1].length; i++){
+				var posizione = $scope.symbolConfigurations[charArraySize-1][i];
+				//adesso posso comporre lo stack dei simboli
+				var translatedSymbol = configController.symbolTranslate(charArray[i]);
+				var url = $scope.baseUrlSymbols 
+					+ "INIZIALI" + "_" 
+					+  translatedSymbol + "_" 
+					+ posizione + "_" 
+					+ $scope.resolution + "_" 
+					+ configController.colorTranslate($scope.coloreSelezionato) + ".png";
+				//devo sostituire il nome del modello 
+				url = url.replace("MODELLO", configController.modelNameTranslate($scope.modelloSelezionato));
+				$scope.symbolsUrlStack.push(url);
+			}
 		}
 	}
 	
