@@ -160,7 +160,9 @@ $btn-default-border:                rgba(#7E2C09, .35); /* #ccc*/
 
 $btn-action-color:                  #fff;
 $btn-action-bg:                     #7E2C09;
+$btn-action-bg:                     lighten(#9cb453, 15);
 $btn-action-border:                 rgba(#7E2C09, .35);
+$btn-action-border:                 darken(#9cb453, .5);
 
 // $btn-primary-color:              #fff
 // $btn-primary-bg:                 $brand-primary

@@ -12010,52 +12010,52 @@ button:focus {
 
 .btn-action {
   color: #fff;
-  background-color: #7E2C09;
-  border-color: rgba(126, 44, 9, 0.35);
-  font-size: 1.8em;
+  background-color: #bbcb88;
+  border-color: #9bb351;
+  font-size: 1.5em;
 }
 .btn-action:focus, .btn-action.focus {
   color: #fff;
-  background-color: #4e1b06;
-  border-color: rgba(7, 2, 1, 0.35);
+  background-color: #a6bc65;
+  border-color: #505d28;
 }
 .btn-action:hover {
   color: #fff;
-  background-color: #4e1b06;
-  border-color: rgba(69, 24, 5, 0.35);
+  background-color: #a6bc65;
+  border-color: #778b3d;
 }
 .btn-action:active, .btn-action.active, .open > .btn-action.dropdown-toggle {
   color: #fff;
-  background-color: #4e1b06;
-  border-color: rgba(69, 24, 5, 0.35);
+  background-color: #a6bc65;
+  border-color: #778b3d;
 }
 .btn-action:active:hover, .btn-action:active:focus, .btn-action:active.focus, .btn-action.active:hover, .btn-action.active:focus, .btn-action.active.focus, .open > .btn-action.dropdown-toggle:hover, .open > .btn-action.dropdown-toggle:focus, .open > .btn-action.dropdown-toggle.focus {
   color: #fff;
-  background-color: #2d1003;
-  border-color: rgba(7, 2, 1, 0.35);
+  background-color: #97b04d;
+  border-color: #505d28;
 }
 .btn-action:active, .btn-action.active, .open > .btn-action.dropdown-toggle {
   background-image: none;
 }
 .btn-action.disabled:hover, .btn-action.disabled:focus, .btn-action.disabled.focus, .btn-action[disabled]:hover, .btn-action[disabled]:focus, .btn-action[disabled].focus, fieldset[disabled] .btn-action:hover, fieldset[disabled] .btn-action:focus, fieldset[disabled] .btn-action.focus {
-  background-color: #7E2C09;
-  border-color: rgba(126, 44, 9, 0.35);
+  background-color: #bbcb88;
+  border-color: #9bb351;
 }
 .btn-action .badge {
-  color: #7E2C09;
+  color: #bbcb88;
   background-color: #fff;
 }
 .btn-action.active:after {
-  background-color: #7E2C09;
+  background-color: #bbcb88;
 }
 .btn-action.active:before {
-  border-color: #7E2C09 transparent transparent;
+  border-color: #bbcb88 transparent transparent;
 }
 .btn-action.follow:after {
-  border-color: transparent transparent transparent #7E2C09;
+  border-color: transparent transparent transparent #bbcb88;
 }
 .btn-action.follow:before {
-  border-color: transparent transparent transparent #7E2C09;
+  border-color: transparent transparent transparent #bbcb88;
 }
 
 /* stilizzazione link menu */
@@ -12490,6 +12490,12 @@ a.link {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
+.order-buttons {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .order-state {
   display: block;
   width: 300px;
@@ -12563,6 +12569,16 @@ a.link {
 }
 .order-state.current.active:before {
   border-color: #C09683 transparent transparent;
+}
+.order-state.summary p span {
+  display: inline-block;
+  width: 45%;
+}
+.order-state.summary p span:first-child {
+  text-align: left;
+}
+.order-state.summary p span:last-child {
+  text-align: right;
 }
 
 .adv-box {

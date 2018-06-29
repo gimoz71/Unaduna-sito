@@ -404,7 +404,7 @@ button:focus {outline:0;}
 
 .btn-action { // stilizzazione pulsante di azione
     @include button-variant($btn-action-color, $btn-action-bg, $btn-action-border);
-    font-size: 1.8em;
+    font-size: 1.5em;
     &.active:after {
         background-color: $btn-action-bg;
 
@@ -817,7 +817,6 @@ a.link {
             border: none;
             border-top: solid 1px $standard-border-color;
         }
-
     }
     .materiale {
         display: block;
@@ -828,6 +827,11 @@ a.link {
     }
 }
 
+.order-buttons {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .order-state {
     display: block;
@@ -893,6 +897,20 @@ a.link {
             }
             &:before {
                 border-color: #C09683 transparent transparent;
+            }
+        }
+    }
+    &.summary {
+        p {
+            span{
+                display: inline-block;
+                width: 45%;
+                &:first-child{
+                    text-align:left;
+                }
+                &:last-child {
+                    text-align: right;
+                }
             }
         }
     }
