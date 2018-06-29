@@ -56,6 +56,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.baseUrlSymbols = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/MODELLI/MODELLO/INIZIALI/";
 	$scope.symbolConfigurations = [["M"],["MSX","MDX"],["SX","M","DX"]];
 	$scope.inizialiPreview = "";
+	
+	$scope.tempZoomContent = "";
+	$scope.showZoom = false;
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -351,6 +354,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.caricaSpinner = function(){
+		$scope.showZoom = false;
+		
 		var date1 = new Date();
 		$("#loader").show();
 		
@@ -437,8 +442,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						var date3 = new Date();
 						var diff = date3 - date2;
 						$scope.$log.log('durata caricamento spinner: ' + diff);
-
-
+						
+						html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+							$scope.tempZoomContent = canvas.toDataURL();
+							$scope.showZoom = true;
+						});
 					}
 				}
             }
