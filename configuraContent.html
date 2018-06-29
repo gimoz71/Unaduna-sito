@@ -5,7 +5,7 @@
 				<div class="col-sm-12 clearfix">
 					<ul class="nav navbar-nav fixed-navbar-left">
 						<li>
-							<a href="#" class="link" ng-click="setHome()"><i class="fa fa-bars"></i></a>
+							<a href="#" class="link" ng-click="setHome()"><i class="fa fa-home"></i></a>
 						</li>
 						<li class="dropdown yamm-fw">
 							<a href="#" class="active dropdown-toggle link modello" data-toggle="dropdown">scegli il modello</a>
@@ -14,7 +14,7 @@
 									<div class="yamm-content clearfix">
 										<div class="col-xs-12">
 											<!-- CON IL REPEATER VADO A ELENCARE TUTTI I MODELLI DI BORSA DISPONIBILI  -->
-											<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center" ng-repeat="modello in modelli">
+											<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center" ng-repeat="modello in modelli">
 												<a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.scegliModello(modello)"><img ng-src="{{modello.urlThumbnailHD}}" /><h5>{{modello.nome}}</h5></a>
 											</div>
 										</div>
@@ -48,7 +48,7 @@
 	<div class="zoom">
 		<button id="closeZoom"><i class="unaicon-remove"></i></button>
 		<div class="zoomHolder">
-			<img data-src="{{tempZoomContent}}" id="pz" data-elem="pinchzoomer" data-options="scaleMode:proportionalInside;maxZoom:3;doubleTapZoom:3;force3D:true;appendControls:true;appendControlHolder:true">
+			<img data-src="images/zoom-test-2.jpg" id="pz" data-elem="pinchzoomer" data-options="scaleMode:proportionalInside;maxZoom:3;initZoom:2;doubleTapZoom:3;force3D:true;appendControls:true;appendControlHolder:true">
 			<div class="controlHolder" data-elem="controlHolder">
 				<div class="zoomIn" data-elem="zoomIn"><i class="unaicon-add"></i></div>
 				<div class="zoomOut" data-elem="zoomOut"><i class="unaicon-minus"></i></div>

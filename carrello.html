@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Configuratore Borse</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta property="og:description" content="Configuratore Borse.">
+    <link media="screen" rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+    <!--[if lt IE 9]><script src="javascripts/html5shiv.js"></script><![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <style type="text/css">
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-header-content">
+        <nav class="navbar main-navbar navbar-default nomargin" role="navigation">
+            <div class="container">
+                <a class="navbar-brand logo-big  hidden-xs text-hide" href="#">Unaduna</a>
+                <a class="navbar-brand logo-small hidden-lg hidden-md hidden-sm text-hide" href="#">Unaduna</a>
+                <div class="navbar-header navbar-right">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <ul class="nav navbar-nav fixed-navbar-right">
+                        <li>
+                            <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
+                            <ul class="dropdown-menu" aria-labelledby="user-menu">
+                                <li><a href="accesso.html">Profilo</a></li>
+                                <li><a href="#">Esci</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="unaicon-cart"></i> <span class="hidden-xs">(1)</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="unaicon-favourite"></i> <span class="hidden-xs">(2)</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="#">
+                                <i class="unaicon-search"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="language" data-toggle="dropdown">English
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="language">
+                                <li>
+                                    <a href="#">Deutsche</a>
+                                </li>
+                                <li>
+                                    <a href="#">Francois</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--<li>
+                            <a href="#"><i class="unaicon-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="unaicon-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="unaicon-instagram"></i></a>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--<div class="container" style="position: relative">
+            <div class="search hidden-xs">
+                <input type="text" placeholder="Ricerca"><a href="#"><i class="unaicon-search"></i></a>
+            </div>
+            <div class="language hidden-xs">
+                <a href="#" id="language" data-toggle="dropdown">English <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="language">
+                    <li><a href="#">Deutsche</a></li>
+                    <li><a href="#">Francois</a></li>
+                </ul>
+            </div>
+        </div> -->
+    </div>
+    <nav class="navbar navbar-default nomargin main-site-navbar">
+        <div class="container">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html" class="">Home</a>
+                    </li>
+                    <li>
+                        <a href="http://unadunaconfiguratore.eu-central-1.elasticbeanstalk.com" target="_blank" class="">Configura</a>
+                    </li>
+                    <li>
+                        <a href="visione.html" class="">Visione</a>
+                    </li>
+                    <li>
+                        <a href="esperienza.html" class="">Esperienza</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Contatti</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Stores</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center gradient">
+        <div class="row">
+            <div class="col-sm-12 clearfix bottom-buffer">
+                <h3 class="title section">Carrello</h3>
+                <!--<p>in questa area puoi verificare i tuoi ordini, visualizzare e modificare i tuoi preferiti.</p>-->
+            </div>
+        </div>
+        
+        <div class="tab-content clearfix gradient">
+            <div class="row bag-list">
+                <div class="col-sm-12">
+                    <div class="col-sm-8">
+                            <div class="row bag-item clearfix">
+                                <div class="col-sm-4">
+                                    <img src="images/borsa-dummy-conf.jpg" class="bag-sample">
+                                </div>
+                                <div class="col-sm-8">
+                                    <h4 class="bag">10/10/17 - Configurazione #1  - 340&euro;</h4>
+                                </div>
+                                <div class="col-sm-4 base">
+                                    <h5 class="section-small left">Base</h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 40%;" class="hidden-sm"><span>colore:</span></td>
+                                            <td><div class="materiale" style="background-color:#C9FF26;"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="hidden-sm"><span class="hidden-sm">pelle:</span></td>
+                                            <td><div class="materiale" style="background-image: url('images/pelle.jpg');"></div></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-sm-4 accessori">
+                                    <h5 class="section-small left">Accessori</h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 40%;">nappa:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>zip:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>tracolla:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>manico:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>borchia:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ciondolo:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                            <div class="row bag-item clearfix">
+                                <div class="col-sm-4">
+                                    <img src="images/borsa-dummy-conf.jpg" class="bag-sample">
+                                </div>
+                                <div class="col-sm-8">
+                                    <h4 class="bag">10/10/17 - Configurazione #1  - 340&euro;</h4>
+                                </div>
+                                <div class="col-sm-4 base">
+                                    <h5 class="section-small left">Base</h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 40%;" class="hidden-sm"><span>colore:</span></td>
+                                            <td><div class="materiale" style="background-color:#C9FF26;"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="hidden-sm"><span class="hidden-sm">pelle:</span></td>
+                                            <td><div class="materiale" style="background-image: url('images/pelle.jpg');"></div></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-sm-4 accessori">
+                                    <h5 class="section-small left">Accessori</h5>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 40%;">nappa:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>zip:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>tracolla:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>manico:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>borchia:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ciondolo:</td>
+                                            <td>#1</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                    </div>
+                    <div class="col-sm-4 bag-item clearfix">
+                        <div class="col-sm-12 action">
+                            <div class="order-state active one just-done summary">
+                                <p>
+                                    <span><strong>Subtotale</strong></span>
+                                    <span><strong>640&euro;</strong></span>
+                                </p>
+                                
+                                <p>
+                                    <span>spedizione</span>
+                                    <span>0&euro;</span>
+                                </p>
+                                <hr>
+                                
+                            </div>
+                            
+                            <!--<div class="order-state active two just-done">In lavorazione</div>-->
+                            <div class="order-state active three current summary">
+                                <p style="margin:0">
+                                    <span>
+                                        <strong>TOTALE</strong>
+                                    </span>
+                                    <span>
+                                        <strong>0&euro;</strong>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="order-buttons" style="margin-top: 20px;">
+                                <a href="#" class="btn btn-action btn-lg btn-block follow" style="width:auto;"> Procedi al checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center">
+        <div class="footer-navbar-container">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html" class="">Home</a>
+                    </li>
+                    <li>
+                        <a href="http://unadunaconfiguratore.eu-central-1.elasticbeanstalk.com" class="">Configura</a>
+                    </li>
+                    <li>
+                        <a href="visione.html" class="">Visione</a>
+                    </li>
+                    <li>
+                        <a href="esperienza.html" class="">Esperienza</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Contatti</a>
+                    </li>
+                    <li>
+                        <a href="#" class="">Stores</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="credits">
+            <div class="container">
+                <a class="logo-footer text-hide" href="#">Unaduna</a>
+                <p>
+                    Via S. Carlo 2707/2709 47522, San Carlo dI Cesena (FC) Italia<br />
+                    Tel. +39 0547 373077 - Fax +39 0547 373363<br />
+                    P.IVA 03487580403
+                </p>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                Copyright 2017 Unaduna
+            </div>
+        </div>
+    </footer>
+    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="javascripts/bootstrap.js"></script>
+    <script src="javascripts/mdb.js"></script>
+    <!-- <script src="javascripts/custom.js"></script> -->
+    <script>new WOW().init();
+    $(document).ready(function() {
+        // show active tab on reload
+        if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+
+        // remember the hash in the URL without jumping
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+               if(history.pushState) {
+                    history.pushState(null, null, '#'+$(e.target).attr('href').substr(1));
+               } else {
+                    location.hash = '#'+$(e.target).attr('href').substr(1);
+               }
+            });
+        });
+    </script>
+</body>
+
+</html>
