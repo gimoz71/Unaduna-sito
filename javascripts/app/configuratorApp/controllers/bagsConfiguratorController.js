@@ -745,8 +745,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		  e.stopPropagation()
 		});
 
-		
-
 		/* gestione elementi dell'interfaccia */
 
 		var aperto = 0;
