@@ -361,12 +361,59 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
         } else {
         	html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
 				$("#pz").attr("data-src", canvas.toDataURL());
-				
 				$("#pz").pinchzoomer();
 				$("#pz").load();
+				
+				var spriteSpinAPI = $('#spritespin').spritespin('api');
+				var currentFrame = spriteSpinAPI.currentFrame();
+				
+				configController.caricaZoomSpinner(currentFrame)
 			});	
         }
     }
+
+	configController.caricaZoomSpinner = function(frame){
+		//$('#spritespin_zoom').spritespin('destroy');
+		var cleanStack = configController.pulisciStack();
+		
+		if($scope.symbolsUrlStack.length > 0) {
+			cleanStack = cleanStack.concat($scope.symbolsUrlStack);
+		}
+		
+		//sostituisco le risoluzioni per avere immagini, nello zoom, piu' definite
+		var higherResolutionStack = configController.getHighResolutionStack(cleanStack);
+		
+		mergeImages(higherResolutionStack).then(b64 => {
+			dataSourceString = b64;
+			var dataSpin_zoom = {
+				width: 960,
+                height: 960,
+				source: dataSourceString,
+				frame: 8,
+				frames: 8,
+				framesX: 8,
+				rendering: "images",
+				loop: false,
+				onComplete: function() {
+//					if($('#spritespin_zoom') != undefined &&  $('#spritespin_zoom').data("spritespin") != undefined){
+//						var dataUrl = $('#spritespin_zoom').data("spritespin").canvas[0].toDataURL();
+//						$("#pz").attr("data-src", dataUrl);
+//						$("#pz").pinchzoomer();
+//						$("#pz").load();
+//					}
+					
+					html2canvas(document.querySelector("#spritespin_zoom"), { async:false }).then(cnvs => {
+						var dataUrl = cnvs.toDataURL();
+						$("#pz").attr("data-src", dataUrl);
+						$("#pz").pinchzoomer();
+						$("#pz").load();
+					});	
+				}
+            }
+			$('#spritespin_zoom').spritespin(dataSpin_zoom);
+		});
+		
+	}
 	
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.caricaSpinner = function(){
@@ -396,15 +443,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		var firstExecComplete = true;
 
 		if($('#spritespin') != undefined &&  $('#spritespin').data("spritespin") != undefined){
-
 			$scope.dataUrl = $('#spritespin').data("spritespin").canvas[0].toDataURL();
 		}
 
 		mergeImages(cleanStack).then(b64 => {
 			dataSourceString = b64;
-			var date2 = new Date();
-			var diff = date2 - date1;
-			$scope.$log.log('durata fusione immagini: ' + diff);
 			var dataSpin = {
 				width: 960,
                 height: 960,
@@ -459,10 +502,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 						$scope.spinIcon = false;
 						$scope.spinAnim = false;
-
-						var date3 = new Date();
-						var diff = date3 - date2;
-						$scope.$log.log('durata caricamento spinner: ' + diff);
 						
 						$scope.time = 0;
 						$timeout(configController.timer, 1000);
@@ -500,6 +539,31 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			}
 		}
 		return "";
+	}
+	
+	configController.getHighResolutionStack = function(currentStack){
+		var currentRes = $scope.resolution;
+		var higherRes = currentRes;
+		switch(currentRes) {
+			case "560":
+				higherRes = "720";
+				break;
+			case "720":
+				higherRes = "960";
+				break;
+			case "960":
+				//higherRes = "1920";//in attesa che le 1920 siano su S3
+				higherRes = "960";//in attesa che le 1920 siano su S3
+				break;
+		}
+		
+		var higherResolutionStack = [];
+		for(var i = 0; i < currentStack.length; i++){
+			var element = currentStack[i];
+			element = element.replace(currentRes, higherRes);
+			higherResolutionStack.push(element);
+		}
+		return higherResolutionStack;
 	}
 	
 	/*
