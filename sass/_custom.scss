@@ -46,7 +46,7 @@
 // font per lista lettere emboss
 
 @font-face {
-    font-family: 'unaduna-char';
+    font-family: 'unaduna char';
     src: url('../fonts/unaduna-char.eot');
     src: url('../fonts/unaduna-char.eot?#iefix') format('embedded-opentype'),
          url('../fonts/unaduna-char.woff') format('woff'),
@@ -55,15 +55,16 @@
     font-weight: normal;
     font-style: normal;
 }
-[class*='unaduna-char-icon-']:before{
+[class*='unaduna-char-']:before{
 	display: inline-block;
-   font-family: 'unaduna-char';
+   font-family: 'unaduna char';
    font-style: normal;
    font-weight: normal;
    line-height: 1;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale
 }
+
 .unaduna-char-icon-a:before{content:'\0041';}
 .unaduna-char-icon-b:before{content:'\0042';}
 .unaduna-char-icon-c:before{content:'\0043';}
@@ -93,11 +94,12 @@
 .unaduna-char-icon-paperella:before{content:'\0031';}
 .unaduna-char-icon-nota:before{content:'\0032';}
 .unaduna-char-icon-stella:before{content:'\0033';}
-.unaduna-char-icon-blank:before{content:'\005f';}
+.unaduna-char-icon-backspace:before{content:'\0034';}
+.unaduna-char-icon-reset:before{content:'\0035';}
 
 .unaduna-char-icon-w:before {
     font-size: 135%;
-    line-height: .75em;
+    line-height: 1.15em;;
 }
 /*-------------------------------*/
 /* override e aggiunte a stili bootstrap      */
@@ -289,6 +291,8 @@ input {
 
 /* settaggio elementi grafici dei link e pulsanti */
 
+button:focus {outline:0;}
+
 .btn {
     @include transition(all 500ms ease-in-out);
     box-shadow: 0 0 0 rgba(0,0,0,0);
@@ -400,7 +404,7 @@ input {
 
 .btn-action { // stilizzazione pulsante di azione
     @include button-variant($btn-action-color, $btn-action-bg, $btn-action-border);
-    font-size: 1.8em;
+    font-size: 1.5em;
     &.active:after {
         background-color: $btn-action-bg;
 
@@ -813,7 +817,6 @@ a.link {
             border: none;
             border-top: solid 1px $standard-border-color;
         }
-
     }
     .materiale {
         display: block;
@@ -824,6 +827,11 @@ a.link {
     }
 }
 
+.order-buttons {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .order-state {
     display: block;
@@ -889,6 +897,20 @@ a.link {
             }
             &:before {
                 border-color: #C09683 transparent transparent;
+            }
+        }
+    }
+    &.summary {
+        p {
+            span{
+                display: inline-block;
+                width: 45%;
+                &:first-child{
+                    text-align:left;
+                }
+                &:last-child {
+                    text-align: right;
+                }
             }
         }
     }
@@ -1036,7 +1058,7 @@ a.link {
     left: 0;
     border: solid 1px $standard-border-color;
     border-left: none;
-    border-radius: 0 5px 5px 0;
+    //border-radius: 0 5px 5px 0;
     background-color: #fff;
     z-index: 10;
 }
@@ -1100,7 +1122,7 @@ a.link {
 .controlHolder
 {
 
-    border-radius: 0 0 5px 0 !important;
+    border-radius: 0 !important;
 	background: #fff !important;
 	position: absolute;
     right: auto !important;
@@ -1292,8 +1314,12 @@ a.link {
         background-size: 12px, cover;
         right: auto;
     }
+<<<<<<< HEAD
     /*.swiper-button-prev.swiper-button-black,
     .swiper-container-rtl .swiper-button-next.swiper-button-black {
+=======
+    /* {
+>>>>>>> 59a2d2216977e2e59f86cbf59a177413d9db71a0
         // background-image:url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxpdmVsbG9fMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHdpZHRoPSIyMDUuNDgxcHgiIGhlaWdodD0iNDA3Ljc4NXB4IiB2aWV3Qm94PSIwIDAgMjA1LjQ4MSA0MDcuNzg1IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyMDUuNDgxIDQwNy43ODUiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBvbHlnb24gcG9pbnRzPSIyMDUuNDgxLDQwNy43ODUgMCwyMDMuNDggMjA1LjQ4MSwwIDIxLjIxMywyMDMuNDggCSIvPg0KPC9nPg0KPC9zdmc+DQo=');
     }
     .swiper-button-prev.swiper-button-white,
@@ -1327,6 +1353,7 @@ a.link {
         cursor: auto;
         pointer-events: none;
     }
+    
 
     .swiper-slide {
         text-align: center;
@@ -1404,19 +1431,17 @@ a.link {
         }
     }
     .accessori-thumb {
-        padding: 10px 0;
+        //padding: 10px 0;
+        .swiper-wrapper {
+            padding: 10px 0;
+        }
         overflow: visible;
         img {
             height: 57px;
             cursor: pointer;
 
         }
-        @media screen and (max-height: 600px) {
-            padding: 5px 0;
-            img {
-                height: 47px;
-            }
-        }
+       
         @media screen and (max-width: $screen-xs-max) {
 
         }
@@ -1505,64 +1530,73 @@ a.link {
             }
         }
 
-        .unaduna-char {
-            height: 49px;
-            width: 100%;
-            line-height: 1.75em;
-            font-size: 1.75em;
-            display: block;
-        }
-        select {
-            display: none;
-            font-family: 'unaduna-char';
-            width                : 100%;
-            height                  : 59px;
-            padding-left: 35%;
-            font-size: 1.75em;
-            border               : none;
-            text-align           : right;
-            -webkit-border-radius: 0;
-            -moz-border-radius   : 0;
-            border-radius        : 0;
-            border: none;
-            color: #999;
-            cursor: pointer;
-            -webkit-appearance : none;
-            box-shadow         : none;
-            background-repeat  : no-repeat;
-            background-color   : #fff;
-            margin: 0 2px;
-            &:focus {
-                outline-width: 0;
-                outline: none;
+        .unaduna-char{
+            &.disabled {
+                pointer-events: none;
+                cursor: default;
+                text-decoration: none;
+                color: #ccc;
             }
-            option {
-                font-size: .5em;
+            i {
+                height: 57px;
+                width: 57px;
+                line-height: 2em;
+                font-size: 2em;
+                display: block;
             }
         }
 
-    }
-    .iniziali-list {
-        display: block;
-        position: absolute;
-        top: 60px;
-        background: rgba(255,255,255,1);
-        border: solid 1px $standard-border-color;
-        left: 10px;
-        right: 10px;
-        bottom: 75px;
-        z-index: 100;
-        font-size: 3em;
-        overflow: auto;
-        .unaduna-char {
-            height: 1em;
-            margin: 20px 0;
-            width: 100%;
-            line-height: 1em;
-            font-size: 1em;
-            display: block;
+
+         @media screen and (max-height: 600px) {
+            .swiper-wrapper {
+                padding: 5px 0;
+            }
+            img {
+                height: 47px;
+            }
+            .unaduna-char{
+                i {
+                    height: 47px;
+                    width: 47px;
+                    line-height: 1.9em;
+                    font-size: 1.75em;
+                }
+            }
         }
     }
+
+    .iniziali-preview {
+        position: absolute;
+        top: -80px;
+        left: 50%;
+        margin-left: -64px;
+        width: auto;
+        font-family: "unaduna char";
+        font-size: 1em;
+        background: rgba(255,255,255,.9);
+        border: solid 1px $standard-border-color;
+        padding: 1px;
+        input {
+            width:4em;
+            border: none;
+            background: transparent;
+        }
+        button {
+            font-family: "Source Sans Pro";
+            position: absolute;
+            top: -1px;
+            height: 43px;
+            width: 40px;
+            border: solid 1px $standard-border-color;
+            background: #fff;
+        }
+        @media screen and (max-height: 600px) {
+            top: -76px;
+        }
+    }
+
+
+
     /* spinner borse */
 
     .spritespin {

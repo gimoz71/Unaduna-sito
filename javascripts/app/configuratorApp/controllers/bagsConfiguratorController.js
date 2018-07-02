@@ -1,4 +1,4 @@
-angular.module('configuratorModule').controller('unadunaConfiguratorController2', function($http, $scope, $filter, listeService, $log, $window){
+angular.module('configuratorModule').controller('unadunaConfiguratorController2', function($http, $scope, $filter, listeService, $log, $window, $timeout){
 
 	$scope.$log = $log;
 
@@ -42,12 +42,25 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.borchieSelezionate = false;
 	$scope.nomeBorchiaSelezionata = "";
 	$scope.tracollaSelezionata = false;
+	$scope.coloreSelezionato = "black";
 
 	$scope.metalleriaObbligatoria = [];
 
 	$scope.removable = false;
 
 	$scope.resolution = "560";
+	
+	$scope.symbolsUrlStack = [];
+	$scope.symbolArray = []; 
+	$scope.symbolEnabled = true;
+	$scope.baseUrlSymbols = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/MODELLI/MODELLO/INIZIALI/";
+	$scope.symbolConfigurations = [["M"],["MSX","MDX"],["SX","M","DX"]];
+	$scope.inizialiPreview = "";
+	
+	$scope.tempZoomContent = "";
+	$scope.showZoom = false;
+	$scope.time = 0;
+	$scope.loadComplete = false;
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -129,8 +142,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						}
 					}
 				}
-				
-				
 			}
 		}
 	}
@@ -174,26 +185,20 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		$(".dropdown-toggle").dropdown("toggle");
 
 		$scope.stack = [];
-		//$scope.stack.push(modello.urlStripeHD);
 		var url = modello.urlStripe;
-		//url = url.replace("RES", configController.getResolutionPlaceHolder());
 		url = url.replace("RES", $scope.resolution);
 		
-
 		configController.aggiungiElementoAStack(url, 0, false);
 		$scope.modelloSelezionato = modello.nome;
 		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
 		$scope.tipiAccessoriModelloSelezionato.push("iniziali");
-
 
 		$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
 		configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
 
 		//apro il pannello dei colori
 		configController.selezioneTipoAccessorio("colore");
-
 		configController.caricaSpinner();
-
 	}
 
 	configController.selezionaEntita = function(entita){
@@ -206,11 +211,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
 			$scope.dataUrl = canvas.toDataURL();
-
 		});
 
 		var url = entita.urlStripe;
-		//url = url.replace("RES", configController.getResolutionPlaceHolder());
 		url = url.replace("RES", $scope.resolution);
 
 		if($scope.tipoEntitaSelezionata == "stile"){
@@ -220,14 +223,20 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.nomeBorchiaSelezionata = entita.nomeBorchia;
 		}
 		if ($scope.tipoEntitaSelezionata.startsWith("colore")){
-
+			
+			$scope.coloreSelezionato = entita.colore;
+			
+			//ricarico le iniziali quando cambio il colore
+			if($scope.inizialiPreview.length > 0){
+				configController.generateArray();
+				configController.caricaSpinner();
+			}
 			if($scope.embossSelezionato){
 				//devo sostituire l'emboss se è selezionato
 				//1. estraggo la url dell'emboss
 
 				var embossUrl = $scope.mapEmboss.get($scope.nomeStileSelezionato + "_" + entita.colore);
 				var urlE = embossUrl.urlStripe;
-				//urlE = urlE.replace("RES", configController.getResolutionPlaceHolder());
 				urlE = urlE.replace("RES", $scope.resolution);
 
 				if(embossUrl){
@@ -272,13 +281,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.metalloVincolante = entita.metallo;
 		}
 
-		
-
-		//configController.aggiungiStrato(entita.urlStripeHD, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
 		configController.aggiungiStrato(url, entita.ordine, (entita.categoria != "colore" && entita.categoria != "metalleria"));
 
 		if($scope.tipoEntitaSelezionata == "stile"){
-			//if($scope.stack.indexOf(entita.urlStripeHD) == -1){
 			if($scope.stack.indexOf(url) == -1){
 				$scope.embossSelezionato = false;
 			} else {
@@ -288,7 +293,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 
 		if($scope.tipoEntitaSelezionata == "borchie"){
-			//if($scope.stack.indexOf(entita.urlStripeHD) == -1){
 			if ($scope.stack.indexOf(url) == -1) {
 				$scope.borchieSelezionate = false;
 			} else {
@@ -297,7 +301,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.removable = true;
 		}
 		if($scope.tipoEntitaSelezionata == "tracolle"){
-			//if($scope.stack.indexOf(entita.urlStripeHD) == -1){
 			if ($scope.stack.indexOf(url) == -1) {
 				$scope.tracollaSelezionata = false;
 			} else {
@@ -347,14 +350,31 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		return tempStack;
 	}
 
+	configController.caricaZoom = function(){
+		
+	}
+	
+	configController.timer = function() {
+        if( $scope.time < 1000 ) {
+            $scope.time += 1000;
+            $timeout(configController.timer, 1000);
+        } else {
+        	html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+				$("#pz").attr("data-src", canvas.toDataURL());
+				
+				$("#pz").pinchzoomer();
+				$("#pz").load();
+			});	
+        }
+    }
+	
 	//qui avviene la richiesta del modello in base agli accessori selezionati
 	configController.caricaSpinner = function(){
+		$scope.showZoom = false;
+		
 		var date1 = new Date();
 		$("#loader").show();
-		//attivo il loader e tolgo lo spinner
-		// configController.visibleManager.loaderVisible = true; // non funziona
-		// configController.visibleManager.spinnerVisible = false;
-//
+		
 		configController.setVisible(false);
 
 		//ho ricevuto i dati, attivo lo spinner per la visualizzazione 3D
@@ -367,6 +387,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 
 		var cleanStack = configController.pulisciStack();
+		
+		if($scope.symbolsUrlStack.length > 0) {
+			cleanStack = cleanStack.concat($scope.symbolsUrlStack);
+		}
 
 		var firstExecInit = true;
 		var firstExecComplete = true;
@@ -395,7 +419,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				frameTime: 100,
 				loop: false,
 				stopFrame: 7,
-				//renderer: renderType,
                 scrollThreshold   : 200,
                 plugins: [
                     'drag',
@@ -412,20 +435,17 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
                 	}
                 },
-				onLoad: function() {
-					// html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
-					// 	$scope.dataUrl = canvas.toDataURL();
-					//
-					// });
-
-
-				},
+                onFrameChanged: function(){
+                	if($scope.loadComplete){
+    					$scope.time = 0;
+    					$timeout(configController.timer, 1000);                		
+                	}
+                },
 				onComplete: function() {
 					if(firstExecComplete){
 						firstExecComplete = false;
 
 						if ($scope.spinIcon == true) {
-							var pos1 = $('#spinIcon').position();
 							$("#spinIcon").fadeIn().delay(100).fadeOut();
 							$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
 							//$('#a-middle').animate({opacity:'1'}, 500);
@@ -437,18 +457,20 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						$("#transition-image").delay(100).fadeOut();
 						$("#loader").delay(200).fadeOut("slow");
 
-
-						// configController.visibleManager.loaderVisible = false; // non funziona
-
 						$scope.spinIcon = false;
 						$scope.spinAnim = false;
 
 						var date3 = new Date();
 						var diff = date3 - date2;
 						$scope.$log.log('durata caricamento spinner: ' + diff);
-
-
-					}
+						
+						$scope.time = 0;
+						$timeout(configController.timer, 1000);
+						
+						$timeout(function(){
+							$scope.loadComplete = true;
+						}, 1500);	
+					} 
 				}
             }
 			$('#spritespin').spritespin(dataSpin);
@@ -474,16 +496,155 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			var singolaEntita = $scope.entita[i];
 			if(singolaEntita.modello == modello && singolaEntita.metallo == metallo && singolaEntita.categoria == "metalleria"){
 				var url = singolaEntita.urlStripe;
-				//url = url.replace("RES", configController.getResolutionPlaceHolder());
-				url = url.replace("RES", $scope.resolution);
-				
-				return url;
-				//return singolaEntita.urlStripeHD;
+				return url.replace("RES", $scope.resolution);
 			}
 		}
 		return "";
 	}
-
+	
+	/*
+	 * SEZIONE RELATIVA ALLA GESTIONE DELLE LETTERE E DEI SIMBOLI 
+	 * */
+	configController.generateSymbolStack = function(){
+		//aggiungo la parte delle iniziali - se ce ne sono
+		/*
+		 * il symbolArray è quello su cui agganciare il modello del 'campo di testo'. Una volta definito quello e dato l'OK
+		 * questa funzione si occupa di definire l'array delle url da concatenare a quelle della borsa, andando anche a ragionare
+		 * sulle disposizioni dei simboli (sx, msx, m, mdx, dx) dipendentemente dal numero di simboli selezionati
+		 * */
+		if(configController.areSymbolsSelected()){
+			var symbolNumber = configController.getSelectedSymbolNumber();
+			if(symbolNumber > 0){
+				for(var i=0; i<symbolConfigurations[symbolNumber+1].length; i++){
+					var posizione = symbolConfigurations[symbolNumber+1][i];
+					//adesso posso comporre lo stack dei simboli
+					var url = $scope.baseUrlSymbols 
+						+ "INIZIALI" + "_" 
+						+ $scope.symbolArray + "_" 
+						+ posizione + "_" 
+						+ $scope.resolution + "_" 
+						+ $scope.coloreSelezionato + ".png";
+						//INIZIALI_W_MDX_960_PARROT
+					$scope.symbolsUrlStack.push(url);
+				}
+			}
+		}
+	}
+	configController.modelNameTranslate = function(modelName){
+		switch(modelName){
+			case "shoulderbag":
+				return "RIBALTINA";
+			case "shopping":
+				return "SHOPPING";
+			case "tote":
+				return "TOTE";
+			case "crossbody":
+				return "POCHETTE";
+		}
+	}
+	
+	configController.symbolTranslate = function(symbol){
+		switch(symbol){
+			case "1":
+				return "PAPERELLA";
+			case "2":
+				return "NOTA";
+			case "3": 
+				return "STELLA";
+			default:
+				return symbol;
+		}
+	}
+	configController.colorTranslate = function(color){
+		switch(color){
+		case "black":
+			return "NERO";
+		case "nude":
+			return "NUDE";
+		case "parrot": 
+			return "PARROT";
+		case "oceania": 
+			return "OCEANIA";
+		case "champagne": 
+			return "CHAMPAGNE";
+		case "lion": 
+			return "LION";
+		default:
+			return "NERO";
+		}
+	}
+	configController.addSymbol = function(symbol){
+		//$scope.symbolArray.push(symbol);
+		//configController.checkSelectedSymbols();
+		if(symbol == 'backspace'){
+			if($scope.inizialiPreview.length > 0){
+				$scope.inizialiPreview = $scope.inizialiPreview.slice(0, -1);
+				configController.checkSelectedSymbols();
+				configController.generateArray();
+				configController.caricaSpinner();
+			}
+		} else {
+			$scope.inizialiPreview += symbol;
+			configController.checkSelectedSymbols();
+			configController.generateArray();
+			configController.caricaSpinner();
+		}
+	}
+	
+	configController.generateArray = function(){
+		$scope.symbolsUrlStack = [];
+		var charArray = $scope.inizialiPreview.split('');
+		var charArraySize = charArray.length;
+		if(charArraySize > 0){
+			for(var i=0; i< $scope.symbolConfigurations[charArraySize-1].length; i++){
+				var posizione = $scope.symbolConfigurations[charArraySize-1][i];
+				//adesso posso comporre lo stack dei simboli
+				var translatedSymbol = configController.symbolTranslate(charArray[i]);
+				var url = $scope.baseUrlSymbols 
+					+ "INIZIALI" + "_" 
+					+  translatedSymbol + "_" 
+					+ posizione + "_" 
+					+ $scope.resolution + "_" 
+					+ configController.colorTranslate($scope.coloreSelezionato) + ".png";
+				//devo sostituire il nome del modello 
+				url = url.replace("MODELLO", configController.modelNameTranslate($scope.modelloSelezionato));
+				$scope.symbolsUrlStack.push(url);
+			}
+		}
+	}
+	
+	configController.checkSelectedSymbols = function(){
+		if($scope.inizialiPreview.length > 2){
+			configController.disableSymbols();
+		} else {
+			configController.enableSymbols();
+		}
+	}
+	
+	configController.disableSymbols = function(){
+		$scope.symbolEnabled = false;
+	}
+	
+	configController.enableSymbols = function(){
+		$scope.symbolEnabled = true;
+	}
+	
+	configController.areSymbolsSelected = function(){
+		return $scope.symbolArray.length > 0;
+	}
+	
+	configController.getSelectedSymbolNumber = function(){
+		return $scope.symbolArray.length;
+	}
+	
+	configController.getSymbolEnabled = function(){
+		return $scope.symbolEnabled;
+	}
+	/*
+	 * FINE ---- SEZIONE RELATIVA ALLA GESTIONE DELLE LETTERE E DEI SIMBOLI 
+	 * */
+	
+	
 	configController.initConfiguratore = function(){
 
 		//1. devo fare il caricamento massivo iniziale delle configurazioni (solo la struttura json dal DB, non le immagini)
@@ -526,7 +687,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		var aperto = 0;
 
-		$("#pz").pinchzoomer();
+		//$("#pz").pinchzoomer();
 
 		$('#canvasWrapper').parentResize();
 		//$('#a-middle').centerElement();
@@ -534,6 +695,13 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		// pulsanti apertura/chiusura zoom borsa
 		$('#openZoom').click(function() {
 			$('.zoom').css({'z-index':'10'}).animate({opacity: '1'});
+//			html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+//				$scope.tempZoomContent = canvas.toDataURL();
+//				$("#pz").attr("data-src", $scope.tempZoomContent);
+//				$("#pz").pinchzoomer();
+//				$("#pz").load();
+//				$scope.showZoom = true;
+//			});	
 		});
 		$('#closeZoom').click(function() {
 			$('.zoom').animate({opacity: 0}, {complete: function(){ $(this).css({'z-index': '0'}) }})
@@ -555,6 +723,15 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$('#txt_fullname').focus();
 
 		});
+
+		$('#a').click(function(){
+			var $target = $('#inizialiPreview'),
+				text = $('#inizialiPreview').val(),
+				buttonVal = $(this).data('value');
+
+			$target.val(text+" "+buttonVal);
+		})
+
 		$(document).on('blur', '#txt_fullname', function() {
 			var name = $(this).val();
 			//alert('Make an AJAX call and pass this parameter >> name=' + name);
@@ -586,7 +763,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX')
 		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
-
 	};
 
 });

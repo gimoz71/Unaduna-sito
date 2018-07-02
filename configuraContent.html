@@ -5,7 +5,7 @@
 				<div class="col-sm-12 clearfix">
 					<ul class="nav navbar-nav fixed-navbar-left">
 						<li>
-							<a href="#" class="link" ng-click="setHome()"><i class="fa fa-bars"></i></a>
+							<a href="#" class="link" ng-click="setHome()"><i class="fa fa-home"></i></a>
 						</li>
 						<li class="dropdown yamm-fw">
 							<a href="#" class="active dropdown-toggle link modello" data-toggle="dropdown">scegli il modello</a>
@@ -14,7 +14,7 @@
 									<div class="yamm-content clearfix">
 										<div class="col-xs-12">
 											<!-- CON IL REPEATER VADO A ELENCARE TUTTI I MODELLI DI BORSA DISPONIBILI  -->
-											<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center" ng-repeat="modello in modelli">
+											<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center" ng-repeat="modello in modelli">
 												<a href="#" class="borsaModel" id="start3dbutton" type="button" ng-click="contr.scegliModello(modello)"><img ng-src="{{modello.urlThumbnailHD}}" /><h5>{{modello.nome}}</h5></a>
 											</div>
 										</div>
@@ -48,7 +48,8 @@
 	<div class="zoom">
 		<button id="closeZoom"><i class="unaicon-remove"></i></button>
 		<div class="zoomHolder">
-			<img data-src="images/zoom-test-2.jpg" id="pz" data-elem="pinchzoomer" data-options="scaleMode:proportionalInside;maxZoom:3;doubleTapZoom:3;force3D:true;appendControls:true;appendControlHolder:true">
+<!-- 			<img ng-src="{{tempZoomContent}}" id="pz" data-elem="pinchzoomer" data-options="preload:false;scaleMode:proportionalInside;maxZoom:3;initZoom:2;doubleTapZoom:3;force3D:true;appendControls:true;appendControlHolder:true"> -->
+			<img data-src="" id="pz" data-elem="pinchzoomer" data-options="scaleMode:proportionalInside;maxZoom:3;initZoom:2;doubleTapZoom:3;force3D:true;appendControls:true;appendControlHolder:true">
 			<div class="controlHolder" data-elem="controlHolder">
 				<div class="zoomIn" data-elem="zoomIn"><i class="unaicon-add"></i></div>
 				<div class="zoomOut" data-elem="zoomOut"><i class="unaicon-minus"></i></div>
@@ -85,6 +86,9 @@
 			</div>
 			<div class="row" id="rigaaccessori">
 				<div class="col-lg-12">
+
+<!-- 					<div class="iniziali-preview" ng-show="tipoEntitaSelezionata == 'iniziali'"><input type="text"  id="inizialiPreview" readonly placeholder="ABC" value="{{inizialiPreview}}"><button class="follow anim">OK</button></div> -->
+
 					<section class="swipe">
 						<swiper class="accessori-thumb" grab-cursor="true" observer="false"  keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}">
 							<slides ng-hide="tipoEntitaSelezionata == 'iniziali'" >
@@ -95,113 +99,163 @@
 	                                </a>
 								</slide>
 							</slides>
-							<slides ng-show="tipoEntitaSelezionata == 'iniziali'" >
-								
+						</swiper>
+						<swiper class="accessori-thumb" ng-show="tipoEntitaSelezionata == 'iniziali'" grab-cursor="true" observer="false" keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}">
+							<slides>
 								<slide>
-									<select>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>F</option>
-										<option>G</option>
-										<option>H</option>
-										<option>I</option>
-										<option>J</option>
-										<option>K</option>
-										<option>L</option>
-										<option>M</option>
-										<option>N</option>
-										<option>O</option>
-										<option>P</option>
-										<option>Q</option>
-										<option>R</option>
-										<option>S</option>
-										<option>T</option>
-										<option>U</option>
-										<option>V</option>
-										<option>W</option>
-										<option>X</option>
-										<option>Y</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-									</select>
-									<a href="#" onclick="$('#sx').show();" class="unaduna-char">
+									<a href="#" ng-click="contr.addSymbol('backspace')" class="unaduna-char">
+										<i class="unaduna-char-icon-backspace"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('A')" class="unaduna-char" ng-class="{disabled: !contr.getSymbolEnabled()}">
 										<i class="unaduna-char-icon-a"></i>
 									</a>
 								</slide>
 								<slide>
-									<select>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>F</option>
-										<option>G</option>
-										<option>H</option>
-										<option>I</option>
-										<option>J</option>
-										<option>K</option>
-										<option>L</option>
-										<option>M</option>
-										<option>N</option>
-										<option>O</option>
-										<option>P</option>
-										<option>Q</option>
-										<option>R</option>
-										<option>S</option>
-										<option>T</option>
-										<option>U</option>
-										<option>V</option>
-										<option>W</option>
-										<option>X</option>
-										<option>Y</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-									</select>
-									<a href="#" onclick="$('#sx').show();" class="unaduna-char">
+									<a href="#" ng-click="contr.addSymbol('B')"  class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-b"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('C')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-c"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('D')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-d"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('E')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-e"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('F')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-f"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('G')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-g"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('H')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-h"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('I')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-i"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('J')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-j"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('K')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-k"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('L')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-l"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('M')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-m"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('N')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-n"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('O')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-o"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('P')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-p"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('Q')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-q"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('R')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-r"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('S')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-s"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('T')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-t"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('U')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-u"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('V')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-v"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('W')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-w"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('X')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-x"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('Y')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-y"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('Z')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-z"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('1')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
 										<i class="unaduna-char-icon-paperella"></i>
 									</a>
 								</slide>
 								<slide>
-									<select>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>F</option>
-										<option>G</option>
-										<option>H</option>
-										<option>I</option>
-										<option>J</option>
-										<option>K</option>
-										<option>L</option>
-										<option>M</option>
-										<option>N</option>
-										<option>O</option>
-										<option>P</option>
-										<option>Q</option>
-										<option>R</option>
-										<option>S</option>
-										<option>T</option>
-										<option>U</option>
-										<option>V</option>
-										<option>W</option>
-										<option>X</option>
-										<option>Y</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-									</select>
-									<a href="#" onclick="$('#sx').show();" class="unaduna-char">
-										<i class="unaduna-char-icon-w"></i>
+									<a href="#" ng-click="contr.addSymbol('2')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-nota"></i>
+									</a>
+								</slide>
+								<slide>
+									<a href="#" ng-click="contr.addSymbol('3')" class="unaduna-char"ng-class="{disabled: !contr.getSymbolEnabled()}">
+										<i class="unaduna-char-icon-stella"></i>
 									</a>
 								</slide>
 							</slides>
 							<prev></prev>
 							<next></next>
+							
 						</swiper>
 					</section>
 				</div>
@@ -228,158 +282,5 @@
 			</div>
 		</div>
 	</div>
-	<div class="iniziali-list" id="sx" style="display: none;">
-		<div class="col-xs-12">
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-blank"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-a"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-b"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-c"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-d"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-e"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-f"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-g"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-h"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-i"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-j"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-k"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-l"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-m"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-n"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-o"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-p"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-q"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-r"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-s"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-t"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-u"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-v"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-w"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-x"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-y"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-z"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-paperella"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-nota"></i>
-				</a>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-				<a href="#" onclick="$('#sx').hide()" class="unaduna-char">
-					<i class="unaduna-char-icon-stella"></i>
-				</a>
-			</div>
-		</div>
-	</div>
 </div>
+
