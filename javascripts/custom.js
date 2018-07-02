@@ -99,14 +99,10 @@ $.fn.animateAccessoriBar = function(accContainer, offsetElement, triggerElement,
 }*/
 
 
-<<<<<<< HEAD
 $.fn.showIniziali = function(panel) {
     $(panel).show();
 }
 
-
-=======
->>>>>>> 59a2d2216977e2e59f86cbf59a177413d9db71a0
 $.fn.parentResize = function() {
     var elemSize = $(window).height() - $(".navbar").outerHeight() - $(".accessori").outerHeight() - $(".riepilogo").outerHeight();
     this.css("position", "absolute").css("top", $(".navbar").outerHeight()).css("height", elemSize).css("width", $(window).width());
