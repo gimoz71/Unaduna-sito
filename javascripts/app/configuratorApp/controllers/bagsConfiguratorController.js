@@ -505,7 +505,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				break;
 			case "960":
 				//higherRes = "1920";//in attesa che le 1920 siano su S3
-				higherRes = "960";//in attesa che le 1920 siano su S3
+				higherRes = "1920";//in attesa che le 1920 siano su S3
 				break;
 		}
 		return higherRes;
