@@ -1096,7 +1096,8 @@ a.link {
 }
 
 #zoomCanvasWrapper  {
-    display: none;
+    position: absolute;
+    top: -1500px;
 }
 
 .zoom img.loaded{ opacity: 1; }
