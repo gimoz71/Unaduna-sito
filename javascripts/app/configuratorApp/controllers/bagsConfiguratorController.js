@@ -61,6 +61,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.showZoom = false;
 	$scope.time = 0;
 	$scope.loadComplete = false;
+	
+	$scope.cutImage = "";
+	$scope.currentFrame = 0;
+
+	$scope.modelliAbilitati = false;
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -191,7 +196,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		configController.aggiungiElementoAStack(url, 0, false);
 		$scope.modelloSelezionato = modello.nome;
 		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
-		$scope.tipiAccessoriModelloSelezionato.push("iniziali");
 
 		$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
 		configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
@@ -365,13 +369,28 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				$("#pz").load();
 				
 				var spriteSpinAPI = $('#spritespin').spritespin('api');
-				var currentFrame = spriteSpinAPI.currentFrame();
-				
-				configController.caricaZoomSpinner(currentFrame)
+				$scope.currentFrame = spriteSpinAPI.currentFrame();
 			});	
         }
     }
 
+	configController.getCutImage = function(imgBase64, frame, resolution){
+		var image = new Image();
+		
+		image.src = imgBase64;
+		var canvas = document.createElement('canvas');
+		var ctx = canvas.getContext('2d');
+		ctx.drawImage(image, 0, 0);
+		
+        ctx.drawImage(image, frame*resolution, 0, resolution, resolution, 0,0, resolution, resolution);
+
+        // ... or get as Data URI
+        //callback(canvas.toDataURL('image/png'));
+        $("#pz").attr("data-src", canvas.toDataURL('image/jpg'));
+		$("#pz").pinchzoomer();
+		$("#pz").load();
+	}
+	
 	configController.caricaZoomSpinner = function(frame){
 		//$('#spritespin_zoom').spritespin('destroy');
 		var cleanStack = configController.pulisciStack();
@@ -384,33 +403,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		var higherResolutionStack = configController.getHighResolutionStack(cleanStack);
 		
 		mergeImages(higherResolutionStack).then(b64 => {
-			dataSourceString = b64;
-			var dataSpin_zoom = {
-				width: 960,
-                height: 960,
-				source: dataSourceString,
-				frame: 8,
-				frames: 8,
-				framesX: 8,
-				rendering: "images",
-				loop: false,
-				onComplete: function() {
-//					if($('#spritespin_zoom') != undefined &&  $('#spritespin_zoom').data("spritespin") != undefined){
-//						var dataUrl = $('#spritespin_zoom').data("spritespin").canvas[0].toDataURL();
-//						$("#pz").attr("data-src", dataUrl);
-//						$("#pz").pinchzoomer();
-//						$("#pz").load();
-//					}
-					
-					html2canvas(document.querySelector("#spritespin_zoom"), { async:false }).then(cnvs => {
-						var dataUrl = cnvs.toDataURL();
-						$("#pz").attr("data-src", dataUrl);
-						$("#pz").pinchzoomer();
-						$("#pz").load();
-					});	
-				}
-            }
-			$('#spritespin_zoom').spritespin(dataSpin_zoom);
+			configController.getCutImage(b64, frame, configController.getHigherResolution());
 		});
 		
 	}
@@ -541,7 +534,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		return "";
 	}
 	
-	configController.getHighResolutionStack = function(currentStack){
+	configController.getHigherResolution = function(){
 		var currentRes = $scope.resolution;
 		var higherRes = currentRes;
 		switch(currentRes) {
@@ -556,6 +549,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				higherRes = "960";//in attesa che le 1920 siano su S3
 				break;
 		}
+		return higherRes;
+	}
+	
+	configController.getHighResolutionStack = function(currentStack){
+		var currentRes = $scope.resolution;
+		var higherRes = configController.getHigherResolution();
 		
 		var higherResolutionStack = [];
 		for(var i = 0; i < currentStack.length; i++){
@@ -708,35 +707,26 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	 * FINE ---- SEZIONE RELATIVA ALLA GESTIONE DELLE LETTERE E DEI SIMBOLI 
 	 * */
 	
-	
 	configController.initConfiguratore = function(){
 
 		//1. devo fare il caricamento massivo iniziale delle configurazioni (solo la struttura json dal DB, non le immagini)
 		listeService.getModelli().then(function (res) {
 			if(res.data.esito.codice == 100){
 				$scope.modelli = res.data.modelli;
-				$(".dropdown-toggle").dropdown("toggle");
+				//$(".dropdown-toggle").dropdown("toggle");
 				listeService.getAccessori().then(function(res2) {
 					$scope.entita = res2.data.accessori;
 					//inizializzo la mappa con gli elenchi dei tipi di accessori
 					for(var i = 0; i < $scope.modelli.length; i++){
-						var elencoAccessori = [];
 						var modello = $scope.modelli[i];
 						$scope.tipiAccessori.set(modello.nome, modello.accessori);
-
-//						for(var j = 0; j < $scope.entita.length; j++){
-//							var entitaSingola = $scope.entita[j];
-//							if(entitaSingola.modello == modello.nome){
-//								if(elencoAccessori.indexOf(entitaSingola.categoria) == -1){
-//									elencoAccessori.push(entitaSingola.categoria);
-//								}
-//							}
-//						}
-//						$scope.tipiAccessori.set(modello.nome, elencoAccessori);
 					}
+					$(".dropdown-toggle").dropdown("toggle");
+					// $scope.modelliAbilitati = true;
+					// alert("CARICAMENTO COMPLETATO");
 				});
 			}
-	    });
+		});
 
 		configController.visibleManager.loaderVisible = true;
 		configController.visibleManager.spinnerVisible = false;
@@ -746,7 +736,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		});
 
 		/* gestione elementi dell'interfaccia */
-
 		var aperto = 0;
 
 		//$("#pz").pinchzoomer();
@@ -757,13 +746,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		// pulsanti apertura/chiusura zoom borsa
 		$('#openZoom').click(function() {
 			$('.zoom').css({'z-index':'10'}).animate({opacity: '1'});
-//			html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
-//				$scope.tempZoomContent = canvas.toDataURL();
-//				$("#pz").attr("data-src", $scope.tempZoomContent);
-//				$("#pz").pinchzoomer();
-//				$("#pz").load();
-//				$scope.showZoom = true;
-//			});	
+			//configController.caricaZoomSpinner($scope.currentFrame);
 		});
 		$('#closeZoom').click(function() {
 			$('.zoom').animate({opacity: 0}, {complete: function(){ $(this).css({'z-index': '0'}) }})
@@ -825,6 +808,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX')
 		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
+
+		
 	};
 
 });

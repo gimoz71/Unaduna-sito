@@ -107,7 +107,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		return placeHolder;
 	}
 	
-	configController.ricalcolaPrezzo(){
+	configController.ricalcolaPrezzo = function(){
 		$scope.prezzo = 0;
 		for (entita in configurazione.elencoEntita) {
 			  $scope.prezzo += entita.prezzo;
@@ -249,72 +249,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 	}
 
-<<<<<<< HEAD
 	/*
 	 * funzione invocata quando si seleziona una qualsiasi entità nella scelta degli accessori
 	 * */
-=======
-	configController.getResolutionPlaceHolder = function(){
-		var screenWidth = $("#canvasWrapper").innerWidth();
-		var screenHeight = $("#canvasWrapper").innerHeight();
-
-		var placeHolder = "";
-		var minSize = (screenWidth > screenHeight ? screenHeight : screenWidth);
-		if (minSize <= 560) {
-			placeHolder = "560";
-		} else if (minSize > 560 && minSize < 720) {
-			placeHolder = "720"
-		} else if (minSize >= 720) {
-			placeHolder = "960"
-		}
-
-		return placeHolder;
-	}
-
-	configController.scegliModello = function(modello){
-
-		$scope.resolution = configController.getResolutionPlaceHolder();
-
-		$scope.embossSelezionato = false;
-		$scope.mapEmboss = new Map();
-
-		$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
-		$scope.scegliColore = true;
-
-		$scope.metalloVincolante = "argento";
-		$scope.mapMetalloTracolle = new Map();
-		$scope.mapMetalloBorchie = new Map();
-
-		$scope.borchieSelezionate = false;
-		$scope.tracollaSelezionata = false;
-
-		$scope.metalleriaObbligatoria = [];
-
-		$(".dropdown-toggle").dropdown("toggle");
-
-		$scope.stack = [];
-		//$scope.stack.push(modello.urlStripeHD);
-		var url = modello.urlStripe;
-		//url = url.replace("RES", configController.getResolutionPlaceHolder());
-		url = url.replace("RES", $scope.resolution);
-		
-
-		configController.aggiungiElementoAStack(url, 0, false);
-		$scope.modelloSelezionato = modello.nome;
-		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
-
-
-		$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
-		configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
-
-		//apro il pannello dei colori
-		configController.selezioneTipoAccessorio("colore");
-
-		configController.caricaSpinner();
-
-	}
-
->>>>>>> fcefc4352b51655130e5d382ad024482a4b135cc
 	configController.selezionaEntita = function(entita){
 
 		if(entita.nome == $scope.nomeEntitaSelezionata && $scope.tipoEntitaSelezionata != "colore" && $scope.tipoEntitaSelezionata != "metalleria"){
@@ -589,16 +526,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		for(var i = 0; i < $scope.entita.length; i++){
 			var singolaEntita = $scope.entita[i];
 			if(singolaEntita.modello == modello && singolaEntita.metallo == metallo && singolaEntita.categoria == "metalleria"){
-<<<<<<< HEAD
 				return singolaEntita;
-=======
-				var url = singolaEntita.urlStripe;
-				//url = url.replace("RES", configController.getResolutionPlaceHolder());
-				url = url.replace("RES", $scope.resolution);
-				
-				return url;
-				//return singolaEntita.urlStripeHD;
->>>>>>> fcefc4352b51655130e5d382ad024482a4b135cc
 			}
 		}
 		return null;
@@ -640,11 +568,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		  e.stopPropagation()
 		});
 
-<<<<<<< HEAD
-=======
-		
-
->>>>>>> fcefc4352b51655130e5d382ad024482a4b135cc
 		/* gestione elementi dell'interfaccia */
 		var aperto = 0;
 
