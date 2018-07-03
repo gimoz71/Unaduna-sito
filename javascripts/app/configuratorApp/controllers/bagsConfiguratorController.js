@@ -11,16 +11,12 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	$scope.modelli = [];
 	$scope.entita = [];
-
 	$scope.stack = [];
 
 	$scope.tipiAccessori = new Map();
 	$scope.entitaTipoAccessorioSelezionato = [];
 	$scope.tipiAccessoriModelloSelezionato = [];
 	$scope.modelloSelezionato = '';
-
-	$scope.swiperAccessori = null;
-	$scope.swiperCategorie = null;
 
 	$scope.dataUrl = "";
 
@@ -57,15 +53,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.symbolConfigurations = [["M"],["MSX","MDX"],["SX","M","DX"]];
 	$scope.inizialiPreview = "";
 	
-	$scope.tempZoomContent = "";
-	$scope.showZoom = false;
-	$scope.time = 0;
-	$scope.loadComplete = false;
-	
-	$scope.cutImage = "";
 	$scope.currentFrame = 0;
 
-	$scope.modelliAbilitati = false;
 
 	configController.getRepeaterClass = function(accessorio, index){
 		var toReturn = "";
@@ -354,45 +343,27 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		return tempStack;
 	}
 
-	configController.caricaZoom = function(){
-		
-	}
-	
-	configController.timer = function() {
-        if( $scope.time < 1000 ) {
-            $scope.time += 1000;
-            $timeout(configController.timer, 1000);
-        } else {
-        	html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
-				$("#pz").attr("data-src", canvas.toDataURL());
-				$("#pz").pinchzoomer();
-				$("#pz").load();
-				
-				var spriteSpinAPI = $('#spritespin').spritespin('api');
-				$scope.currentFrame = spriteSpinAPI.currentFrame();
-			});	
-        }
-    }
-
 	configController.getCutImage = function(imgBase64, frame, resolution){
-		var image = new Image();
 		
-		image.src = imgBase64;
 		var canvas = document.createElement('canvas');
 		var ctx = canvas.getContext('2d');
-		ctx.drawImage(image, 0, 0);
+		var image = new Image();
+		canvas.height = resolution;
+		canvas.width = resolution;
 		
-        ctx.drawImage(image, frame*resolution, 0, resolution, resolution, 0,0, resolution, resolution);
+		image.src = imgBase64;
+		image.onload = function(){
+			ctx.drawImage(image, frame * resolution, 0, resolution, resolution, 0 ,0 , resolution, resolution);
 
-        // ... or get as Data URI
-        //callback(canvas.toDataURL('image/png'));
-        $("#pz").attr("data-src", canvas.toDataURL('image/jpg'));
-		$("#pz").pinchzoomer();
-		$("#pz").load();
+			var dataUrl = canvas.toDataURL("image/png");
+			// ... or get as Data URI
+
+			$("#pz").attr("src", dataUrl);
+			$("#pz").load();
+		}
 	}
 	
-	configController.caricaZoomSpinner = function(frame){
-		//$('#spritespin_zoom').spritespin('destroy');
+	configController.caricaZoom = function(frame){
 		var cleanStack = configController.pulisciStack();
 		
 		if($scope.symbolsUrlStack.length > 0) {
@@ -402,6 +373,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		//sostituisco le risoluzioni per avere immagini, nello zoom, piu' definite
 		var higherResolutionStack = configController.getHighResolutionStack(cleanStack);
 		
+		// mergeImages(higherResolutionStack).then(b64 => {
+		// 	configController.getCutImage(b64, frame, 960);//valore fisso temporaneo
+		// });
+
 		mergeImages(higherResolutionStack).then(b64 => {
 			configController.getCutImage(b64, frame, configController.getHigherResolution());
 		});
@@ -471,12 +446,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
                 	}
                 },
-                onFrameChanged: function(){
-                	if($scope.loadComplete){
-    					$scope.time = 0;
-    					$timeout(configController.timer, 1000);                		
-                	}
-                },
 				onComplete: function() {
 					if(firstExecComplete){
 						firstExecComplete = false;
@@ -485,23 +454,13 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 							$("#spinIcon").fadeIn().delay(100).fadeOut();
 							$("#spinIcon img").animate({ 'margin-left': '50px'}, 1000);
 							//$('#a-middle').animate({opacity:'1'}, 500);
-							$('.accessori').animate({opacity:'1'}, 500, function() { // all'avvio lancia il 'fadein' degli elementi dell'interfaccia
-								// $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','trigger'); // rif. descrizione funzione animateAccessoriBar: custom.js linea 94
-								//$('#a-middle').centerElement(); // rif. descrizione funzione centerElement: custom.js linea 139
-						    });
+							$('.accessori').animate({opacity:'1'}, 500, function() {});
 						}
 						$("#transition-image").delay(100).fadeOut();
 						$("#loader").delay(200).fadeOut("slow");
 
 						$scope.spinIcon = false;
 						$scope.spinAnim = false;
-						
-						$scope.time = 0;
-						$timeout(configController.timer, 1000);
-						
-						$timeout(function(){
-							$scope.loadComplete = true;
-						}, 1500);	
 					} 
 				}
             }
@@ -539,7 +498,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		var higherRes = currentRes;
 		switch(currentRes) {
 			case "560":
-				higherRes = "720";
+				higherRes = "960";
 				break;
 			case "720":
 				higherRes = "960";
@@ -713,7 +672,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		listeService.getModelli().then(function (res) {
 			if(res.data.esito.codice == 100){
 				$scope.modelli = res.data.modelli;
-				//$(".dropdown-toggle").dropdown("toggle");
 				listeService.getAccessori().then(function(res2) {
 					$scope.entita = res2.data.accessori;
 					//inizializzo la mappa con gli elenchi dei tipi di accessori
@@ -721,9 +679,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						var modello = $scope.modelli[i];
 						$scope.tipiAccessori.set(modello.nome, modello.accessori);
 					}
-					$(".dropdown-toggle").dropdown("toggle");
-					// $scope.modelliAbilitati = true;
-					// alert("CARICAMENTO COMPLETATO");
+					$(".dropdown-toggle").dropdown("toggle"); //NEW 03/07 - APRO IL TOGGLE DEI MODELLI QUANDO HO EFFETTIVAMENTE CARICATO TUTTI GLI ACCESSORI
 				});
 			}
 		});
@@ -738,18 +694,24 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		/* gestione elementi dell'interfaccia */
 		var aperto = 0;
 
-		//$("#pz").pinchzoomer();
+		$("#pz").pinchzoomer();
 
 		$('#canvasWrapper').parentResize();
-		//$('#a-middle').centerElement();
 
 		// pulsanti apertura/chiusura zoom borsa
 		$('#openZoom').click(function() {
-			$('.zoom').css({'z-index':'10'}).animate({opacity: '1'});
-			//configController.caricaZoomSpinner($scope.currentFrame);
+			
+			html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+				var dataUrl = canvas.toDataURL();
+				$("#pz").attr("src", dataUrl);
+				$("#pz").load();
+				$('.zoom').css({'z-index':'10'}).animate({opacity: '1'});	
+				var spriteSpinAPI = $('#spritespin').spritespin('api');
+				configController.caricaZoom(spriteSpinAPI.currentFrame());//CARICO LO ZOOM AD ALTA RISOLUZIONE
+			});
 		});
 		$('#closeZoom').click(function() {
-			$('.zoom').animate({opacity: 0}, {complete: function(){ $(this).css({'z-index': '0'}) }})
+			$('.zoom').animate({opacity: 0}, {complete: function(){ $(this).css({'z-index': '0'}) }});
 		});
 
 		/* edito il nome della borsa nel configuratore *DA COMPLETARE* */
@@ -806,7 +768,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		    //$('#a-middle').centerElement();
 		    $.fn.sepLine('first-divider', 'swiper-container', 'accessori');
 		    $.fn.yammHeight('navbar-nav', 'yamm-content','riepilogoX')
-		    // $.fn.animateAccessoriBar('accessori','riepilogo','accessori-trigger','notrigger');
 		});
 
 		

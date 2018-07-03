@@ -48,7 +48,6 @@
 	<div class="zoom">
 		<button id="closeZoom"><i class="unaicon-remove"></i></button>
 		<div class="zoomHolder">
-<!-- 			<img ng-src="{{tempZoomContent}}" id="pz" data-elem="pinchzoomer" data-options="preload:false;scaleMode:proportionalInside;maxZoom:3;initZoom:2;doubleTapZoom:3;force3D:true;appendControls:true;appendControlHolder:true"> -->
 			<img data-src="" id="pz" data-elem="pinchzoomer" data-options="scaleMode:proportionalInside;maxZoom:3;initZoom:2;doubleTapZoom:3;force3D:true;appendControls:true;appendControlHolder:true">
 			<div class="controlHolder" data-elem="controlHolder">
 				<div class="zoomIn" data-elem="zoomIn"><i class="unaicon-add"></i></div>
@@ -63,9 +62,6 @@
 				<img class="transition-image" id="transition-image" ng-src="{{dataUrl}}">
 			</div>
 			<div class="animate-show-hide" ng-show="spinnerVisibleTest" id="spritespin"></div>
-			<!-- <div>
-				<img alt="" src="images/base-rounded-square-3d.jpg" style="width:100%">
-			</div> -->
 		</div>
 	</div>
 	<div id="zoomCanvasWrapper">
@@ -81,7 +77,6 @@
 						<swiper class="accessori-categoria" grab-cursor="true"keyboard-control="true" slides-per-view="6" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;3&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;3&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; }}">
 							<slides>
 								<slide ng-repeat="tipoAccessorio in tipiAccessoriModelloSelezionato" ng-click="contr.selezioneTipoAccessorio(tipoAccessorio)" class="swiper-lazy" ng-class="{active: tipoAccessorio === tipoEntitaSelezionata, selected: tipoAccessorio === tipoEntitaSelezionata}"><a href="#">{{tipoAccessorio}}</a></slide>
-								<!--  <slide class="swiper-lazy" ><a href="#">Iniziali</a></slide>  -->
 							</slides>
 							<prev></prev>
 							<next></next>
@@ -91,9 +86,6 @@
 			</div>
 			<div class="row" id="rigaaccessori">
 				<div class="col-lg-12">
-
-<!-- 					<div class="iniziali-preview" ng-show="tipoEntitaSelezionata == 'iniziali'"><input type="text"  id="inizialiPreview" readonly placeholder="ABC" value="{{inizialiPreview}}"><button class="follow anim">OK</button></div> -->
-
 					<section class="swipe">
 						<swiper class="accessori-thumb" grab-cursor="true" observer="false"  keyboard-control="true" slides-per-view="12" breakpoints="{ &quot;320&quot;: { &quot;slidesPerView&quot;: &quot;4&quot; },  &quot;480&quot;: { &quot;slidesPerView&quot;: &quot;5&quot; },  &quot;768&quot;: { &quot;slidesPerView&quot;: &quot;6&quot; },  &quot;992&quot;: { &quot;slidesPerView&quot;: &quot;8&quot; },  &quot;1200&quot;: { &quot;slidesPerView&quot;: &quot;12&quot; }}">
 							<slides ng-hide="tipoEntitaSelezionata == 'iniziali'" >
@@ -273,11 +265,11 @@
 				<div class="col-sm-6 col-sm-offset-3  clearfix">
 					<div class="col-xs-6 ">
 						<h3 class="price nomargin">{{contr.priceManager.price}}&euro;</h3>
-						<!-- <h5 class="info nomargin">iva inclusa</h5> -->
 					</div>
 					<div class="col-xs-6 text-center">
 						<a href="#" class="btn btn-default btn-block follow">procedi</a>
 					</div>
+					
 				</div>
 			</div>
 			<div class="row info">
