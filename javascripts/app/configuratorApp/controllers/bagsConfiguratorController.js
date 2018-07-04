@@ -702,11 +702,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		$('#openZoom').click(function() {
 			
 			html2canvas(document.querySelector("#spritespin"), { async:false }).then(canvas => {
+				$("#loader").show();
+
 				var dataUrl = canvas.toDataURL();
 				$("#pz").attr("src", dataUrl);
 				$("#pz").load();
 				$('.zoom').css({'z-index':'10'}).animate({opacity: '1'});	
 				var spriteSpinAPI = $('#spritespin').spritespin('api');
+				$("#loader").fadeOut("slow");
 				configController.caricaZoom(spriteSpinAPI.currentFrame());//CARICO LO ZOOM AD ALTA RISOLUZIONE
 			});
 		});
