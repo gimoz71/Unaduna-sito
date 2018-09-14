@@ -175,6 +175,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		$scope.tracollaSelezionata = false;
 
 		$scope.metalleriaObbligatoria = [];
+		$scope.inizialiPreview = "";
+		$scope.symbolsUrlStack = [];
 
 		$(".dropdown-toggle").dropdown("toggle");
 
