@@ -40,8 +40,8 @@ angular.module("applicationModule").service("listeService", ["$http", "UtilFunct
 		return $http.post(this.urlGetService, requestMessage, config);
 	}
 	
-	this.getAccessori = function(){
-		var requestMessage = UtilFunctionMessagesCreator.getAccessoriMessage();
+	this.getAccessori = function(nomeModello){
+		var requestMessage = UtilFunctionMessagesCreator.getAccessoriMessage(nomeModello);
 		var config = {
 			headers: {
 				'Content-Type': 'application/json'

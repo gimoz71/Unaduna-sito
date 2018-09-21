@@ -14,9 +14,10 @@ angular.module("applicationModule").service("UtilFunctionMessagesCreator", funct
 		return message;
 	}
 	
-	this.getAccessoriMessage = function(){
+	this.getAccessoriMessage = function(nomeModello){
 		var message = {};
 		message.functionName = "UnaDunaGetAccessori";
+		message.codiceModello = nomeModello;
 		return message;
 	}
 	
