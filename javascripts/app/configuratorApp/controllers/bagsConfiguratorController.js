@@ -210,6 +210,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			var url = modello.urlStripe;
 			url = url.replace("RES", $scope.resolution);
 
+			$scope.coloreSelezionato = "black";
 
 			configController.aggiungiElementoAStack(url, 0, false);
 			$scope.modelloSelezionato = modello.nome;
@@ -241,10 +242,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		var url = entita.urlStripe;
 		url = url.replace("RES", $scope.resolution);
-		url = url.replace("560", $scope.resolution);
-		url = url.replace("720", $scope.resolution);
-		url = url.replace("960", $scope.resolution);
-		url = url.replace("1920", $scope.resolution);
+		//url = url.replace("560", $scope.resolution);
+		//url = url.replace("720", $scope.resolution);
+		//url = url.replace("960", $scope.resolution);
+		//url = url.replace("1920", $scope.resolution);
 
 		if($scope.tipoEntitaSelezionata == "stile"){
 			$scope.nomeStileSelezionato = entita.nomeStile;
@@ -268,10 +269,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				var embossUrl = $scope.mapEmboss.get($scope.nomeStileSelezionato + "_" + entita.colore);
 				var urlE = embossUrl.urlStripe;
 				urlE = urlE.replace("RES", $scope.resolution);
-				urlE = urlE.replace("560", $scope.resolution);
-				urlE = urlE.replace("720", $scope.resolution);
-				urlE = urlE.replace("960", $scope.resolution);
-				urlE = urlE.replace("1920", $scope.resolution);
+				//urlE = urlE.replace("560", $scope.resolution);
+				//urlE = urlE.replace("720", $scope.resolution);
+				//urlE = urlE.replace("960", $scope.resolution);
+				//urlE = urlE.replace("1920", $scope.resolution);
 
 				if(embossUrl){
 					configController.aggiungiElementoAStack(urlE, embossUrl.ordine);
@@ -287,10 +288,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				var urlT = tracollaUrl.urlStripe;
 				//urlT = urlT.replace("RES", configController.getResolutionPlaceHolder());
 				urlT = urlT.replace("RES", $scope.resolution);
-				urlT = urlT.replace("560", $scope.resolution);
-				urlT = urlT.replace("720", $scope.resolution);
-				urlT = urlT.replace("960", $scope.resolution);
-				urlT = urlT.replace("1920", $scope.resolution);
+				//urlT = urlT.replace("560", $scope.resolution);
+				//urlT = urlT.replace("720", $scope.resolution);
+				//urlT = urlT.replace("960", $scope.resolution);
+				//urlT = urlT.replace("1920", $scope.resolution);
 
 				if(tracollaUrl){
 					configController.aggiungiElementoAStack(urlT, tracollaUrl.ordine, false);
@@ -304,10 +305,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				var urlB = borchieUrl.urlStripe;
 				//urlB = urlB.replace("RES", configController.getResolutionPlaceHolder());
 				urlB = urlB.replace("RES", $scope.resolution);
-				urlB = urlB.replace("560", $scope.resolution);
-				urlB = urlB.replace("720", $scope.resolution);
-				urlB = urlB.replace("960", $scope.resolution);
-				urlB = urlB.replace("1920", $scope.resolution);
+				//urlB = urlB.replace("560", $scope.resolution);
+				//urlB = urlB.replace("720", $scope.resolution);
+				//urlB = urlB.replace("960", $scope.resolution);
+				//urlB = urlB.replace("1920", $scope.resolution);
 
 				if(borchieUrl){
 					configController.aggiungiElementoAStack(urlB, borchieUrl.ordine, false);

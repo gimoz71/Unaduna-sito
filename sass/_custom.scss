@@ -1390,7 +1390,7 @@ a.link {
         left: -1px;
     }
     .accessori-categoria {
-        overflow: visible;
+        //overflow: visible;
         .swiper-slide {
             border-right: solid 1px $standard-border-color;
             &:first-child  {
@@ -1417,14 +1417,14 @@ a.link {
         }
 
         .swiper-button-prev {
-            left: -20px;
+            left: -17px;
             height: 35px;
             @media screen and (max-height: 600px) {
                 height: 31px;
             }
         }
         .swiper-button-next {
-            right: -20px;
+            right: -17px;
             height: 35px;
             @media screen and (max-height: 600px) {
                 height: 31px;
@@ -1436,7 +1436,7 @@ a.link {
         .swiper-wrapper {
             padding: 10px 0;
         }
-        overflow: visible;
+        //overflow: visible;
         img {
             height: 57px;
             cursor: pointer;
@@ -1517,14 +1517,14 @@ a.link {
             height: 20px;
         }
         .swiper-button-prev {
-            left: -20px;
+            left: -17px;
             height: 82px;
             @media screen and (max-height: 600px) {
                 height: 62px;
             }
         }
         .swiper-button-next {
-            right: -20px;
+            right: -17px;
             height: 82px;
             @media screen and (max-height: 600px) {
                 height: 62px;
