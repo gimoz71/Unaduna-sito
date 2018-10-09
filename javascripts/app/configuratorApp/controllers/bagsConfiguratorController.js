@@ -138,6 +138,24 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				}
 			}
 		}
+
+		//ordinamento delle entità
+		$scope.entitaTipoAccessorioSelezionato = configController.ordinaEntita($scope.entitaTipoAccessorioSelezionato);
+	}
+
+	configController.ordinaEntita = function (entitaNonOrdinate) {
+
+		var size = entitaNonOrdinate.length;
+		var tempEntita = new Array(size);
+
+		for (var i = 0; i < size; i++) {
+			if (entitaNonOrdinate[i]["ordineInterfaccia"] == null || entitaNonOrdinate[i]["ordineInterfaccia"] == "" || entitaNonOrdinate[i]["ordineInterfaccia"] == 0){
+				return entitaNonOrdinate;
+			}	
+			tempEntita[entitaNonOrdinate[i]["ordineInterfaccia"] - 1] = entitaNonOrdinate[i];
+		}
+
+		return tempEntita;
 	}
 
 	configController.getResolutionPlaceHolder = function(){
@@ -159,39 +177,55 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 	configController.scegliModello = function(modello){
 
-		$scope.resolution = configController.getResolutionPlaceHolder();
-
-		$scope.embossSelezionato = false;
-		$scope.mapEmboss = new Map();
-
-		$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
-		$scope.scegliColore = true;
-
-		$scope.metalloVincolante = "argento";
-		$scope.mapMetalloTracolle = new Map();
-		$scope.mapMetalloBorchie = new Map();
-
-		$scope.borchieSelezionate = false;
-		$scope.tracollaSelezionata = false;
-
-		$scope.metalleriaObbligatoria = [];
-
-		$(".dropdown-toggle").dropdown("toggle");
-
-		$scope.stack = [];
-		var url = modello.urlStripe;
-		url = url.replace("RES", $scope.resolution);
 		
-		configController.aggiungiElementoAStack(url, 0, false);
-		$scope.modelloSelezionato = modello.nome;
-		$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
 
-		$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
-		configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
+		//carico solo gli accessori relativi al modello scelto
+		listeService.getAccessori(modello.nome).then(function (res2) {
+			$scope.entita = res2.data.accessori;
+			//inizializzo la mappa con gli elenchi dei tipi di accessori
+			$scope.tipiAccessori.set(modello.nome, modello.accessori);
+			
+			$scope.resolution = configController.getResolutionPlaceHolder();
 
-		//apro il pannello dei colori
-		configController.selezioneTipoAccessorio("colore");
-		configController.caricaSpinner();
+			$scope.embossSelezionato = false;
+			$scope.mapEmboss = new Map();
+
+			$scope.coloreVincolante = "black";//scellgo il nero come colore vincolante di default
+			$scope.scegliColore = true;
+
+			$scope.metalloVincolante = "argento";
+			$scope.mapMetalloTracolle = new Map();
+			$scope.mapMetalloBorchie = new Map();
+
+			$scope.borchieSelezionate = false;
+			$scope.tracollaSelezionata = false;
+
+			$scope.metalleriaObbligatoria = [];
+			$scope.inizialiPreview = "";
+			$scope.symbolsUrlStack = [];
+
+			$(".dropdown-toggle").dropdown("toggle");
+
+			$scope.stack = [];
+			var url = modello.urlStripe;
+			url = url.replace("RES", $scope.resolution);
+
+			$scope.coloreSelezionato = "black";
+
+			configController.aggiungiElementoAStack(url, 0, false);
+			$scope.modelloSelezionato = modello.nome;
+			$scope.tipiAccessoriModelloSelezionato = $scope.tipiAccessori.get(modello.nome);
+
+			$scope.metalleriaObbligatoria = configController.getUrlMetalleria(modello.nome, "argento");
+			configController.aggiungiElementoAStack($scope.metalleriaObbligatoria, 3, false);
+
+			//apro il pannello dei colori
+			configController.selezioneTipoAccessorio("colore");
+			configController.caricaSpinner();
+			
+		});
+
+		
 	}
 
 	configController.selezionaEntita = function(entita){
@@ -208,6 +242,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 
 		var url = entita.urlStripe;
 		url = url.replace("RES", $scope.resolution);
+		//url = url.replace("560", $scope.resolution);
+		//url = url.replace("720", $scope.resolution);
+		//url = url.replace("960", $scope.resolution);
+		//url = url.replace("1920", $scope.resolution);
 
 		if($scope.tipoEntitaSelezionata == "stile"){
 			$scope.nomeStileSelezionato = entita.nomeStile;
@@ -231,6 +269,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				var embossUrl = $scope.mapEmboss.get($scope.nomeStileSelezionato + "_" + entita.colore);
 				var urlE = embossUrl.urlStripe;
 				urlE = urlE.replace("RES", $scope.resolution);
+				//urlE = urlE.replace("560", $scope.resolution);
+				//urlE = urlE.replace("720", $scope.resolution);
+				//urlE = urlE.replace("960", $scope.resolution);
+				//urlE = urlE.replace("1920", $scope.resolution);
 
 				if(embossUrl){
 					configController.aggiungiElementoAStack(urlE, embossUrl.ordine);
@@ -246,6 +288,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				var urlT = tracollaUrl.urlStripe;
 				//urlT = urlT.replace("RES", configController.getResolutionPlaceHolder());
 				urlT = urlT.replace("RES", $scope.resolution);
+				//urlT = urlT.replace("560", $scope.resolution);
+				//urlT = urlT.replace("720", $scope.resolution);
+				//urlT = urlT.replace("960", $scope.resolution);
+				//urlT = urlT.replace("1920", $scope.resolution);
 
 				if(tracollaUrl){
 					configController.aggiungiElementoAStack(urlT, tracollaUrl.ordine, false);
@@ -259,6 +305,10 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 				var urlB = borchieUrl.urlStripe;
 				//urlB = urlB.replace("RES", configController.getResolutionPlaceHolder());
 				urlB = urlB.replace("RES", $scope.resolution);
+				//urlB = urlB.replace("560", $scope.resolution);
+				//urlB = urlB.replace("720", $scope.resolution);
+				//urlB = urlB.replace("960", $scope.resolution);
+				//urlB = urlB.replace("1920", $scope.resolution);
 
 				if(borchieUrl){
 					configController.aggiungiElementoAStack(urlB, borchieUrl.ordine, false);
@@ -666,13 +716,26 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	 * FINE ---- SEZIONE RELATIVA ALLA GESTIONE DELLE LETTERE E DEI SIMBOLI 
 	 * */
 	
+	configController.ordinaModelli = function(modelliNonOrdinati){
+
+		var size = modelliNonOrdinati.length;
+		var tempModelli = new Array(size);
+
+		for(var i = 0; i< size; i++){
+			tempModelli[modelliNonOrdinati[i]["ordineInterfaccia"] - 1] = modelliNonOrdinati[i];
+		}
+
+		return tempModelli;
+	}
+
 	configController.initConfiguratore = function(){
 
 		//1. devo fare il caricamento massivo iniziale delle configurazioni (solo la struttura json dal DB, non le immagini)
 		listeService.getModelli().then(function (res) {
 			if(res.data.esito.codice == 100){
-				$scope.modelli = res.data.modelli;
-				listeService.getAccessori().then(function(res2) {
+				$scope.modelli = configController.ordinaModelli(res.data.modelli);
+
+				/* listeService.getAccessori().then(function(res2) {
 					$scope.entita = res2.data.accessori;
 					//inizializzo la mappa con gli elenchi dei tipi di accessori
 					for(var i = 0; i < $scope.modelli.length; i++){
@@ -680,7 +743,9 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 						$scope.tipiAccessori.set(modello.nome, modello.accessori);
 					}
 					$(".dropdown-toggle").dropdown("toggle"); //NEW 03/07 - APRO IL TOGGLE DEI MODELLI QUANDO HO EFFETTIVAMENTE CARICATO TUTTI GLI ACCESSORI
-				});
+				});*/
+
+				$(".dropdown-toggle").dropdown("toggle"); //NEW 03/07 - APRO IL TOGGLE DEI MODELLI QUANDO HO EFFETTIVAMENTE CARICATO TUTTI GLI ACCESSORI
 			}
 		});
 

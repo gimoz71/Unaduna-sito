@@ -1,5 +1,49 @@
 {
   "ecmaVersion": 5,
+  "ide": {
+    "scriptPaths": [
+      {
+        "type": "FOLDER",
+        "path": "javascripts/angular"
+      },
+      {
+        "type": "FOLDER",
+        "path": "javascripts/app/common"
+      },
+      {
+        "type": "FOLDER",
+        "path": "javascripts/app/configuratorApp/controllers"
+      },
+      {
+        "type": "FOLDER",
+        "path": "javascripts/app/controllers"
+      },
+      {
+        "type": "FOLDER",
+        "path": "javascripts/app/loginApp/constants"
+      },
+      {
+        "type": "FOLDER",
+        "path": "javascripts/app/loginApp/controller"
+      },
+      {
+        "type": "FOLDER",
+        "path": "javascripts/app/loginApp/services"
+      },
+      {
+        "type": "FOLDER",
+        "path": "javascripts/app/services"
+      },
+      {
+        "type": "FOLDER",
+        "path": "javascripts/html2canvas"
+      },
+      {
+        "type": "FOLDER",
+        "path": "javascripts/mergeimages"
+      }
+    ]
+  },
   "plugins": {
     "guess-types": {
       
@@ -12,6 +56,7 @@
     }
   },
   "libs": [
-    "browser"
+    "browser",
+    "jquery"
   ]
 }

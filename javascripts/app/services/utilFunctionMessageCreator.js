@@ -7,12 +7,6 @@ angular.module("applicationModule").service("UtilFunctionMessagesCreator", funct
 		return message;
 	};
 	
-	this.putUtenteMessage = function(utente){
-		var message = {};
-		message.functionName = "UnaDunaPutUtente";
-		message.utente = utente;
-		return message;
-	}
 	
 	this.getModelliMessage = function(){
 		var message = {};
@@ -20,9 +14,10 @@ angular.module("applicationModule").service("UtilFunctionMessagesCreator", funct
 		return message;
 	}
 	
-	this.getAccessoriMessage = function(){
+	this.getAccessoriMessage = function(nomeModello){
 		var message = {};
 		message.functionName = "UnaDunaGetAccessori";
+		message.codiceModello = nomeModello;
 		return message;
 	}
 	
@@ -66,31 +61,17 @@ angular.module("applicationModule").service("UtilFunctionMessagesCreator", funct
 		return message;
 	}
 
-	this.putConfigurazioneMessage = function(configurazione){
+	this.putConfigurazione = function(configurazione){
 		var message = {};
 		message.functionName = "UnaDunaPutConfigurazione";
 		message.configurazione = configurazione;
 		return message;
 	}
 	
-	this.putOrdineMessage = function(ordine){
+	this.putOrdine = function(ordine){
 		var message = {};
 		message.functionName = "UnaDunaPutOrdine";
 		message.ordine = ordine;
-		return message;
-	}
-	
-	this.deleteConfigurazioneMessage = function(configurazione){
-		var message = {};
-		message.functionName = "UnaDunaDeleteConfigurazione";
-		message.codiceConfigurazione = configurazione;
-		return message;
-	}
-	
-	this.deleteOrdineMessage = function(ordine){
-		var message = {};
-		message.functionName = "UnaDunaDeleteOrdine";
-		message.codiceOrdine = ordine;
 		return message;
 	}
 });

@@ -91,7 +91,7 @@
 							<slides ng-hide="tipoEntitaSelezionata == 'iniziali'" >
 								<slide ng-repeat="entita in entitaTipoAccessorioSelezionato" ng-click="contr.selezionaEntita(entita)">
 									<a href="#" ng_class="{activeAccessorio: entita.nome === nomeEntitaSelezionata}" title="">
-	                                    <img ng-src="{{entita.urlThumbnailHD}}" class="swiper-lazy"/>
+	                                    <img ng-src="{{entita.urlThumbnail}}" class="swiper-lazy"/>
 	                                    <div ng-if="removable" class="closeItem"><i class="unaicon-remove"></i></div>
 	                                </a>
 								</slide>
