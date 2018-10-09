@@ -29,4 +29,27 @@ var app = angular.module('applicationModule', ['loginModule', 'configuratorModul
 		 restrict: 'E',
 		 templateUrl: ''
 	 };
+}).directive('accessoContent', function(){
+	 return {
+		 restrict: 'E',
+		 templateUrl: 'accesso.html'
+	 };
+}).directive('preferitiContent', function(){
+	 return {
+		 restrict: 'E',
+		 templateUrl: 'profilo-borse.html'
+	 };
+}).directive('ordiniContent', function(){
+	 return {
+		 restrict: 'E',
+		 templateUrl: 'ordini-borse.html'
+	 };
+}).directive('paypalContent', function(){
+	 return {
+		 restrict: 'E',
+		 scope: {
+			 customerInfo: '=info'
+		    },
+		 templateUrl: 'paypalComponent.html'
+	 };
 });

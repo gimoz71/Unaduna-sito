@@ -1,6 +1,7 @@
 angular.module("applicationModule").service("listeService", ["$http", "UtilFunctionMessagesCreator", function($http, UtilFunctionMessagesCreator) {
 	
 	this.urlGetService = "https://5mjp7r5urj.execute-api.eu-central-1.amazonaws.com/UnadunaGet"
+	this.urlGetServiceNode = 'https://ig24v3ii6b.execute-api.eu-central-1.amazonaws.com/unaDunaGetAccessori';
 	
 	this.tipiAccessoriList = [];
 	this.accessoriesList = [];
@@ -47,7 +48,7 @@ angular.module("applicationModule").service("listeService", ["$http", "UtilFunct
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post(this.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetServiceNode, requestMessage, config);
 	}
 	
 	this.getConfigurazione = function(codiceConfigurazione){
@@ -117,7 +118,7 @@ angular.module("applicationModule").service("listeService", ["$http", "UtilFunct
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post(this.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetServiceNode, requestMessage, config);
 	}
 	
 	this.putOrdine = function(ordine){

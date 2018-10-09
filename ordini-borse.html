@@ -1,0 +1,55 @@
+    <div ng-controller="ordiniController" class="container text-center gradient">
+        <div class="row">
+            <div class="col-sm-12 clearfix bottom-buffer">
+                <h3 class="title section">Ciao Gianluca,</h3>
+                <p>in questa area puoi verificare i tuoi ordini, visualizzare e modificare i tuoi preferiti.</p>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" ><a href="#preferiti" data-toggle="tab"><i class="unaicon-favourite" style="margin-right: 2px;"></i> Preferiti (2)</a></li>
+            <li role="presentation" class="active"><a href="#ordini" data-toggle="tab"><i class="unaicon-cart" style="margin-right: 2px;"></i> Ordini (2)</a></li>
+        </ul>
+        <div class="tab-content clearfix gradient">
+            
+            <div class="row bag-list tab-pane fade in active" id="ordini">
+                <div ng-repeat="ord in listaOrdini" class="col-sm-12 bag-item clearfix">
+                    <div class="col-sm-3">
+                        <img src="images/borsa-dummy-conf.jpg" class="bag-sample">
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="bag">10/10/17 - Configurazione #{{ord.configurazione.codice}}</h4>
+                            </div>
+                            <div class="col-sm-2 base">
+                                <h5 class="section-small left">Base</h5>
+                                <table>
+                                    <tr ng-repeat="base in ord.configurazione.elencoEntita" ng-if="base.categoria == 'base'" >
+                                        <td style="width: 40%;" class="hidden-sm"><span>{{base['nome']}}:</span></td>
+                                        <td>{{base['descrizione']}}<div class="materiale hidden" style="background-color:#C9FF26;"></div></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-sm-4 accessori">
+                                <h5 class="section-small left">Accessori</h5>
+                                <table>
+                                    <tr ng-repeat="base in ord.configurazione.elencoEntita" ng-if="base.categoria == 'accessori'">
+                                        <td style="width: 40%;">{{base['nome']}}:</td>
+                                        <td>{{base['descrizione']}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-sm-6 action">
+                                <div class="order-state active one " ng-class="{'current': ord.stato == 1 }"> Ordinato </div>
+                                <div class="order-state active two " ng-class="{'current': ord.stato == 2 }">In lavorazione</div>
+                                <div class="order-state active three " ng-class="{'current': ord.stato == 3 }">In spedizione</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
