@@ -86,61 +86,72 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 	}
 
+	configController.selezionaVarianteTracolla = function() {
+		$scope.tipoEntitaSelezionata = "varianti-tracolle";
+	}
+
 	configController.selezioneTipoAccessorio = function(tipoAccessorio){
 		$scope.tipoEntitaSelezionata = tipoAccessorio;
 		//preparo la mappa che ha chiave = entita.nome - valore = entita
 		//fadeout del componente
-		if(tipoAccessorio == "colore"){
-			//qui devo gestire le limitazioni relative al colore
-			$scope.scegliColore = true;
+		if(tipoAccessorio == "tracolle"){
+			$scope.tipoEntitaSelezionata = "tipi-tracolle";
 		} else {
-			$scope.scegliColore = false;
-		}
-		if(tipoAccessorio == "metalleria"){
-			//qui devo gestire le limitazioni relative al colore
-			$scope.scegliMetallo = true;
-		} else {
-			$scope.scegliMetallo = false;
-		}
-		if(tipoAccessorio == "stile"){
-			$scope.scegliEmboss = true;
-		} else {
-			$scope.scegliEmboss = false;
-		}
-		$scope.entitaTipoAccessorioSelezionato = [];
-		for(var i = 0; i < $scope.modelli.length; i++){
-			var modello = $scope.modelli[i];
-			if(modello.nome == $scope.modelloSelezionato){
-				for(var j = 0; j < $scope.entita.length; j++){
-					var entitaSingola = $scope.entita[j];
-					if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
-						if(entitaSingola.vincoloColore == true){
-							if(entitaSingola.categoria == "stile"){
-								$scope.mapEmboss.set(entitaSingola.nomeStile + "_" + entitaSingola.colore, entitaSingola);
-							}
-							if(entitaSingola.colore == $scope.coloreVincolante){
+
+			if (tipoAccessorio == "colore") {
+				//qui devo gestire le limitazioni relative al colore
+				$scope.scegliColore = true;
+			} else {
+				$scope.scegliColore = false;
+			}
+			if (tipoAccessorio == "metalleria") {
+				//qui devo gestire le limitazioni relative al colore
+				$scope.scegliMetallo = true;
+			} else {
+				$scope.scegliMetallo = false;
+			}
+			if (tipoAccessorio == "stile") {
+				$scope.scegliEmboss = true;
+			} else {
+				$scope.scegliEmboss = false;
+			}
+			$scope.entitaTipoAccessorioSelezionato = [];
+			for (var i = 0; i < $scope.modelli.length; i++) {
+				var modello = $scope.modelli[i];
+				if (modello.nome == $scope.modelloSelezionato) {
+					for (var j = 0; j < $scope.entita.length; j++) {
+						var entitaSingola = $scope.entita[j];
+						if (entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato) {
+							if (entitaSingola.vincoloColore == true) {
+								if (entitaSingola.categoria == "stile") {
+									$scope.mapEmboss.set(entitaSingola.nomeStile + "_" + entitaSingola.colore, entitaSingola);
+								}
+								if (entitaSingola.colore == $scope.coloreVincolante) {
+									$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+								}
+							} else if (entitaSingola.vincoloMetallo == true) {
+								if (entitaSingola.categoria == "tracolle") {
+									$scope.mapMetalloTracolle.set(entitaSingola.metallo, entitaSingola);
+									$scope.mapMetalloBorchie.set(entitaSingola.metallo, entitaSingola);
+								} else if (entitaSingola.categoria == "borchie") {
+									$scope.mapMetalloBorchie.set(entitaSingola.nomeBorchia + "_" + entitaSingola.metallo, entitaSingola);
+								}
+								if (entitaSingola.metallo == $scope.metalloVincolante) {
+									$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+								}
+							} else {
 								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
 							}
-						} else if(entitaSingola.vincoloMetallo == true) {
-							if(entitaSingola.categoria == "tracolle"){
-								$scope.mapMetalloTracolle.set(entitaSingola.metallo, entitaSingola);
-								$scope.mapMetalloBorchie.set(entitaSingola.metallo, entitaSingola);
-							}else if (entitaSingola.categoria == "borchie"){
-								$scope.mapMetalloBorchie.set(entitaSingola.nomeBorchia + "_" + entitaSingola.metallo, entitaSingola);
-							}
-							if(entitaSingola.metallo == $scope.metalloVincolante){
-								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
-							}
-						} else {
-							$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
 						}
 					}
 				}
 			}
-		}
 
-		//ordinamento delle entità
-		$scope.entitaTipoAccessorioSelezionato = configController.ordinaEntita($scope.entitaTipoAccessorioSelezionato);
+			//ordinamento delle entità
+			$scope.entitaTipoAccessorioSelezionato = configController.ordinaEntita($scope.entitaTipoAccessorioSelezionato);
+
+		}
+		
 	}
 
 	configController.ordinaEntita = function (entitaNonOrdinate) {
