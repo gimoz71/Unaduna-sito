@@ -35,17 +35,17 @@
 		                    </button>
 		                    <ul class="nav navbar-nav fixed-navbar-right">
 		                        <li>
-		                            <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi</span></a>
+		                            <a href="#" id="user-menu" data-toggle="dropdown"><i class="unaicon-login"></i> <span class="hidden-xs">accedi {{user.username}}</span></a>
 		                            <ul class="dropdown-menu" aria-labelledby="user-menu">
-		                                <li><a href="accesso.html">Profilo</a></li>
-		                                <li><a href="#">Esci</a></li>
+		                                <li><a  ng-click="setAccesso()" >Profilo</a></li>
+		                                <li><a href="#" ng-click="logOut()">Esci</a></li>
 		                            </ul>
 		                        </li>
 		                        <li>
-		                            <a href="profilo-borse.html#preferiti"><i class="unaicon-cart"></i> <span class="hidden-xs">(1)</span></a>
-		                        </li>
+		                            <a ng-click="setPreferiti()"><i class="unaicon-favourite"></i> <span class="hidden-xs">(1)</span></a>
+	                           </li>
 		                        <li>
-		                            <a href="profilo-borse.html#ordini"><i class="unaicon-favourite"></i> <span class="hidden-xs">(2)</span></a>
+		                            <a ng-click="setOrdini()"><i class="unaicon-cart"></i> <span class="hidden-xs">(2)</span></a>
 		                        </li>
 		                    </ul>
 		                </div>
@@ -129,7 +129,9 @@
 		    <esperienza-content ng-if="isEsperienza"></esperienza-content>
 		    <contatti-content ng-if="isContatti"></contatti-content>
 		    <stores-content ng-if="isStores"></stores-content>
-
+			<accesso-content ng-if="isAccesso"></accesso-content>
+			<preferiti-content ng-if="isPreferiti" ></preferiti-content>
+			<ordini-content ng-if="isOrdini"></ordini-content>
 	    </div>
 
 	    <footer class="text-center" ng-if="!isConfigurator">
@@ -200,6 +202,8 @@
 
     <script src="http://code.jquery.com/jquery-2.2.4.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
+    <!-- paypal  -->
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
 	<!--BLOCCO IMPORT FILE APPLICAZIONE ANGULAR  -->
     <script src="javascripts/angular/angular.min.js"></script>
@@ -215,21 +219,37 @@
     <script src="javascripts/app/services/StackService.js"></script>
 
     <script src="javascripts/app/loginApp/app.js"></script>
-	<script src="javascripts/app/loginApp/constants/rolesConstants.js"></script>
+    <script src="javascripts/app/loginApp/constants/constants.js"></script>
+	<!-- <script src="javascripts/app/loginApp/constants/rolesConstants.js"></script>
 	<script src="javascripts/app/loginApp/constants/statesConstants.js"></script>
 	<script src="javascripts/app/loginApp/constants/responseCodesConstants.js"></script>
-	<script src="javascripts/app/loginApp/constants/loginUrlConstants.js"></script>
+	<script src="javascripts/app/loginApp/constants/loginUrlConstants.js"></script> -->
 	<script src="javascripts/app/loginApp/services/loginService.js"></script>
-	<script src="javascripts/app/loginApp/services/sessionService.js"></script>
+	<!-- <script src="javascripts/app/loginApp/services/sessionService.js"></script>
 	<script src="javascripts/app/loginApp/services/loginMessagesCreator.js"></script>
-	<script src="javascripts/app/loginApp/controller/applicationController.js"></script>
-	<script src="javascripts/app/loginApp/controller/loginController.js"></script>
+	<script src="javascripts/app/loginApp/controller/applicationController.js"></script>-->
+	<script src="javascripts/app/loginApp/services/salvaUtenteService.js"></script>
+	<script src="javascripts/app/loginApp/services/getOrdiniService.js"></script>
+	<script src="javascripts/app/loginApp/services/getConfigurazioniService.js"></script>
+	<script src="javascripts/app/loginApp/services/putOrdineService.js"></script>
+	<script src="javascripts/app/loginApp/services/putConfigurazioneService.js"></script>
+	<script src="javascripts/app/loginApp/services/deleteOrdineService.js"></script>
+	<script src="javascripts/app/loginApp/services/deleteConfigurazioneService.js"></script>
+	<script src="javascripts/app/loginApp/controller/accessoController.js"></script> 
+	<script src="javascripts/app/loginApp/controller/preferitiController.js"></script>
+	<script src="javascripts/app/loginApp/controller/ordiniController.js"></script>
+	
+	<script src="javascripts/app/loginApp/controller/paypalController.js"></script>
 
 	<script src="javascripts/app/configuratorApp/app.js"></script>
 	<script src="javascripts/app/configuratorApp/controllers/configuratorController.js"></script>
 	<script src="javascripts/app/configuratorApp/controllers/bagsConfiguratorController.js"></script>
 	<script src="javascripts/app/configuratorApp/controllers/rootController.js"></script>
 	<!--FINE BLOCCO IMPORT FILE APPLICAZIONE ANGULAR  -->
+	
+	<script src="javascripts/app/common/aws-sdk.min.js"></script>
+	<script src="javascripts/app/common/amazon-cognito.min.js"></script>
+	<script src="javascripts/app/common/amazon-cognito-identity.min.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <!-- <script src='https://unpkg.com/spritespin@4.0.1/release/spritespin.js' type='text/javascript'></script> -->

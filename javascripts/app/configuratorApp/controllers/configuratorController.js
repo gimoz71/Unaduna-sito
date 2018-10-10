@@ -9,9 +9,6 @@ angular.module('configuratorModule').controller('unadunaBorseConfiguratorControl
 
 	//array che popolo in fasse di inizializzazione e che saranno i dati su gui lavorare, lato client, per richiedere le immagini del configuratore
 
-
-
-
 	$scope.elencoAccessori = ['https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/test-merge-images/base/ImageCollage.jpg'];
 
 	//configController.accessoriBorsa = accessoriesService.accessoriesList;ù
