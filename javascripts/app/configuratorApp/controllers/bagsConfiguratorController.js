@@ -18,6 +18,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.tipiAccessoriModelloSelezionato = [];
 	$scope.modelloSelezionato = '';
 
+	$scope.categorieTracolle = [];
+	$scope.modelliTracolleOro = new Map();
+	$scope.modelliTracolleArgento = new Map();
+	$scope.variantiTracolle = [];
+
 	$scope.dataUrl = "";
 
 	$scope.tipoEntitaSelezionata = "colore";//di default apro il pannello colori
@@ -50,6 +55,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.symbolArray = []; 
 	$scope.symbolEnabled = true;
 	$scope.baseUrlSymbols = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/MODELLI/MODELLO/INIZIALI/";
+	$scope.baseUrlThumbCategorieTracolle = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/MODELLI/MODELLO/TRACOLLE/THUMBNAILS/";
 	$scope.symbolConfigurations = [["M"],["MSX","MDX"],["SX","M","DX"]];
 	$scope.inizialiPreview = "";
 	
@@ -86,7 +92,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 	}
 
-	configController.selezionaVarianteTracolla = function() {
+	configController.getThumbnailName = function(entita){
+		var toReplace = configController.modelNameTranslate($scope.modelloSelezionato);
+		var thumbnailName = $scope.baseUrlThumbCategorieTracolle.replace("MODELLO", toReplace) + "THUMBNAIL_" + entita.replace("-","_") + ".png";
+		return thumbnailName;
+	}
+
+	configController.selezionaCategoriaTracolla = function(entita) {
+		$scope.variantiTracolle = $scope.modelliTracolleOro.get(entita);
 		$scope.tipoEntitaSelezionata = "varianti-tracolle";
 	}
 
@@ -96,6 +109,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		//fadeout del componente
 		if(tipoAccessorio == "tracolle"){
 			$scope.tipoEntitaSelezionata = "tipi-tracolle";
+
 		} else {
 
 			if (tipoAccessorio == "colore") {
@@ -186,9 +200,56 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		return placeHolder;
 	}
 
-	configController.scegliModello = function(modello){
+	configController.gestisciTracolle = function() {
+		for(var i = 0; i< $scope.entita.length; i++){
+			var entita = $scope.entita[i];
+			if(entita.categoria == "tracolle"){
+				//prendo il nome
+				var nomeTracolla = entita.nome;
 
-		
+				//trovo la categoria di tracolle
+				var split = nomeTracolla.split('_');
+				var categoriaTracolla = split[0] + '_' + split[1];
+
+				//inserisco nelle categorie di tracolle
+				if ($scope.categorieTracolle.indexOf(categoriaTracolla) == -1){
+					$scope.categorieTracolle.push(categoriaTracolla);
+				}
+
+				var modelName = configController.getNomeModelloTracolla(split);
+				if(entita.metallo == "oro"){
+					if (!$scope.modelliTracolleOro.has(categoriaTracolla)) {
+						$scope.modelliTracolleOro.set(categoriaTracolla, []);
+					}
+
+					if ($scope.modelliTracolleOro.get(categoriaTracolla).indexOf(modelName) == -1) {
+						$scope.modelliTracolleOro.get(categoriaTracolla).push(entita);
+					}
+				} else {
+					if (!$scope.modelliTracolleArgento.has(categoriaTracolla)) {
+						$scope.modelliTracolleArgento.set(categoriaTracolla, []);
+					}
+
+					if ($scope.modelliTracolleArgento.get(categoriaTracolla).indexOf(modelName) == -1) {
+						$scope.modelliTracolleArgento.get(categoriaTracolla).push(entita);
+					}
+				}
+			}
+		}
+
+	}
+
+	configController.getNomeModelloTracolla = function(splitted) {
+		var toReturn = "";
+		for (var i = 0; i < splitted.length; i++){
+			if (i > 1 && i < splitted.length - 1){
+				toReturn += splitted[i];
+			}
+		}
+		return toReturn;
+	}
+
+	configController.scegliModello = function(modello){
 
 		//carico solo gli accessori relativi al modello scelto
 		listeService.getAccessori(modello.nome).then(function (res2) {
@@ -215,6 +276,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.inizialiPreview = "";
 			$scope.symbolsUrlStack = [];
 
+			configController.gestisciTracolle();
+
 			$(".dropdown-toggle").dropdown("toggle");
 
 			$scope.stack = [];
@@ -236,7 +299,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			
 		});
 
-		
 	}
 
 	configController.selezionaEntita = function(entita){

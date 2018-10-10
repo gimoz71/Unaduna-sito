@@ -1476,6 +1476,7 @@ a.link {
         a {
             position: relative;
             border: solid 1px transparent;
+            padding: 2px;
             &:hover, &.added, &.activeAccessorio {
                 border: solid 1px $standard-border-color;
                 opacity: 1;
