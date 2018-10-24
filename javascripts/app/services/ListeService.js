@@ -48,7 +48,7 @@ angular.module("applicationModule").service("listeService", ["$http", "UtilFunct
 				'Content-Type': 'application/json'
 			}
 		};
-		return $http.post(this.urlGetService, requestMessage, config);
+		return $http.post(this.urlGetService , requestMessage, config);
 	}
 	
 	this.getConfigurazione = function(codiceConfigurazione){

@@ -176,12 +176,14 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	}
 
 	configController.scegliModello = function(modello){
-
-		
-
+		var t0 = performance.now();
 		//carico solo gli accessori relativi al modello scelto
 		listeService.getAccessori(modello.nome).then(function (res2) {
+			var t1 = performance.now();
+			console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
+			console.log(res2);
 			$scope.entita = res2.data.accessori;
+			console.log($scope.entita);
 			//inizializzo la mappa con gli elenchi dei tipi di accessori
 			$scope.tipiAccessori.set(modello.nome, modello.accessori);
 			
