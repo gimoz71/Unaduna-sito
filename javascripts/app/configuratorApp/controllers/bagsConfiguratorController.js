@@ -18,6 +18,11 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.tipiAccessoriModelloSelezionato = [];
 	$scope.modelloSelezionato = '';
 
+	$scope.categorieTracolle = [];
+	$scope.modelliTracolleOro = new Map();
+	$scope.modelliTracolleArgento = new Map();
+	$scope.variantiTracolle = [];
+
 	$scope.dataUrl = "";
 
 	$scope.tipoEntitaSelezionata = "colore";//di default apro il pannello colori
@@ -50,6 +55,7 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 	$scope.symbolArray = []; 
 	$scope.symbolEnabled = true;
 	$scope.baseUrlSymbols = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/MODELLI/MODELLO/INIZIALI/";
+	$scope.baseUrlThumbCategorieTracolle = "https://s3.eu-central-1.amazonaws.com/unaduna-images-bucket/MODELLI/MODELLO/TRACOLLE/THUMBNAILS/";
 	$scope.symbolConfigurations = [["M"],["MSX","MDX"],["SX","M","DX"]];
 	$scope.inizialiPreview = "";
 	
@@ -86,61 +92,80 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		}
 	}
 
+	configController.getThumbnailName = function(entita){
+		var toReplace = configController.modelNameTranslate($scope.modelloSelezionato);
+		var thumbnailName = $scope.baseUrlThumbCategorieTracolle.replace("MODELLO", toReplace) + "THUMBNAIL_" + entita.replace("-","_") + ".png";
+		return thumbnailName;
+	}
+
+	configController.selezionaCategoriaTracolla = function(entita) {
+		$scope.variantiTracolle = $scope.modelliTracolleOro.get(entita);
+		$scope.tipoEntitaSelezionata = "varianti-tracolle";
+	}
+
 	configController.selezioneTipoAccessorio = function(tipoAccessorio){
 		$scope.tipoEntitaSelezionata = tipoAccessorio;
 		//preparo la mappa che ha chiave = entita.nome - valore = entita
 		//fadeout del componente
-		if(tipoAccessorio == "colore"){
-			//qui devo gestire le limitazioni relative al colore
-			$scope.scegliColore = true;
+		if(tipoAccessorio == "tracolle"){
+			$scope.tipoEntitaSelezionata = "tipi-tracolle";
+
 		} else {
-			$scope.scegliColore = false;
-		}
-		if(tipoAccessorio == "metalleria"){
-			//qui devo gestire le limitazioni relative al colore
-			$scope.scegliMetallo = true;
-		} else {
-			$scope.scegliMetallo = false;
-		}
-		if(tipoAccessorio == "stile"){
-			$scope.scegliEmboss = true;
-		} else {
-			$scope.scegliEmboss = false;
-		}
-		$scope.entitaTipoAccessorioSelezionato = [];
-		for(var i = 0; i < $scope.modelli.length; i++){
-			var modello = $scope.modelli[i];
-			if(modello.nome == $scope.modelloSelezionato){
-				for(var j = 0; j < $scope.entita.length; j++){
-					var entitaSingola = $scope.entita[j];
-					if(entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato){
-						if(entitaSingola.vincoloColore == true){
-							if(entitaSingola.categoria == "stile"){
-								$scope.mapEmboss.set(entitaSingola.nomeStile + "_" + entitaSingola.colore, entitaSingola);
-							}
-							if(entitaSingola.colore == $scope.coloreVincolante){
+
+			if (tipoAccessorio == "colore") {
+				//qui devo gestire le limitazioni relative al colore
+				$scope.scegliColore = true;
+			} else {
+				$scope.scegliColore = false;
+			}
+			if (tipoAccessorio == "metalleria") {
+				//qui devo gestire le limitazioni relative al colore
+				$scope.scegliMetallo = true;
+			} else {
+				$scope.scegliMetallo = false;
+			}
+			if (tipoAccessorio == "stile") {
+				$scope.scegliEmboss = true;
+			} else {
+				$scope.scegliEmboss = false;
+			}
+			$scope.entitaTipoAccessorioSelezionato = [];
+			for (var i = 0; i < $scope.modelli.length; i++) {
+				var modello = $scope.modelli[i];
+				if (modello.nome == $scope.modelloSelezionato) {
+					for (var j = 0; j < $scope.entita.length; j++) {
+						var entitaSingola = $scope.entita[j];
+						if (entitaSingola.categoria == tipoAccessorio & entitaSingola.modello == $scope.modelloSelezionato) {
+							if (entitaSingola.vincoloColore == true) {
+								if (entitaSingola.categoria == "stile") {
+									$scope.mapEmboss.set(entitaSingola.nomeStile + "_" + entitaSingola.colore, entitaSingola);
+								}
+								if (entitaSingola.colore == $scope.coloreVincolante) {
+									$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+								}
+							} else if (entitaSingola.vincoloMetallo == true) {
+								if (entitaSingola.categoria == "tracolle") {
+									$scope.mapMetalloTracolle.set(entitaSingola.metallo, entitaSingola);
+									$scope.mapMetalloBorchie.set(entitaSingola.metallo, entitaSingola);
+								} else if (entitaSingola.categoria == "borchie") {
+									$scope.mapMetalloBorchie.set(entitaSingola.nomeBorchia + "_" + entitaSingola.metallo, entitaSingola);
+								}
+								if (entitaSingola.metallo == $scope.metalloVincolante) {
+									$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
+								}
+							} else {
 								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
 							}
-						} else if(entitaSingola.vincoloMetallo == true) {
-							if(entitaSingola.categoria == "tracolle"){
-								$scope.mapMetalloTracolle.set(entitaSingola.metallo, entitaSingola);
-								$scope.mapMetalloBorchie.set(entitaSingola.metallo, entitaSingola);
-							}else if (entitaSingola.categoria == "borchie"){
-								$scope.mapMetalloBorchie.set(entitaSingola.nomeBorchia + "_" + entitaSingola.metallo, entitaSingola);
-							}
-							if(entitaSingola.metallo == $scope.metalloVincolante){
-								$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
-							}
-						} else {
-							$scope.entitaTipoAccessorioSelezionato.push(entitaSingola);
 						}
 					}
 				}
 			}
-		}
 
-		//ordinamento delle entità
-		$scope.entitaTipoAccessorioSelezionato = configController.ordinaEntita($scope.entitaTipoAccessorioSelezionato);
+			//ordinamento delle entità
+			$scope.entitaTipoAccessorioSelezionato = configController.ordinaEntita($scope.entitaTipoAccessorioSelezionato);
+
+		}
+		
 	}
 
 	configController.ordinaEntita = function (entitaNonOrdinate) {
@@ -175,15 +200,60 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 		return placeHolder;
 	}
 
+	configController.gestisciTracolle = function() {
+		for(var i = 0; i< $scope.entita.length; i++){
+			var entita = $scope.entita[i];
+			if(entita.categoria == "tracolle"){
+				//prendo il nome
+				var nomeTracolla = entita.nome;
+
+				//trovo la categoria di tracolle
+				var split = nomeTracolla.split('_');
+				var categoriaTracolla = split[0] + '_' + split[1];
+
+				//inserisco nelle categorie di tracolle
+				if ($scope.categorieTracolle.indexOf(categoriaTracolla) == -1){
+					$scope.categorieTracolle.push(categoriaTracolla);
+				}
+
+				var modelName = configController.getNomeModelloTracolla(split);
+				if(entita.metallo == "oro"){
+					if (!$scope.modelliTracolleOro.has(categoriaTracolla)) {
+						$scope.modelliTracolleOro.set(categoriaTracolla, []);
+					}
+
+					if ($scope.modelliTracolleOro.get(categoriaTracolla).indexOf(modelName) == -1) {
+						$scope.modelliTracolleOro.get(categoriaTracolla).push(entita);
+					}
+				} else {
+					if (!$scope.modelliTracolleArgento.has(categoriaTracolla)) {
+						$scope.modelliTracolleArgento.set(categoriaTracolla, []);
+					}
+
+					if ($scope.modelliTracolleArgento.get(categoriaTracolla).indexOf(modelName) == -1) {
+						$scope.modelliTracolleArgento.get(categoriaTracolla).push(entita);
+					}
+				}
+			}
+		}
+
+	}
+
+	configController.getNomeModelloTracolla = function(splitted) {
+		var toReturn = "";
+		for (var i = 0; i < splitted.length; i++){
+			if (i > 1 && i < splitted.length - 1){
+				toReturn += splitted[i];
+			}
+		}
+		return toReturn;
+	}
+
 	configController.scegliModello = function(modello){
-		var t0 = performance.now();
+
 		//carico solo gli accessori relativi al modello scelto
 		listeService.getAccessori(modello.nome).then(function (res2) {
-			var t1 = performance.now();
-			console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
-			console.log(res2);
 			$scope.entita = res2.data.accessori;
-			console.log($scope.entita);
 			//inizializzo la mappa con gli elenchi dei tipi di accessori
 			$scope.tipiAccessori.set(modello.nome, modello.accessori);
 			
@@ -206,6 +276,8 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			$scope.inizialiPreview = "";
 			$scope.symbolsUrlStack = [];
 
+			configController.gestisciTracolle();
+
 			$(".dropdown-toggle").dropdown("toggle");
 
 			$scope.stack = [];
@@ -227,7 +299,6 @@ angular.module('configuratorModule').controller('unadunaConfiguratorController2'
 			
 		});
 
-		
 	}
 
 	configController.selezionaEntita = function(entita){

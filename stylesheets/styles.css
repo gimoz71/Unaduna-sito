@@ -13040,6 +13040,7 @@ a.link {
 .configuratore .accessori-thumb a {
   position: relative;
   border: solid 1px transparent;
+  padding: 2px;
 }
 .configuratore .accessori-thumb a:hover, .configuratore .accessori-thumb a.added, .configuratore .accessori-thumb a.activeAccessorio {
   border: solid 1px #dbd4d1;
